@@ -96,23 +96,27 @@ define(function(require){
 
 
 
-	//删除选中的
+	//删除选中的口味
 	Model.prototype.button11Click = function(event){
-	
-		var seleObj=$(".ed-con-con").children("span.active");
-		//alert(seleObj.html());
-		//alert()
-		seleObj.remove();
+		var deletingCookWayData = this.comp('deletingCookWayData');
+		var currentCookWayData = this.comp('currentCookWayData');
+		currentCookWayData.eachAll(function(param){
+			if(param.row.val('goodsId')==deletingCookWayData.val('goodsId')&&param.row.val('cookWayId')==deletingCookWayData.val('cookWayId')){
+				currentCookWayData.deleteData(param.row);
+				return;
+			}
+		});
+		
 	};
 
 
 
 
 
-
+	//清空口味
 	Model.prototype.button10Click = function(event){
-		var seleObj=$(".ed-con-con").children("span");
-		seleObj.remove();
+		var currentCookWayData = this.comp('currentCookWayData');
+		currentCookWayData.clear();
 	};
 
 
@@ -479,11 +483,17 @@ define(function(require){
 	Model.prototype.button7Click = function(event){
 		var currentCookWayData = this.comp('currentCookWayData');
 		currentCookWayData.clear();
+		var deletingCookWayData = this.comp('deletingCookWayData');
+		deletingCookWayData.clear();
+		//清空待
 		this.comp("popOver2").hide();
 	};
 
 	//确定完成编辑菜单，
 	Model.prototype.button8Click = function(event){
+		//清空待删除口味
+		var deletingCookWayData = this.comp('deletingCookWayData');
+		deletingCookWayData.clear();
 		//购物车加上加工
 		var cart = this.comp('cartData');
 		var currentCookWayData = this.comp('currentCookWayData');
@@ -491,14 +501,16 @@ define(function(require){
 		var sendCookWayData = this.comp('sendCookWayData');
 		//为cart补上cookWay字段，主要用于菜单页面显示,加上附加费用
 		cart.eachAll(function(param){
-			if(param.row.val('goodsId') == currentCookWayData.val('goodsId')){
-				param.row.val('cookWay',currentCookWayData.val('detail'));
-			}
+			currentCookWayData.eachAll(function(data){
+				if(param.row.val('goodsId')== data.row.val('goodsId')){
+						param.row.val('cookWay',param.row.val('cookWay')+data.row.val('cookWay')+'('+data.row.val('addMoney')+')');
+				}
+			});
 			if(param.row.val('goodsId') ==  currentGoodsData.val('goodsId')){
 				param.row.val('addMoney',currentGoodsData.val('addMoney'));
 			}
 		})
-		//将数据加入sendCookWayData，用于发送订单的数据
+		//将currentCookWayData数据加入sendCookWayData，用于发送订单的数据
 		currentCookWayData.eachAll(function(param){
 			sendCookWayData.newData({
 				defaultValues:[{
@@ -673,14 +685,20 @@ define(function(require){
 				cookways += param.row.val('goodsId')+'_'+param.row.val('cookWayId')+',';
 		});
 		cookways = cookways.substring(0,cookways.length-1);
-		var url = '/OrderSystemWeixin/ShopCartServlet.do?func=orderByReturnJson&billMasterId='+billMasterId+'&roomId='+roomId+'&goods='+goods+'&&cookways='+cookways;	
+		var user = this.comp('userData');
+		var url = '/OrderSystemWeixin/ShopCartServlet.do?func=orderByReturnJson&billMasterId='+billMasterId+'&roomId='+roomId+'&goods='+goods+'&cookways='+cookways+'&orderempcode='+user.val('userId');	
 		
 		debugger;
 		//送单成功
 		var success = function(param){	
+		
+			var testPrintSuccess = function(printData){
+			alert(printData)
+			//----------------------------------------------------start of print----------------------------------
 			sendCook.clear();//清空sendCook
 			alert(param.result[0].msg);
 			debugger
+			//当有订单时才打印
 			if(param.result[0].billmasterid != ''&&param.result[0].billmasterid != undefined){
 				//打印成功
 				var success1 = function(param){
@@ -705,7 +723,7 @@ define(function(require){
 								}
 								//拿到订单详情
 								Baas.sendRequest({
-									"url" : ip + '/OrderSystemWeixin/ShopCartServlet.do?func=showOrderedReturnJson&billMasterId='+currentDeskData.val('billMasterId')+'&roomId='+currentDeskData.val('roomId'),
+									"url" : '192.168.1.120:8081' + '/OrderSystemWeixin/ShopCartServlet.do?func=showOrderedReturnJson&billMasterId='+currentDeskData.val('billMasterId')+'&roomId='+currentDeskData.val('roomId'),
 									"dataType": "json",
 									"success" : successOrder
 								});
@@ -717,6 +735,14 @@ define(function(require){
 					"success" : success1
 				});
 			}
+			//----------------------------------------------end of print------------------------------
+			}
+			//打印前检测端口
+			Baas.sendRequest({
+					"url" : ip + '/PrintOrder?RptNO=TotalBillLocal&ParamName1=ConsumeRoomID&ParamValue1='+param.result[0].msg.split('=')[1],
+					"dataType": "json",
+					"success" : testPrintSuccess
+			});
 		}
 			//送单
 		Baas.sendRequest({
@@ -727,8 +753,27 @@ define(function(require){
 	};
 	
 
-	
-	
+		
+	//删除----选中口味事件
+	Model.prototype.li6Click = function(event){
+			//去除所有激活点
+		$('.ed-con-con').find('li').attr('__inline-id__',$(event.target).attr('__inline-id__')).addClass('active').siblings().removeClass('active');
+			//为点击的li加上绿色
+		$(event.target.parentElement).addClass('active');
+		var deletingCookWayData = this.comp('deletingCookWayData');
+		var row = event.bindingContext.$rawData;//currentCookWayData
+		
+		//将待删除的口味，放入到deletingCookWayData
+		deletingCookWayData.newData({
+			index:0,
+			defaultValues:[{
+				'cookWayId':row.val('cookWayId'),
+				'goodsId':row.val('goodsId')
+			}]
+		});
+		
+		
+	};
 	
 
 	
