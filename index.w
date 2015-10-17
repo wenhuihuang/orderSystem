@@ -2,7 +2,7 @@
 
 <div xmlns="http://www.w3.org/1999/xhtml" xid="window" class="window" component="$UI/system/components/justep/window/window"
   design="device:mobile">  
-  <div component="$UI/system/components/justep/model/model" xid="model" style="height:auto;left:892px;top:310px;" onLoad="modelLoad"><div component="$UI/system/components/justep/data/data" autoLoad="true" xid="roomData" idColumn="typeName" onCustomRefresh="fan_nameCustomRefresh" autoNew="false"><column label="房类型" name="typeName" type="String" xid="xid4"></column>
+  <div component="$UI/system/components/justep/model/model" xid="model" style="height:auto;left:626px;top:241px;" onLoad="modelLoad"><div component="$UI/system/components/justep/data/data" autoLoad="true" xid="roomData" idColumn="typeName" onCustomRefresh="fan_nameCustomRefresh" autoNew="false"><column label="房类型" name="typeName" type="String" xid="xid4"></column>
   <column label="房类号" name="typeCode" type="Long" xid="xid6"></column></div><div component="$UI/system/components/justep/data/data" autoLoad="true" xid="deskData" idColumn="tai_number"><column label="台号" name="tai_number" type="String" xid="xid5"></column>
   <column label="状态" name="state" type="String" xid="xid7"></column>
   <column label="房号id" name="roomId" type="String" xid="xid8"></column>
@@ -212,11 +212,11 @@
         </div>  
         <div class="x-panel-bottom menu-bottom-wrap" xid="bottom2">
           <div xid="div105" class="menu-bottom-left"> 
-            <span bind-text=" '共 '+$model.cartData.getCount() +'份'">共
-              <b>0</b>份
+            <span>共
+              <b bind-text="$model.cartData.getCount() " class="color-price">0</b>份
             </span>
             <span>
-              <span bind-text="statusData.val('cartTotal')+'元'">45元</span>
+              <b bind-text="statusData.val('cartTotal')" class="color-price">0</b>元
             </span> 
           </div>  
           <div xid="div106" class="menu-bottom-right">
@@ -309,16 +309,16 @@
             <div xid="div45" class="bottom-wrap"> 
               <div xid="div46" class="pop-bottom-left">总价格(元):
                 <div component="$UI/system/components/justep/output/output"
-                  class="x-output dib" xid="output1" bind-text=' $model.statusData.val("orderTotal") + $model.statusData.val("cartTotal")'/>
+                  class="x-output dib color-price" xid="output1" bind-text=' $model.statusData.val("orderTotal") + $model.statusData.val("cartTotal")'/>
               </div>  
               <div xid="div47" class="poop-bottom-right"> 
                 <a component="$UI/system/components/justep/button/button"
-                  class="btn btn-default" label="送单" xid="button5" onClick="button5Click"> 
+                  class="btn btn-default send-order-btn" label="送单" xid="button5" onClick="button5Click"> 
                   <i xid="i5"/>  
                   <span xid="span83">送单</span>
                 </a>  
                 <a component="$UI/system/components/justep/button/button"
-                  class="btn btn-default" label="关闭" xid="button6" onClick="button6Click"> 
+                  class="btn btn-default close-btn" label="关闭" xid="button6" onClick="button6Click"> 
                   <i xid="i6"/>  
                   <span xid="span84">关闭</span>
                 </a> 
@@ -399,7 +399,7 @@
                 <span xid="span165">其他</span>
               </a>
             </div></div>
-   <div class="x-panel-content" xid="content7"><div component="$UI/system/components/justep/contents/contents" class="x-contents x-full" active="0" xid="contents2">
+   <div class="x-panel-content" xid="content7"><div component="$UI/system/components/justep/contents/contents" class="x-contents x-full" active="0" xid="contents2" swipe="false">
    <div class="x-contents-content" xid="content5">
    <div class="select-con-wrap" style="text-align:center;"><h5><a href="javascript:;" class="subtract" id="popOver2Sub" bind-click="a2Click"></a><span bind-text="currentGoodsData.ref('qty')">1</span><a href="javascript:;" class="add" id="popOver2Add" bind-click="a1Click"></a></h5>
   </div>
