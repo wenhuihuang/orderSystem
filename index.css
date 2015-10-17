@@ -109,6 +109,7 @@ img.subtract,img.add{
 	display:-webkit-box;
 	display:-moz-box;
 	background:#E6E2E2;
+	padding:10px;
 }
 .main-con .row{
 	margin:0;
@@ -188,7 +189,7 @@ img.subtract,img.add{
 	display:box;
 	display:-webkit-box;
 	display:-moz-box;
-	background:#acacac;
+	background:#e6e6e6;
 }
 .menu-bottom-wrap .menu-bottom-left,.menu-bottom-wrap .menu-bottom-right{
 	box-flex:1.0;
@@ -205,6 +206,13 @@ img.subtract,img.add{
 	padding-left:10px;
 }
 .menu-bottom-wrap .menu-bottom-left span{
+	color:#000;
+}
+.menu-bottom-wrap .menu-bottom-left span b{
+	padding:0 8px;
+}
+.x-titlebar{
+	background:#2BB8AA;
 	color:#fff;
 }
 .pop-container{
@@ -391,12 +399,24 @@ img.subtract,img.add{
 	display:box;
 	display:-webkit-box;
 	display:-moz-box;
+	width:98%;
 }
 .ed-btn-wrap{
 	width:20%;
 }
 .ed-btn-wrap ul{
 	width:100%;
+	margin:0;
+}
+.send-order-btn,.send-order-btn:hover,.menu-bottom-right .btn{
+	background:#2BB8AA;
+	border:none;
+	color:#fff;
+}
+.close-btn,.close-btn:hover{
+	background:#E5642A;
+	border:none;
+	color:#fff;
 }
 .ed-btn-wrap ul li{
 	width:100%;
@@ -601,6 +621,9 @@ ul.menu-item li{
 .require-title-wrap ul{
 	margin:8px 0;
 }
+.require-title{
+	overflow:auto;
+}
 .require-title li{
 	float:left;
 	display:inline-block;
@@ -617,12 +640,5 @@ ul.menu-item li{
 }
 .showCookWays li.active{
 	background:red;
-}
-.hwh{
-	
-}
-.mrc{
 	color:#fff;
-	color:asdfasfd;
-	color:wo shi mairongchao
 }

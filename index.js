@@ -599,12 +599,12 @@ define(function(require){
 			"dataType": "json",
 			"success" : success
 		});
-			//计算出ul宽
-		var liLength=$(".require-title").find("ul").children("li").length;
-		//alert(liLength)
-//		$(".require-title").find("ul").children("li").each(function(){
-//			alert($(this).css("width"));
-//		});
+		//设置要求内标题ul的宽
+		var liWidthAll=0; 
+		$(".require-title").find("ul").children("li").each(function(){
+			liWidthAll+=parseInt($(this).outerWidth(true));
+		})
+		$(".require-title").find("ul").css({"width":liWidthAll});
 	};
 
 
