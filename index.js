@@ -279,7 +279,7 @@ define(function(require){
 						state="空台";
 						color="green";
 					}
-				 rowss[i]={'tai_number':{'value':msg.rooms[i].roomName},'state':{'value':state},'roomId':{'value':msg.rooms[i].roomId},'billMasterId':{'value':msg.rooms[i].billMasterId},'color':{'value':color}};
+				 rowss[i]={'tai_number':{'value':msg.rooms[i].roomName},'state':{'value':state},'roomId':{'value':msg.rooms[i].roomId},'billMasterId':{'value':msg.rooms[i].consumeRoomID},'color':{'value':color}};
 			 	}
 			 	var ffdata={"rows":rowss};
 		 	mydata.loadData(ffdata);	
