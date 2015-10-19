@@ -110,14 +110,16 @@
                 class="form-control x-edit" xid="userPwd" placeHolder="密码"/>
             </div>
             <p xid="p79" class="login-wrap">
-              <a component="$UI/system/components/justep/button/button" class="btn btn-default btn-exit" label="退出" xid="exit"> 
+              <div component="$UI/system/components/bootstrap/row/row" class="row" xid="row1">
+   <div class="col col-xs-6" xid="col2"><a component="$UI/system/components/justep/button/button" class="btn btn-default btn-exit" label="退出" xid="exit"> 
                 <i xid="i17" />  
                 <span xid="span86">退出</span>
-              </a><a component="$UI/system/components/justep/button/button" class="btn btn-default btn-login"
-                label="登录" xid="login_btn" bind-click="login_btnClick"> 
-                <i xid="i16"/>  
+              </a></div>
+   <div class="col col-xs-6" xid="col3"><a component="$UI/system/components/justep/button/button" class="btn btn-default btn-login" label="登录" xid="login_btn" bind-click="login_btnClick"> 
+                <i xid="i16" />  
                 <span xid="span85">登录</span>
-              </a>  
+              </a></div>
+   </div>  
               
             </p>
           </div>

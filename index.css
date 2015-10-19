@@ -328,7 +328,7 @@ img.subtract,img.add{
 }
 .con-con ul li div:nth-child(1),.con-top ul li div:nth-child(1){
 	border-right:1px solid #ccc;
-	width:70%;
+	width:68%;
 }
 .con-con ul li div:nth-child(2),.con-top ul li div:nth-child(2){
 	width:29%;
@@ -378,7 +378,7 @@ img.subtract,img.add{
 	display:box;
 	display:-webkit-box;
 	display:-moz-box;
-	padding:5px 15px;
+	padding:5px 2%;
 }
 .edit-add-wrap{
 	background:#fff;
@@ -400,6 +400,7 @@ img.subtract,img.add{
 	display:-webkit-box;
 	display:-moz-box;
 	width:98%;
+	margin:0 auto;
 }
 .ed-btn-wrap{
 	width:20%;
@@ -445,7 +446,7 @@ img.subtract,img.add{
 	box-flex:1.0;
 	-webkit-box-flex:1.0;
 	-moz-box-flex:1.0;
-	height:100px;
+	height:114px;
 	overflow:auto;
 	border:1px solid #ccc;
 	border-radius:4px;
@@ -466,10 +467,11 @@ img.subtract,img.add{
     border-radius: 4px;
     height: 200px;
     background: #fff;
-    width: 100%;
+    width: 96%;
     overflow: auto;
     display: block;
     resize:none;
+    margin:0 auto;
 }
 .select-con-wrap .subtract,.select-con-wrap .add{
 	display:inline-block;
@@ -520,10 +522,10 @@ img.subtract,img.add{
 .ed-con-con span{
 	margin:5px;
 }
-.ed-con-con  ul li{
+.edit-add-con .x-panel-top   .ed-con-con  ul li div{
 	float:left;
 }
-.ed-con-con  ul li.active{
+.edit-add-con .x-panel-top   .ed-con-con  ul li div.active{
 	background:red;
 }
 .order-info-title span{
@@ -557,13 +559,12 @@ ul.menu-item li{
 	text-align:center;
 }
 .login-wrap .btn{
-	width:48%;
+	width:100%;
 	color:#fff;
 	border:none;
 }
 .login-wrap .btn-login{
 	background:#2BB8AA;
-	margin-left:10px;
 }
 .login-wrap .btn-exit{
 	background:#E5642A;
