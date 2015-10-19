@@ -142,6 +142,18 @@ img.subtract,img.add{
 	background:rgba(231, 255, 248, 0.58) !important;
 	overflow:auto;
 }
+.home .left-menu li div.count{
+	position:absolute;
+	width:20px;
+	height:20px;
+	line-height:20px;
+	border-radius:10px;
+	border:1px dashed #fff;
+	padding:0;
+	top:5px;
+	right:5px;
+	color:#FF0000;
+}
 .home .left-menu li{
 	border-radius:3px;
 	background:#2BB8AA;
@@ -522,11 +534,21 @@ img.subtract,img.add{
 .ed-con-con span{
 	margin:5px;
 }
-.edit-add-con .x-panel-top   .ed-con-con  ul li div{
-	float:left;
+.edit-add-con .x-panel-top .ed-con-con  ul{
+	width:100%;
 }
-.edit-add-con .x-panel-top   .ed-con-con  ul li div.active{
-	background:red;
+.edit-add-con .x-panel-top .ed-con-con  ul li{
+	float:left;
+	margin:5px;
+}
+.edit-add-con .x-panel-top .ed-con-con  ul li div{
+	display:block;
+	padding:5px;
+}
+.edit-add-con .x-panel-top .ed-con-con  ul li.active{
+	background:#F35526;
+	color:#fff;
+	border-radius:3px;
 }
 .order-info-title span{
 	font-size:16px;
@@ -576,35 +598,45 @@ ul.menu-item li{
 	width:75%;
 }
 /*输入人数框*/
-.renShu .con-wrap{
+.renShu .con-wrap,.take .con-wrap{
 	background:#fff;
 	padding:20px 0;
 	box-shadow:0 0px 2px 2px #B9B9B9;
 	border-radius:5px;
 }
-.renShu .con-wrap .btn-wrap{
+.renShu .con-wrap .btn-wrap,.take .con-wrap .btn-wrap{
 	border-top:1px solid #ccc;
 	padding-top:10px;
 }
-.renShu .con-wrap .con-con h2{
+.renShu .con-wrap .con-con h2,.take .con-wrap .con-con h2{
 	font-size:16px;
-	color:#acacac;
+	color:#000;
 	text-align:center;
 }
-.renShu .con-wrap .con-con input{
+.renShu .con-wrap .con-con input,.take .con-wrap .con-con input{
 	margin:5px auto;
 	width:95%;
 }
-.renShu .con-wrap .con-con{
+.renShu .con-wrap .con-con, .take .con-wrap .con-con{
 	text-align:center;
 }
-.renShu .con-wrap .con-con .btn-wrap{
+.renShu .con-wrap .con-con .btn-wrap, .take .con-wrap .con-con .btn-wrap{
 	text-align:center;
 }
-.renShu .con-wrap .con-con .btn{
+.renShu .con-wrap .con-con .btn, .take .con-wrap .con-con .btn{
+	border:none;
+	width:45%;
+}
+.do-btn{
 	color:#fff;
 	background:#39BE1B;
-	border:none;
+}
+.undo-btn{
+	color:#fff;
+	background:#F35526;
+}
+.renShu .con-wrap .pop-title,.take .con-wrap .pop-title{
+	padding:0 10px;
 }
 .number .num{
 	display:inline-block;
@@ -649,4 +681,21 @@ ul.menu-item li{
 .showCookWays li.active{
 	background:red;
 	color:#fff;
+}
+/*更多菜单*/
+.more-wrap{
+	position:fixed;
+	bottom:48px;
+	background:#fff;
+	width:100%;
+}
+.more-wrap .row .col{
+	text-align:center;
+	padding-top:5px;
+	padding-bottom:5px;
+}
+.more-wrap .row .col .btn{
+	background:#2BB8AA;
+	color:#fff;
+	border:none;
 }
