@@ -815,33 +815,21 @@ define(function(require){
 		
 		
 	};
-	
 
-	
-	
-	
 	Model.prototype.button19Click = function(event){
 		this.comp("contents1").to("index");
 	};
-
-	Model.prototype.li2Dblclick = function(event){
-		alert("d")
-	};
-	
-
-	
-	
 	
 	Model.prototype.button18Click = function(event){
 		this.comp("popOver-take").show();
 	};
-	
 
-	
-	
-	
 	Model.prototype.button26Click = function(event){
 		this.comp("popOver-take").hide();
+	};
+	
+	Model.prototype.li1Dblclick = function(event){
+		alert("d")
 	};
 	
 

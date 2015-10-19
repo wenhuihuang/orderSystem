@@ -173,7 +173,7 @@
       <i xid="i25"></i>
       <span xid="span12">埋单</span></a> </div> 
     <div class="col col-xs-4" xid="col9">
-     <a component="$UI/system/components/justep/button/button" class="btn btn-default" label=" 点菜" xid="button24">
+     <a component="$UI/system/components/justep/button/button" class="btn btn-default" label=" 点菜" xid="button24" target="menu">
       <i xid="i26"></i>
       <span xid="span13">点菜</span></a> </div> </div> </div></div>  
         <div class="x-panel-bottom bottom-wrap" xid="bottom1"> 
@@ -224,7 +224,7 @@
           <div xid="left-menu" class="left-menu"> 
             <div component="$UI/system/components/justep/list/list" class="x-list" xid="list3" data="menuTypeData">
    <ul class="x-list-template" xid="listTemplateUl3">
- <li xid="li2" bind-click="li2Click" bind-dblclick="li2Dblclick"><div component="$UI/system/components/justep/output/output" class="x-output" xid="output5" bind-ref="ref('typeName')"></div>
+ <li xid="li2" bind-click="li2Click"><div component="$UI/system/components/justep/output/output" class="x-output" xid="output5" bind-ref="ref('typeName')"></div>
   <div component="$UI/system/components/justep/output/output" class="x-output count" xid="output6" bind-ref="ref('qty')" bind-visible="val('qty')&gt;0"></div></li></ul> </div></div>          <div xid="right-main" class="right-main"> 
             <div component="$UI/system/components/justep/list/list" class="x-list" xid="list6" data="goodsListData">
    <ul class="x-list-template" xid="listTemplateUl6">
@@ -483,9 +483,9 @@
   
   </h2><div component="$UI/system/components/justep/labelEdit/labelEdit" class="x-label-edit x-label30" xid="labelInput2">
    <label class="x-label" xid="label3"><![CDATA[台号]]></label>
-   <input component="$UI/system/components/justep/input/input" class="form-control x-edit" xid="input3" placeHolder="台号"></input></div><div component="$UI/system/components/justep/labelEdit/labelEdit" class="x-label-edit x-label30" xid="labelInput3">
+   <input component="$UI/system/components/justep/input/input" class="form-control x-edit" xid="input3" placeHolder="台号" disabled="true"></input></div><div component="$UI/system/components/justep/labelEdit/labelEdit" class="x-label-edit x-label30" xid="labelInput3">
    <label class="x-label" xid="label5"><![CDATA[人数]]></label>
-   <input component="$UI/system/components/justep/input/input" class="form-control x-edit" xid="input4" placeHolder="请输入人数"></input></div></div>
+   <input component="$UI/system/components/justep/input/input" class="form-control x-edit" xid="input4" placeHolder="请输入人数" dataType="Integer"></input></div></div>
     <div xid="div12" class="btn-wrap">
       
       
