@@ -294,6 +294,7 @@ define(function(require){
 
 
 	//进入房台，记录下当前的订单号和roomId,然后再根据状态跳去不同的页面
+	//在这里应该
 	Model.prototype.li1Click = function(event){
 		var oneDeskData = this.comp('currentDeskData');
 		var row = event.bindingContext.$rawData;
@@ -621,6 +622,7 @@ define(function(require){
 	Model.prototype.button14Click = function(event){
 		var cookTypeData = this.comp('cookTypeData');
 		//debugger;
+		cookTypeData.clear();//清空要求数据
 		var success = function(param){
 			for(var o in param.typeCodes){
 				var typeCode = param.typeCodes[o].typeCode;
