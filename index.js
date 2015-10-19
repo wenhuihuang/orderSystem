@@ -294,6 +294,7 @@ define(function(require){
 
 
 	//进入房台，记录下当前的订单号和roomId,然后再根据状态跳去不同的页面
+	//在这里应该
 	Model.prototype.li1Click = function(event){
 		var oneDeskData = this.comp('currentDeskData');
 		var row = event.bindingContext.$rawData;
