@@ -25,7 +25,7 @@
   <column label="房号id" name="roomId" type="String" xid="default13"></column>
   <column label="订单号" name="billMasterId" type="String" xid="default2"></column>
   <column label="台" name="roomCode" type="String" xid="xid17"></column></div>
-  <div component="$UI/system/components/justep/data/data" autoLoad="true" xid="cartData" idColumn="goodsId">
+  <div component="$UI/system/components/justep/data/data" autoLoad="true" xid="cartData" idColumn="goodsId" confirmDelete="false">
    <column label="商品id" name="goodsId" type="String" xid="column3"></column>
   <column label="商品名称" name="goodsName" type="String" xid="column4"></column>
   <column name="sprice" type="Double" xid="column1"></column>
