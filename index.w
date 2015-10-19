@@ -231,7 +231,7 @@
     </div> 
   </div>
   <div component="$UI/system/components/justep/popOver/popOver" class="x-popOver"
-    xid="popOver1" opacity="0.8" style="box-shadow:0 0px 2px 2px #c9B9B9;"> 
+    xid="popOver1" opacity="0.9" style="box-shadow:0 0px 2px 2px #c9B9B9;"> 
     <div class="x-popOver-overlay" xid="div107"/>  
     <div class="x-popOver-content  pop-container" xid="div108" style="width:95%;height:96%;">
       <div xid="div109" class="pop-wrap" style="height:94%;">
@@ -330,7 +330,7 @@
     </div>
   </div>  
   <div component="$UI/system/components/justep/popOver/popOver" class="x-popOver"
-    xid="popOver2" opacity="0.8" style="box-shadow:0 0px 2px 2px #B9B9B9;"> 
+    xid="popOver2" opacity="0.9" style="box-shadow:0 0px 2px 2px #B9B9B9;"> 
     <div class="x-popOver-overlay" xid="div76"/>  
     <div class="x-popOver-content edit-add-wrap" xid="div77" style="width:95%;height:96%;">
       <div xid="div78" style="height:94%;" class="edit-add">
@@ -408,12 +408,13 @@
   <div class='select-con-wrap'></div>
   </div>
   <div class="x-contents-content" xid="content9">
-  <div xid="div9" class="require-title-wrap"><div component="$UI/system/components/justep/list/list" class="x-list require-title clearfix" xid="list7" data="cookTypeData">
+  <div xid="div9" class="require-title-wrap">
+  <div component="$UI/system/components/justep/list/list" class="x-list require-title clearfix" xid="list7" data="cookTypeData">
+   <div component="$UI/system/components/bootstrap/row/row" class="row" xid="row2">
    <ul class="x-list-template clearfix" xid="listTemplateUl7">
-    <li xid="li4" bind-click="li4Click" bind-text="val('typeName')"></li>
-  </ul> </div></div><div class='select-con-wrap'>
+    <div class="col col-xs-4" xid="col1" bind-click="li4Click"><span xid="span7" bind-text="val('typeName')" bind-click="li4Click"></span></div></ul></div> </div></div><div class='select-con-wrap'>
   <div component="$UI/system/components/justep/list/list" class="x-list require-con" xid="list8" data="cookTypeDetailData">
-   <ul class="x-list-template" xid="listTemplateUl8">
+   <ul class="x-list-template clearfix" xid="listTemplateUl8">
     <li xid="li5" bind-text="val('cookWay')" bind-click="li5Click"></li></ul> </div></div>
   </div>
   <div class="x-contents-content" xid="content10">
@@ -431,7 +432,7 @@
       </div>
     </div>
   </div>
-<div component="$UI/system/components/justep/popOver/popOver" class="x-popOver renShu" xid="popOver_renshu" opacity="0.8">
+<div component="$UI/system/components/justep/popOver/popOver" class="x-popOver renShu" xid="popOver_renshu" opacity="0.9">
    <div class="x-popOver-overlay" xid="div1"></div>
    <div class="x-popOver-content con-wrap" xid="div6"><div xid="div7" class="con-con"><h2 xid="h22"><![CDATA[请输入就餐人数]]></h2><input component="$UI/system/components/justep/input/input" class="form-control" xid="input1" placeHolder="输入人数" id="custNum" dataType="Integer"></input><div xid="div8" class="btn-wrap"><a component="$UI/system/components/justep/button/button" class="btn btn-default" label="确认" xid="button16" onClick="button16Click">
    <i xid="i18"></i>

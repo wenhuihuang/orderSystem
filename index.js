@@ -587,12 +587,14 @@ define(function(require){
 			"dataType": "json",
 			"success" : success
 		});
+		/*
 		//设置要求内标题ul的宽
 		var liWidthAll=0; 
 		$(".require-title").find("ul").children("li").each(function(){
 			liWidthAll+=parseInt($(this).outerWidth(true));
 		})
 		$(".require-title").find("ul").css({"width":liWidthAll});
+		 */
 	};
 
 
