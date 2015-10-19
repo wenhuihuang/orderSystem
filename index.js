@@ -130,6 +130,7 @@ define(function(require){
 		var pwd=this.comp('userPwd').val();
 		var mydata = this.comp('user_inof');
 		var success = function(data){
+				debugger;
 			     if(data.admin[0].userId != "")   {
 			    	 userData.newData({
 			    		 defaultValues:[{
@@ -138,7 +139,7 @@ define(function(require){
 			    	 });
 			    	 contents1.to('index');
 			     }else{
-			    	 justep.Error.create("登陆失败");
+			    	 justep.Util.hint("登陆失败");
 			     }                                            
 		}
 		Baas.sendRequest({
@@ -435,11 +436,11 @@ define(function(require){
 		var cartData = this.comp('cartData');
 		var row = event.bindingContext.$rawData;
 		
-		if(row.val('qty')<=0){		
-			justep.Util.hint('已经为0');
+		if(row.val('qty')<=1){		
 			cartData.eachAll(function(param){
 				if(param.row.val('goodsId') == row.val('goodsId')){//已经存在
 					cartData.deleteData(param.row);
+					row.val('qty',row.val('qty')-1);//将显示数量置0
 				}
 			});
 			return;
@@ -481,7 +482,9 @@ define(function(require){
 		})
 		
 		var cartData = this.comp('cartData');
-		cartData.deleteData(row);
+		if(confirm('确定删除<'+row.val('goodsName')+'>')){
+			cartData.deleteData(row);
+		}
 	};
 
 
