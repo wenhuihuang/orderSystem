@@ -502,7 +502,7 @@ img.subtract,img.add{
 	margin:0 5px;
 }
 .select-con-wrap .require-con ul li{
-	width:46%;
+	width:43%;
 	float:left;
 	border-radius:3px;
 	background:#CAD42D;
@@ -624,14 +624,21 @@ ul.menu-item li{
 .require-title{
 	overflow:auto;
 }
-.require-title li{
-	float:left;
-	display:inline-block;
-	padding:5px 8px;
+.require-title .row{
+	margin:0;
+}
+.require-title ul div{
+	text-align:center;
+	padding:2px;
+}
+.require-title ul div span{
 	background:#2BB8AA;
-	margin:0 8px;
 	border-radius:3px;
 	color:#fff;
+	text-align:center;
+	padding:5px 2px;
+	display:block;
+	margin:0 auto;
 }
 .showCookWays span{
 	background:#2BB8AA;

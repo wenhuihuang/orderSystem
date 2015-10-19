@@ -411,12 +411,13 @@
   <div class='select-con-wrap'></div>
   </div>
   <div class="x-contents-content" xid="content9">
-  <div xid="div9" class="require-title-wrap"><div component="$UI/system/components/justep/list/list" class="x-list require-title clearfix" xid="list7" data="cookTypeData">
+  <div xid="div9" class="require-title-wrap">
+  <div component="$UI/system/components/justep/list/list" class="x-list require-title clearfix" xid="list7" data="cookTypeData">
+   <div component="$UI/system/components/bootstrap/row/row" class="row" xid="row2">
    <ul class="x-list-template clearfix" xid="listTemplateUl7">
-    <li xid="li4" bind-click="li4Click" bind-text="val('typeName')"></li>
-  </ul> </div></div><div class='select-con-wrap'>
+    <div class="col col-xs-4" xid="col1" bind-click="li4Click"><span xid="span7" bind-text="val('typeName')" bind-click="li4Click"></span></div></ul></div> </div></div><div class='select-con-wrap'>
   <div component="$UI/system/components/justep/list/list" class="x-list require-con" xid="list8" data="cookTypeDetailData">
-   <ul class="x-list-template" xid="listTemplateUl8">
+   <ul class="x-list-template clearfix" xid="listTemplateUl8">
     <li xid="li5" bind-text="val('cookWay')" bind-click="li5Click"></li></ul> </div></div>
   </div>
   <div class="x-contents-content" xid="content10">
