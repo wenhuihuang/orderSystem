@@ -429,13 +429,18 @@ define(function(require){
 
 
 
-	//菜单购物车减
+	//菜单购物车减,当购物车数量为0的时候，删掉当前行购物车
 	Model.prototype.image1Click = function(event){
 		var cartData = this.comp('cartData');
 		var row = event.bindingContext.$rawData;
 		
 		if(row.val('qty')<=0){		
 			justep.Util.hint('已经为0');
+			cartData.eachAll(function(param){
+				if(param.row.val('goodsId') == row.val('goodsId')){//已经存在
+					cartData.deleteData(param.row);
+				}
+			});
 			return;
 		}
 		

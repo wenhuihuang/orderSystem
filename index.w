@@ -216,7 +216,7 @@
         <div class="x-panel-bottom menu-bottom-wrap" xid="bottom2">
           <div xid="div105" class="menu-bottom-left"> 
             <span>共
-              <b bind-text="$model.cartData.getCount() " class="color-price">0</b>份
+              <b bind-text="$model.cartData.sum('qty') " class="color-price">0</b>份
             </span>
             <span>
               <b bind-text="statusData.val('cartTotal')" class="color-price">0</b>元
@@ -234,7 +234,7 @@
     </div> 
   </div>
   <div component="$UI/system/components/justep/popOver/popOver" class="x-popOver"
-    xid="popOver1" opacity="0.8" style="box-shadow:0 0px 2px 2px #c9B9B9;"> 
+    xid="popOver1" opacity="0.9" style="box-shadow:0 0px 2px 2px #c9B9B9;"> 
     <div class="x-popOver-overlay" xid="div107"/>  
     <div class="x-popOver-content  pop-container" xid="div108" style="width:95%;height:96%;">
       <div xid="div109" class="pop-wrap" style="height:94%;">
@@ -333,7 +333,7 @@
     </div>
   </div>  
   <div component="$UI/system/components/justep/popOver/popOver" class="x-popOver"
-    xid="popOver2" opacity="0.8" style="box-shadow:0 0px 2px 2px #B9B9B9;"> 
+    xid="popOver2" opacity="0.9" style="box-shadow:0 0px 2px 2px #B9B9B9;"> 
     <div class="x-popOver-overlay" xid="div76"/>  
     <div class="x-popOver-content edit-add-wrap" xid="div77" style="width:95%;height:96%;">
       <div xid="div78" style="height:94%;" class="edit-add">
@@ -434,7 +434,7 @@
       </div>
     </div>
   </div>
-<div component="$UI/system/components/justep/popOver/popOver" class="x-popOver renShu" xid="popOver_renshu" opacity="0.8">
+<div component="$UI/system/components/justep/popOver/popOver" class="x-popOver renShu" xid="popOver_renshu" opacity="0.9">
    <div class="x-popOver-overlay" xid="div1"></div>
    <div class="x-popOver-content con-wrap" xid="div6"><div xid="div7" class="con-con"><h2 xid="h22"><![CDATA[请输入就餐人数]]></h2><input component="$UI/system/components/justep/input/input" class="form-control" xid="input1" placeHolder="输入人数" id="custNum" dataType="Integer"></input><div xid="div8" class="btn-wrap"><a component="$UI/system/components/justep/button/button" class="btn btn-default" label="确认" xid="button16" onClick="button16Click">
    <i xid="i18"></i>
