@@ -224,9 +224,8 @@
           <div xid="left-menu" class="left-menu"> 
             <div component="$UI/system/components/justep/list/list" class="x-list" xid="list3" data="menuTypeData">
    <ul class="x-list-template" xid="listTemplateUl3">
-    <li xid="li2" bind-click="li2Click" bind-dblclick="li2Dblclick"><div component="$UI/system/components/justep/output/output" class="x-output" xid="output5" bind-ref="ref('typeName')"></div>
-  <div component="$UI/system/components/justep/output/output" class="x-output count" xid="output6" bind-ref="ref('qty')"></div></li></ul> </div></div>  
-          <div xid="right-main" class="right-main"> 
+ <li xid="li2" bind-click="li2Click" bind-dblclick="li2Dblclick"><div component="$UI/system/components/justep/output/output" class="x-output" xid="output5" bind-ref="ref('typeName')"></div>
+  <div component="$UI/system/components/justep/output/output" class="x-output count" xid="output6" bind-ref="ref('qty')" bind-visible="val('qty')&gt;0"></div></li></ul> </div></div>          <div xid="right-main" class="right-main"> 
             <div component="$UI/system/components/justep/list/list" class="x-list" xid="list6" data="goodsListData">
    <ul class="x-list-template" xid="listTemplateUl6">
     <li xid="li3"><ul xid="ul4"> 
