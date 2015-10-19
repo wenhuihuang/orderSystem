@@ -646,7 +646,7 @@ ul.menu-item li{
 	color:#fff;
 	border-radius:3px;
 }
-.showCookWays span.active{
+.showCookWays li.active{
 	background:red;
 	color:#fff;
 }

@@ -85,7 +85,10 @@
   <column name="cookWayId" type="String" xid="default17"></column>
   <column name="addMoney" type="Double" xid="default16"></column>
   <column name="cookWay" type="String" xid="default15"></column>
-  <column name="goodsId" type="String" xid="xid37"></column></div></div>  
+  <column name="goodsId" type="String" xid="xid37"></column></div>
+  <div component="$UI/system/components/justep/data/data" autoLoad="true" xid="deletingCookWayData" idColumn="col0"><column name="col0" type="String" xid="xid43"></column>
+  <column name="cookWayId" type="String" xid="xid44"></column>
+  <column name="goodsId" type="String" xid="xid45"></column></div></div>  
   <div component="$UI/system/components/justep/contents/contents" class="x-contents x-full"
     active="0" xid="contents1" swipe="false"> 
     <div class="x-contents-content" xid="login">
@@ -215,7 +218,7 @@
         <div class="x-panel-bottom menu-bottom-wrap" xid="bottom2">
           <div xid="div105" class="menu-bottom-left"> 
             <span>共
-              <b bind-text="$model.cartData.getCount() " class="color-price">0</b>份
+              <b bind-text="$model.cartData.sum('qty') " class="color-price">0</b>份
             </span>
             <span>
               <b bind-text="statusData.val('cartTotal')" class="color-price">0</b>元
@@ -363,13 +366,13 @@
                     <span xid="span161"><![CDATA[汇总]]></span>
                   </li>  
                   <li> 
-                    <a component="$UI/system/components/justep/button/button" class="btn btn-default clear" label="清空" xid="button10" bind-click="button10Click"> 
+                    <a component="$UI/system/components/justep/button/button" class="btn btn-default clear" label="清空" xid="button10" bind-click="button10Click" onClick="button10Click"> 
                       <i xid="i10" />  
                       <span xid="span159">清空</span>
                     </a>
                   </li>  
                   <li> 
-                    <a component="$UI/system/components/justep/button/button" class="btn btn-default delete" label="删除" xid="button11" bind-click="button11Click"> 
+                    <a component="$UI/system/components/justep/button/button" class="btn btn-default delete" label="删除" xid="button11" onClick="button11Click"> 
                       <i xid="i11" />  
                       <span xid="span160">删除</span>
                     </a>
@@ -378,7 +381,7 @@
               </div>  
               <div component="$UI/system/components/justep/list/list" class="x-list ed-con-con " xid="list9" data="currentCookWayData">
    <ul class="x-list-template" xid="listTemplateUl9">
-    <li xid="li6"><div component="$UI/system/components/justep/labelEdit/labelEdit" class="x-label-edit x-label30" xid="labelOutput1" bind-text="val('cookWay')+'('+val('addMoney')+')'">
+    <li xid="li6" bind-click="li6Click"><div component="$UI/system/components/justep/labelEdit/labelEdit" class="x-label-edit x-label30" xid="labelOutput1" bind-text="val('cookWay')+'('+val('addMoney')+')'">
    <label class="x-label" xid="label4"></label>
    <div component="$UI/system/components/justep/output/output" class="x-output x-edit" xid="output3"></div></div></li></ul> 
   </div></div></div>
