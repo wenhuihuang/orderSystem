@@ -373,6 +373,7 @@ define(function(require){
 	    var num = $('#custNum').val();
 	    if(num == ''||num == undefined){
 	    	alert('输入错误');
+	    	return;
 	    }
 	    var success = function(param){
 	    	debugger
