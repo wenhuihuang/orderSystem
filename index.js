@@ -795,6 +795,14 @@ define(function(require){
 	
 	
 	
+	Model.prototype.li1Dblclick = function(event){
+		alert("d")
+	};
+	
+
+	
+	
+	
 	return Model;
 });
 

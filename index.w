@@ -142,7 +142,7 @@
           <div xid="div4" class="main-con"> 
             <div component="$UI/system/components/justep/list/list" class="x-list" xid="list2" data="deskData">
    <ul class="x-list-template" xid="listTemplateUl2">
-    <li xid="li1" bind-click="li1Click">
+    <li xid="li1" bind-click="li1Click" bind-dblclick="li1Dblclick">
    <div xid="div5" class="table-con use" bind-style="{  'background-color':val('color')}">
      <p xid="p87">
       <div component="$UI/system/components/justep/output/output" class="x-output" xid="roomNum" bind-ref="ref('state')" id="roomNum" style="color:#FFFFFF;"></div></p> 
