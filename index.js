@@ -622,6 +622,7 @@ define(function(require){
 	Model.prototype.button14Click = function(event){
 		var cookTypeData = this.comp('cookTypeData');
 		//debugger;
+		cookTypeData.clear();//清空要求数据
 		var success = function(param){
 			for(var o in param.typeCodes){
 				var typeCode = param.typeCodes[o].typeCode;
