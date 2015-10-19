@@ -2,7 +2,7 @@ define(function(require){
 	var $ = require("jquery");
 	var justep = require("$UI/system/lib/justep");
 	//var ip = "http://qixusoft.vicp.net";
-	var ip="http://192.168.1.20:8080";
+	var ip="http://192.168.1.20:8080/OrderSystemWeX5/";
 	//var url="UI2/orderSystem_a/index.w#!index";
 	var Baas = require("$UI/demo/baas/baas");
 	var Model = function(){
@@ -29,7 +29,7 @@ define(function(require){
 			}
 		}
 		Baas.sendRequest({
-			"url" : ip + '/OrderSystemWeixin/ShopCartServlet.do?func=showOrderedReturnJson&billMasterId='+currentDeskData.val('billMasterId')+'&roomId='+currentDeskData.val('roomId'),
+			"url" : ip + 'ShopCartServlet.do?func=showOrderedReturnJson&billMasterId='+currentDeskData.val('billMasterId')+'&roomId='+currentDeskData.val('roomId'),
 			"dataType": "json",
 			"success" : success
 		});
@@ -143,7 +143,7 @@ define(function(require){
 			     }                                            
 		}
 		Baas.sendRequest({
-			"url" : ip + '/OrderSystemWeixin/LoginByBackstageServlet.do?func=login&returnJson=1',
+			"url" : ip + 'LoginByBackstageServlet.do?func=login&returnJson=1',
 			"dataType": "json",
 			"params":{"username":username,"password":pwd},
 			"async" : true,
@@ -159,7 +159,7 @@ define(function(require){
 	Model.prototype.fan_nameCustomRefresh = function(event){
 		var masterData = event.source;
 		var mydata = this.comp('menuTypeData');
-		var url= ip+"/OrderSystemWeixin/RoomServlet.do?func=getRoomType&getJson=1";//http://192.168.1.20:8080
+		var url= ip+"RoomServlet.do?func=getRoomType&getJson=1";//http://192.168.1.20:8080
 	    $.ajax({
 	        type: "GET",
 	        url: url,
@@ -184,7 +184,7 @@ define(function(require){
 	    });
 	    
 	    //加载菜单类型列表，以便让进房间的时候，可以快速看到菜单
-	    var url=ip+"/OrderSystemWeixin/GoodsTypeServlet.do?func=listGoodsType&getJson=1";
+	    var url=ip+"GoodsTypeServlet.do?func=listGoodsType&getJson=1";
 	    $.ajax({
 			type: "GET",
 	        url: url,
@@ -195,7 +195,7 @@ define(function(require){
 	        success: function(msg){        	
 		            var rowss=[];		            
 					for(var i=0;i<msg.typeCodes.length;i++){												 
-					 rowss[i]={'typeCode':{'value':msg.typeCodes[i].typeCode},'typeName':{'value':msg.typeCodes[i].typeName}};
+					 rowss[i]={'typeCode':{'value':msg.typeCodes[i].typeCode},'typeName':{'value':msg.typeCodes[i].typeName},'qty':{'value':0}};
 				 	}
 				 	var ffdata={"rows":rowss};
 			
@@ -246,7 +246,7 @@ define(function(require){
 		var typeCode= row.val("typeCode");
 		var mydata = this.comp('deskData');
 		//var state=mydata.val('state')
-		var url= ip+"/OrderSystemWeixin/RoomServlet.do";//http://192.168.1.20:8080
+		var url= ip+"RoomServlet.do";//http://192.168.1.20:8080
 		var data="func=getRoom&typeCode="+typeCode+"&getJson=1";
 		$.ajax({
 			type: "GET",
@@ -320,7 +320,7 @@ define(function(require){
 		}
 		
 		Baas.sendRequest({
-			"url" : ip + '/OrderSystemWeixin/RoomServlet.do?func=getRoomById&getJson=1&roomId='+row.val('roomId'),
+			"url" : ip + 'RoomServlet.do?func=getRoomById&getJson=1&roomId='+row.val('roomId'),
 			"dataType": "json",
 			"success" : success
 		});
@@ -338,12 +338,12 @@ define(function(require){
 		var currentDeskData = this.comp('currentDeskData');
 		var typeCode=row.val("typeCode");
 		var mydata = this.comp('goodsListData');
-		var url= ip+'/OrderSystemWeixin/GoodsServlet.do?func=listByTypeCode&typeCode='+typeCode+'&getJson=1';//http://192.168.1.20:8080
+		var url= ip+'GoodsServlet.do?func=listByTypeCode&typeCode='+typeCode+'&getJson=1';//http://192.168.1.20:8080
 		//alert(data)
 		var success = function(msg){
 						var rowss=[];
 						for(var i=0;i<msg.goods.length;i++){
-						 rowss[i]={'goodsId':{'value':msg.goods[i].goodsId},'goodsName':{'value':msg.goods[i].goodsName},'sprice':{'value':msg.goods[i].sprice},'qty':{'value':0}};
+						 rowss[i]={'goodsId':{'value':msg.goods[i].goodsId},'goodsName':{'value':msg.goods[i].goodsName},'sprice':{'value':msg.goods[i].sprice},'qty':{'value':0},'typeCode':{'value':msg.goods[i].typeCode}};
 					 	}
 					 	var ffdata={"rows":rowss};
 					 	mydata.loadData(ffdata);
@@ -389,7 +389,7 @@ define(function(require){
 	    	contents1.to('menu');
 	    }				
 		Baas.sendRequest({
-			"url" : ip + '/OrderSystemWeixin/OrderedNumServlet.do?func=newConsumeRoom&getJson=1&roomId='+oneDeskData.val('roomId')+'&custQty='+num,
+			"url" : ip + 'OrderedNumServlet.do?func=newConsumeRoom&getJson=1&roomId='+oneDeskData.val('roomId')+'&custQty='+num,
 			"dataType": "json",
 			"success" : success
 		});
@@ -427,6 +427,16 @@ define(function(require){
 		}
 		//购物车显示数量显示在goodsList
 		row.val('qty',row.val('qty')+1);
+		//向菜单类型右侧添加数量
+		//---1.抽出与当前相同菜单类型的菜单类型
+		var menuType = this.comp('menuTypeData');
+		menuType.eachAll(function(data){
+			if(data.row.val('typeCode') == row.val('typeCode')){
+				data.row.val('qty',data.row.val('qty')+1);
+			}
+			
+		});
+		//---end of 加数量
 	};
 
 
@@ -435,12 +445,22 @@ define(function(require){
 	Model.prototype.image1Click = function(event){
 		var cartData = this.comp('cartData');
 		var row = event.bindingContext.$rawData;
+		var menuType = this.comp('menuTypeData');
 		
 		if(row.val('qty')<=1){		
 			cartData.eachAll(function(param){
 				if(param.row.val('goodsId') == row.val('goodsId')){//已经存在
 					cartData.deleteData(param.row);
 					row.val('qty',row.val('qty')-1);//将显示数量置0
+							//向菜单类型右侧添减数量
+							//---1.抽出与当前相同菜单类型的菜单类型
+							
+							menuType.eachAll(function(data){
+								if(data.row.val('typeCode') == row.val('typeCode')){
+									data.row.val('qty',data.row.val('qty')-1);
+								}
+							});
+							//---end of 减数量
 				}
 			});
 			return;
@@ -454,6 +474,16 @@ define(function(require){
 		
 		//购物车显示数量显示在goodsList
 		row.val('qty',row.val('qty')-1);
+		
+		//向菜单类型右侧添减数量
+		//---1.抽出与当前相同菜单类型的菜单类型
+		
+		menuType.eachAll(function(data){
+			if(data.row.val('typeCode') == row.val('typeCode')){
+				data.row.val('qty',data.row.val('qty')-1);
+			}
+		});
+		//---end of 减数量
 		
 	};
 
@@ -604,7 +634,7 @@ define(function(require){
 			}
 		}
 		Baas.sendRequest({
-			"url" : ip + '/OrderSystemWeixin/CookWayServlet.do?func=getCookType&getJson=1',
+			"url" : ip + 'CookWayServlet.do?func=getCookType&getJson=1',
 			"dataType": "json",
 			"success" : success
 		});
@@ -638,7 +668,7 @@ define(function(require){
 				}
 			}
 			Baas.sendRequest({
-			"url" : ip + '/OrderSystemWeixin/CookWayServlet.do?func=getCookWay&getJson=1&typeCode='+row.val('typeCode'),
+			"url" : ip + 'CookWayServlet.do?func=getCookWay&getJson=1&typeCode='+row.val('typeCode'),
 			"dataType": "json",
 			"success" : success
 		});
@@ -697,7 +727,7 @@ define(function(require){
 		});
 		cookways = cookways.substring(0,cookways.length-1);
 		var user = this.comp('userData');
-		var url = '/OrderSystemWeixin/ShopCartServlet.do?func=orderByReturnJson&billMasterId='+billMasterId+'&roomId='+roomId+'&goods='+goods+'&cookways='+cookways+'&orderempcode='+user.val('userId');	
+		var url = 'ShopCartServlet.do?func=orderByReturnJson&billMasterId='+billMasterId+'&roomId='+roomId+'&goods='+goods+'&cookways='+cookways+'&orderempcode='+user.val('userId');	
 		
 		debugger;
 		//送单成功
@@ -734,14 +764,14 @@ define(function(require){
 								}
 								//拿到订单详情
 								Baas.sendRequest({
-									"url" : '192.168.1.120:8081' + '/OrderSystemWeixin/ShopCartServlet.do?func=showOrderedReturnJson&billMasterId='+currentDeskData.val('billMasterId')+'&roomId='+currentDeskData.val('roomId'),
+									"url" : ip + 'ShopCartServlet.do?func=showOrderedReturnJson&billMasterId='+currentDeskData.val('billMasterId')+'&roomId='+currentDeskData.val('roomId'),
 									"dataType": "json",
 									"success" : successOrder
 								});
 				}
 				//打印
 				Baas.sendRequest({
-					"url" : ip + '/OrderSystemWeixin/ShopCartServlet.do?func=afterPrint&isReturnJson=true&billMasterId='+billMasterId+'&roomId='+roomId,
+					"url" : ip + 'ShopCartServlet.do?func=afterPrint&isReturnJson=true&billMasterId='+billMasterId+'&roomId='+roomId,
 					"dataType": "json",
 					"success" : success1
 				});

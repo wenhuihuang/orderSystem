@@ -14,12 +14,14 @@
   <column label="状态" name="state" type="Integer" xid="xid10"></column>
   <column label="台号" name="roomName" type="String" xid="xid11"></column></div>
   <div component="$UI/system/components/justep/data/data" autoLoad="true" xid="menuTypeData" idColumn="typeCode"><column label="菜单类号" name="typeCode" type="String" xid="xid12"></column>
-  <column label="菜单分类名" name="typeName" type="String" xid="xid13"></column></div>
+  <column label="菜单分类名" name="typeName" type="String" xid="xid13"></column>
+  <column label="当前类型点单数量" name="qty" type="Integer" xid="xid47"></column></div>
   <div component="$UI/system/components/justep/data/data" autoLoad="true" xid="goodsListData" idColumn="goodsId">
    <column label="商品id" name="goodsId" type="String" xid="xid14"></column>
-   <column label="商品名称" name="goodsName" type="String" xid="xid15"></column>
-   <column name="sprice" type="Double" xid="xid18"></column>
-   <column label="商品数量" name="qty" type="String" xid="xid19"></column></div><div component="$UI/system/components/justep/data/data" autoLoad="true" xid="currentDeskData" idColumn="tai_number">
+  <column label="商品名称" name="goodsName" type="String" xid="xid15"></column>
+  <column name="sprice" type="Double" xid="xid18"></column>
+  <column label="商品数量" name="qty" type="String" xid="xid19"></column>
+  <column label="商品类型" name="typeCode" type="String" xid="xid46"></column></div><div component="$UI/system/components/justep/data/data" autoLoad="true" xid="currentDeskData" idColumn="tai_number">
    <column label="台号" name="tai_number" type="String" xid="default11"></column>
   <column label="状态" name="state" type="String" xid="default12"></column>
   <column label="房号id" name="roomId" type="String" xid="default13"></column>
@@ -197,7 +199,8 @@
           <div xid="left-menu" class="left-menu"> 
             <div component="$UI/system/components/justep/list/list" class="x-list" xid="list3" data="menuTypeData">
    <ul class="x-list-template" xid="listTemplateUl3">
-    <li xid="li2" bind-click="li2Click"><div component="$UI/system/components/justep/output/output" class="x-output" xid="output5" bind-ref="ref('typeName')"></div></li></ul> </div></div>  
+    <li xid="li2" bind-click="li2Click"><div component="$UI/system/components/justep/output/output" class="x-output" xid="output5" bind-ref="ref('typeName')"></div>
+  <div component="$UI/system/components/justep/output/output" class="x-output" xid="output6" bind-ref="ref('qty')"></div></li></ul> </div></div>  
           <div xid="right-main" class="right-main"> 
             <div component="$UI/system/components/justep/list/list" class="x-list" xid="list6" data="goodsListData">
    <ul class="x-list-template" xid="listTemplateUl6">
