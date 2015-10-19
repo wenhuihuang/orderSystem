@@ -186,7 +186,9 @@
         <div class="x-panel-top" xid="top2">
           <div component="$UI/system/components/justep/titleBar/titleBar" class="x-titlebar"
             xid="titleBar1" title="菜单"> 
-            <div class="x-titlebar-left" xid="div49"/>  
+            <div class="x-titlebar-left" xid="div49"><a component="$UI/system/components/justep/button/button" class="btn btn-link btn-only-icon color-green" xid="button19" icon="icon-android-arrow-back" bind-click="button19Click">
+   <i xid="i21" class="icon-android-arrow-back"></i>
+   <span xid="span41"></span></a></div>  
             <div class="x-titlebar-title" xid="div50">菜单</div>  
             <div class="x-titlebar-right reverse" xid="div51"/>
           </div>

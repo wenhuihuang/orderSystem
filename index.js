@@ -787,6 +787,14 @@ define(function(require){
 	
 	
 	
+	Model.prototype.button19Click = function(event){
+		this.comp("contents1").to("index");
+	};
+	
+
+	
+	
+	
 	return Model;
 });
 
