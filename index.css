@@ -1,3 +1,31 @@
+
+/*一行五列*/
+.col-xs-2dot4 {
+position: relative;
+min-height: 1px;
+padding-right: 15px;
+padding-left: 15px;
+}
+
+.col-xs-2dot4 {
+float: left;
+}
+.col-xs-2dot4 {
+width: 20%;
+}
+.col-xs-pull-2dot4 {
+right: 20%;
+}
+.col-xs-push-2dot4 {
+left: 20%;
+}
+.col-xs-offset-2dot4 {
+margin-left: 20%;
+}
+
+
+/*一行五列结束*/
+
 .clearfix:after{
 	display:block;
 	visibility:hidden;
