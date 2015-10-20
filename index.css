@@ -411,17 +411,51 @@ img.subtract,img.add{
 	padding:8px 0;
 	border-bottom:1px solid #acacac;
 }
+.con-con ul li.active{
+	background:red;
+}
 .pop-con-title{
 	padding:6px 0;
 	border-bottom:1px solid #acacac;
 }
+
 .pop-con-title .col{
 	text-align:center;
 }
 .pop-menu-btn{
+	width:100%;
 	position: fixed;
     bottom: 57px;
     background-color: #E8E8E8;
+}
+.pop-menuSub-btn{
+	width:100%;
+	position: fixed;
+    bottom: 57px;
+    background-color: #E8E8E8;
+}
+.pop-menuSub-btn span{
+	padding: 8px 10px;
+    text-align: center;
+    background: #32C152;
+    color: #fff;
+    border-radius: 3px;
+    margin: 5px;
+    display: inline-block;
+}
+.x-popOver-content{
+	background:#fff;
+}
+.bottom-btn-wrap .col{
+	text-align:center;
+}
+.bottom-btn-wrap .col .btn{
+	width:80%;
+	border:none;
+	color:#fff;
+}
+.pop-menuSub-btn{
+	/*display:none;*/
 }
 /*
 .con-con ul li div,.con-top ul li div{

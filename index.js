@@ -499,7 +499,8 @@ define(function(require){
 
 	//隐藏订单 
 	Model.prototype.button6Click = function(event){
-		this.comp("popOver1").hide();
+		//this.comp("popOver1").hide();
+		this.comp("order").hide();
 	};
 
 
@@ -837,9 +838,51 @@ define(function(require){
 	};
 	
 
+	Model.prototype.button33Click = function(event){
+		$(".pop-menuSub-btn").css({"display":"block"});
+	};
 	
+	//赠送
+	Model.prototype.span35Click = function(event){
+		this.comp("give").show();
+		this.comp("contents4").to("content16");
+	};
 	
+
+	Model.prototype.button44Click = function(event){
+		this.comp("give").hide();
+	};
 	
+
+	Model.prototype.span32Click = function(event){
+		this.comp("give").show();
+		this.comp("contents4").to("content17");
+	};
+	
+	//返回
+	Model.prototype.span37Click = function(event){
+		$(".pop-menuSub-btn").css({"display":"none"});
+	};
+	
+	//价格
+	Model.prototype.span33Click = function(event){
+		this.comp("give").show();
+		this.comp("contents4").to("content15")
+	};
+	
+
+	Model.prototype.span34Click = function(event){
+		this.comp("give").show();
+		this.comp("contents4").to("content21")
+	};
+	
+
+	Model.prototype.span36Click = function(event){
+		this.comp("give").show();
+		this.comp("contents4").to("content23")
+	};
+	
+
 	return Model;
 });
 
