@@ -25,7 +25,45 @@ margin-left: 20%;
 
 
 /*一行五列结束*/
+/*一行7列*/
+.col-xs-1dot7 {
+position: relative;
+min-height: 1px;
+padding-right: 15px;
+padding-left: 15px;
+}
 
+.col-xs-1dot7 {
+float: left;
+}
+.col-xs-1dot7{
+width: 13%;
+}
+.col-xs-pull-1dot7 {
+right: 13%;
+}
+.col-xs-push-1dot7 {
+left: 13;
+}
+.col-xs-offset-1dot7 {
+margin-left: 13%;
+}
+/*一行7列结束*/
+/*一行列结束*/
+.col-xs-5dot2 {
+position: relative;
+min-height: 1px;
+padding-right: 15px;
+padding-left: 15px;
+}
+
+.col-xs-5dot2 {
+float: left;
+}
+.col-xs-5dot2{
+width: 46.5%;
+}
+/**/
 .clearfix:after{
 	display:block;
 	visibility:hidden;
@@ -351,9 +389,6 @@ img.subtract,img.add{
 .poop-bottom-right .btn{
 	margin-left:5px;
 }
-.con-con ul li div,.con-top ul li div{
-	display:inline-block;
-}
 .con-top ul{
 	border-bottom:1px solid #acacac;
 }
@@ -363,9 +398,36 @@ img.subtract,img.add{
 .con-top ul,.con-con ul{
 	margin:0;
 }
+.con-con .row{
+	margin:0;
+}
+.con-con .row .col{
+	padding:0;
+}
+.con-con .row .col-xs-1dot7{
+	text-align:center;
+}
 .con-con ul li{
+	padding:8px 0;
 	border-bottom:1px solid #acacac;
 }
+.pop-con-title{
+	padding:6px 0;
+	border-bottom:1px solid #acacac;
+}
+.pop-con-title .col{
+	text-align:center;
+}
+.pop-menu-btn{
+	position: fixed;
+    bottom: 57px;
+    background-color: #E8E8E8;
+}
+/*
+.con-con ul li div,.con-top ul li div{
+	display:inline-block;
+}
+
 .con-con ul li div:nth-child(1),.con-top ul li div:nth-child(1){
 	border-right:1px solid #ccc;
 	width:68%;
@@ -376,6 +438,7 @@ img.subtract,img.add{
 .pop-con{
 	
 }
+
 .pop-con .no-send{
 	padding:8px 0;
 	color:red;
@@ -397,6 +460,7 @@ img.subtract,img.add{
 	-moz-box-flex:1.0;
 	display:block;
 }
+*/
 .con-top-left p span{
 	display:inline-block;
 	width:32%;

@@ -33,7 +33,9 @@ define(function(require){
 			"dataType": "json",
 			"success" : success
 		});
-		this.comp("popOver1").show();
+		//this.comp("popOver1").show();
+		this.comp("order").show();
+		
 	};
 
 
