@@ -2,7 +2,9 @@
 
 <div xmlns="http://www.w3.org/1999/xhtml" xid="window" class="window" component="$UI/system/components/justep/window/window"
   design="device:mobile">  
-  <div component="$UI/system/components/justep/model/model" xid="model" style="height:auto;left:651px;top:110px;"
+  <div component="$UI/system/components/justep/labelEdit/labelEdit" class="x-label-edit x-label30" xid="labelRange1">
+   <label class="x-label" xid="label10"></label>
+   <input component="$UI/system/components/justep/input/range" class="x-edit" xid="range1"></input></div><div component="$UI/system/components/justep/model/model" xid="model" style="height:auto;left:877px;top:274px;"
     onLoad="modelLoad">
     <div component="$UI/system/components/justep/data/data" autoLoad="true"
       xid="roomData" idColumn="typeName" onCustomRefresh="fan_nameCustomRefresh" autoNew="false">
@@ -218,7 +220,7 @@
             <div component="$UI/system/components/justep/list/list" class="x-list"
               xid="list2" data="deskData"> 
               <ul class="x-list-template" xid="listTemplateUl2"> 
-                <li xid="li1" bind-click="li1Click" bind-dblclick="li1Dblclick"> 
+                <li xid="li1" bind-click="li1Click" bind-attr-mydata="val('roomId')" bind-touchstart="li1Touchstart" bind-touchmove="li1Touchmove" bind-touchend="li1Touchend"> 
                   <div xid="div5" class="table-con use" bind-style="{  'background-color':val('color')}"> 
                     <p xid="p87"> 
                       <div component="$UI/system/components/justep/output/output"
@@ -722,17 +724,17 @@
           <div class="x-panel-top" xid="top7" height="48"> 
             <div component="$UI/system/components/justep/button/buttonGroup"
               class="btn-group btn-group-justified" tabbed="true" xid="buttonGroup2">
-              <a component="$UI/system/components/justep/button/button" class="btn btn-default"
+              <a component="$UI/system/components/justep/button/button" class="btn x-main-color"
                 label="没分单" xid="button27" target="content12"> 
                 <i xid="i29"/>  
                 <span xid="span29">没分单</span>
               </a>  
-              <a component="$UI/system/components/justep/button/button" class="btn btn-default"
+              <a component="$UI/system/components/justep/button/button" class="btn x-main-color"
                 label="已分单" xid="button28" target="content13"> 
                 <i xid="i30"/>  
                 <span xid="span30">已分单</span>
               </a>  
-              <a component="$UI/system/components/justep/button/button" class="btn btn-default"
+              <a component="$UI/system/components/justep/button/button" class="btn x-main-color"
                 label="结账单" xid="button29" target="content14"> 
                 <i xid="i31"/>  
                 <span xid="span31">结账单</span>
@@ -959,7 +961,79 @@
                   
                 </div>
               </div>  
-              <div class="x-contents-content" xid="content14"/>
+              <div class="x-contents-content" xid="content14"><div xid="div23" class="have-wrap"><div xid="div72"><h3 xid="h32"><![CDATA[十号台（1人）]]></h3><table class="table table-bordered table-hover table-striped" component="$UI/system/components/bootstrap/table/table" xid="table1">
+   <thead xid="thead1">
+    <tr xid="tr1">
+     <th xid="col42"><![CDATA[管理员]]></th>
+     <th xid="col43" colspan="2">1000</th>
+     </tr>  </thead> 
+   <tbody class="x-list-template" xid="listTemplate1">
+    <tr xid="tr2">
+     <td xid="td1"><![CDATA[原始单号]]></td>
+     <td xid="td2" colspan="2"></td>
+     </tr>
+     <tr xid="tr2">
+     <td xid="td1"><![CDATA[会员卡]]></td>
+     <td xid="td2"></td>
+     <td xid="td3"></td>
+     </tr> 
+       <tr xid="tr2">
+     <td xid="td1"><![CDATA[消费合计]]></td>
+     <td xid="td2"></td>
+     <td xid="td3"></td>
+     </tr>
+       <tr xid="tr2">
+     <td xid="td1"><![CDATA[服务费]]></td>
+     <td xid="td2"></td>
+     <td xid="td3"></td>
+     </tr>  
+       <tr xid="tr2">
+     <td xid="td1"><![CDATA[折扣额]]></td>
+     <td xid="td2"></td>
+     <td xid="td3"></td>
+     </tr> 
+       <tr xid="tr2">
+     <td xid="td1"><![CDATA[应付合计]]></td>
+     <td xid="td2"></td>
+     <td xid="td3"></td>
+     </tr>
+       <tr xid="tr2">
+     <td xid="td1"><![CDATA[最低消费]]></td>
+     <td xid="td2"></td>
+     <td xid="td3"></td>
+     </tr>  
+      </tbody> </table></div><div xid="div73"><div xid="div75" class="pop-menu-btn">
+   <div component="$UI/system/components/justep/button/buttonGroup" class="btn-group btn-group-justified" tabbed="true" xid="buttonGroup5">
+    <a component="$UI/system/components/justep/button/button" class="btn btn-link" xid="button46" label="预览结帐单" bind-click="button46Click">
+     <i xid="i50"></i>
+     <span xid="span57">预览结帐单</span></a> 
+    <a component="$UI/system/components/justep/button/button" class="btn btn-link" xid="button49" label="输入会员卡号">
+     <i xid="i48"></i>
+     <span xid="span52">输入会员卡号</span></a> 
+    
+    <a component="$UI/system/components/justep/button/button" class="btn btn-link" xid="button47" label="更多">
+     <i xid="i49"></i>
+     <span xid="span58">更多</span></a> </div> 
+  </div><div xid="div83" class="pop-menuSub-btn">
+   <div component="$UI/system/components/bootstrap/row/row" class="row" xid="row13">
+    <div class="col col-xs-3" xid="col48">
+     <span xid="span73"><![CDATA[修改原始单号]]></span></div> 
+    <div class="col col-xs-3" xid="col49">
+     <span xid="span74"><![CDATA[修改服务费率]]></span></div> 
+    <div class="col col-xs-3" xid="col50">
+     <span xid="span75"><![CDATA[修改人数]]></span></div> 
+    <div class="col col-xs-3" xid="col46">
+     <span xid="span76"><![CDATA[修改最低消费]]></span></div> </div> 
+   <div component="$UI/system/components/bootstrap/row/row" class="row" xid="row14">
+    <div class="col col-xs-3" xid="col53">
+     <span xid="span60"><![CDATA[打折]]></span></div> 
+    <div class="col col-xs-3" xid="col52">
+     <span xid="span71"><![CDATA[会员打折]]></span></div> 
+    <div class="col col-xs-3" xid="col51">
+     <span xid="span72"><![CDATA[重打总单]]></span></div> 
+    <div class="col col-xs-3" xid="col47">
+     <span xid="span77"><![CDATA[埋单]]></span></div> </div> </div></div></div>
+  </div>
             </div>
           </div>  
           <div class="x-panel-bottom" xid="bottom5"> 
@@ -1239,7 +1313,37 @@
                   </div> 
                 </div>
               </div>
-            </div> 
+            <div class="x-contents-content" xid="order-info">
+  <div component="$UI/system/components/justep/panel/panel" class="x-panel x-full" xid="panel13">
+   <div class="x-panel-top" xid="top8"><h3 xid="h33" class="order-info-title"><![CDATA[大酒店]]></h3></div>
+   <div class="x-panel-content" xid="content26"><div xid="div84" class="order-info-wrap"><div xid="div85"><div component="$UI/system/components/bootstrap/row/row" class="row" xid="row15">
+   <div class="col col-xs-4" xid="col54"><span xid="span78"><![CDATA[管理员：]]></span></div>
+   <div class="col col-xs-8" xid="col55"><span xid="span79"><![CDATA[]]></span></div>
+   </div>
+  <div component="$UI/system/components/bootstrap/row/row" class="row" xid="row17">
+   <div class="col col-xs-4" xid="col59"><span xid="span80"><![CDATA[台号：]]></span></div>
+   <div class="col col-xs-8" xid="col57"><span xid="span81"></span></div>
+   </div>
+  <div component="$UI/system/components/bootstrap/row/row" class="row" xid="row18">
+   <div class="col col-xs-4" xid="col64"><span xid="span82"><![CDATA[单号：]]></span></div>
+   <div class="col col-xs-8" xid="col60"><span xid="span87"></span></div>
+   </div></div><table class="table table-bordered table-hover table-striped" component="$UI/system/components/bootstrap/table/table" xid="table2">
+   <thead xid="thead2">
+    <tr xid="tr3">
+     <th xid="col65"><![CDATA[项目]]></th>
+     <th xid="col66"><![CDATA[数量]]></th>
+     <th xid="col67"><![CDATA[金额]]></th>
+     </tr> </thead> 
+   <tbody class="x-list-template" xid="listTemplate2">
+    <tr xid="tr4">
+     <td xid="td5">1</td>
+     <td xid="td6"></td>
+     <td xid="td7"></td>
+     </tr> </tbody> </table><div xid="div86"><h3 xid="h34"><![CDATA[总金额：]]></h3><p xid="p2"><span xid="span89"><![CDATA[欢迎下次光临]]></span></p></div>
+  </div></div>
+   <div class="x-panel-bottom order-info-button" xid="bottom10"><a component="$UI/system/components/justep/button/button" class="btn x-orange" label="返回" xid="button50" bind-click="button50Click">
+   <i xid="i52"></i>
+   <span xid="span90">返回</span></a></div></div></div></div> 
           </div> 
         </div> 
       </div>

@@ -95,6 +95,16 @@ dl{
 	margin:0;
 	padding:0;
 }
+.x-main-color{
+	color:#fff;
+	background:#2BB8AA;
+	border-color:#25AA9D;
+}
+.x-main-color:active ,.x-main-color.active{
+	color:#fff;
+	border-color:#5FB26F;
+	background:#69C17A;
+}
 .black{
 	color:black;
 }
@@ -435,13 +445,13 @@ img.subtract,img.add{
     background-color: #E8E8E8;
 }
 .pop-menuSub-btn span{
-	padding: 8px 10px;
+	padding: 8px 0;
     text-align: center;
     background: #32C152;
     color: #fff;
     border-radius: 3px;
     margin: 5px;
-    display: inline-block;
+    display: block;
 }
 .x-popOver-content{
 	background:#fff;
@@ -455,7 +465,13 @@ img.subtract,img.add{
 	color:#fff;
 }
 .pop-menuSub-btn{
-	display:none;
+	/*display:none;*/
+}
+.pop-menuSub-btn .row{
+	margin:0;
+}
+.pop-menuSub-btn .row .col{
+	padding:0;
 }
 /*
 .con-con ul li div,.con-top ul li div{
@@ -824,4 +840,27 @@ ul.menu-item li{
 	background:#2BB8AA;
 	color:#fff;
 	border:none;
+}
+.have-wrap h3{
+	text-align:center;
+}
+.have-wrap table tr td:nth-child(1){
+	width:30%;
+}
+.order-info-title{
+	height-line:48px;
+}
+.order-info-title h3,.order-info-wrap h3{
+	text-align:center;
+}
+.order-info-wrap p{
+	text-align:center;
+}
+.order-info-wrap .row{
+	margin:0;
+}
+.order-info-button{
+	text-align:right;
+	height-line:48px;
+	padding:0 10px;
 }

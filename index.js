@@ -294,15 +294,24 @@ define(function(require){
 	};
 
 
-
+	//定义setTimeout执行方法 
+	//var TimeFn = null; 
 	//进入房台，记录下当前的订单号和roomId,然后再根据状态跳去不同的页面
 	//在这里应该
 	Model.prototype.li1Click = function(event){
-		var oneDeskData = this.comp('currentDeskData');
+			var oneDeskData = this.comp('currentDeskData');
 		var row = event.bindingContext.$rawData;
 		var state=row.val("state");
 		var contents1 = this.comp('contents1');
 		var popOver_renshu = this.comp("popOver_renshu");
+			// 取消上次延时未执行的方法 
+		//clearTimeout(TimeFn); 
+		//执行延时 
+		//TimeFn = setTimeout(function(){ 
+		//do function在此处写单击事件要执行的代码 
+		
+	
+	
 		 
 		var success = function(param){	
 			//记录当前台号
@@ -327,7 +336,11 @@ define(function(require){
 			"dataType": "json",
 			"success" : success
 		});
+		//alert(row.val("roomId"))
+		//$(this).attr({"bind-attr-mydata":row.val("roomId")})
 		
+		//alert("a")
+		//},300); 
 	
 	};
 
@@ -832,11 +845,6 @@ define(function(require){
 	Model.prototype.button26Click = function(event){
 		this.comp("popOver-take").hide();
 	};
-	
-	Model.prototype.li1Dblclick = function(event){
-		alert("d")
-	};
-	
 
 	Model.prototype.button33Click = function(event){
 		$(".pop-menuSub-btn").css({"display":"block"});
@@ -880,6 +888,47 @@ define(function(require){
 	Model.prototype.span36Click = function(event){
 		this.comp("give").show();
 		this.comp("contents4").to("content23")
+	};
+	
+	//预览账单
+	Model.prototype.button46Click = function(event){
+		this.comp("give").show();
+		this.comp("contents4").to("order-info");
+	};
+	
+
+	Model.prototype.button50Click = function(event){
+		this.comp("give").hide();
+	};
+	//定时器 
+	var timeOutEvent=0;
+	//长按开始
+	Model.prototype.li1Touchstart = function(event){
+		 timeOutEvent = setTimeout(function(){
+    	timeOutEvent = 0;  
+		    //执行长按要执行的内容，如弹出菜单  
+		    alert("长按事件触发发");  
+		    var liObj= $(event.target).is("li") ? $(event.target).attr("mydata") : $(event.target).parents("li").attr("mydata");
+		//var attrData=$(event.target).is("li") ? $(event.target).attr("mydata") : $(event.target.parentElement).attr("mydata");
+		alert(liObj);
+	    },500);//这里设置定时器，定义长按500毫秒触发长按事件，时间可以自己改，个人感觉500毫秒非常合适  
+	    return false;  
+	};
+	
+	//移动
+	Model.prototype.li1Touchmove = function(event){
+		clearTimeout(timeOutEvent);//清除定时器  
+		timeOutEvent = 0;  
+	};
+	
+	//结束
+	Model.prototype.li1Touchend = function(event){
+		   clearTimeout(timeOutEvent);//清除定时器  
+		    if(timeOutEvent!=0){  
+		        //这里写要执行的内容（尤如onclick事件）  
+		        alert("你这是点击，不是长按");  
+		    }  
+		    return false;  
 	};
 	
 
