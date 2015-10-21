@@ -33,9 +33,7 @@ define(function(require){
 			"dataType": "json",
 			"success" : success
 		});
-		//this.comp("popOver1").show();
-		this.comp("order").show();
-		
+		this.comp("popOver1").show();
 	};
 
 
@@ -44,7 +42,7 @@ define(function(require){
 		
 		//获取当前行数据
 		var row = event.bindingContext.$rawData;
-		debugger
+		 
 		var currentGoodsData = this.comp('currentGoodsData');
 		currentGoodsData.newData({
 			index:0,
@@ -63,7 +61,7 @@ define(function(require){
 		//清空购物车加钱文本
 		var cart = this.comp('cartData');
 		cart.eachAll(function(param){
-		debugger
+		 
 			if(param.row.val('goodsId') == currentGoodsData.val('goodsId')){
 				param.row.val('cookWay','');
 			}
@@ -132,7 +130,6 @@ define(function(require){
 		var pwd=this.comp('userPwd').val();
 		var mydata = this.comp('user_inof');
 		var success = function(data){
-				debugger;
 			     if(data.admin[0].userId != "")   {
 			    	 userData.newData({
 			    		 defaultValues:[{
@@ -214,8 +211,7 @@ define(function(require){
 
 
 
-
-
+	
 	//data加载完成，调整顶部宽度
 	Model.prototype.modelLoad = function(event){
 			//设置菜单宽度
@@ -235,6 +231,9 @@ define(function(require){
 			$(".top-menu-li").eq(0).trigger("click");
 			var row = this.comp('deskData');
 			console.log(row)
+		
+			
+
 				
 	};
 
@@ -246,6 +245,7 @@ define(function(require){
 		var masterData = event.source;
 		var row = event.bindingContext.$object;
 		var typeCode= row.val("typeCode");
+		 ;
 		var mydata = this.comp('deskData');
 		//var state=mydata.val('state')
 		var url= ip+"RoomServlet.do";//http://192.168.1.20:8080
@@ -258,6 +258,7 @@ define(function(require){
 	        async: false,//使用同步方式，目前data组件有同步依赖
 	        cache: false,
 	        success: function(msg){
+	         ;
 	        	//ebugger;
 	           // masterData.loadData(data);//将返回的数据加载到data组件
 	          
@@ -294,26 +295,64 @@ define(function(require){
 	};
 
 
-	//定义setTimeout执行方法 
-	//var TimeFn = null; 
+	//下面方法不太好，应该通过当前行拿到roomId,而不需再去请求
 	//进入房台，记录下当前的订单号和roomId,然后再根据状态跳去不同的页面
-	//在这里应该
+	//1.在这里应该先清空购物车
+	//2.重新加载菜单类型信息
+	//3.通过购物车重新菜单数量和
+	//4.
 	Model.prototype.li1Click = function(event){
-			var oneDeskData = this.comp('currentDeskData');
+		;
+		var oneDeskData = this.comp('currentDeskData');
 		var row = event.bindingContext.$rawData;
 		var state=row.val("state");
 		var contents1 = this.comp('contents1');
 		var popOver_renshu = this.comp("popOver_renshu");
-			// 取消上次延时未执行的方法 
-		//clearTimeout(TimeFn); 
-		//执行延时 
-		//TimeFn = setTimeout(function(){ 
-		//do function在此处写单击事件要执行的代码 
-		
-	
-	
-		 
-		var success = function(param){	
+		var cartData = this.comp('cartData');
+		var goodsListData = this.comp('goodsListData');
+		var menuTypeData = this.comp('menuTypeData');
+		$('#more').slideUp();
+		var success = function(param){
+			//清空购物车
+			cartData.clear();
+			//重新加载菜单类型信息
+			$.ajax({
+		        type: "GET",
+		        url: ip + 'GoodsTypeServlet.do?func=listGoodsType&getJson=1',
+		        dataType: 'json',
+		        async: false,//使用同步方式，目前data组件有同步依赖
+		        cache: false,
+		        success: function(data){
+		            var rowss=[];
+					for(var i=0;i<data.typeCodes.length;i++){
+					 rowss[i]={'typeName':{'value':data.typeCodes[i].typeName},'typeCode':{'value':data.typeCodes[i].typeCode},'qty':{'value':0}};
+				 	}
+				 	var ffdata={"@type":"table","rows":rowss};
+			 	menuTypeData.loadData(ffdata);//将返回的数据加载到data组件
+			 	
+		        },
+		        error: function(){
+		          throw justep.Error.create("加载数据失败");
+		        }
+			});
+			//---------end of ajax-------------
+			
+			//从localStorage中获取购物车数据
+			 ;
+			if(localStorage.getItem(param.rooms[0].roomId)!=null&&localStorage.getItem(param.rooms[0].roomId)!=""){
+				cartData.loadData(JSON.parse(localStorage.getItem(param.rooms[0].roomId)));
+			}
+			//通过购物车计算，各商品类型中的数量和商品的数据
+			menuTypeData.eachAll(function(data){
+				cartData.eachAll(function(data1){
+					if(data.row.val('typeCode')==data1.row.val('typeCode')){
+						data.row.val('qty',data.row.val('qty')+data1.row.val('qty'));
+					}
+				});
+			});
+			//清空商品列表
+			goodsListData.clear();
+			
 			//记录当前台号
 			oneDeskData.newData({
 				index: 0,
@@ -328,6 +367,8 @@ define(function(require){
 				contents1.to("menu");
 			}else if(state="空台"){
 				popOver_renshu.show();
+				//让文本框架
+				$('#custNum').focus();
 			}	
 		}
 		
@@ -336,12 +377,7 @@ define(function(require){
 			"dataType": "json",
 			"success" : success
 		});
-		//alert(row.val("roomId"))
-		//$(this).attr({"bind-attr-mydata":row.val("roomId")})
-		
-		//alert("a")
-		//},300); 
-	
+
 	};
 
 
@@ -351,18 +387,28 @@ define(function(require){
 		$(event.target.parentElement).find("li").removeClass("active");
 		$(event.target).is("li")?$(event.target).addClass("active").siblings().removeClass("active"):$(event.target.parentElement).addClass("active").siblings().removeClass("active");
 		var row = event.bindingContext.$rawData;
-		var currentDeskData = this.comp('currentDeskData');
 		var typeCode=row.val("typeCode");
-		var mydata = this.comp('goodsListData');
+		var goodsListData = this.comp('goodsListData');
+		//从购物车中统计当前各商品购买数量，并将数量显示在商品列中
+		var cartData = this.comp('cartData');
 		var url= ip+'GoodsServlet.do?func=listByTypeCode&typeCode='+typeCode+'&getJson=1';//http://192.168.1.20:8080
-		//alert(data)
 		var success = function(msg){
+						 ;
 						var rowss=[];
 						for(var i=0;i<msg.goods.length;i++){
 						 rowss[i]={'goodsId':{'value':msg.goods[i].goodsId},'goodsName':{'value':msg.goods[i].goodsName},'sprice':{'value':msg.goods[i].sprice},'qty':{'value':0},'typeCode':{'value':msg.goods[i].typeCode}};
 					 	}
 					 	var ffdata={"rows":rowss};
-					 	mydata.loadData(ffdata);
+					 	goodsListData.loadData(ffdata);
+				//从购物车中统计当前各商品购买数量，并将数量显示在商品列中
+				goodsListData.eachAll(function(param){
+						cartData.eachAll(function(data){
+							if(param.row.val('goodsId')==data.row.val('goodsId')){
+								param.row.val('qty',param.row.val('qty')+data.row.val('qty'));
+							}
+						});
+				}); 	
+					 	
 					 		 	
 	    }
 	   
@@ -393,7 +439,7 @@ define(function(require){
 	    	return;
 	    }
 	    var success = function(param){
-	    	debugger
+	    	 
 	    	//补上当前台的订单id
 	    	oneDeskData.newData({
 	    		defaultValues:[{
@@ -420,10 +466,10 @@ define(function(require){
 	Model.prototype.image2Click = function(event){
 		var cartData = this.comp('cartData');
 		var row = event.bindingContext.$rawData;
-		//debugger;
+		// ;
 		var flag = false;//该菜单是否存在
 		cartData.eachAll(function(param){
-		//debugger;
+		// ;
 			if(param.row.val('goodsId') == row.val('goodsId')){//已经存在
 				param.row.val('qty',param.row.val('qty')+1);
 				flag = true;
@@ -437,7 +483,8 @@ define(function(require){
 					'qty':row.val('qty')+1,
 					'goodsName':row.val('goodsName'),
 					'sprice':row.val('sprice'),
-					'addMoney':0
+					'addMoney':0,
+					'typeCode':row.val('typeCode')
 				}]
 			});
 		}
@@ -450,9 +497,13 @@ define(function(require){
 			if(data.row.val('typeCode') == row.val('typeCode')){
 				data.row.val('qty',data.row.val('qty')+1);
 			}
-			
 		});
 		//---end of 加数量
+		
+		//将购物车数据写入到localStorage
+		var currentDeskData = this.comp('currentDeskData');
+		var roomId = currentDeskData.val('roomId');
+		localStorage.setItem(roomId,JSON.stringify(cartData.toJson()));
 	};
 
 
@@ -500,7 +551,10 @@ define(function(require){
 			}
 		});
 		//---end of 减数量
-		
+		//将购物车数据写入到localStorage
+		var currentDeskData = this.comp('currentDeskData');
+		var roomId = currentDeskData.val('roomId');
+		localStorage.setItem(roomId,JSON.stringify(cartData.toJson()));
 	};
 
 
@@ -512,8 +566,7 @@ define(function(require){
 
 	//隐藏订单 
 	Model.prototype.button6Click = function(event){
-		//this.comp("popOver1").hide();
-		this.comp("order").hide();
+		this.comp("popOver1").hide();
 	};
 
 
@@ -522,15 +575,27 @@ define(function(require){
 		var row = event.bindingContext.$rawData;
 		var goodsId = row.val('goodsId');
 		var goodsList = this.comp('goodsListData');
-		goodsList.eachAll(function(data){
-			if(data.row.val('goodsId') == goodsId){
-				data.row.val('qty',0);
-			}
-		})
+		var currentDeskData = this.comp('currentDeskData');
+		var roomId = currentDeskData.val('roomId');
+		var typeCode = row.val('typeCode');
+		var menuTypeData = this.comp('menuTypeData');
+
 		
 		var cartData = this.comp('cartData');
 		if(confirm('确定删除<'+row.val('goodsName')+'>')){
 			cartData.deleteData(row);
+			localStorage.setItem(roomId,JSON.stringify(cartData.toJson()));
+			goodsList.eachAll(function(data){//菜单数量置0
+				if(data.row.val('goodsId') == goodsId){
+					data.row.val('qty',0);
+				}
+			});
+			//菜单类型数量减
+			menuTypeData.eachAll(function(param){
+				if(param.row.val('typeCode')==typeCode){
+					param.row.val('qty',param.row.val('qty')-row.val('qty'));
+				}
+			});
 		}
 	};
 
@@ -587,7 +652,7 @@ define(function(require){
 	Model.prototype.a1Click = function(event){
 		var currentGoodsData = this.comp('currentGoodsData');
 		var cartData = this.comp('cartData');
-		//debugger;
+		// ;
 		cartData.eachAll(function(param){
 			if(currentGoodsData.val('goodsId') == param.row.val('goodsId')){
 				param.row.val('qty',param.row.val('qty')+1);
@@ -613,7 +678,7 @@ define(function(require){
 			return;
 		}
 		cartData.eachAll(function(param){
-			//debugger;
+			// ;
 			if(currentGoodsData.val('goodsId') == param.row.val('goodsId')){
 				param.row.val('qty',param.row.val('qty')-1);
 			}
@@ -637,7 +702,7 @@ define(function(require){
 	//要求分类
 	Model.prototype.button14Click = function(event){
 		var cookTypeData = this.comp('cookTypeData');
-		//debugger;
+		// ;
 		cookTypeData.clear();//清空要求数据
 		var success = function(param){
 			for(var o in param.typeCodes){
@@ -672,7 +737,7 @@ define(function(require){
 			var cookTypeDetailData = this.comp('cookTypeDetailData');
 			var row = event.bindingContext.$rawData;
 			var success = function(param){
-			//debugger;
+			// ;
 				cookTypeDetailData.clear();
 				for(var o in param.cookways){
 					cookTypeDetailData.newData({
@@ -718,7 +783,7 @@ define(function(require){
 				'detail':$('#showCookWays').text()
 			}]
 		});	
-		debugger;
+		 ;
 		
 	};
 
@@ -735,7 +800,7 @@ define(function(require){
 		var goods = '';
 		var cartData = this.comp('cartData');
 		cartData.eachAll(function(param){
-			goods += param.row.val('goodsId')+'_'+param.row.val('qty')+',';
+			goods += param.row.val('goodsId')+'_'+param.row.val('qty')+'_'+param.row.val('sprice')+',';
 		});
 		goods = goods.substring(0,goods.length-1);
 		var sendCook = this.comp('sendCookWayData');
@@ -745,24 +810,36 @@ define(function(require){
 		});
 		cookways = cookways.substring(0,cookways.length-1);
 		var user = this.comp('userData');
-		var url = 'ShopCartServlet.do?func=orderByReturnJson&billMasterId='+billMasterId+'&roomId='+roomId+'&goods='+goods+'&cookways='+cookways+'&orderempcode='+user.val('userId');	
-		
-		debugger;
+		var url = 'ShopCartServlet.do?func=orderByReturnJson&billMasterId='+billMasterId+'&roomId='+roomId+'&goods='+goods+'&cookways='+cookways+'&orderempcode='+user.val('userId')+'&presents=';	
+		var menuTypeData = this.comp('menuTypeData');//用于清0数据
+		var goodsListData = this.comp('goodsListData');
+		 ;
 		//送单成功
 		var success = function(param){	
-		
+			alert(param.result[0].msg);
+			localStorage.setItem(roomId,'');//清空购物车缓存
+			cartData.clear();//发送订单成功，清空cartData
+			//menuList清0
+			menuTypeData.eachAll(function(menuData){
+				menuData.row.val('qty',0);
+			});
+			goodsListData.eachAll(function(goodsData){
+				goodsData.row.val('qty',0);
+			});
+			//
 			var testPrintSuccess = function(printData){
 			alert(printData)
 			//----------------------------------------------------start of print----------------------------------
 			sendCook.clear();//清空sendCook
-			alert(param.result[0].msg);
-			debugger
+//			alert(param.result[0].msg);
+			 
 			//当有订单时才打印
 			if(param.result[0].billmasterid != ''&&param.result[0].billmasterid != undefined){
 				//打印成功
 				var success1 = function(param){
-					debugger;
-					cartData.clear();//发送订单成功，清空cartData
+					 
+					
+					
 					//更新orderData
 							var successOrder = function(param){
 									//清空现有的订单数据
@@ -837,103 +914,136 @@ define(function(require){
 	Model.prototype.button19Click = function(event){
 		this.comp("contents1").to("index");
 	};
-	
+	//搭台
 	Model.prototype.button18Click = function(event){
 		this.comp("popOver-take").show();
+		$('#more').slideUp();
+		
+//		var deskData = this.comp('deskData');
+
 	};
 
 	Model.prototype.button26Click = function(event){
 		this.comp("popOver-take").hide();
 	};
-
-	Model.prototype.button33Click = function(event){
-		$(".pop-menuSub-btn").css({"display":"block"});
-	};
 	
-	//赠送
-	Model.prototype.span35Click = function(event){
-		this.comp("give").show();
-		this.comp("contents4").to("content16");
-	};
 	
 
-	Model.prototype.button44Click = function(event){
-		this.comp("give").hide();
+
+	
+	//房号加载
+	Model.prototype.li1Load = function(event){
+
 	};
+	
+	
 	
 
-	Model.prototype.span32Click = function(event){
-		this.comp("give").show();
-		this.comp("contents4").to("content17");
-	};
 	
-	//返回
-	Model.prototype.span37Click = function(event){
-		$(".pop-menuSub-btn").css({"display":"none"});
-	};
+//	Model.prototype.li1Touchstart = function(event){
+//			imeOutEvent = setTimeout("longPress()",1000);//这里设置定时器，定义长按500毫秒触发长按事件，时间可以自己改，个人感觉500毫秒非常合适
+//			$('#more').slideDown();
+//			var row = event.bindingContext.$rawData;
+//				var currentDeskData = this.comp('currentDeskData');
+//				currentDeskData.newData({
+//					index:0,
+//					defaultValues:[{
+//						'roomId':row.val('roomId'),
+//						'tai_number':row.val('tai_number')
+//					}]
+//				});
+//		    return false;  
+//	};
 	
-	//价格
-	Model.prototype.span33Click = function(event){
-		this.comp("give").show();
-		this.comp("contents4").to("content15")
-	};
 	
-
-	Model.prototype.span34Click = function(event){
-		this.comp("give").show();
-		this.comp("contents4").to("content21")
-	};
 	
 
-	Model.prototype.span36Click = function(event){
-		this.comp("give").show();
-		this.comp("contents4").to("content23")
+	//搭台确定
+	Model.prototype.button25Click = function(event){
+			//RoomFunctionServlet.do?func=shareRoom&roomId=0001000000000117&custQty=1
+		//送单
+		Baas.sendRequest({
+			"url" : ip + url,
+			"dataType": "json",
+			"success" : success
+		});
 	};
 	
-	//预览账单
-	Model.prototype.button46Click = function(event){
-		this.comp("give").show();
-		this.comp("contents4").to("order-info");
-	};
+	
+	
+	
 	
 
-	Model.prototype.button50Click = function(event){
-		this.comp("give").hide();
-	};
-	//定时器 
-	var timeOutEvent=0;
-	//长按开始
+
+	
 	Model.prototype.li1Touchstart = function(event){
-		 timeOutEvent = setTimeout(function(){
-    	timeOutEvent = 0;  
-		    //执行长按要执行的内容，如弹出菜单  
-		    alert("长按事件触发发");  
-		    var liObj= $(event.target).is("li") ? $(event.target).attr("mydata") : $(event.target).parents("li").attr("mydata");
-		//var attrData=$(event.target).is("li") ? $(event.target).attr("mydata") : $(event.target.parentElement).attr("mydata");
-		alert(liObj);
-	    },500);//这里设置定时器，定义长按500毫秒触发长按事件，时间可以自己改，个人感觉500毫秒非常合适  
-	    return false;  
-	};
-	
-	//移动
-	Model.prototype.li1Touchmove = function(event){
-		clearTimeout(timeOutEvent);//清除定时器  
-		timeOutEvent = 0;  
-	};
-	
-	//结束
-	Model.prototype.li1Touchend = function(event){
-		   clearTimeout(timeOutEvent);//清除定时器  
-		    if(timeOutEvent!=0){  
-		        //这里写要执行的内容（尤如onclick事件）  
-		        alert("你这是点击，不是长按");  
-		    }  
+			imeOutEvent = setTimeout("longPress()",1000);//这里设置定时器，定义长按500毫秒触发长按事件，时间可以自己改，个人感觉500毫秒非常合适
+			$('#more').slideDown();
+			var row = event.bindingContext.$rawData;
+				var currentDeskData = this.comp('currentDeskData');
+				currentDeskData.newData({
+					index:0,
+					defaultValues:[{
+						'roomId':row.val('roomId'),
+						'tai_number':row.val('tai_number')
+					}]
+				});
 		    return false;  
 	};
 	
+	
 
+
+	
+	
+	Model.prototype.li1Touchmove = function(event){
+		
+	};
+	
+
+	
+	
+	Model.prototype.li1Touchend = function(event){
+			clearTimeout(timeOutEvent);//清除定时器  
+			    if(timeOutEvent!=0){  
+			    	
+			    	alert("你这是点击，不是长按");  
+			    }  
+		    return false;  
+	};
+	
+	
+
+
+	
+	
 	return Model;
 });
 
+
+		var timeOutEvent=0;//定时器  
+//		//开始按  
+//		function gtouchstart(){
+//			$('#more').slideUp();
+//		    timeOutEvent = setTimeout("longPress()",500);//这里设置定时器，定义长按500毫秒触发长按事件，时间可以自己改，个人感觉500毫秒非常合适  
+//		    return false;  
+//		};  
+////		//手释放，如果在500毫秒内就释放，则取消长按事件，此时可以执行onclick应该执行的事件  
+//		function gtouchend(){  
+//		    clearTimeout(timeOutEvent);//清除定时器  
+//		    return false;  
+//		};  
+////		//如果手指有移动，则取消所有事件，此时说明用户只是要移动而不是长按  
+//		function gtouchmove(){  
+//		    clearTimeout(timeOutEvent);//清除定时器  
+//		    timeOutEvent = 0;  
+//		};  
+		 
+		function longPress(){  
+		    timeOutEvent = 0;  
+		    //执行长按要执行的内容，如弹出菜单  
+		    $('#more').slideDown();
+		}  
+		//真正长按后应该执行的内容  
 
 
