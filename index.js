@@ -299,8 +299,8 @@ define(function(require){
 	//1.在这里应该先清空购物车
 	//2.重新加载菜单类型信息
 	//3.通过购物车重新菜单数量和
-	//4.	Model.prototype.li1Click = function(event){
-		;
+	//4.	
+	Model.prototype.li1Click = function(event){
 		var oneDeskData = this.comp('currentDeskData');
 		var row = event.bindingContext.$rawData;
 		var state=row.val("state");
@@ -309,9 +309,9 @@ define(function(require){
 		var cartData = this.comp('cartData');
 		var goodsListData = this.comp('goodsListData');
 		var menuTypeData = this.comp('menuTypeData');
-		var success = function(param){	
-		$('#more').slideUp();
+		
 		var success = function(param){
+		$('#more').slideUp();
 			//清空购物车
 			cartData.clear();
 			//重新加载菜单类型信息
@@ -374,7 +374,7 @@ define(function(require){
 			"dataType": "json",
 			"success" : success
 		});
-	};
+	}
 
 
 
@@ -964,82 +964,43 @@ define(function(require){
 			"success" : success
 		});
 	};
-	
-	
-	
-	
-	
-
-
-	
-	Model.prototype.li1Touchstart = function(event){
-			imeOutEvent = setTimeout("longPress()",1000);//这里设置定时器，定义长按500毫秒触发长按事件，时间可以自己改，个人感觉500毫秒非常合适
-			$('#more').slideDown();
-			var row = event.bindingContext.$rawData;
-				var currentDeskData = this.comp('currentDeskData');
-				currentDeskData.newData({
-					index:0,
-					defaultValues:[{
-						'roomId':row.val('roomId'),
-						'tai_number':row.val('tai_number')
-					}]
-				});
-		    return false;  
-	};
-	
-	
-
-
-	
-	
-	Model.prototype.li1Touchmove = function(event){
 		
-	};
 	
-
-	
-	
-	Model.prototype.li1Touchend = function(event){
-			clearTimeout(timeOutEvent);//清除定时器  
-			    if(timeOutEvent!=0){  
-			    	
-			    	alert("你这是点击，不是长按");  
-			    }  
-		    return false;  
-	};
-	
-	
+  //定时器 
+    var timeOutEvent=0;
+    //长按开始
+    Model.prototype.li1Touchstart = function(event){
+         timeOutEvent = setTimeout(function(){
+    	timeOutEvent = 0;  
+            //执行长按要执行的内容，如弹出菜单  
+            alert("长按事件触发发");  
+            var liObj= $(event.target).is("li") ? $(event.target).attr("mydata") : $(event.target).parents("li").attr("mydata");
+        //var attrData=$(event.target).is("li") ? $(event.target).attr("mydata") : $(event.target.parentElement).attr("mydata");
+        alert(liObj);
+        },500);//这里设置定时器，定义长按500毫秒触发长按事件，时间可以自己改，个人感觉500毫秒非常合适  
+        return false;  
+    };
+    
+    //移动
+    Model.prototype.li1Touchmove = function(event){
+        clearTimeout(timeOutEvent);//清除定时器  
+        timeOutEvent = 0;  
+    };
+    
+    //结束
+    Model.prototype.li1Touchend = function(event){
+           clearTimeout(timeOutEvent);//清除定时器  
+            if(timeOutEvent!=0){  
+                //这里写要执行的内容（尤如onclick事件）  
+              alert("你这是点击，不是长按");  
+            }  
+            return false;  
+    };
 
 
 	
 	
 	return Model;
 });
-
-
-		var timeOutEvent=0;//定时器  
-//		//开始按  
-//		function gtouchstart(){
-//			$('#more').slideUp();
-//		    timeOutEvent = setTimeout("longPress()",500);//这里设置定时器，定义长按500毫秒触发长按事件，时间可以自己改，个人感觉500毫秒非常合适  
-//		    return false;  
-//		};  
-////		//手释放，如果在500毫秒内就释放，则取消长按事件，此时可以执行onclick应该执行的事件  
-//		function gtouchend(){  
-//		    clearTimeout(timeOutEvent);//清除定时器  
-//		    return false;  
-//		};  
-////		//如果手指有移动，则取消所有事件，此时说明用户只是要移动而不是长按  
-//		function gtouchmove(){  
-//		    clearTimeout(timeOutEvent);//清除定时器  
-//		    timeOutEvent = 0;  
-//		};  
-		 
-		function longPress(){  
-		    timeOutEvent = 0;  
-		    //执行长按要执行的内容，如弹出菜单  
-		    $('#more').slideDown();
-		}  
-		//真正长按后应该执行的内容  
 
 
