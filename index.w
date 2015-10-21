@@ -219,7 +219,7 @@
           <div xid="div4" class="main-con clearfix"> 
             <div component="$UI/system/components/justep/list/list" class="x-list"
               xid="list2" data="deskData"> 
-              <ul class="x-list-template" xid="listTemplateUl2"> 
+              <ul class="x-list-template clearfix" xid="listTemplateUl2"> 
                 <li xid="li1" bind-click="li1Click" bind-attr-mydata="val('roomId')" bind-touchstart="li1Touchstart" bind-touchmove="li1Touchmove" bind-touchend="li1Touchend"> 
                   <div xid="div5" class="table-con use" bind-style="{  'background-color':val('color')}"> 
                     <p xid="p87"> 

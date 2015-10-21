@@ -293,27 +293,13 @@ define(function(require){
 		
 	};
 
-
-	//定义setTimeout执行方法 
-	//var TimeFn = null; 
-	//进入房台，记录下当前的订单号和roomId,然后再根据状态跳去不同的页面
-	//在这里应该
 	Model.prototype.li1Click = function(event){
 			var oneDeskData = this.comp('currentDeskData');
 		var row = event.bindingContext.$rawData;
 		var state=row.val("state");
 		var contents1 = this.comp('contents1');
 		var popOver_renshu = this.comp("popOver_renshu");
-			// 取消上次延时未执行的方法 
-		//clearTimeout(TimeFn); 
-		//执行延时 
-		//TimeFn = setTimeout(function(){ 
-		//do function在此处写单击事件要执行的代码 
-		
-	
-	
-		 
-		var success = function(param){	
+	var success = function(param){	
 			//记录当前台号
 			oneDeskData.newData({
 				index: 0,
@@ -336,11 +322,7 @@ define(function(require){
 			"dataType": "json",
 			"success" : success
 		});
-		//alert(row.val("roomId"))
-		//$(this).attr({"bind-attr-mydata":row.val("roomId")})
-		
-		//alert("a")
-		//},300); 
+
 	
 	};
 
