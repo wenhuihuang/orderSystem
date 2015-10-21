@@ -294,14 +294,12 @@ define(function(require){
 		
 	};
 
-
 	//下面方法不太好，应该通过当前行拿到roomId,而不需再去请求
 	//进入房台，记录下当前的订单号和roomId,然后再根据状态跳去不同的页面
 	//1.在这里应该先清空购物车
 	//2.重新加载菜单类型信息
 	//3.通过购物车重新菜单数量和
-	//4.
-	Model.prototype.li1Click = function(event){
+	//4.	Model.prototype.li1Click = function(event){
 		;
 		var oneDeskData = this.comp('currentDeskData');
 		var row = event.bindingContext.$rawData;
@@ -311,6 +309,7 @@ define(function(require){
 		var cartData = this.comp('cartData');
 		var goodsListData = this.comp('goodsListData');
 		var menuTypeData = this.comp('menuTypeData');
+		var success = function(param){	
 		$('#more').slideUp();
 		var success = function(param){
 			//清空购物车
@@ -351,9 +350,7 @@ define(function(require){
 				});
 			});
 			//清空商品列表
-			goodsListData.clear();
-			
-			//记录当前台号
+			goodsListData.clear();			//记录当前台号
 			oneDeskData.newData({
 				index: 0,
 				defaultValues:[{
@@ -377,7 +374,6 @@ define(function(require){
 			"dataType": "json",
 			"success" : success
 		});
-
 	};
 
 

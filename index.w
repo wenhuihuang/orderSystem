@@ -143,44 +143,74 @@
   </li> </ul> </div></div>  
         <div class="x-panel-content content-wrap" xid="content2"> 
           <div xid="div4" class="main-con clearfix"> 
-            <div component="$UI/system/components/justep/list/list" class="x-list" xid="list2" data="deskData" >
-			   <ul class="x-list-template" xid="listTemplateUl2">
-			    <li xid="li1" bind-click="li1Click" >
-			   <div xid="div5" class="table-con use" bind-style="{  'background-color':val('color')}">
-			     <p xid="p87">
-			      <div component="$UI/system/components/justep/output/output" class="x-output" xid="roomNum" bind-ref="ref('state')" id="roomNum" style="color:#FFFFFF;"></div></p> 
-			     <p xid="p88">
-			      <div component="$UI/system/components/justep/output/output" class="x-output" xid="output4" bind-ref="ref('tai_number')" style="color:#FFFFFF;"></div></p> </div></li></ul> 
-			</div>
-      
-      </div> 
-        <div xid="more" class="more-wrap " id="more">
-   <div component="$UI/system/components/bootstrap/row/row" class="row" xid="row3">
-    <div class="col col-xs-4" xid="col4">
-     <a component="$UI/system/components/justep/button/button" class="btn btn-default" label=" 搭台 " xid="button18" bind-click="button18Click">
-      <i xid="i20"></i>
-      <span xid="span8">搭台</span></a> </div> 
-    <div class="col col-xs-4" xid="col5">
-     <a component="$UI/system/components/justep/button/button" class="btn btn-default" label="并台 " xid="button20">
-      <i xid="i22"></i>
-      <span xid="span9">并台</span></a> </div> 
-    <div class="col col-xs-4" xid="col6">
-     <a component="$UI/system/components/justep/button/button" class="btn btn-default" label="转台" xid="button21">
-      <i xid="i23"></i>
-      <span xid="span10">转台</span></a> </div> 
-    <div class="col col-xs-4" xid="col7">
-     <a component="$UI/system/components/justep/button/button" class="btn btn-default" label=" 清台 " xid="button22">
-      <i xid="i24"></i>
-      <span xid="span11">清台</span></a> </div> 
-    <div class="col col-xs-4" xid="col8">
-     <a component="$UI/system/components/justep/button/button" class="btn btn-default" label="埋单" xid="button23">
-      <i xid="i25"></i>
-      <span xid="span12">埋单</span></a> </div> 
-    <div class="col col-xs-4" xid="col9">
-     <a component="$UI/system/components/justep/button/button" class="btn btn-default" label=" 点菜" xid="button24" target="menu">
-      <i xid="i26"></i>
-      <span xid="span13">点菜</span></a> </div> </div> </div></div>  
-        <div class="x-panel-bottom bottom-wrap" xid="bottom1"> 
+            <div component="$UI/system/components/justep/list/list" class="x-list"
+              xid="list2" data="deskData"> 
+              <ul class="x-list-template clearfix" xid="listTemplateUl2"> 
+                <li xid="li1" bind-click="li1Click" bind-attr-mydata="val('roomId')" bind-touchstart="li1Touchstart" bind-touchmove="li1Touchmove" bind-touchend="li1Touchend"> 
+                  <div xid="div5" class="table-con use" bind-style="{  'background-color':val('color')}"> 
+                    <p xid="p87"> 
+                      <div component="$UI/system/components/justep/output/output"
+                        class="x-output" xid="roomNum" bind-ref="ref('state')" id="roomNum"
+                        style="color:#FFFFFF;"/>
+                    </p>  
+                    <p xid="p88"> 
+                      <div component="$UI/system/components/justep/output/output"
+                        class="x-output" xid="output4" bind-ref="ref('tai_number')"
+                        style="color:#FFFFFF;"/>
+                    </p> 
+                  </div>
+                </li>
+              </ul> 
+            </div>
+          </div>  
+          <div xid="more" class="more-wrap"> 
+            <div component="$UI/system/components/bootstrap/row/row" class="row"
+              xid="row3"> 
+              <div class="col col-xs-4" xid="col4"> 
+                <a component="$UI/system/components/justep/button/button"
+                  class="btn btn-default" label=" 搭台 " xid="button18" bind-click="button18Click"> 
+                  <i xid="i20"/>  
+                  <span xid="span8">搭台</span>
+                </a> 
+              </div>  
+              <div class="col col-xs-4" xid="col5"> 
+                <a component="$UI/system/components/justep/button/button"
+                  class="btn btn-default" label="并台 " xid="button20"> 
+                  <i xid="i22"/>  
+                  <span xid="span9">并台</span>
+                </a> 
+              </div>  
+              <div class="col col-xs-4" xid="col6"> 
+                <a component="$UI/system/components/justep/button/button"
+                  class="btn btn-default" label="转台" xid="button21"> 
+                  <i xid="i23"/>  
+                  <span xid="span10">转台</span>
+                </a> 
+              </div>  
+              <div class="col col-xs-4" xid="col7"> 
+                <a component="$UI/system/components/justep/button/button"
+                  class="btn btn-default" label=" 清台 " xid="button22"> 
+                  <i xid="i24"/>  
+                  <span xid="span11">清台</span>
+                </a> 
+              </div>  
+              <div class="col col-xs-4" xid="col8"> 
+                <a component="$UI/system/components/justep/button/button"
+                  class="btn btn-default" label="埋单" xid="button23"> 
+                  <i xid="i25"/>  
+                  <span xid="span12">埋单</span>
+                </a> 
+              </div>  
+              <div class="col col-xs-4" xid="col9"> 
+                <a component="$UI/system/components/justep/button/button"
+                  class="btn btn-default" label=" 点菜" xid="button24" target="menu"> 
+                  <i xid="i26"/>  
+                  <span xid="span13">点菜</span>
+                </a> 
+              </div> 
+            </div> 
+          </div>
+        </div>          <div class="x-panel-bottom bottom-wrap" xid="bottom1"> 
           <div xid="div2" class="bottom-left"> 
             <div component="$UI/system/components/justep/button/buttonGroup"
               class="btn-group" tabbed="true" xid="buttonGroup1"> 
