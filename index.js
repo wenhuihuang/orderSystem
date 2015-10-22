@@ -24,7 +24,6 @@ define(function(require){
 						addMoney:param.consumeDetails[o].addMoney,
 						qty:param.consumeDetails[o].qty
 					}]
-					
 				});
 			}
 		}
@@ -230,25 +229,16 @@ define(function(require){
 			})();
 			$(".top-menu-li").eq(0).trigger("click");
 			var row = this.comp('deskData');
-			console.log(row)
-		
-			
-
-				
+			console.log(row)	
 	};
 
-
-
-
-	//点击通过台类型加载桌子，通过状态字段来设置当前的颜色字段
-	Model.prototype.li10Click = function(event){
+	//mydata为deskData
+	function getDesk(event,mydata,row){
 		var masterData = event.source;
-		var row = event.bindingContext.$object;
+//		var row = event.bindingContext.$object;
 		var typeCode= row.val("typeCode");
-		 ;
-		var mydata = this.comp('deskData');
-		//var state=mydata.val('state')
-		var url= ip+"RoomServlet.do";//http://192.168.1.20:8080
+//		var mydata = this.comp('deskData');
+		var url= ip+"RoomServlet.do";
 		var data="func=getRoom&typeCode="+typeCode+"&getJson=1";
 		$.ajax({
 			type: "GET",
@@ -257,11 +247,7 @@ define(function(require){
 	        dataType: 'json',
 	        async: false,//使用同步方式，目前data组件有同步依赖
 	        cache: false,
-	        success: function(msg){
-	         ;
-	        	//ebugger;
-	           // masterData.loadData(data);//将返回的数据加载到data组件
-	          
+	        success: function(msg){	          
 	            var rowss=[];
 				for(var i=0;i<msg.rooms.length;i++){
 					var state="空台";
@@ -284,17 +270,22 @@ define(function(require){
 					}
 				 rowss[i]={'tai_number':{'value':msg.rooms[i].roomName},'state':{'value':state},'roomId':{'value':msg.rooms[i].roomId},'billMasterId':{'value':msg.rooms[i].consumeRoomID},'color':{'value':color}};
 			 	}
-			 	var ffdata={"rows":rowss};
+			 	
+			var ffdata={"rows":rowss};
 		 	mydata.loadData(ffdata);	
 	        },
 	        error: function(){
 	          throw justep.Error.create("加载数据失败");
 	        }
 		});
-		
+	}
+
+
+	//点击通过台类型加载桌子，通过状态字段来设置当前的颜色字段
+	Model.prototype.li10Click = function(event){
+		getDesk(event,this.comp('deskData'),event.bindingContext.$rawData);
 	};
 
-	//下面方法不太好，应该通过当前行拿到roomId,而不需再去请求
 	//进入房台，记录下当前的订单号和roomId,然后再根据状态跳去不同的页面
 	//1.在这里应该先清空购物车
 	//2.重新加载菜单类型信息
@@ -303,15 +294,17 @@ define(function(require){
 	Model.prototype.li1Click = function(event){
 		var oneDeskData = this.comp('currentDeskData');
 		var row = event.bindingContext.$rawData;
+		getDesk(event,this.comp('deskData'),row);//更新台状态
 		var state=row.val("state");
 		var contents1 = this.comp('contents1');
 		var popOver_renshu = this.comp("popOver_renshu");
 		var cartData = this.comp('cartData');
 		var goodsListData = this.comp('goodsListData');
 		var menuTypeData = this.comp('menuTypeData');
-		
+		var deskData = this.comp('deskData');
 		var success = function(param){
-		$('#more').slideUp();
+			//重新加载房台
+			$('#more').slideUp();
 			//清空购物车
 			cartData.clear();
 			//重新加载菜单类型信息
@@ -327,7 +320,7 @@ define(function(require){
 					 rowss[i]={'typeName':{'value':data.typeCodes[i].typeName},'typeCode':{'value':data.typeCodes[i].typeCode},'qty':{'value':0}};
 				 	}
 				 	var ffdata={"@type":"table","rows":rowss};
-			 	menuTypeData.loadData(ffdata);//将返回的数据加载到data组件
+				 	menuTypeData.loadData(ffdata);//将返回的数据加载到data组件
 			 	
 		        },
 		        error: function(){
@@ -932,31 +925,22 @@ define(function(require){
 
 	};
 	
-	
-	
 
-	
-//	Model.prototype.li1Touchstart = function(event){
-//			imeOutEvent = setTimeout("longPress()",1000);//这里设置定时器，定义长按500毫秒触发长按事件，时间可以自己改，个人感觉500毫秒非常合适
-//			$('#more').slideDown();
-//			var row = event.bindingContext.$rawData;
-//				var currentDeskData = this.comp('currentDeskData');
-//				currentDeskData.newData({
-//					index:0,
-//					defaultValues:[{
-//						'roomId':row.val('roomId'),
-//						'tai_number':row.val('tai_number')
-//					}]
-//				});
-//		    return false;  
-//	};
 	
 	
 	
 
 	//搭台确定
 	Model.prototype.button25Click = function(event){
-			//RoomFunctionServlet.do?func=shareRoom&roomId=0001000000000117&custQty=1
+		
+		var currentDeskData = this.comp('currentDeskData');
+		var url = 'RoomFunctionServlet.do?func=shareRoom&roomId='+currentDeskData.val('roomId')+'&custQty='+$('#'+this.getIDByXID('input4')).val();
+		var contents1 = this.comp('contents1');
+		var success = function(param){
+			if(param.code == '1'){
+				contents1.to('index');
+			}
+		}
 		//送单
 		Baas.sendRequest({
 			"url" : ip + url,
@@ -970,7 +954,16 @@ define(function(require){
     var timeOutEvent=0;
     //长按开始
     Model.prototype.li1Touchstart = function(event){
-         timeOutEvent = setTimeout(function(){
+    	var currentDeskData = this.comp('currentDeskData');
+    	var row = event.bindingContext.$rawData;
+//    	currentDeskData.newData({
+//				index:0,
+//				defaultValues:[{
+//					'billMasterId':row.val('billMasterId'),
+//					'roomId':row.val('roomId')
+//				}]
+//		});
+        timeOutEvent = setTimeout(function(){
     	timeOutEvent = 0;  
             //执行长按要执行的内容，如弹出菜单  
              
@@ -1044,8 +1037,12 @@ define(function(require){
 	};
 */
 
+	Model.prototype.indexActive = function(event){
+		$('.left-menu').find('li').eq(0).trigger('click');
+	};
+    
 	
-	
+		
 	Model.prototype.button20Click = function(event){
 		//var liAttr=$(this).attr("roomid");
 		var _this=$(event.target).is("a") ? $(event.target) : $(event.target.parentElement);
