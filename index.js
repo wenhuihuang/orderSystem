@@ -902,6 +902,7 @@ define(function(require){
 
 	Model.prototype.button19Click = function(event){
 		this.comp("contents1").to("index");
+		this.comp("deskData").applyUpdates();
 	};
 	//搭台
 	Model.prototype.button18Click = function(event){
@@ -1044,6 +1045,7 @@ define(function(require){
 	
 		
 	Model.prototype.button20Click = function(event){
+		alert("d");
 		//var liAttr=$(this).attr("roomid");
 		var _this=$(event.target).is("a") ? $(event.target) : $(event.target.parentElement);
 		var liAttr=_this.attr("roomid");
