@@ -1064,19 +1064,20 @@ define(function(require){
 	
 		
 	Model.prototype.button20Click = function(event){
-		//var liAttr=$(this).attr("roomid");		var _this=$(event.target).is("a") ? $(event.target) : $(event.target.parentElement);
+		//var liAttr=$(this).attr("roomid");		
+		var _this=$(event.target).is("a") ? $(event.target) : $(event.target.parentElement);
 		var liAttr=_this.attr("roomid");
 		
 		//选判断当前节点是否为已点节点
 		//1.如果当前节点为空房，则不允许点击
-		//2.
+		//2.如果点击的房间为当前房间，则不允许点击 
 		var currentDeskData = this.comp('currentDeskData');
 		
 		
 		//当a节点点击的时候，当前节点变红其它节点变灰
-		$(".main-ul").find("li").each(function(){
+		$(".main-ul").find(".table-con").each(function(){
 			$(this).unbind("click");
-			if($(this).attr("mydata") == liAttr){
+			if($(this).parents("li").attr("roomId") == liAttr){
 				$(this).css({"background":"red"});
 				
 			}else{
