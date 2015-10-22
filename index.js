@@ -975,6 +975,7 @@ define(function(require){
             //执行长按要执行的内容，如弹出菜单  
              
             var liObj= $(event.target).is("li") ? $(event.target).attr("mydata") : $(event.target).parents("li").attr("mydata");
+            $(event.target).is("li") ? $(event.target).addClass("active").siblings().removeClass("active") : $(event.target).parents("li").addClass("active").siblings().removeClass("active");
             $(".more-wrap").show();
             $(".main-ul").css({"margin-bottom":"94px"});
             $(".more-wrap").find(".btn").each(function(){
@@ -1042,6 +1043,24 @@ define(function(require){
 		});
 	};
 */
+
+	
+	
+	Model.prototype.button20Click = function(event){
+		var liAttr=$(this).attr("mydata");
+		$(".main-ul").find("li").each(function(){
+			$(this).unbind("click");
+			if($(this).attr("mydata") == liAttr){
+				$(this).css({"background":"red"});
+				
+			}else{
+				$(this).css({"background":"#ccc"});
+			}
+			$(this).bind("click",function(){
+				$(this).css({"background":"green"})
+			})
+		})
+	};
 
 	
 	
