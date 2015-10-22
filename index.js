@@ -975,6 +975,8 @@ define(function(require){
             //执行长按要执行的内容，如弹出菜单  
              
             var liObj= $(event.target).is("li") ? $(event.target).attr("mydata") : $(event.target).parents("li").attr("mydata");
+            $(".more-wrap").show();
+            $(".main-ul").css({"margin-bottom":"94px"});
             $(".more-wrap").find(".btn").each(function(){
             	$(this).attr({"roomId":liObj});
             })
@@ -1000,14 +1002,18 @@ define(function(require){
     };
 
 
-	
+	/*
 	//并台
 	Model.prototype.button20Click = function(event){
 		var row = event.bindingContext.$rawData;
-		var typeCode=row.val("typeCode");
-		var goodsListData = this.comp('goodsListData');
-		//从购物车中统计当前各商品购买数量，并将数量显示在商品列中
-		var cartData = this.comp('cartData');
+		//var typeCode=row.val("typeCode");
+		$(event).attr("")
+		var deskData = this.comp('deskData');
+		deskData.eachAll(function(param){
+			if(param.row.val("roomId") == ){
+			
+			}
+		})
 		var url= ip+'RoomFunctionServlet.do?func=mergeRoom&shareRoomId=xxxx&shareConsumeRoomId=xxx&shareBillMasterId=xxx&currentRoomId=xxx&currentBillMasterId=xxx&currentConsumeRoomId=xxx&currentCustQty=xxx';
 		var success = function(msg){
 						 ;
@@ -1035,7 +1041,7 @@ define(function(require){
 			"success" : success
 		});
 	};
-
+*/
 
 	
 	

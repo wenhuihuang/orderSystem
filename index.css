@@ -834,6 +834,7 @@ ul.menu-item li{
 	bottom:48px;
 	background:#fff;
 	width:100%;
+	display:none;
 }
 .more-wrap .row .col{
 	text-align:center;
@@ -869,5 +870,5 @@ ul.menu-item li{
 	padding:0 10px;
 }
 .main-con  ul{
-	margin-bottom:94px;
+	margin-bottom:0px;
 }
