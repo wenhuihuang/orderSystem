@@ -956,7 +956,8 @@ define(function(require){
 
 	//搭台确定
 	Model.prototype.button25Click = function(event){
-			//RoomFunctionServlet.do?func=shareRoom&roomId=0001000000000117&custQty=1
+		var url = 'RoomFunctionServlet.do?func=shareRoom&roomId=0001000000000117&custQty=1';
+			//http://127.0.0.1:8080/OrderSystemWeX5/RoomFunctionServlet.do?func=shareRoom&roomId=0001000000000117&custQty=1
 		//送单
 		Baas.sendRequest({
 			"url" : ip + url,
