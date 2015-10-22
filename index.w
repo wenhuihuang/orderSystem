@@ -7,7 +7,8 @@
   <column label="状态" name="state" type="String" xid="xid7"></column>
   <column label="房号id" name="roomId" type="String" xid="xid8"></column>
   <column label="订单号" name="billMasterId" type="String" xid="xid16"></column>
-  <column label="颜色" name="color" type="String" xid="xid40"></column></div><div component="$UI/system/components/justep/data/data" autoLoad="true" xid="userData" idColumn="userId"><column label="用户id" name="userId" type="String" xid="xid1"></column>
+  <column label="颜色" name="color" type="String" xid="xid40"></column>
+  <column name="typeCode" type="String" xid="xid49"></column></div><div component="$UI/system/components/justep/data/data" autoLoad="true" xid="userData" idColumn="userId"><column label="用户id" name="userId" type="String" xid="xid1"></column>
   <column label="手机号" name="fetionNO" type="Long" xid="xid2"></column>
   <column label="用户名" name="userName" type="String" xid="xid3"></column></div>
   <div component="$UI/system/components/justep/data/data" autoLoad="true" xid="enterDeskData" idColumn="roomId"><column label="房台ID" name="roomId" type="Long" xid="xid9"></column>
@@ -26,7 +27,8 @@
   <column label="状态" name="state" type="String" xid="default12"></column>
   <column label="房号id" name="roomId" type="String" xid="default13"></column>
   <column label="订单号" name="billMasterId" type="String" xid="default2"></column>
-  <column label="台" name="roomCode" type="String" xid="xid17"></column></div>
+  <column label="台" name="roomCode" type="String" xid="xid17"></column>
+  <column name="typeCode" type="String" xid="xid50"></column></div>
   <div component="$UI/system/components/justep/data/data" autoLoad="true" xid="cartData" idColumn="goodsId" confirmDelete="false">
    <column label="商品id" name="goodsId" type="String" xid="column3"></column>
   <column label="商品名称" name="goodsName" type="String" xid="column4"></column>

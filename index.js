@@ -233,11 +233,13 @@ define(function(require){
 	};
 
 	//mydata为deskData
-	function getDesk(event,mydata,row){
-		var masterData = event.source;
-//		var row = event.bindingContext.$object;
-		var typeCode= row.val("typeCode");
-//		var mydata = this.comp('deskData');
+	function getDesk(mydata,row,type){
+			var typeCode ;
+		if(type == 1){
+			typeCode = row.val("typeCode");
+		}else{
+			typeCode = row;
+		}
 		var url= ip+"RoomServlet.do";
 		var data="func=getRoom&typeCode="+typeCode+"&getJson=1";
 		$.ajax({
@@ -268,7 +270,7 @@ define(function(require){
 						state="空台";
 						color="green";
 					}
-				 rowss[i]={'tai_number':{'value':msg.rooms[i].roomName},'state':{'value':state},'roomId':{'value':msg.rooms[i].roomId},'billMasterId':{'value':msg.rooms[i].consumeRoomID},'color':{'value':color}};
+				 rowss[i]={'tai_number':{'value':msg.rooms[i].roomName},'state':{'value':state},'roomId':{'value':msg.rooms[i].roomId},'billMasterId':{'value':msg.rooms[i].consumeRoomID},'color':{'value':color},'typeCode':{'value':msg.rooms[i].typeCode}};
 			 	}
 			 	
 			var ffdata={"rows":rowss};
@@ -283,26 +285,28 @@ define(function(require){
 
 	//点击通过台类型加载桌子，通过状态字段来设置当前的颜色字段
 	Model.prototype.li10Click = function(event){
-		getDesk(event,this.comp('deskData'),event.bindingContext.$rawData);
+		getDesk(this.comp('deskData'),event.bindingContext.$rawData,1);
 	};
 
 	//进入房台，记录下当前的订单号和roomId,然后再根据状态跳去不同的页面
 	//1.在这里应该先清空购物车
 	//2.重新加载菜单类型信息
 	//3.通过购物车重新菜单数量和
-	//4.	
 	Model.prototype.li1Click = function(event){
 		var oneDeskData = this.comp('currentDeskData');
 		var row = event.bindingContext.$rawData;
-		getDesk(event,this.comp('deskData'),row);//更新台状态
+		var deskData = this.comp('deskData');
 		var state=row.val("state");
 		var contents1 = this.comp('contents1');
 		var popOver_renshu = this.comp("popOver_renshu");
 		var cartData = this.comp('cartData');
 		var goodsListData = this.comp('goodsListData');
 		var menuTypeData = this.comp('menuTypeData');
+		//下面用于刷新当前房台状态
 		var deskData = this.comp('deskData');
+		
 		var success = function(param){
+			
 			//重新加载房台
 			$('#more').slideUp();
 			//清空购物车
@@ -348,7 +352,8 @@ define(function(require){
 				index: 0,
 				defaultValues:[{
 					 "billMasterId":param.rooms[0].billMasterId,
-					 "roomId":param.rooms[0].roomId
+					 "roomId":param.rooms[0].roomId,
+					 "typeCode":param.rooms[0].typeCode
 				}]
 			});//end
 			if(state=="在用"){
@@ -382,7 +387,6 @@ define(function(require){
 		var cartData = this.comp('cartData');
 		var url= ip+'GoodsServlet.do?func=listByTypeCode&typeCode='+typeCode+'&getJson=1';//http://192.168.1.20:8080
 		var success = function(msg){
-						 ;
 						var rowss=[];
 						for(var i=0;i<msg.goods.length;i++){
 						 rowss[i]={'goodsId':{'value':msg.goods[i].goodsId},'goodsName':{'value':msg.goods[i].goodsName},'sprice':{'value':msg.goods[i].sprice},'qty':{'value':0},'typeCode':{'value':msg.goods[i].typeCode}};
@@ -427,8 +431,11 @@ define(function(require){
 	    	alert('输入错误');
 	    	return;
 	    }
+	    var deskData = this.comp('deskData');
+	    var currentDeskData = this.comp('currentDeskData');
+	    var row = currentDeskData.val('typeCode');
 	    var success = function(param){
-	    	 
+	    	 getDesk(deskData,row,2);
 	    	//补上当前台的订单id
 	    	oneDeskData.newData({
 	    		defaultValues:[{
@@ -957,25 +964,25 @@ define(function(require){
     Model.prototype.li1Touchstart = function(event){
     	var currentDeskData = this.comp('currentDeskData');
     	var row = event.bindingContext.$rawData;
-//    	currentDeskData.newData({
-//				index:0,
-//				defaultValues:[{
-//					'billMasterId':row.val('billMasterId'),
-//					'roomId':row.val('roomId')
-//				}]
-//		});
         timeOutEvent = setTimeout(function(){
     	timeOutEvent = 0;  
-            //执行长按要执行的内容，如弹出菜单  
-             
+            //执行长按要执行的内容，如弹出菜单              
             var liObj= $(event.target).is("li") ? $(event.target).attr("mydata") : $(event.target).parents("li").attr("mydata");
             $(event.target).is("li") ? $(event.target).addClass("active").siblings().removeClass("active") : $(event.target).parents("li").addClass("active").siblings().removeClass("active");
             $(".more-wrap").show();
             $(".main-ul").css({"margin-bottom":"94px"});
             $(".more-wrap").find(".btn").each(function(){
             	$(this).attr({"roomId":liObj});
-            })
-        alert(liObj);
+            });
+            currentDeskData.newData({
+				index: 0,
+				defaultValues:[{
+					 "billMasterId":row.val('billMasterId'),
+					 "roomId":row.val('roomId'),
+					 "typeCode":row.val('typeCode')
+				}]
+			})
+            
         },500);//这里设置定时器，定义长按500毫秒触发长按事件，时间可以自己改，个人感觉500毫秒非常合适  
         return false;  
     };
