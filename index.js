@@ -973,9 +973,11 @@ define(function(require){
          timeOutEvent = setTimeout(function(){
     	timeOutEvent = 0;  
             //执行长按要执行的内容，如弹出菜单  
-            alert("长按事件触发发");  
+             
             var liObj= $(event.target).is("li") ? $(event.target).attr("mydata") : $(event.target).parents("li").attr("mydata");
-        //var attrData=$(event.target).is("li") ? $(event.target).attr("mydata") : $(event.target.parentElement).attr("mydata");
+            $(".more-wrap").find(".btn").each(function(){
+            	$(this).attr({"roomId":liObj});
+            })
         alert(liObj);
         },500);//这里设置定时器，定义长按500毫秒触发长按事件，时间可以自己改，个人感觉500毫秒非常合适  
         return false;  
@@ -996,6 +998,43 @@ define(function(require){
             }  
             return false;  
     };
+
+
+	
+	//并台
+	Model.prototype.button20Click = function(event){
+		var row = event.bindingContext.$rawData;
+		var typeCode=row.val("typeCode");
+		var goodsListData = this.comp('goodsListData');
+		//从购物车中统计当前各商品购买数量，并将数量显示在商品列中
+		var cartData = this.comp('cartData');
+		var url= ip+'RoomFunctionServlet.do?func=mergeRoom&shareRoomId=xxxx&shareConsumeRoomId=xxx&shareBillMasterId=xxx&currentRoomId=xxx&currentBillMasterId=xxx&currentConsumeRoomId=xxx&currentCustQty=xxx';
+		var success = function(msg){
+						 ;
+						var rowss=[];
+						for(var i=0;i<msg.goods.length;i++){
+						 rowss[i]={'goodsId':{'value':msg.goods[i].goodsId},'goodsName':{'value':msg.goods[i].goodsName},'sprice':{'value':msg.goods[i].sprice},'qty':{'value':0},'typeCode':{'value':msg.goods[i].typeCode}};
+					 	}
+					 	var ffdata={"rows":rowss};
+					 	goodsListData.loadData(ffdata);
+				//从购物车中统计当前各商品购买数量，并将数量显示在商品列中
+				goodsListData.eachAll(function(param){
+						cartData.eachAll(function(data){
+							if(param.row.val('goodsId')==data.row.val('goodsId')){
+								param.row.val('qty',param.row.val('qty')+data.row.val('qty'));
+							}
+						});
+				}); 	
+					 	
+					 		 	
+	    }
+	   
+		Baas.sendRequest({
+			"url" : url,
+			"dataType": "json",
+			"success" : success
+		});
+	};
 
 
 	

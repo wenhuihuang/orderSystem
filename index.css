@@ -746,6 +746,10 @@ ul.menu-item li{
 	box-shadow:0 0px 2px 2px #B9B9B9;
 	border-radius:5px;
 }
+.take .con-wrap{
+	width:186px;
+	
+}
 .renShu .con-wrap .btn-wrap,.take .con-wrap .btn-wrap{
 	border-top:1px solid #ccc;
 	padding-top:10px;
@@ -755,7 +759,7 @@ ul.menu-item li{
 	color:#000;
 	text-align:center;
 }
-.renShu .con-wrap .con-con input,.take .con-wrap .con-con input{
+.renShu .con-wrap .con-con input,.take .con-wrap .con-con .x-label-edit{
 	margin:5px auto;
 	width:95%;
 }
@@ -863,4 +867,7 @@ ul.menu-item li{
 	text-align:right;
 	height-line:48px;
 	padding:0 10px;
+}
+.main-con  ul{
+	margin-bottom:94px;
 }
