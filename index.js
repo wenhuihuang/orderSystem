@@ -1047,7 +1047,10 @@ define(function(require){
 	
 	
 	Model.prototype.button20Click = function(event){
-		var liAttr=$(this).attr("mydata");
+		//var liAttr=$(this).attr("roomid");
+		var _this=$(event.target).is("a") ? $(event.target) : $(event.target.parentElement);
+		var liAttr=_this.attr("roomid");
+		alert(liAttr)
 		$(".main-ul").find("li").each(function(){
 			$(this).unbind("click");
 			if($(this).attr("mydata") == liAttr){
