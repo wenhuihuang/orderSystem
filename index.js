@@ -932,24 +932,7 @@ define(function(require){
 
 	};
 	
-	
-	
 
-	
-//	Model.prototype.li1Touchstart = function(event){
-//			imeOutEvent = setTimeout("longPress()",1000);//这里设置定时器，定义长按500毫秒触发长按事件，时间可以自己改，个人感觉500毫秒非常合适
-//			$('#more').slideDown();
-//			var row = event.bindingContext.$rawData;
-//				var currentDeskData = this.comp('currentDeskData');
-//				currentDeskData.newData({
-//					index:0,
-//					defaultValues:[{
-//						'roomId':row.val('roomId'),
-//						'tai_number':row.val('tai_number')
-//					}]
-//				});
-//		    return false;  
-//	};
 	
 	
 	
