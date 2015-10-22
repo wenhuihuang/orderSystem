@@ -14,7 +14,7 @@
 .gray{
 	background:#ccc;
 }
-.main-ul li.active{
+.main-ul li div.active{
 	background:#1ECAD3;
 }
 /*台颜色结束*/
@@ -218,6 +218,7 @@ img.subtract,img.add{
 	border:1px solid #ccc;
 	box-shadow:0px 0px 8px 2px #acacac;
 	/*background:#fff;*/
+	margin:4%;
 }
 /*menu*/
 .home-wrap{
@@ -392,8 +393,8 @@ img.subtract,img.add{
 .main-con ul li{
 	display:block;
 	float:left;
-	width:20%;
-	margin:2%;
+	width:25%;
+	/*margin:2%;*/
 }
 .main-con ul li .x-output{
 	text-align:center;

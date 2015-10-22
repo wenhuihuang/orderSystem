@@ -155,8 +155,8 @@
             <div component="$UI/system/components/justep/list/list" class="x-list"
               xid="list2" data="deskData"> 
               <ul class="x-list-template clearfix main-ul" xid="listTemplateUl2"> 
-                <li xid="li1" bind-attr-mydata="val('roomId')" bind-touchstart="li1Touchstart" bind-touchmove="li1Touchmove" bind-touchend="li1Touchend" bind-css="{'blue':val('color')=='blue','gray':val('color')=='gray','yellow':val('color')=='yellow','red':val('color')=='red','green':val('color')=='green'}"> 
-                  <div xid="div5" class="table-con use"> 
+                <li xid="li1" bind-click="li1Click" bind-attr-mydata="val('roomId')" bind-touchstart="li1Touchstart" bind-touchmove="li1Touchmove" bind-touchend="li1Touchend" > 
+                  <div xid="div5" class="table-con use"  bind-css="{'blue':val('color')=='blue','gray':val('color')=='gray','yellow':val('color')=='yellow','red':val('color')=='red','green':val('color')=='green'}"> 
                     <p xid="p87"> 
                       <div component="$UI/system/components/justep/output/output"
                         class="x-output" xid="roomNum" bind-ref="ref('state')" id="roomNum"
