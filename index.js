@@ -293,6 +293,8 @@ define(function(require){
 	//2.重新加载菜单类型信息
 	//3.通过购物车重新菜单数量和
 	Model.prototype.li1Click = function(event){
+		 event.preventDefault(); 
+		 //event.stopPropagation();
 		var oneDeskData = this.comp('currentDeskData');
 		var row = event.bindingContext.$rawData;
 		var deskData = this.comp('deskData');
@@ -372,6 +374,7 @@ define(function(require){
 			"dataType": "json",
 			"success" : success
 		});
+		
 	}
 
 
@@ -966,9 +969,14 @@ define(function(require){
     	var row = event.bindingContext.$rawData;
         timeOutEvent = setTimeout(function(){
     	timeOutEvent = 0;  
-            //执行长按要执行的内容，如弹出菜单              
+            //执行长按要执行的内容，如弹出菜单         
+            //找出台li里的attr=mydata     
             var liObj= $(event.target).is("li") ? $(event.target).attr("mydata") : $(event.target).parents("li").attr("mydata");
-            $(event.target).is("li") ? $(event.target).addClass("active").siblings().removeClass("active") : $(event.target).parents("li").addClass("active").siblings().removeClass("active");
+            //找出台下主体
+            var divObj= $(event.target).is("li") ? $(event.target).find(".table-con") : $(event.target).parents("li").find(".table-con");
+            //alert( divObj.html());
+            //为选中的台加上active
+            divObj.addClass("active").siblings().removeClass("active") //? $(event.target).addClass("active").siblings().removeClass("active") : $(event.target).parents("li").addClass("active").siblings().removeClass("active");
             $(".more-wrap").show();
             $(".main-ul").css({"margin-bottom":"94px"});
             $(".more-wrap").find(".btn").each(function(){
@@ -984,7 +992,7 @@ define(function(require){
 			})
             
         },500);//这里设置定时器，定义长按500毫秒触发长按事件，时间可以自己改，个人感觉500毫秒非常合适  
-        return false;  
+      
     };
     
     //移动
@@ -1000,7 +1008,7 @@ define(function(require){
                 //这里写要执行的内容（尤如onclick事件）  
               alert("你这是点击，不是长按");  
             }  
-            return false;  
+          
     };
 
 
