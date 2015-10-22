@@ -963,25 +963,25 @@ define(function(require){
     Model.prototype.li1Touchstart = function(event){
     	var currentDeskData = this.comp('currentDeskData');
     	var row = event.bindingContext.$rawData;
-//    	currentDeskData.newData({
-//				index:0,
-//				defaultValues:[{
-//					'billMasterId':row.val('billMasterId'),
-//					'roomId':row.val('roomId')
-//				}]
-//		});
         timeOutEvent = setTimeout(function(){
     	timeOutEvent = 0;  
-            //执行长按要执行的内容，如弹出菜单  
-             
+            //执行长按要执行的内容，如弹出菜单              
             var liObj= $(event.target).is("li") ? $(event.target).attr("mydata") : $(event.target).parents("li").attr("mydata");
             $(event.target).is("li") ? $(event.target).addClass("active").siblings().removeClass("active") : $(event.target).parents("li").addClass("active").siblings().removeClass("active");
             $(".more-wrap").show();
             $(".main-ul").css({"margin-bottom":"94px"});
             $(".more-wrap").find(".btn").each(function(){
             	$(this).attr({"roomId":liObj});
-            })
-        alert(liObj);
+            });
+            currentDeskData.newData({
+				index: 0,
+				defaultValues:[{
+					 "billMasterId":row.val('billMasterId'),
+					 "roomId":row.val('roomId'),
+					 "typeCode":row.val('typeCode')
+				}]
+			})
+            
         },500);//这里设置定时器，定义长按500毫秒触发长按事件，时间可以自己改，个人感觉500毫秒非常合适  
         return false;  
     };
