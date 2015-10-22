@@ -2,7 +2,7 @@
 
 <div xmlns="http://www.w3.org/1999/xhtml" xid="window" class="window" component="$UI/system/components/justep/window/window"
   design="device:mobile">  
-  <div component="$UI/system/components/justep/model/model" xid="model" style="height:auto;left:840px;top:202px;" onLoad="modelLoad"><div component="$UI/system/components/justep/data/data" autoLoad="true" xid="roomData" idColumn="typeName" onCustomRefresh="fan_nameCustomRefresh" autoNew="false"><column label="房类型" name="typeName" type="String" xid="xid4"></column>
+  <div component="$UI/system/components/justep/model/model" xid="model" style="height:auto;left:709px;top:84px;" onLoad="modelLoad"><div component="$UI/system/components/justep/data/data" autoLoad="true" xid="roomData" idColumn="typeName" onCustomRefresh="fan_nameCustomRefresh" autoNew="false"><column label="房类型" name="typeName" type="String" xid="xid4"></column>
   <column label="房类号" name="typeCode" type="Long" xid="xid6"></column></div><div component="$UI/system/components/justep/data/data" autoLoad="true" xid="deskData" idColumn="tai_number"><column label="台号" name="tai_number" type="String" xid="xid5"></column>
   <column label="状态" name="state" type="String" xid="xid7"></column>
   <column label="房号id" name="roomId" type="String" xid="xid8"></column>
@@ -93,7 +93,14 @@
   <column name="goodsId" type="String" xid="xid37"></column></div>
   <div component="$UI/system/components/justep/data/data" autoLoad="true" xid="deletingCookWayData" idColumn="col0"><column name="col0" type="String" xid="xid43"></column>
   <column name="cookWayId" type="String" xid="xid44"></column>
-  <column name="goodsId" type="String" xid="xid45"></column></div></div>  
+  <column name="goodsId" type="String" xid="xid45"></column></div>
+  <div component="$UI/system/components/justep/data/data" autoLoad="true" xid="mergeRoomData" idColumn="tai_number">
+   <column label="台号" name="tai_number" type="String" xid="default26"></column>
+   <column label="状态" name="state" type="String" xid="default25"></column>
+   <column label="房号id" name="roomId" type="String" xid="default24"></column>
+   <column label="订单号" name="billMasterId" type="String" xid="default23"></column>
+   <column label="台" name="roomCode" type="String" xid="default22"></column>
+   <column name="typeCode" type="String" xid="default27"></column></div></div>  
   <div component="$UI/system/components/justep/contents/contents" class="x-contents x-full"
     active="0" xid="contents1" swipe="false"> 
     <div class="x-contents-content" xid="login">
@@ -148,8 +155,8 @@
             <div component="$UI/system/components/justep/list/list" class="x-list"
               xid="list2" data="deskData"> 
               <ul class="x-list-template clearfix main-ul" xid="listTemplateUl2"> 
-                <li xid="li1" bind-click="li1Click" bind-attr-mydata="val('roomId')" bind-touchstart="li1Touchstart" bind-touchmove="li1Touchmove" bind-touchend="li1Touchend" > 
-                  <div xid="div5" class="table-con use" bind-css="{'blue':val('color')=='blue','gray':val('color')=='gray','yellow':val('color')=='yellow','red':val('color')=='red','green':val('color')=='green'}"> 
+                <li xid="li1" bind-click="li1Click" bind-attr-roomId="val('roomId')" bind-attr-status="val('status')" bind-touchstart="li1Touchstart" bind-touchmove="li1Touchmove" bind-touchend="li1Touchend" > 
+                  <div xid="div5" class="table-con use"  bind-css="{'blue':val('color')=='blue','gray':val('color')=='gray','yellow':val('color')=='yellow','red':val('color')=='red','green':val('color')=='green'}"> 
                     <p xid="p87"> 
                       <div component="$UI/system/components/justep/output/output"
                         class="x-output" xid="roomNum" bind-ref="ref('state')" id="roomNum"
@@ -177,7 +184,7 @@
               </div>  
               <div class="col col-xs-4" xid="col5"> 
                 <a component="$UI/system/components/justep/button/button"
-                  class="btn btn-default" label="并台 " xid="button20"> 
+                  class="btn btn-default" label="并台 " xid="button20" bind-click="button20Click"> 
                   <i xid="i22"/>  
                   <span xid="span9">并台</span>
                 </a> 
@@ -519,9 +526,9 @@
   
   </h2><div component="$UI/system/components/justep/labelEdit/labelEdit" class="x-label-edit x-label30" xid="labelInput2">
    <label class="x-label" xid="label3"><![CDATA[台号]]></label>
-   <input component="$UI/system/components/justep/input/input" class="form-control x-edit" xid="input3" placeHolder="台号" bind-text="currentDeskData.val('tai_number')" bind-ref="currentDeskData.ref('tai_number')" readonly="true"></input></div><div component="$UI/system/components/justep/labelEdit/labelEdit" class="x-label-edit x-label30" xid="labelInput3">
+   <input component="$UI/system/components/justep/input/input" class="form-control x-edit" xid="input3" placeHolder="台号" bind-ref="currentDeskData.ref('tai_number')" readonly="true"></input></div><div component="$UI/system/components/justep/labelEdit/labelEdit" class="x-label-edit x-label30" xid="labelInput3">
    <label class="x-label" xid="label5"><![CDATA[人数]]></label>
-   <input component="$UI/system/components/justep/input/input" class="form-control x-edit" xid="input4" placeHolder="请输入人数" dataType="Integer"></input></div></div>
+   <input component="$UI/system/components/justep/input/input" class="form-control x-edit" xid="input4" placeHolder="请输入人数" dataType="Integer" min="0"></input></div></div>
     <div xid="div12" class="btn-wrap">
       
       

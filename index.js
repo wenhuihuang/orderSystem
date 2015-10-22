@@ -355,7 +355,8 @@ define(function(require){
 				defaultValues:[{
 					 "billMasterId":param.rooms[0].billMasterId,
 					 "roomId":param.rooms[0].roomId,
-					 "typeCode":param.rooms[0].typeCode
+					 "typeCode":param.rooms[0].typeCode,
+					 "state":param.rooms[0].state
 				}]
 			});//end
 			if(state=="在用"){
@@ -435,15 +436,17 @@ define(function(require){
 	    	return;
 	    }
 	    var deskData = this.comp('deskData');
-	    var currentDeskData = this.comp('currentDeskData');
 	    var row = currentDeskData.val('typeCode');
 	    var success = function(param){
 	    	 getDesk(deskData,row,2);
 	    	//补上当前台的订单id
 	    	oneDeskData.newData({
+	    		index:0,
 	    		defaultValues:[{
 	    			 "billMasterId":param.result[0].msg.split('=')[1],
-					 "roomId":oneDeskData.val('roomId')
+					 "roomId":oneDeskData.val('roomId'),
+					 "state":oneDeskData.val('state'),
+					 "typeCode":oneDeskData.val('typeCode')
 	    		}]
 	    	});
 	    	pop.hide();
@@ -918,8 +921,6 @@ define(function(require){
 	Model.prototype.button18Click = function(event){
 		this.comp("popOver-take").show();
 		$('#more').slideUp();
-		
-//		var deskData = this.comp('deskData');
 
 	};
 
@@ -943,7 +944,6 @@ define(function(require){
 
 	//搭台确定
 	Model.prototype.button25Click = function(event){
-		
 		var currentDeskData = this.comp('currentDeskData');
 		var url = 'RoomFunctionServlet.do?func=shareRoom&roomId='+currentDeskData.val('roomId')+'&custQty='+$('#'+this.getIDByXID('input4')).val();
 		var contents1 = this.comp('contents1');
@@ -968,6 +968,7 @@ define(function(require){
     	var currentDeskData = this.comp('currentDeskData');
     	var row = event.bindingContext.$rawData;
         timeOutEvent = setTimeout(function(){
+        alert('长按开始')
     	timeOutEvent = 0;  
             //执行长按要执行的内容，如弹出菜单         
             //找出台li里的attr=mydata     
@@ -982,12 +983,15 @@ define(function(require){
             $(".more-wrap").find(".btn").each(function(){
             	$(this).attr({"roomId":liObj});
             });
+            //记录下当前长按的桌子信息
             currentDeskData.newData({
 				index: 0,
 				defaultValues:[{
+					 "tai_number":row.val('tai_number'),
 					 "billMasterId":row.val('billMasterId'),
 					 "roomId":row.val('roomId'),
-					 "typeCode":row.val('typeCode')
+					 "typeCode":row.val('typeCode'),
+					 "status":row.val('status')
 				}]
 			})
             
@@ -1059,21 +1063,30 @@ define(function(require){
 	
 		
 	Model.prototype.button20Click = function(event){
-		alert("d");
-		//var liAttr=$(this).attr("roomid");
+		//var liAttr=$(this).attr("roomid");		
 		var _this=$(event.target).is("a") ? $(event.target) : $(event.target.parentElement);
 		var liAttr=_this.attr("roomid");
-		alert(liAttr)
-		$(".main-ul").find("li").each(function(){
+		
+		//选判断当前节点是否为已点节点
+		//1.如果当前节点为空房，则不允许点击
+		//2.如果点击的房间为当前房间，则不允许点击 
+		var currentDeskData = this.comp('currentDeskData');
+		
+		
+		//当a节点点击的时候，当前节点变红其它节点变灰
+		$(".main-ul").find(".table-con").each(function(){
 			$(this).unbind("click");
-			if($(this).attr("mydata") == liAttr){
+			if($(this).parents("li").attr("roomId") == liAttr){
 				$(this).css({"background":"red"});
 				
 			}else{
+			//如果当前房间为空房，不允许并单
 				$(this).css({"background":"#ccc"});
 			}
-			$(this).bind("click",function(){
+			$(this).bind("click",function(event){
 				$(this).css({"background":"green"})
+				debugger
+				alert(event)
 			})
 		})
 	};
