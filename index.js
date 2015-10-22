@@ -229,7 +229,7 @@ define(function(require){
 			})();
 			$(".top-menu-li").eq(0).trigger("click");
 			var row = this.comp('deskData');
-			console.log(row)
+			console.log(row)	
 	};
 
 	//mydata为deskData
@@ -243,7 +243,7 @@ define(function(require){
 		$.ajax({
 			type: "GET",
 	        url: url,
-	        data: data,
+	        data:data,
 	        dataType: 'json',
 	        async: false,//使用同步方式，目前data组件有同步依赖
 	        cache: false,
@@ -270,6 +270,7 @@ define(function(require){
 					}
 				 rowss[i]={'tai_number':{'value':msg.rooms[i].roomName},'state':{'value':state},'roomId':{'value':msg.rooms[i].roomId},'billMasterId':{'value':msg.rooms[i].consumeRoomID},'color':{'value':color}};
 			 	}
+			 	
 			var ffdata={"rows":rowss};
 		 	mydata.loadData(ffdata);	
 	        },
@@ -967,6 +968,7 @@ define(function(require){
             //执行长按要执行的内容，如弹出菜单  
              
             var liObj= $(event.target).is("li") ? $(event.target).attr("mydata") : $(event.target).parents("li").attr("mydata");
+            $(event.target).is("li") ? $(event.target).addClass("active").siblings().removeClass("active") : $(event.target).parents("li").addClass("active").siblings().removeClass("active");
             $(".more-wrap").show();
             $(".main-ul").css({"margin-bottom":"94px"});
             $(".more-wrap").find(".btn").each(function(){
@@ -1041,6 +1043,24 @@ define(function(require){
     
 	
 		
+	Model.prototype.button20Click = function(event){
+		var liAttr=$(this).attr("mydata");
+		$(".main-ul").find("li").each(function(){
+			$(this).unbind("click");
+			if($(this).attr("mydata") == liAttr){
+				$(this).css({"background":"red"});
+				
+			}else{
+				$(this).css({"background":"#ccc"});
+			}
+			$(this).bind("click",function(){
+				$(this).css({"background":"green"})
+			})
+		})
+	};
+
+	
+	
 	return Model;
 });
 
