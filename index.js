@@ -1171,7 +1171,7 @@ define(function(require){
 					//要改变的台名
 					var changeRoomName = $(this).attr('billmasterid');
 					//选择的房间的名称，如果有【xx】 需要截断字符串再上传  --去【xx】
-					changeRoomName = changeRoomName.replace(/【.*/g," ");
+					//changeRoomName = changeRoomName.replace(/【.*/g," ");
 					alert(changeRoomName);
 					$(this).find(".table-con").css({"background":"#18AEB6"});
 					
