@@ -1033,11 +1033,9 @@ define(function(require){
 		//1.如果当前节点为空房，则不允许点击
 		//2.如果点击的房间为当前房间，则不允许点击 
 		
-
 		//当a节点点击的时候，当前节点变红其它节点变灰
 		$(".main-ul").find("li").each(function(){
 			$(this).unbind("click");
-			debugger;
 			console.log($(this))
 			if($(this).attr("roomid") == roomId){
 				$(this).find(".table-con").css({"background":"red"});
@@ -1051,7 +1049,8 @@ define(function(require){
 				if($(this).attr("state") == '在用'){
 					//记录下当前房台的信息
 					var currentRoomId = $(this).attr('roomid');
-					var creentBillMasterId = $(this).attr('billmasterid');				
+					var creentBillMasterId = $(this).attr('billmasterid');	
+					var custQty = $(this).attr('custQty');			
 					$(this).find(".table-con").css({"background":"green"})
 					var success = function(param){
 						
