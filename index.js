@@ -916,7 +916,7 @@ define(function(require){
 
 	Model.prototype.button19Click = function(event){
 		this.comp("contents1").to("index");
-		this.comp("deskData").applyUpdates();
+	
 	};
 	//搭台
 	Model.prototype.button18Click = function(event){
