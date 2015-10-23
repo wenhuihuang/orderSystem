@@ -1004,7 +1004,8 @@ define(function(require){
 					 "billMasterId":row.val('billMasterId'),
 					 "roomId":row.val('roomId'),
 					 "typeCode":row.val('typeCode'),
-					 "state":row.val('state')
+					 "state":row.val('state'),
+					 "consumeRoomId":row.val('consumeRoomId')
 				}]
 			})
             
@@ -1118,18 +1119,23 @@ define(function(require){
 	Model.prototype.button21Click = function(event){
 		var currentDeskData = this.comp('currentDeskData');
 		//当前房间的roomId
-		var changeRoomId = currentDeskData.val('roomId');
-		debugger;
+		var currentRoomId = currentDeskData.val('roomId');
+		//当前台BillMasterID
+		var currentBillMasterId	= currentDeskData.val('billMasterId')
+		alert("currentBillMasterId"+currentBillMasterId)
+		//当前台ConsumeRoomID
+		var currentConsumeRoomId =currentDeskData.val("consumeRoomId");
+		alert("currentConsumeRoomId"+currentConsumeRoomId)
 		//当前房间的名称
-		var changeRoomName	 = currentDeskData.val("tai_number");
+		var currentRoomName	= currentDeskData.val("tai_number");
 		//选择的房间的名称，如果有【xx】 需要截断字符串再上传  --去【xx】
-			changeRoomName = changeRoomName.replace(/【.*/g," ")
-		alert(changeRoomName)
+			currentRoomName = currentRoomName.replace(/【.*/g," ");
+		alert("currentRoomName"+currentRoomName)
 			//当a节点点击的时候，当前节点变红其它节点变灰
 		$(".main-ul").find("li").each(function(){
 			$(this).unbind("click");
 			//console.log($(this))
-			if($(this).attr("roomid") == changeRoomId){
+			if($(this).attr("roomid") == currentRoomId){
 				$(this).find(".table-con").css({"background":"red"});
 				
 			}else{
@@ -1140,16 +1146,15 @@ define(function(require){
 			$(this).bind("click",function(event){	
 				if($(this).attr("state") == '空台'){
 					//记录下当前房台的信息
-					var currentRoomId = $(this).attr('roomid');
-					var creentBillMasterId = $(this).attr('billmasterid');
-					var currentConsumeRoomId = $(this).attr('consumeRoomId');
-					alert(creentBillMasterId)
-					alert(currentConsumeRoomId)
-					var custQty = $(this).attr('custQty');			
+					var changeRoomId = $(this).attr('roomid');
+					//要改变的台名
+					var changeRoomName = $(this).attr('billmasterid');
+					//选择的房间的名称，如果有【xx】 需要截断字符串再上传  --去【xx】
+					changeRoomName = changeRoomName.replace(/【.*/g," ");
 					$(this).find(".table-con").css({"background":"#18AEB6"});
 					
 					var url=ip + 'RoomFunctionServlet.do';
-					var data='func=changeRoom&changeRoomId='+changeRoomId+'&changeRoomName='+changeRoomName+'&currentRoomId='+currentRoomId+'&currentBillMasterId='+creentBillMasterId+'&currentConsumeRoomId=xxx&currentShareNo=xxx&currentRoomName=xxx';
+					var data='func=changeRoom&changeRoomId='+changeRoomId+'&changeRoomName='+changeRoomName+'&currentRoomId='+currentRoomId+'&currentBillMasterId='+creentBillMasterId+'&currentConsumeRoomId='+currentConsumeRoomId+'&currentShareNo='+currentShareNo+'&currentRoomName='+currentRoomName;
 						$.ajax({
 					        type: "GET",
 					        url: url,
