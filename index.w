@@ -991,7 +991,7 @@
                       </div>  
                       <div class="col col-xs-6" xid="col63">
                         <a component="$UI/system/components/justep/button/button"
-                          class="btn x-orange" label="返回" xid="button44" bind-click="button44Click"> 
+                          class="btn x-orange" label="返回" xid="button44" bind-click="closeGive"> 
                           <i xid="i46"/>  
                           <span xid="span100">返回</span>
                         </a>
@@ -1037,7 +1037,7 @@
                       </div>  
                       <div class="col col-xs-6" xid="col36"> 
                         <a component="$UI/system/components/justep/button/button"
-                          class="btn x-orange" label="返回" xid="button35" bind-click="button44Click"> 
+                          class="btn x-orange" label="返回" xid="button35" bind-click="closeGive"> 
                           <i xid="i36"/>  
                           <span xid="span38">返回</span>
                         </a> 
@@ -1083,7 +1083,7 @@
                       </div>  
                       <div class="col col-xs-6" xid="col39"> 
                         <a component="$UI/system/components/justep/button/button"
-                          class="btn x-orange" label="返回" xid="button36" bind-click="button44Click"> 
+                          class="btn x-orange" label="返回" xid="button36" bind-click="closeGive"> 
                           <i xid="i39"/>  
                           <span xid="span42">返回</span>
                         </a> 
