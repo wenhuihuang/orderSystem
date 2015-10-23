@@ -1121,13 +1121,15 @@ define(function(require){
 		        async: false,//使用同步方式，目前data组件有同步依赖
 		        cache: false,
 		        success: function(msg){
+		        alert(msg)
+		        /*
 		            var rowss=[];
 					for(var i=0;i<msg.typeCodes.length;i++){
 					 rowss[i]={'typeName':{'value':msg.typeCodes[i].typeName},'typeCode':{'value':msg.typeCodes[i].typeCode},'qty':{'value':0}};
 				 	}
 				 	var ffdata={"@type":"table","rows":rowss};
 				 	menuTypeData.loadData(ffdata);//将返回的数据加载到data组件
-			 	
+			 	*/
 		        },
 		        error: function(){
 		          throw justep.Error.create("加载数据失败");
