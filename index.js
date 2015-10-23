@@ -1102,6 +1102,42 @@ define(function(require){
 	};
 
 	
+	//转台
+	Model.prototype.button21Click = function(event){
+		var currentDeskData = this.comp('currentDeskData');
+		//当前房间的roomId
+		var roomId = currentDeskData.val('roomId');
+		//当前房间的名称
+		var roomName = currentDeskDate.val("tai_number");
+		/*ajax*/
+			var url=ip + 'RoomFunctionServlet.do';
+			var data='func=changeRoom&changeRoomId='+roomId+'&changeRoomName='+roomName+'&currentRoomId=xxx&currentBillMasterId=xxx&currentConsumeRoomId=xxx&currentShareNo=xxx&currentRoomName=xxx';
+			$.ajax({
+		        type: "GET",
+		        url: url,
+		        data:data,
+		        dataType: 'json',
+		        async: false,//使用同步方式，目前data组件有同步依赖
+		        cache: false,
+		        success: function(msg){
+		        alert(msg)
+		        /*
+		            var rowss=[];
+					for(var i=0;i<msg.typeCodes.length;i++){
+					 rowss[i]={'typeName':{'value':msg.typeCodes[i].typeName},'typeCode':{'value':msg.typeCodes[i].typeCode},'qty':{'value':0}};
+				 	}
+				 	var ffdata={"@type":"table","rows":rowss};
+				 	menuTypeData.loadData(ffdata);//将返回的数据加载到data组件
+			 	*/
+		        },
+		        error: function(){
+		          throw justep.Error.create("加载数据失败");
+		        }
+			});
+		/*end ajax*/
+	};
+
+	
 	
 	Model.prototype.li1Dblclick = function(event){
 
