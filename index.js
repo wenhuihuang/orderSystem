@@ -269,13 +269,14 @@ define(function(require){
 					}else{
 						state="空台";
 						color="green";
-					}				
-				 rowss[i]={'tai_number':{'value':msg.rooms[i].roomName},'state':{'value':state},'roomId':{'value':msg.rooms[i].roomId},'billMasterId':{'value':msg.rooms[i].consumeBillMasterID},
-				 'color':{'value':color},'typeCode':{'value':msg.rooms[i].typeCode},'custQty':{'value':msg.rooms[i].custQty},'consumeRoomId':{'value':msg.rooms[i].consumeRoomId}};
+					}	
+							
+				 rowss[i]={'tai_number':{'value':msg.rooms[i].roomName},'state':{'value':state},'roomId':{'value':msg.rooms[i].roomId},'billMasterId':{'value':msg.rooms[i].consumeBillMasterID},'color':{'value':color},'typeCode':{'value':msg.rooms[i].typeCode},'custQty':{'value':msg.rooms[i].custQty},'consumeRoomId':{'value':msg.rooms[i].consumeRoomID}};
 			 	}
 			 	
 			var ffdata={"rows":rowss};
 		 	mydata.loadData(ffdata);	
+		 	;	
 	        },
 	        error: function(){
 	          throw justep.Error.create("加载数据失败");
@@ -307,9 +308,9 @@ define(function(require){
 		var menuTypeData = this.comp('menuTypeData');
 		//下面用于刷新当前房台状态
 		var deskData = this.comp('deskData');
-		
+		;
 		var success = function(param){
-			debugger
+			
 			//重新加载房台
 			$('#more').slideUp();
 			//清空购物车
@@ -360,7 +361,7 @@ define(function(require){
 					 "typeCode":param.rooms[0].typeCode,
 					 "state":param.rooms[0].state,
 					 "custQty":param.rooms[0].custQty,
-					 "consumeRoomId":param.rooms[0].consumeRoomId
+					 "consumeRoomId":param.rooms[0].consumeRoomID
 				}]
 			});//end
 			if(state=="在用"){
@@ -376,12 +377,12 @@ define(function(require){
 		
 		var room = '' ;
 		var room1 = '';
-		if( row.val('consumeRoomId')==null&&row.val('consumeRoomId')==undefined){
+		if( row.val('consumeRoomId')==null||row.val('consumeRoomId')==undefined||row.val('consumeRoomId')==''){
 			 room = row.val('roomId');			
 		}else{
 			 room1 = row.val('consumeRoomId');
 		}
-		debugger
+		
 		Baas.sendRequest({		
 			"url" : ip + 'RoomServlet.do?func=getRoomById&getJson=1&consumeRoomId='+room1+'&roomId='+room,
 			"dataType": "json",
@@ -459,7 +460,8 @@ define(function(require){
 	    			 "consumeRoomId":param.result[0].consumeRoomId,
 					 "roomId":currentDeskData.val('roomId'),
 					 "state":currentDeskData.val('state'),
-					 "typeCode":currentDeskData.val('typeCode')
+					 "typeCode":currentDeskData.val('typeCode'),
+					 "custQty":currentDeskData.val('custQty')
 	    		}]
 	    	});
 	    	pop.hide();
@@ -1063,6 +1065,9 @@ define(function(require){
 					//记录下当前房台的信息
 					var currentRoomId = $(this).attr('roomid');
 					var creentBillMasterId = $(this).attr('billmasterid');	
+					var currentConsumeRoomId = $(this).attr('consumeRoomId');
+					var currentCustQty = $(this).attr('custQty');
+					
 					var custQty = $(this).attr('custQty');			
 					$(this).find(".table-con").css({"background":"green"})
 					var success = function(param){
@@ -1076,8 +1081,8 @@ define(function(require){
 				}else{//如果当前房间不为在用状态，不允许并单
 					alert('当前桌子不允许并台');
 				}
-			})
-		})
+			});
+		});
 	};
 
 	
@@ -1120,12 +1125,11 @@ define(function(require){
 		var currentDeskData = this.comp('currentDeskData');
 		//当前房间的roomId
 		var changeRoomId = currentDeskData.val('roomId');
-		debugger;
 		//当前房间的名称
 		var changeRoomName	 = currentDeskData.val("tai_number");
 		//选择的房间的名称，如果有【xx】 需要截断字符串再上传  --去【xx】
-			changeRoomName = changeRoomName.replace(/【.*/g," ")
-		alert(changeRoomName)
+			changeRoomName = changeRoomName.replace("/【.*/g"," ");
+//		alert(changeRoomName)
 			//当a节点点击的时候，当前节点变红其它节点变灰
 		$(".main-ul").find("li").each(function(){
 			$(this).unbind("click");
