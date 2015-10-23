@@ -269,7 +269,7 @@ define(function(require){
 					}else{
 						state="空台";
 						color="green";
-					}
+					}				
 				 rowss[i]={'tai_number':{'value':msg.rooms[i].roomName},'state':{'value':state},'roomId':{'value':msg.rooms[i].roomId},'billMasterId':{'value':msg.rooms[i].consumeBillMasterID},
 				 'color':{'value':color},'typeCode':{'value':msg.rooms[i].typeCode},'custQty':{'value':msg.rooms[i].custQty},'consumeRoomId':{'value':msg.rooms[i].consumeRoomId}};
 			 	}
@@ -359,7 +359,8 @@ define(function(require){
 					 "roomId":param.rooms[0].roomId,
 					 "typeCode":param.rooms[0].typeCode,
 					 "state":param.rooms[0].state,
-					 "custQty":param.rooms[0].custQty
+					 "custQty":param.rooms[0].custQty,
+					 "consumeRoomId":param.rooms[0].consumeRoomId
 				}]
 			});//end
 			if(state=="在用"){
