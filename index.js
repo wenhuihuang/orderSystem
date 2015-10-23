@@ -1068,17 +1068,24 @@ define(function(require){
 				if($(this).attr("state") == '在用'){
 					//记录下当前房台的信息
 					var currentRoomId = $(this).attr('roomid');
-					var creentBillMasterId = $(this).attr('billmasterid');	
+					var currentBillMasterId = $(this).attr('billmasterid');	
 					var currentConsumeRoomId = $(this).attr('consumeRoomId');
 					var currentCustQty = $(this).attr('custQty');
+					var custQty = $(this).attr('custQty');
 					
-					var custQty = $(this).attr('custQty');			
+					var shareRoomId = currentDeskData.val('roomId');
+					var shareBillMasterId = currentDeskData.val('billMasterId');
+					var shareConsumeRoomId = currentDeskData.val('consumeRoomId');
+								
 					$(this).find(".table-con").css({"background":"#18AEB6"})
 					var success = function(param){
-						
+						if(param.code == '1'){
+							$('.left-menu').find('li').eq(0).trigger('click');//刷新房台
+							return;
+						}
 					}
 					Baas.sendRequest({
-						"url" : ip + 'RoomFunctionServlet.do?func=mergeRoom&shareRoomId=xxxx&shareConsumeRoomId=xxx&shareBillMasterId=xxx&currentRoomId=xxx&currentBillMasterId=xxx&currentConsumeRoomId=xxx&currentCustQty=xxx',
+						"url" : ip + 'RoomFunctionServlet.do?func=mergeRoom&shareRoomId='+shareRoomId+'&shareConsumeRoomId='+shareConsumeRoomId+'&shareBillMasterId='+shareBillMasterId+'&currentRoomId='+currentRoomId+'&currentBillMasterId='+currentBillMasterId+'&currentConsumeRoomId='+currentConsumeRoomId+'&currentCustQty='+currentCustQty,
 						"dataType": "json",
 						"success" : success
 					});
