@@ -1074,19 +1074,21 @@ define(function(require){
 		
 
 		//当a节点点击的时候，当前节点变红其它节点变灰
-		$(".main-ul").find(".table-con").each(function(){
+		$(".main-ul").find("li").each(function(){
 			$(this).unbind("click");
-			if($(this).parents("li").attr("roomid") == roomId){
-				$(this).css({"background":"red"});
+			debugger;
+			console.log($(this))
+			if($(this).attr("roomid") == roomId){
+				$(this).find(".table-con").css({"background":"red"});
 				
 			}else{
-				if($(this).parents("li").attr("roomid") == '在用'){
-					$(this).css({"background":"#ccc"});
+				if($(this).attr("state") == '在用'){
+					$(this).find(".table-con").css({"background":"#ccc"});
 				}
 			}
 			$(this).bind("click",function(event){				
-				if($(this).parents("li").attr("state") == '在用'){
-					$(this).css({"background":"green"})
+				if($(this).attr("state") == '在用'){
+					$(this).find(".table-con").css({"background":"green"})
 				}else{//如果当前房间不为在用状态，不允许并单
 					alert('当前桌子不允许并台');
 				}
