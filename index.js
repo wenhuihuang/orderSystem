@@ -5,6 +5,7 @@ define(function(require){
 	var ip="http://192.168.1.20:8080/OrderSystemWeX5/";
 	//var url="UI2/orderSystem_a/index.w#!index";
 	var Baas = require("$UI/demo/baas/baas");
+	var Language = require('$UI/orderSystem/language')
 	var Model = function(){
 		this.callParent();
 	};
