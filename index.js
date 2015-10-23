@@ -349,7 +349,8 @@ define(function(require){
 				});
 			});
 			//清空商品列表
-			goodsListData.clear();			//记录当前台号
+			goodsListData.clear();			
+			//记录当前台号
 			oneDeskData.newData({
 				index: 0,
 				defaultValues:[{
@@ -991,7 +992,7 @@ define(function(require){
 					 "billMasterId":row.val('billMasterId'),
 					 "roomId":row.val('roomId'),
 					 "typeCode":row.val('typeCode'),
-					 "status":row.val('status')
+					 "state":row.val('state')
 				}]
 			})
             
@@ -1021,32 +1022,34 @@ define(function(require){
 	};
     
 	
-		
+	//并台	
 	Model.prototype.button20Click = function(event){
-		//var liAttr=$(this).attr("roomid");		
-		var _this=$(event.target).is("a") ? $(event.target) : $(event.target.parentElement);
-		var liAttr=_this.attr("roomid");
-		
+		var currentDeskData = this.comp('currentDeskData');
+		//当前房间的roomId
+		var roomId = currentDeskData.val('roomId');
+		var mergeRoomData = this.comp('mergeRoomData');
 		//选判断当前节点是否为已点节点
 		//1.如果当前节点为空房，则不允许点击
 		//2.如果点击的房间为当前房间，则不允许点击 
-		var currentDeskData = this.comp('currentDeskData');
 		
-		
+
 		//当a节点点击的时候，当前节点变红其它节点变灰
 		$(".main-ul").find(".table-con").each(function(){
 			$(this).unbind("click");
-			if($(this).parents("li").attr("roomId") == liAttr){
+			if($(this).parents("li").attr("roomid") == roomId){
 				$(this).css({"background":"red"});
 				
 			}else{
-			//如果当前房间为空房，不允许并单
-				$(this).css({"background":"#ccc"});
+				if($(this).parents("li").attr("roomid") == '在用'){
+					$(this).css({"background":"#ccc"});
+				}
 			}
-			$(this).bind("click",function(event){
-				$(this).css({"background":"green"})
-				debugger
-				alert(event)
+			$(this).bind("click",function(event){				
+				if($(this).parents("li").attr("state") == '在用'){
+					$(this).css({"background":"green"})
+				}else{//如果当前房间不为在用状态，不允许并单
+					alert('当前桌子不允许并台');
+				}
 			})
 		})
 	};
