@@ -191,7 +191,7 @@
               </div>  
               <div class="col col-xs-4" xid="col6"> 
                 <a component="$UI/system/components/justep/button/button"
-                  class="btn btn-default" label="转台" xid="button21"> 
+                  class="btn btn-default" label="转台" xid="button21" bind-click="button21Click"> 
                   <i xid="i23"/>  
                   <span xid="span10">转台</span>
                 </a> 
