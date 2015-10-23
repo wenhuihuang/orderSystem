@@ -1063,7 +1063,7 @@ define(function(require){
 					var currentRoomId = $(this).attr('roomid');
 					var creentBillMasterId = $(this).attr('billmasterid');	
 					var custQty = $(this).attr('custQty');			
-					$(this).find(".table-con").css({"background":"green"})
+					$(this).find(".table-con").css({"background":"#18AEB6"})
 					var success = function(param){
 						
 					}
@@ -1128,24 +1128,25 @@ define(function(require){
 			//当a节点点击的时候，当前节点变红其它节点变灰
 		$(".main-ul").find("li").each(function(){
 			$(this).unbind("click");
-			console.log($(this))
+			//console.log($(this))
 			if($(this).attr("roomid") == changeRoomId){
 				$(this).find(".table-con").css({"background":"red"});
 				
 			}else{
-				if($(this).attr("status") == '在用'){
+				if($(this).attr("state") == '空台'){
 					$(this).find(".table-con").css({"background":"#ccc"});
 				}
 			}
 			$(this).bind("click",function(event){	
-				if($(this).attr("status") == '在用'){
+				if($(this).attr("state") == '空台'){
 					//记录下当前房台的信息
 					var currentRoomId = $(this).attr('roomid');
 					var creentBillMasterId = $(this).attr('billmasterid');
-					var currentConsumeRoomId = $(this).atte('ConsumeRoomid');
+					var currentConsumeRoomId = $(this).attr('consumeRoomId');
+					alert(creentBillMasterId)
 					alert(currentConsumeRoomId)
 					var custQty = $(this).attr('custQty');			
-					$(this).find(".table-con").css({"background":"green"});
+					$(this).find(".table-con").css({"background":"#18AEB6"});
 					
 					var url=ip + 'RoomFunctionServlet.do';
 					var data='func=changeRoom&changeRoomId='+changeRoomId+'&changeRoomName='+changeRoomName+'&currentRoomId='+currentRoomId+'&currentBillMasterId='+creentBillMasterId+'&currentConsumeRoomId=xxx&currentShareNo=xxx&currentRoomName=xxx';
@@ -1173,6 +1174,8 @@ define(function(require){
 						});
 			
 				
+			}else{
+				alert("此台已有人，不能转");
 			}
 			
 		})
