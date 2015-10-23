@@ -155,7 +155,7 @@
             <div component="$UI/system/components/justep/list/list" class="x-list"
               xid="list2" data="deskData"> 
               <ul class="x-list-template clearfix main-ul" xid="listTemplateUl2"> 
-                <li xid="li1" bind-click="li1Click" bind-attr-roomId="val('roomId')" bind-attr-state="val('state')" bind-touchstart="li1Touchstart" bind-touchmove="li1Touchmove" bind-touchend="li1Touchend" > 
+                <li xid="li1" bind-click="li1Click" bind-attr-roomId="val('roomId')" bind-attr-status="val('status')" bind-touchstart="li1Touchstart" bind-touchmove="li1Touchmove" bind-touchend="li1Touchend" > 
                   <div xid="div5" class="table-con use"  bind-css="{'blue':val('color')=='blue','gray':val('color')=='gray','yellow':val('color')=='yellow','red':val('color')=='red','green':val('color')=='green'}"> 
                     <p xid="p87"> 
                       <div component="$UI/system/components/justep/output/output"
@@ -198,9 +198,9 @@
               </div>  
               <div class="col col-xs-4" xid="col7"> 
                 <a component="$UI/system/components/justep/button/button"
-                  class="btn btn-default" label=" 清台 " xid="button22"> 
+                  class="btn btn-default" label=" 零结账" xid="button22"> 
                   <i xid="i24"/>  
-                  <span xid="span11">清台</span>
+                  <span xid="span11"> 零结账</span>
                 </a> 
               </div>  
               <div class="col col-xs-4" xid="col8"> 
