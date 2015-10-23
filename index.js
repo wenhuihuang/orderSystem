@@ -1062,12 +1062,12 @@ define(function(require){
 	};
     
 	
-		
+	//并台	
 	Model.prototype.button20Click = function(event){
 		var currentDeskData = this.comp('currentDeskData');
 		//当前房间的roomId
 		var roomId = currentDeskData.val('roomId');
-		
+		var mergeRoomData = this.comp('mergeRoomData');
 		//选判断当前节点是否为已点节点
 		//1.如果当前节点为空房，则不允许点击
 		//2.如果点击的房间为当前房间，则不允许点击 
@@ -1080,12 +1080,16 @@ define(function(require){
 				$(this).css({"background":"red"});
 				
 			}else{
-			//如果当前房间为空房，不允许并单
-				$(this).css({"background":"#ccc"});
+				if($(this).parents("li").attr("roomid") == '在用'){
+					$(this).css({"background":"#ccc"});
+				}
 			}
-			$(this).bind("click",function(event){
-				$(this).css({"background":"green"})
-				
+			$(this).bind("click",function(event){				
+				if($(this).parents("li").attr("state") == '在用'){
+					$(this).css({"background":"green"})
+				}else{//如果当前房间不为在用状态，不允许并单
+					alert('当前桌子不允许并台');
+				}
 			})
 		})
 	};
