@@ -270,7 +270,7 @@ define(function(require){
 						state="空台";
 						color="green";
 					}
-				 rowss[i]={'tai_number':{'value':msg.rooms[i].roomName},'state':{'value':state},'roomId':{'value':msg.rooms[i].roomId},'billMasterId':{'value':msg.rooms[i].consumeRoomID},'color':{'value':color},'typeCode':{'value':msg.rooms[i].typeCode}};
+				 rowss[i]={'tai_number':{'value':msg.rooms[i].roomName},'state':{'value':state},'roomId':{'value':msg.rooms[i].roomId},'billMasterId':{'value':msg.rooms[i].consumeBillMasterID},'color':{'value':color},'typeCode':{'value':msg.rooms[i].typeCode},'custQty':{'value':msg.room[i].custQty}};
 			 	}
 			 	
 			var ffdata={"rows":rowss};
@@ -354,7 +354,7 @@ define(function(require){
 			oneDeskData.newData({
 				index: 0,
 				defaultValues:[{
-					 "billMasterId":param.rooms[0].billMasterId,
+					 "billMasterId":param.rooms[0].consumeBillMasterID,
 					 "roomId":param.rooms[0].roomId,
 					 "typeCode":param.rooms[0].typeCode,
 					 "state":param.rooms[0].state
@@ -1016,7 +1016,7 @@ define(function(require){
           
     };
 
-
+    //刷新房台
 	Model.prototype.indexActive = function(event){
 		$('.left-menu').find('li').eq(0).trigger('click');
 	};
@@ -1048,7 +1048,18 @@ define(function(require){
 			}
 			$(this).bind("click",function(event){				
 				if($(this).attr("state") == '在用'){
+					//记录下当前房台的信息
+					var currentRoomId = $(this).attr('roomid');
+					var creentBillMasterId = $(this).attr('billmasterid');				
 					$(this).find(".table-con").css({"background":"green"})
+					var success = function(param){
+						
+					}
+					Baas.sendRequest({
+						"url" : ip + 'RoomFunctionServlet.do?func=mergeRoom&shareRoomId=xxxx&shareConsumeRoomId=xxx&shareBillMasterId=xxx&currentRoomId=xxx&currentBillMasterId=xxx&currentConsumeRoomId=xxx&currentCustQty=xxx',
+						"dataType": "json",
+						"success" : success
+					});
 				}else{//如果当前房间不为在用状态，不允许并单
 					alert('当前桌子不允许并台');
 				}
@@ -1088,6 +1099,12 @@ define(function(require){
 	Model.prototype.span35Click = function(event){
 		this.comp("give").show();
 		this.comp("contents4").to("content16");
+	};
+
+	
+	
+	Model.prototype.li1Dblclick = function(event){
+
 	};
 
 	
