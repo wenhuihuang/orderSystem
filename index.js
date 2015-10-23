@@ -271,10 +271,9 @@ define(function(require){
 						state="空台";
 						color="green";
 					}	
-							
-				 rowss[i]={'tai_number':{'value':msg.rooms[i].roomName},'state':{'value':state},'roomId':{'value':msg.rooms[i].roomId},'billMasterId':{'value':msg.rooms[i].consumeBillMasterID},'color':{'value':color},'typeCode':{'value':msg.rooms[i].typeCode},'custQty':{'value':msg.rooms[i].custQty},'consumeRoomId':{'value':msg.rooms[i].consumeRoomID}};
+				 rowss[i]={'tai_number':{'value':msg.rooms[i].roomName},'state':{'value':state},'roomId':{'value':msg.rooms[i].roomId},'billMasterId':{'value':msg.rooms[i].consumeBillMasterID},'color':{'value':color},'typeCode':{'value':msg.rooms[i].typeCode},'custQty':{'value':msg.rooms[i].custQty},'consumeRoomId':{'value':msg.rooms[i].consumeRoomID},'shareNo':{'value':msg.rooms[i].shareNo}};
 			 	}
-			 	
+			 	debugger
 			var ffdata={"rows":rowss};
 		 	mydata.loadData(ffdata);	
 		 	;	
@@ -352,7 +351,8 @@ define(function(require){
 				});
 			});
 			//清空商品列表
-			goodsListData.clear();			
+			goodsListData.clear();	
+			debugger		
 			//记录当前台号
 			oneDeskData.newData({
 				index: 0,
@@ -362,7 +362,8 @@ define(function(require){
 					 "typeCode":param.rooms[0].typeCode,
 					 "state":param.rooms[0].state,
 					 "custQty":param.rooms[0].custQty,
-					 "consumeRoomId":param.rooms[0].consumeRoomID
+					 "consumeRoomId":param.rooms[0].consumeRoomID,
+					 "shareNo":param.rooms[0].shareNo
 				}]
 			});//end
 			if(state=="在用"){
@@ -462,7 +463,8 @@ define(function(require){
 					 "roomId":currentDeskData.val('roomId'),
 					 "state":currentDeskData.val('state'),
 					 "typeCode":currentDeskData.val('typeCode'),
-					 "custQty":currentDeskData.val('custQty')
+					 "custQty":currentDeskData.val('custQty'),
+					 "shareNo":currentDeskData.val('shareNo')
 	    		}]
 	    	});
 	    	pop.hide();
@@ -1008,7 +1010,9 @@ define(function(require){
 					 "billMasterId":row.val('billMasterId'),
 					 "roomId":row.val('roomId'),
 					 "typeCode":row.val('typeCode'),
-					 "state":row.val('state')
+					 "state":row.val('state'),
+					 "consumeRoomId":row.val('consumeRoomId'),
+					 "shareNO":row.val('shareNO')
 				}]
 			})
             
@@ -1074,7 +1078,7 @@ define(function(require){
 					var shareBillMasterId = currentDeskData.val('billMasterId');
 					var shareConsumeRoomId = currentDeskData.val('consumeRoomId');
 								
-					$(this).find(".table-con").css({"background":"green"})
+					$(this).find(".table-con").css({"background":"#18AEB6"})
 					var success = function(param){
 						if(param.code == '1'){
 							$('.left-menu').find('li').eq(0).trigger('click');//刷新房台
@@ -1132,36 +1136,48 @@ define(function(require){
 	Model.prototype.button21Click = function(event){
 		var currentDeskData = this.comp('currentDeskData');
 		//当前房间的roomId
-		var changeRoomId = currentDeskData.val('roomId');
+		var currentRoomId = currentDeskData.val('roomId');
+		//当前台BillMasterID
+		var currentBillMasterId	= currentDeskData.val('billMasterId')
+		//当前台ConsumeRoomID
+		var currentConsumeRoomId =currentDeskData.val("consumeRoomId");
+		//当前台currentShareNo
+		var currentShareNo = currentDeskData.val("shareNO");
+		//判断shareNo是否是undefind
+		if(currentShareNo == "undefind"){
+			currentShareNo=" ";
+		}
+		
 		//当前房间的名称
-		var changeRoomName	 = currentDeskData.val("tai_number");
+		var currentRoomName	= currentDeskData.val("tai_number");
 		//选择的房间的名称，如果有【xx】 需要截断字符串再上传  --去【xx】
-			changeRoomName = changeRoomName.replace("/【.*/g"," ");
-//		alert(changeRoomName)
+			currentRoomName = currentRoomName.replace(/【.*/g," ");
 			//当a节点点击的时候，当前节点变红其它节点变灰
 		$(".main-ul").find("li").each(function(){
 			$(this).unbind("click");
-			console.log($(this))
-			if($(this).attr("roomid") == changeRoomId){
+			//console.log($(this))
+			if($(this).attr("roomid") == currentRoomId){
 				$(this).find(".table-con").css({"background":"red"});
 				
 			}else{
-				if($(this).attr("status") == '在用'){
+				if($(this).attr("state") == '空台'){
 					$(this).find(".table-con").css({"background":"#ccc"});
 				}
 			}
 			$(this).bind("click",function(event){	
-				if($(this).attr("status") == '在用'){
+				if($(this).attr("state") == '空台'){
 					//记录下当前房台的信息
-					var currentRoomId = $(this).attr('roomid');
-					var creentBillMasterId = $(this).attr('billmasterid');
-					var currentConsumeRoomId = $(this).atte('ConsumeRoomid');
-					alert(currentConsumeRoomId)
-					var custQty = $(this).attr('custQty');			
-					$(this).find(".table-con").css({"background":"green"});
+					var changeRoomId = $(this).attr('roomid');
+					//要改变的台名
+					var changeRoomName = $(this).attr('billmasterid');
+					//选择的房间的名称，如果有【xx】 需要截断字符串再上传  --去【xx】
+					//changeRoomName = changeRoomName.replace(/【.*/g," ");
+					alert(changeRoomName);
+					$(this).find(".table-con").css({"background":"#18AEB6"});
 					
 					var url=ip + 'RoomFunctionServlet.do';
-					var data='func=changeRoom&changeRoomId='+changeRoomId+'&changeRoomName='+changeRoomName+'&currentRoomId='+currentRoomId+'&currentBillMasterId='+creentBillMasterId+'&currentConsumeRoomId=xxx&currentShareNo=xxx&currentRoomName=xxx';
+					var data='func=changeRoom&changeRoomId='+changeRoomId+'&changeRoomName='+changeRoomName+'&currentRoomId='+currentRoomId+'&currentBillMasterId='+currentBillMasterId+'&currentConsumeRoomId='+currentConsumeRoomId+'&currentShareNo='+currentShareNo+'&currentRoomName='+currentRoomName;
+					console.log(data)
 						$.ajax({
 					        type: "GET",
 					        url: url,
@@ -1186,12 +1202,15 @@ define(function(require){
 						});
 			
 				
+			}else{
+				alert("此台已有人，不能转");
 			}
 			
 		})
 	
 	})
 	};
+
 
 	
 	
