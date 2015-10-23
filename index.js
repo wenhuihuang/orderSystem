@@ -270,7 +270,7 @@ define(function(require){
 						state="空台";
 						color="green";
 					}
-				 rowss[i]={'tai_number':{'value':msg.rooms[i].roomName},'state':{'value':state},'roomId':{'value':msg.rooms[i].roomId},'billMasterId':{'value':msg.rooms[i].consumeBillMasterID},'color':{'value':color},'typeCode':{'value':msg.rooms[i].typeCode},'custQty':{'value':msg.room[i].custQty}};
+				 rowss[i]={'tai_number':{'value':msg.rooms[i].roomName},'state':{'value':state},'roomId':{'value':msg.rooms[i].roomId},'billMasterId':{'value':msg.rooms[i].consumeBillMasterID},'color':{'value':color},'typeCode':{'value':msg.rooms[i].typeCode},'custQty':{'value':msg.rooms[i].custQty}};
 			 	}
 			 	
 			var ffdata={"rows":rowss};
@@ -357,7 +357,8 @@ define(function(require){
 					 "billMasterId":param.rooms[0].consumeBillMasterID,
 					 "roomId":param.rooms[0].roomId,
 					 "typeCode":param.rooms[0].typeCode,
-					 "state":param.rooms[0].state
+					 "state":param.rooms[0].state,
+					 "custQty":param.rooms[0].custQty
 				}]
 			});//end
 			if(state=="在用"){
