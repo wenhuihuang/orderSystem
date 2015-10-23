@@ -9,7 +9,8 @@
   <column label="订单号" name="billMasterId" type="String" xid="xid16"></column>
   <column label="颜色" name="color" type="String" xid="xid40"></column>
   <column name="typeCode" type="String" xid="xid49"></column>
-  <column label="在餐人数" name="custQty" type="Integer" xid="xid51"></column></div><div component="$UI/system/components/justep/data/data" autoLoad="true" xid="userData" idColumn="userId"><column label="用户id" name="userId" type="String" xid="xid1"></column>
+  <column label="在餐人数" name="custQty" type="Integer" xid="xid51"></column>
+  <column name="consumeRoomId" type="String" xid="xid54"></column></div><div component="$UI/system/components/justep/data/data" autoLoad="true" xid="userData" idColumn="userId"><column label="用户id" name="userId" type="String" xid="xid1"></column>
   <column label="手机号" name="fetionNO" type="Long" xid="xid2"></column>
   <column label="用户名" name="userName" type="String" xid="xid3"></column></div>
   <div component="$UI/system/components/justep/data/data" autoLoad="true" xid="enterDeskData" idColumn="roomId"><column label="房台ID" name="roomId" type="Long" xid="xid9"></column>
@@ -23,14 +24,16 @@
   <column label="商品名称" name="goodsName" type="String" xid="xid15"></column>
   <column name="sprice" type="Double" xid="xid18"></column>
   <column label="商品数量" name="qty" type="String" xid="xid19"></column>
-  <column label="商品类型" name="typeCode" type="String" xid="xid46"></column></div><div component="$UI/system/components/justep/data/data" autoLoad="true" xid="currentDeskData" idColumn="tai_number">
+  <column label="商品类型" name="typeCode" type="String" xid="xid46"></column>
+  <column label="单位" name="unitId" type="String" xid="xid55"></column></div><div component="$UI/system/components/justep/data/data" autoLoad="true" xid="currentDeskData" idColumn="tai_number">
    <column label="台号" name="tai_number" type="String" xid="default11"></column>
   <column label="状态" name="state" type="String" xid="default12"></column>
   <column label="房号id" name="roomId" type="String" xid="default13"></column>
   <column label="订单号" name="billMasterId" type="String" xid="default2"></column>
   <column label="台" name="roomCode" type="String" xid="xid17"></column>
   <column name="typeCode" type="String" xid="xid50"></column>
-  <column name="custQty" type="Integer" xid="xid52"></column></div>
+  <column name="custQty" type="Integer" xid="xid52"></column>
+  <column label="消费房间id" name="consumeRoomId" type="String" xid="xid53"></column></div>
   <div component="$UI/system/components/justep/data/data" autoLoad="true" xid="cartData" idColumn="goodsId" confirmDelete="false">
    <column label="商品id" name="goodsId" type="String" xid="column3"></column>
   <column label="商品名称" name="goodsName" type="String" xid="column4"></column>
@@ -530,7 +533,7 @@
    <label class="x-label" xid="label3"><![CDATA[台号]]></label>
    <input component="$UI/system/components/justep/input/input" class="form-control x-edit" xid="input3" placeHolder="台号" bind-ref="currentDeskData.ref('tai_number')" readonly="true"></input></div><div component="$UI/system/components/justep/labelEdit/labelEdit" class="x-label-edit x-label30" xid="labelInput3">
    <label class="x-label" xid="label5"><![CDATA[人数]]></label>
-   <input component="$UI/system/components/justep/input/input" class="form-control x-edit" xid="input4" placeHolder="请输入人数" dataType="Integer" min="0"></input></div></div>
+   <input component="$UI/system/components/justep/input/input" class="form-control x-edit" xid="input4" placeHolder="请输入人数" dataType="Integer"></input></div></div>
     <div xid="div12" class="btn-wrap">
       
       

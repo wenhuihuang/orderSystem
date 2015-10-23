@@ -270,7 +270,8 @@ define(function(require){
 						state="空台";
 						color="green";
 					}
-				 rowss[i]={'tai_number':{'value':msg.rooms[i].roomName},'state':{'value':state},'roomId':{'value':msg.rooms[i].roomId},'billMasterId':{'value':msg.rooms[i].consumeBillMasterID},'color':{'value':color},'typeCode':{'value':msg.rooms[i].typeCode},'custQty':{'value':msg.rooms[i].custQty}};
+				 rowss[i]={'tai_number':{'value':msg.rooms[i].roomName},'state':{'value':state},'roomId':{'value':msg.rooms[i].roomId},'billMasterId':{'value':msg.rooms[i].consumeBillMasterID},
+				 'color':{'value':color},'typeCode':{'value':msg.rooms[i].typeCode},'custQty':{'value':msg.rooms[i].custQty},'consumeRoomId':{'value':msg.rooms[i].consumeRoomId}};
 			 	}
 			 	
 			var ffdata={"rows":rowss};
@@ -308,7 +309,7 @@ define(function(require){
 		var deskData = this.comp('deskData');
 		
 		var success = function(param){
-			
+			debugger
 			//重新加载房台
 			$('#more').slideUp();
 			//清空购物车
@@ -372,8 +373,16 @@ define(function(require){
 			}	
 		}
 		
-		Baas.sendRequest({
-			"url" : ip + 'RoomServlet.do?func=getRoomById&getJson=1&roomId='+row.val('roomId'),
+		var room = '' ;
+		var room1 = '';
+		if( row.val('consumeRoomId')==null&&row.val('consumeRoomId')==undefined){
+			 room = row.val('roomId');			
+		}else{
+			 room1 = row.val('consumeRoomId');
+		}
+		debugger
+		Baas.sendRequest({		
+			"url" : ip + 'RoomServlet.do?func=getRoomById&getJson=1&consumeRoomId='+room1+'&roomId='+room,
 			"dataType": "json",
 			"success" : success
 		});
@@ -395,7 +404,7 @@ define(function(require){
 		var success = function(msg){
 						var rowss=[];
 						for(var i=0;i<msg.goods.length;i++){
-						 rowss[i]={'goodsId':{'value':msg.goods[i].goodsId},'goodsName':{'value':msg.goods[i].goodsName},'sprice':{'value':msg.goods[i].sprice},'qty':{'value':0},'typeCode':{'value':msg.goods[i].typeCode}};
+						 rowss[i]={'goodsId':{'value':msg.goods[i].goodsId},'goodsName':{'value':msg.goods[i].goodsName},'sprice':{'value':msg.goods[i].sprice},'qty':{'value':0},'typeCode':{'value':msg.goods[i].typeCode},'unitId':{'value':msg.goods[i].unitId}};
 					 	}
 					 	var ffdata={"rows":rowss};
 					 	goodsListData.loadData(ffdata);
@@ -430,7 +439,7 @@ define(function(require){
 	//空房台的时候，确定人数，然后补上billMasterId,因为进入空房时获取不了billMasterId
 	Model.prototype.button16Click = function(event){
 	    var contents1 = this.comp('contents1');
-	    var oneDeskData =  this.comp('currentDeskData');
+	    var currentDeskData =  this.comp('currentDeskData');
 	    var pop = this.comp('popOver_renshu');
 	    var num = $('#custNum').val();
 	    if(num == ''||num == undefined){
@@ -442,20 +451,21 @@ define(function(require){
 	    var success = function(param){
 	    	 getDesk(deskData,row,2);
 	    	//补上当前台的订单id
-	    	oneDeskData.newData({
+	    	currentDeskData.newData({
 	    		index:0,
 	    		defaultValues:[{
-	    			 "billMasterId":param.result[0].msg.split('=')[1],
-					 "roomId":oneDeskData.val('roomId'),
-					 "state":oneDeskData.val('state'),
-					 "typeCode":oneDeskData.val('typeCode')
+	    			 "billMasterId":param.result[0].billMasterId,
+	    			 "consumeRoomId":param.result[0].consumeRoomId,
+					 "roomId":currentDeskData.val('roomId'),
+					 "state":currentDeskData.val('state'),
+					 "typeCode":currentDeskData.val('typeCode')
 	    		}]
 	    	});
 	    	pop.hide();
 	    	contents1.to('menu');
 	    }				
 		Baas.sendRequest({
-			"url" : ip + 'OrderedNumServlet.do?func=newConsumeRoom&getJson=1&roomId='+oneDeskData.val('roomId')+'&custQty='+num,
+			"url" : ip + 'OrderedNumServlet.do?func=newConsumeRoom&getJson=1&roomId='+currentDeskData.val('roomId')+'&custQty='+num,
 			"dataType": "json",
 			"success" : success
 		});
@@ -488,7 +498,8 @@ define(function(require){
 					'goodsName':row.val('goodsName'),
 					'sprice':row.val('sprice'),
 					'addMoney':0,
-					'typeCode':row.val('typeCode')
+					'typeCode':row.val('typeCode'),
+					'unitId':row.val('unitId')
 				}]
 			});
 		}
@@ -804,7 +815,7 @@ define(function(require){
 		var goods = '';
 		var cartData = this.comp('cartData');
 		cartData.eachAll(function(param){
-			goods += param.row.val('goodsId')+'_'+param.row.val('qty')+'_'+param.row.val('sprice')+',';
+			goods += param.row.val('goodsId')+'_'+param.row.val('qty')+'_'+param.row.val('sprice')+'_'+param.row.val('goodsName')+'_'+param.row.val('unitId')+',';
 		});
 		goods = goods.substring(0,goods.length-1);
 		var sendCook = this.comp('sendCookWayData');
