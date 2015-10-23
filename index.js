@@ -569,7 +569,7 @@ define(function(require){
 
 	//隐藏订单 
 	Model.prototype.button6Click = function(event){
-		this.comp("popOver1").hide();
+		this.comp("order").hide();
 	};
 
 
@@ -997,6 +997,7 @@ define(function(require){
 			})
             
         },500);//这里设置定时器，定义长按500毫秒触发长按事件，时间可以自己改，个人感觉500毫秒非常合适  
+        return false;
     };
     
     //移动
@@ -1015,47 +1016,6 @@ define(function(require){
           
     };
 
-
-	/*
-	//并台
-	Model.prototype.button20Click = function(event){
-		var row = event.bindingContext.$rawData;
-		//var typeCode=row.val("typeCode");
-		$(event).attr("")
-		var deskData = this.comp('deskData');
-		deskData.eachAll(function(param){
-			if(param.row.val("roomId") == ){
-			
-			}
-		})
-		var url= ip+'RoomFunctionServlet.do?func=mergeRoom&shareRoomId=xxxx&shareConsumeRoomId=xxx&shareBillMasterId=xxx&currentRoomId=xxx&currentBillMasterId=xxx&currentConsumeRoomId=xxx&currentCustQty=xxx';
-		var success = function(msg){
-						 ;
-						var rowss=[];
-						for(var i=0;i<msg.goods.length;i++){
-						 rowss[i]={'goodsId':{'value':msg.goods[i].goodsId},'goodsName':{'value':msg.goods[i].goodsName},'sprice':{'value':msg.goods[i].sprice},'qty':{'value':0},'typeCode':{'value':msg.goods[i].typeCode}};
-					 	}
-					 	var ffdata={"rows":rowss};
-					 	goodsListData.loadData(ffdata);
-				//从购物车中统计当前各商品购买数量，并将数量显示在商品列中
-				goodsListData.eachAll(function(param){
-						cartData.eachAll(function(data){
-							if(param.row.val('goodsId')==data.row.val('goodsId')){
-								param.row.val('qty',param.row.val('qty')+data.row.val('qty'));
-							}
-						});
-				}); 	
-					 	
-					 		 	
-	    }
-	   
-		Baas.sendRequest({
-			"url" : url,
-			"dataType": "json",
-			"success" : success
-		});
-	};
-*/
 
 	Model.prototype.indexActive = function(event){
 		$('.left-menu').find('li').eq(0).trigger('click');
@@ -1094,6 +1054,40 @@ define(function(require){
 				}
 			})
 		})
+	};
+
+	
+	//弹出修改菜名框
+	Model.prototype.span32Click = function(event){
+		this.comp("give").show();
+		this.comp("contents4").to("content17");
+	};
+
+	
+	//关闭give pop框
+	Model.prototype.closeGive = function(event){
+		this.comp("give").hide();
+	};
+
+	
+	
+	Model.prototype.span33Click = function(event){
+		this.comp("give").show();
+		this.comp("contents4").to("content15");
+	};
+
+	
+	//弹出修改数量框
+	Model.prototype.span34Click = function(event){
+		this.comp("give").show();
+		this.comp("contents4").to("content21");
+	};
+
+	
+	//弹出赠送框
+	Model.prototype.span35Click = function(event){
+		this.comp("give").show();
+		this.comp("contents4").to("content16");
 	};
 
 	
