@@ -9,8 +9,6 @@ define(function(require) {
 		getLanguages:function(data){
 			var success = function(param){
 				//在这里要保存ip到本地和当前语言到本地
-				localStorage.setItem('ip', data.ip);
-				localStorage.setItem('languageId',param.languages[0].languageId);
 				return param;
 			}
 			
@@ -32,6 +30,11 @@ define(function(require) {
 				"dataType": "json",
 				"success" : success
 			});	
+		},
+		//list的click事件时调用
+		setLanguage:function(data){
+			localStorage.setItem('ip', data.ip);
+			localStorage.setItem('languageId',param.languages[0].languageId);
 		}
 		
 	};

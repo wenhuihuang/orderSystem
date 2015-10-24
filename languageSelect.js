@@ -24,11 +24,10 @@ define(function(require){
 
 	Model.prototype.li1Click = function(event){
 		var row = event.bindingContext.$rawData;
-		localStorage.setItem('languageId',row.val('languageId'));
-		localStorage.setItem('languageName',row.val('languageName'));
 		location.href('index.w');
 		
-		var as = lan.getTranslation({'ip':ip,'languageId':localStorage.getItem('languageId'),'languageName':localStorage.getItem('languageName')});
+		var as = lan.getTranslation({'internalCode':'xxx'});
+		this.comp('titleBar1').title = as;
 		
 	};
 
