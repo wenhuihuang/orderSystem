@@ -8,25 +8,26 @@ define(function(require) {
 		//返回参数"{languages":[{"languageId":"00010000000000000101","languageName":"中文"}]}
 		//输入参数	{'ip':xxx}
 		getLanguages:function(data){
+			var obj;
 			var success = function(param){
-				console.log(data)
-				console.log(param)
 				//在这里要保存ip到本地和当前语言到本地
-				return param;
+				obj = param;
 			}
 			
 			Baas.sendRequest({
 				"url" : data.ip + 'LanguageServlet.do?func=getLanguages',
 				"dataType": "json",
 				"success" : success
-			});		
+			});	
+			return obj;
 		},
 		//翻译
 		//返加参数 字符串
 		//输入参数{'internalCode':xxx}
 		getTranslation:function(data){
+			var obj;
 			var success = function(param){
-				return param.result;
+				obj = param.result;
 			}
 			Baas.sendRequest({
 				//getTranslation&languageId=00010000000000000101&internalCode=USING
@@ -34,6 +35,7 @@ define(function(require) {
 				"dataType": "json",
 				"success" : success
 			});	
+			return obj;
 		},
 		//设置语言
 		//list的click事件时调用

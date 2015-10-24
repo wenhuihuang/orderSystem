@@ -843,9 +843,10 @@ define(function(require){
 		var url = 'ShopCartServlet.do?func=orderByReturnJson&billMasterId='+billMasterId+'&roomId='+roomId+'&goods='+goods+'&cookways='+cookways+'&orderempcode='+user.val('userId')+'&presents='+presents;	
 		var menuTypeData = this.comp('menuTypeData');//用于清0数据
 		var goodsListData = this.comp('goodsListData');
-		 ;
+
 		//送单成功
 		var success = function(param){	
+			debugger;
 			alert(param.result[0].msg);
 			localStorage.setItem(roomId,'');//清空购物车缓存
 			cartData.clear();//发送订单成功，清空cartData
@@ -1413,6 +1414,19 @@ define(function(require){
 		var qty = $('#noOrderChangeName').val();
 		var result = order.cancelGoods({'userId':userId,'reasonId':reasonId,'qty':qty});
 		this.comp('give').hide();
+	};
+
+	
+	//已分单价格修改
+	Model.prototype.hspan32Click = function(event){
+		this.comp("yet-sort").show();
+		this.comp("contents5").to("content29");
+	};
+
+	
+	//修改价格
+	Model.prototype.button57Click = function(event){
+
 	};
 
 	

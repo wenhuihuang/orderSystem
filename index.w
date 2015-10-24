@@ -2,7 +2,7 @@
 
 <div xmlns="http://www.w3.org/1999/xhtml" xid="window" class="window" component="$UI/system/components/justep/window/window"
   design="device:mobile">  
-  <div component="$UI/system/components/justep/model/model" xid="model" style="width:185px;height:auto;left:669px;top:113px;" onLoad="modelLoad"><div component="$UI/system/components/justep/data/data" autoLoad="true" xid="roomData" idColumn="typeName" onCustomRefresh="fan_nameCustomRefresh" autoNew="false"><column label="房类型" name="typeName" type="String" xid="xid4"></column>
+  <div component="$UI/system/components/justep/model/model" xid="model" style="width:185px;height:auto;left:916px;top:104px;" onLoad="modelLoad"><div component="$UI/system/components/justep/data/data" autoLoad="true" xid="roomData" idColumn="typeName" onCustomRefresh="fan_nameCustomRefresh" autoNew="false"><column label="房类型" name="typeName" type="String" xid="xid4"></column>
   <column label="房类号" name="typeCode" type="Long" xid="xid6"></column></div><div component="$UI/system/components/justep/data/data" autoLoad="true" xid="deskData" idColumn="tai_number"><column label="台号" name="tai_number" type="String" xid="xid5"></column>
   <column label="状态" name="state" type="String" xid="xid7"></column>
   <column label="房号id" name="roomId" type="String" xid="xid8"></column>
@@ -690,32 +690,32 @@
                     <div component="$UI/system/components/bootstrap/row/row"
                       class="row" xid="row8"> 
                       <div class="col col-xs-3" xid="col30">
-                        <span xid="span32" bind-click="span32Click"><![CDATA[价格]]></span>
+                        <span xid="hspan32" bind-click="hspan32Click"><![CDATA[价格]]></span>
                       </div>  
                       <div class="col col-xs-3" xid="col31">
-                        <span xid="span33" bind-click="span33Click"><![CDATA[数量]]></span>
+                        <span xid="hspan33" bind-click="span33Click"><![CDATA[数量]]></span>
                       </div>  
                       <div class="col col-xs-3" xid="col32">
-                        <span xid="span34" bind-click="span34Click"><![CDATA[催菜]]></span>
+                        <span xid="hspan34" bind-click="span34Click"><![CDATA[催菜]]></span>
                       </div>
                     <div class="col col-xs-3" xid="col68">
-   <span xid="span94" bind-click="span34Click"><![CDATA[叫起]]></span></div></div>  
+   <span xid="hspan94" bind-click="span34Click"><![CDATA[叫起]]></span></div></div>  
                     <div component="$UI/system/components/bootstrap/row/row"
                       class="row" xid="row9"> 
                       <div class="col col-xs-3" xid="col33">
-                        <span xid="span35" bind-click="span35Click"><![CDATA[赠送]]></span>
+                        <span xid="hspan35" bind-click="span35Click"><![CDATA[赠送]]></span>
                       </div>  
                       <div class="col col-xs-3" xid="col34">
-                        <span xid="span36" bind-click="span36Click"><![CDATA[单品打折]]></span>
+                        <span xid="hspan36" bind-click="span36Click"><![CDATA[单品打折]]></span>
                       </div>  
                       <div class="col col-xs-3" xid="col35">
-                        <span xid="span37" bind-click="span37Click"><![CDATA[全单催菜]]></span>
+                        <span xid="hspan37" bind-click="span37Click"><![CDATA[全单催菜]]></span>
                       </div>
                     <div class="col col-xs-3" xid="col69">
-   <span xid="span95" bind-click="span34Click"><![CDATA[全单叫起]]></span></div></div>
+   <span xid="hspan95" bind-click="span34Click"><![CDATA[全单叫起]]></span></div></div>
                   <div component="$UI/system/components/bootstrap/row/row" class="row" xid="row11">
    <div class="col col-xs-3" xid="col45">
-    <span xid="span40" bind-click="span35Click"><![CDATA[退菜]]></span></div> 
+    <span xid="hspan40"><![CDATA[退菜]]></span></div> 
    
    
    </div></div> 
@@ -1269,7 +1269,7 @@
         <div class="x-panel-bottom bottom-btn-wrap" xid="bottom14">
          <div component="$UI/system/components/bootstrap/row/row" class="row" xid="row21">
           <div class="col col-xs-6" xid="col78">
-           <a component="$UI/system/components/justep/button/button" class="btn btn-success" label="确认" xid="button57" onClick="button34Click">
+           <a component="$UI/system/components/justep/button/button" class="btn btn-success" label="确认" xid="button57" onClick="button57Click">
             <i xid="i56"></i>
             <span xid="span88">确认</span></a> </div> 
           <div class="col col-xs-6" xid="col79">
