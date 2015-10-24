@@ -1137,7 +1137,6 @@ define(function(require){
 		this.comp("contents4").to("content16");
 	};
 
-	
 	//转台
 	Model.prototype.button21Click = function(event){
 		var currentDeskData = this.comp('currentDeskData');
@@ -1177,7 +1176,6 @@ define(function(require){
 					changeRoomName = changeRoomName.replace(/【.*/g," ");
 					alert(changeRoomName);
 					$(this).find(".table-con").css({"background":"#18AEB6"});
-					
 					var url=ip + 'RoomFunctionServlet.do';
 					var data='func=changeRoom&changeRoomId='+changeRoomId+'&changeRoomName='+changeRoomName+'&currentRoomId='+currentRoomId+'&current='+currentBillMasterId+'&currentConsumeRoomId='+currentConsumeRoomId+'&currentShareNo='+currentShareNo+'&currentRoomName='+currentRoomName;
 					console.log(data)
