@@ -2,7 +2,7 @@
 
 <div xmlns="http://www.w3.org/1999/xhtml" xid="window" class="window" component="$UI/system/components/justep/window/window"
   design="device:mobile">  
-  <div component="$UI/system/components/justep/model/model" xid="model" style="height:479px;width:185px;left:609px;top:135px;" onLoad="modelLoad"><div component="$UI/system/components/justep/data/data" autoLoad="true" xid="roomData" idColumn="typeName" onCustomRefresh="fan_nameCustomRefresh" autoNew="false"><column label="房类型" name="typeName" type="String" xid="xid4"></column>
+  <div component="$UI/system/components/justep/model/model" xid="model" style="height:479px;width:185px;left:716px;top:176px;" onLoad="modelLoad"><div component="$UI/system/components/justep/data/data" autoLoad="true" xid="roomData" idColumn="typeName" onCustomRefresh="fan_nameCustomRefresh" autoNew="false"><column label="房类型" name="typeName" type="String" xid="xid4"></column>
   <column label="房类号" name="typeCode" type="Long" xid="xid6"></column></div><div component="$UI/system/components/justep/data/data" autoLoad="true" xid="deskData" idColumn="tai_number"><column label="台号" name="tai_number" type="String" xid="xid5"></column>
   <column label="状态" name="state" type="String" xid="xid7"></column>
   <column label="房号id" name="roomId" type="String" xid="xid8"></column>
@@ -713,7 +713,12 @@
                       </div>
                     <div class="col col-xs-3" xid="col69">
    <span xid="span95" bind-click="span34Click"><![CDATA[全单叫起]]></span></div></div>
-                  </div> 
+                  <div component="$UI/system/components/bootstrap/row/row" class="row" xid="row11">
+   <div class="col col-xs-3" xid="col45">
+    <span xid="span40" bind-click="span35Click"><![CDATA[退菜]]></span></div> 
+   
+   
+   </div></div> 
                   
                 </div>
               </div>  
@@ -1154,7 +1159,33 @@
   </div></div>
    <div class="x-panel-bottom order-info-button" xid="bottom10"><a component="$UI/system/components/justep/button/button" class="btn x-orange" label="返回" xid="button50" bind-click="button50Click">
    <i xid="i52"></i>
-   <span xid="span90">返回</span></a></div></div></div></div> 
+   <span xid="span90">返回</span></a></div></div></div>
+  <div class="x-contents-content" xid="content21"><div component="$UI/system/components/justep/panel/panel" class="x-panel x-full" xid="panel11">
+   <div class="x-panel-top" xid="top11">
+    <div component="$UI/system/components/justep/titleBar/titleBar" class="x-titlebar" xid="titleBar4" title="退菜">
+     <div class="x-titlebar-left" xid="div41"></div>
+     <div class="x-titlebar-title" xid="div44">退菜</div>
+     <div class="x-titlebar-right reverse" xid="div39"></div></div> </div> 
+   <div class="x-panel-content" xid="content22">
+    <div xid="div36" class="pop-con">
+     <div class="con-con" xid="div37">
+      <div xid="div42">
+       <div component="$UI/system/components/justep/labelEdit/labelEdit" class="x-label-edit x-label30" xid="labelInput6">
+        <label class="x-label" xid="label8"><![CDATA[原因]]></label>
+        <input component="$UI/system/components/justep/input/input" class="form-control x-edit" xid="input6" placeHolder="请输入菜名" id="noOrderChangeName"></input></div> 
+  <div component="$UI/system/components/justep/labelEdit/labelEdit" class="x-label-edit x-label30" xid="labelInput8">
+   <label class="x-label" xid="label10"><![CDATA[数量]]></label>
+   <input component="$UI/system/components/justep/input/input" class="form-control x-edit" xid="input8" placeHolder="请输入菜名" id="noOrderChangeName"></input></div></div> </div> </div> </div> 
+   <div class="x-panel-bottom bottom-btn-wrap" xid="bottom8">
+    <div component="$UI/system/components/bootstrap/row/row" class="row" xid="row19">
+     <div class="col col-xs-6" xid="col58">
+      <a component="$UI/system/components/justep/button/button" class="btn btn-success" label="确认" xid="button36" onClick="button43Click">
+       <i xid="i39"></i>
+       <span xid="span92">确认</span></a> </div> 
+     <div class="col col-xs-6" xid="col56">
+      <a component="$UI/system/components/justep/button/button" class="btn x-orange" label="返回" xid="button37" bind-click="closeGive">
+       <i xid="i38"></i>
+       <span xid="span91">返回</span></a> </div> </div> </div> </div></div></div> 
           </div> 
         </div> 
       </div>
