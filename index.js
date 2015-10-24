@@ -1414,7 +1414,13 @@ define(function(require){
 	
 	//发送退菜原因
 	Model.prototype.cancelReasonTrueClick = function(event){
-		
+		var userData = this.comp('userData');
+		var userId = userData.val('userId');
+		var currentCancelReasonData = this.comp('currentCancelReasonData');
+		var reasonId = currentCancelReasonData.val('tfzReasonId');
+		var qty = $('#noOrderChangeName').val();
+		var result = order.cancelGoods({'userId':userId,'reasonId':reasonId,'qty':qty});
+		this.comp('give').hide();
 	};
 
 	

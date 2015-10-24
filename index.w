@@ -2,7 +2,7 @@
 
 <div xmlns="http://www.w3.org/1999/xhtml" xid="window" class="window" component="$UI/system/components/justep/window/window"
   design="device:mobile">  
-  <div component="$UI/system/components/justep/model/model" xid="model" style="height:450px;width:190px;left:877px;top:198px;" onLoad="modelLoad"><div component="$UI/system/components/justep/data/data" autoLoad="true" xid="roomData" idColumn="typeName" onCustomRefresh="fan_nameCustomRefresh" autoNew="false"><column label="房类型" name="typeName" type="String" xid="xid4"></column>
+  <div component="$UI/system/components/justep/model/model" xid="model" style="width:190px;height:auto;left:577px;top:130px;" onLoad="modelLoad"><div component="$UI/system/components/justep/data/data" autoLoad="true" xid="roomData" idColumn="typeName" onCustomRefresh="fan_nameCustomRefresh" autoNew="false"><column label="房类型" name="typeName" type="String" xid="xid4"></column>
   <column label="房类号" name="typeCode" type="Long" xid="xid6"></column></div><div component="$UI/system/components/justep/data/data" autoLoad="true" xid="deskData" idColumn="tai_number"><column label="台号" name="tai_number" type="String" xid="xid5"></column>
   <column label="状态" name="state" type="String" xid="xid7"></column>
   <column label="房号id" name="roomId" type="String" xid="xid8"></column>
@@ -1183,7 +1183,7 @@
       <div xid="div42">
        <div component="$UI/system/components/justep/labelEdit/labelEdit" class="x-label-edit x-label30" xid="labelInput8">
    <label class="x-label" xid="label10"><![CDATA[数量]]></label>
-   <input component="$UI/system/components/justep/input/input" class="form-control x-edit" xid="input8" placeHolder="请输入菜名" id="noOrderChangeName"></input></div></div> </div> </div> 
+   <input component="$UI/system/components/justep/input/input" class="form-control x-edit" placeHolder="请输入菜名" id="noOrderChangeName"></input></div></div> </div> </div> 
   <div component="$UI/system/components/justep/list/list" class="x-list" xid="list12" data="cancelReasonData">
    <ul class="x-list-template" xid="listTemplateUl12">
     <li xid="li7" bind-text="val('zReason')" bind-click="li7Click"></li></ul> </div></div> 

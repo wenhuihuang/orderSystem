@@ -42,8 +42,7 @@ define(function(require) {
 		gift:function(data){
 			var obj;
 			var success = function(param){
-				obj =  {'rows':param};
-		
+				obj =  param;		
 			}
 			
 			Baas.sendRequest({
@@ -63,6 +62,20 @@ define(function(require) {
 			
 			Baas.sendRequest({
 				"url" : data.ip + 'RoomFunctionServlet.do?func=returnReason',
+				"dataType": "json",
+				"success" : success
+			});	
+			return obj;
+		},
+		//退菜
+		cancelGoods:function(data){
+			var obj;
+			var success = function(param){
+				var a = param;
+				obj = a;
+			};
+			Baas.sendRequest({
+				"url" : data.ip + 'RoomFunctionServlet.do?func=cancelGoods&cancelQty='+data.qty+'&reasonId='+data.reasonId+'&empcode='+data.userId,
 				"dataType": "json",
 				"success" : success
 			});	
