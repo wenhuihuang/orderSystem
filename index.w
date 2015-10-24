@@ -203,14 +203,14 @@
               </div>  
               <div class="col col-xs-4" xid="col7"> 
                 <a component="$UI/system/components/justep/button/button"
-                  class="btn btn-default" label=" 零结账" xid="button22"> 
+                  class="btn btn-default" label=" 零结账" xid="button22" onClick="button22Click"> 
                   <i xid="i24"/>  
                   <span xid="span11"> 零结账</span>
                 </a> 
               </div>  
               <div class="col col-xs-4" xid="col8"> 
                 <a component="$UI/system/components/justep/button/button"
-                  class="btn btn-default" label="埋单" xid="button23"> 
+                  class="btn btn-default" label="埋单" xid="button23" onClick="button23Click"> 
                   <i xid="i25"/>  
                   <span xid="span12">埋单</span>
                 </a> 
@@ -411,109 +411,7 @@
       </div> 
     </div>
   </div>  
-  <div component="$UI/system/components/justep/popOver/popOver" class="x-popOver"
-    xid="popOver2" opacity="0.9" style="box-shadow:0 0px 2px 2px #B9B9B9;"> 
-    <div class="x-popOver-overlay" xid="div76"/>  
-    <div class="x-popOver-content edit-add-wrap" xid="div77" style="width:95%;height:96%;">
-      <div xid="div78" style="height:94%;" class="edit-add">
-        <div component="$UI/system/components/justep/panel/panel" class="x-panel x-full"
-          xid="panel4"> 
-          <div class="x-panel-top" xid="top4" style="line-height:48px;">
-   <div xid="div79" class="order-info-title">
-    <span xid="span156" bind-text="currentGoodsData.ref('goodsName')">海南鸡腿饭</span></div> </div><div class="x-panel-content edit-add-con" xid="content3"> 
-              
-              
-              
-              
-            <div component="$UI/system/components/justep/panel/panel" class="x-panel x-full" xid="panel5">
-   <div class="x-panel-top" xid="top5" height="160"><div xid="div80"> 
-              <p>单价
-                <span bind-text="currentGoodsData.ref('sprice')">22.00</span>
-              </p>  
-              <p>加价总计
-                <span bind-text="currentGoodsData.val('addMoney')">22.00</span>
-              </p>  
-              <p>数量
-                <span bind-text="currentGoodsData.ref('qty')">1</span>
-              </p> 
-            </div><div xid="div81"> 
-              <div class="ed-btn-wrap"> 
-                <ul xid="ul6"> 
-                  <li> 
-                    <span xid="span161"><![CDATA[汇总]]></span>
-                  </li>  
-                  <li> 
-                    <a component="$UI/system/components/justep/button/button" class="btn btn-default clear" label="清空" xid="button10" bind-click="button10Click" onClick="button10Click"> 
-                      <i xid="i10" />  
-                      <span xid="span159">清空</span>
-                    </a>
-                  </li>  
-                  <li> 
-                    <a component="$UI/system/components/justep/button/button" class="btn btn-default delete" label="删除" xid="button11" onClick="button11Click"> 
-                      <i xid="i11" />  
-                      <span xid="span160">删除</span>
-                    </a>
-                  </li> 
-                </ul> 
-              </div>  
-              <div component="$UI/system/components/justep/list/list" class="x-list ed-con-con " xid="list9" data="currentCookWayData">
-   <ul class="x-list-template" xid="listTemplateUl9">
-    <li xid="li6" bind-click="li6Click" class="clearfix"><div component="$UI/system/components/justep/labelEdit/labelEdit" class="x-label-edit x-label30" xid="labelOutput1" bind-text="val('cookWay')+'('+val('addMoney')+')'">
-   <label class="x-label" xid="label4"></label>
-   <div component="$UI/system/components/justep/output/output" class="x-output x-edit" xid="output3"></div></div></li></ul> 
-  </div></div></div>
-   <div class="x-panel-content" xid="content6"><div component="$UI/system/components/justep/panel/panel" class="x-panel x-full" xid="panel6">
-   <div class="x-panel-top" xid="top6"><div xid="div82" class="edit-container-title">
-              <a component="$UI/system/components/justep/button/button" class="btn btn-default" label="数量" xid="button12" bind-click="button12Click" target="content5"> 
-                <i xid="i12" />  
-                <span xid="span162">数量</span>
-              </a>  
-              <a component="$UI/system/components/justep/button/button" class="btn btn-default" label="口味" xid="button13" bind-click="button13Click" target="content8"> 
-                <i xid="i13" />  
-                <span xid="span163">口味</span>
-              </a>  
-              <a component="$UI/system/components/justep/button/button" class="btn btn-default require" label="要求 " xid="button14" target="content9" onClick="button14Click"> 
-                <i xid="i14" />  
-                <span xid="span164">要求</span>
-              </a>  
-              <a component="$UI/system/components/justep/button/button" class="btn btn-default" label="其他" xid="button15" bind-click="button15Click" target="content10"> 
-                <i xid="i15" />  
-                <span xid="span165">其他</span>
-              </a>
-            </div></div>
-   <div class="x-panel-content" xid="content7"><div component="$UI/system/components/justep/contents/contents" class="x-contents x-full" active="0" xid="contents2" swipe="false">
-   <div class="x-contents-content" xid="content5">
-   <div class="select-con-wrap" style="text-align:center;"><h5><a href="javascript:;" class="subtract" id="popOver2Sub" bind-click="a2Click"></a><span bind-text="currentGoodsData.ref('qty')">1</span><a href="javascript:;" class="add" id="popOver2Add" bind-click="a1Click"></a></h5>
-  </div>
-   </div>
-  <div class="x-contents-content" xid="content8">
-  <div class='select-con-wrap'></div>
-  </div>
-  <div class="x-contents-content" xid="content9">
-  <div xid="div9" class="require-title-wrap">
-  <div component="$UI/system/components/justep/list/list" class="x-list require-title clearfix" xid="list7" data="cookTypeData">
-   <div component="$UI/system/components/bootstrap/row/row" class="row" xid="row2">
-   <ul class="x-list-template clearfix" xid="listTemplateUl7">
-    <div class="col col-xs-4" xid="col1" bind-click="li4Click"><span xid="span7" bind-text="val('typeName')" bind-click="li4Click"></span></div></ul></div> </div></div><div class='select-con-wrap'>
-  <div component="$UI/system/components/justep/list/list" class="x-list require-con" xid="list8" data="cookTypeDetailData">
-   <ul class="x-list-template clearfix" xid="listTemplateUl8">
-    <li xid="li5" bind-text="val('cookWay')" bind-click="li5Click"></li></ul> </div></div>
-  </div>
-  <div class="x-contents-content" xid="content10">
-  	<textarea class='select-con-wrap' placeholder='请输入要求'></textarea>
-  </div></div></div>
-   </div></div>
-   </div></div>  
-          <div class="x-panel-bottom edit-add-bottom" xid="bottom4">
-   <a component="$UI/system/components/justep/button/button" class="btn btn-default" label="取消" xid="button7" onClick="button7Click">
-    <i xid="i7"></i>
-    <span xid="span157">取消</span></a> 
-   <a component="$UI/system/components/justep/button/button" class="btn btn-default" label="确定" xid="button8" onClick="button8Click">
-    <i xid="i8"></i>
-    <span xid="span158">确定</span></a> </div></div>
-      </div>
-    </div>
-  </div>
+  
 <div component="$UI/system/components/justep/popOver/popOver" class="x-popOver renShu" xid="popOver_renshu" opacity="0.9">
    <div class="x-popOver-overlay" xid="div1"></div>
    <div class="x-popOver-content con-wrap" xid="div6"><div xid="div7" class="con-con"><h2 xid="h22"><![CDATA[请输入就餐人数]]></h2><input component="$UI/system/components/justep/input/input" class="form-control" xid="input1" placeHolder="输入人数" id="custNum" dataType="Integer" autoFocus="true"></input><div xid="div8" class="btn-wrap"><a component="$UI/system/components/justep/button/button" class="btn btn-default do-btn" label="确认" xid="button16" onClick="button16Click">
@@ -603,7 +501,7 @@
                     <div component="$UI/system/components/justep/list/list"
                       class="x-list" xid="list10" data="cartData"> 
                       <ul class="x-list-template" xid="listTemplateUl10"> 
-                        <li xid="li8"> 
+                        <li xid="li8" bind-click="li8Click"> 
                           <div component="$UI/system/components/bootstrap/row/row"
                             class="row" xid="row6"> 
                             <div class="col col-xs-5dot2" xid="col19"> 
@@ -892,7 +790,107 @@
     </div> 
   </div>  
   
-    <div component="$UI/system/components/justep/popOver/popOver" class="x-popOver"
+    <div component="$UI/system/components/justep/popOver/popOver" class="x-popOver" xid="popOver2" opacity="0.9" style="box-shadow:0 0px 2px 2px #B9B9B9;"> 
+    <div class="x-popOver-overlay" xid="div76" />  
+    <div class="x-popOver-content edit-add-wrap" xid="div77" style="width:95%;height:96%;">
+      <div xid="div78" style="height:94%;" class="edit-add">
+        <div component="$UI/system/components/justep/panel/panel" class="x-panel x-full" xid="panel4"> 
+          <div class="x-panel-top" xid="top4" style="line-height:48px;">
+   <div xid="div79" class="order-info-title">
+    <span xid="span156" bind-text="currentGoodsData.ref('goodsName')">海南鸡腿饭</span></div> </div><div class="x-panel-content edit-add-con" xid="content3"> 
+              
+              
+              
+              
+            <div component="$UI/system/components/justep/panel/panel" class="x-panel x-full" xid="panel5">
+   <div class="x-panel-top" xid="top5" height="160"><div xid="div80"> 
+              <p>单价
+                <span bind-text="currentGoodsData.ref('sprice')">22.00</span>
+              </p>  
+              <p>加价总计
+                <span bind-text="currentGoodsData.val('addMoney')">22.00</span>
+              </p>  
+              <p>数量
+                <span bind-text="currentGoodsData.ref('qty')">1</span>
+              </p> 
+            </div><div xid="div81"> 
+              <div class="ed-btn-wrap"> 
+                <ul xid="ul6"> 
+                  <li> 
+                    <span xid="span161"><![CDATA[汇总]]></span>
+                  </li>  
+                  <li> 
+                    <a component="$UI/system/components/justep/button/button" class="btn btn-default clear" label="清空" xid="button10" bind-click="button10Click" onClick="button10Click"> 
+                      <i xid="i10" />  
+                      <span xid="span159">清空</span>
+                    </a>
+                  </li>  
+                  <li> 
+                    <a component="$UI/system/components/justep/button/button" class="btn btn-default delete" label="删除" xid="button11" onClick="button11Click"> 
+                      <i xid="i11" />  
+                      <span xid="span160">删除</span>
+                    </a>
+                  </li> 
+                </ul> 
+              </div>  
+              <div component="$UI/system/components/justep/list/list" class="x-list ed-con-con " xid="list9" data="currentCookWayData">
+   <ul class="x-list-template" xid="listTemplateUl9">
+    <li xid="li6" bind-click="li6Click" class="clearfix"><div component="$UI/system/components/justep/labelEdit/labelEdit" class="x-label-edit x-label30" xid="labelOutput1" bind-text="val('cookWay')+'('+val('addMoney')+')'">
+   <label class="x-label" xid="label4"></label>
+   <div component="$UI/system/components/justep/output/output" class="x-output x-edit" xid="output3"></div></div></li></ul> 
+  </div></div></div>
+   <div class="x-panel-content" xid="content6"><div component="$UI/system/components/justep/panel/panel" class="x-panel x-full" xid="panel6">
+   <div class="x-panel-top" xid="top6"><div xid="div82" class="edit-container-title">
+              <a component="$UI/system/components/justep/button/button" class="btn btn-default" label="数量" xid="button12" bind-click="button12Click" target="content5"> 
+                <i xid="i12" />  
+                <span xid="span162">数量</span>
+              </a>  
+              <a component="$UI/system/components/justep/button/button" class="btn btn-default" label="口味" xid="button13" bind-click="button13Click" target="content8"> 
+                <i xid="i13" />  
+                <span xid="span163">口味</span>
+              </a>  
+              <a component="$UI/system/components/justep/button/button" class="btn btn-default require" label="要求 " xid="button14" target="content9" onClick="button14Click"> 
+                <i xid="i14" />  
+                <span xid="span164">要求</span>
+              </a>  
+              <a component="$UI/system/components/justep/button/button" class="btn btn-default" label="其他" xid="button15" bind-click="button15Click" target="content10"> 
+                <i xid="i15" />  
+                <span xid="span165">其他</span>
+              </a>
+            </div></div>
+   <div class="x-panel-content" xid="content7"><div component="$UI/system/components/justep/contents/contents" class="x-contents x-full" active="0" xid="contents2" swipe="false">
+   <div class="x-contents-content" xid="content5">
+   <div class="select-con-wrap" style="text-align:center;"><h5><a href="javascript:;" class="subtract" id="popOver2Sub" bind-click="a2Click"></a><span bind-text="currentGoodsData.ref('qty')">1</span><a href="javascript:;" class="add" id="popOver2Add" bind-click="a1Click"></a></h5>
+  </div>
+   </div>
+  <div class="x-contents-content" xid="content8">
+  <div class="select-con-wrap"></div>
+  </div>
+  <div class="x-contents-content" xid="content9">
+  <div xid="div9" class="require-title-wrap">
+  <div component="$UI/system/components/justep/list/list" class="x-list require-title clearfix" xid="list7" data="cookTypeData">
+   <div component="$UI/system/components/bootstrap/row/row" class="row" xid="row2">
+   <ul class="x-list-template clearfix" xid="listTemplateUl7">
+    <div class="col col-xs-4" xid="col1" bind-click="li4Click"><span xid="span7" bind-text="val('typeName')" bind-click="li4Click"></span></div></ul></div> </div></div><div class="select-con-wrap">
+  <div component="$UI/system/components/justep/list/list" class="x-list require-con" xid="list8" data="cookTypeDetailData">
+   <ul class="x-list-template clearfix" xid="listTemplateUl8">
+    <li xid="li5" bind-text="val('cookWay')" bind-click="li5Click"></li></ul> </div></div>
+  </div>
+  <div class="x-contents-content" xid="content10">
+  	<textarea class="select-con-wrap" placeholder="请输入要求"></textarea>
+  </div></div></div>
+   </div></div>
+   </div></div>  
+          <div class="x-panel-bottom edit-add-bottom" xid="bottom4">
+   <a component="$UI/system/components/justep/button/button" class="btn btn-default" label="取消" xid="button7" onClick="button7Click">
+    <i xid="i7"></i>
+    <span xid="span157">取消</span></a> 
+   <a component="$UI/system/components/justep/button/button" class="btn btn-default" label="确定" xid="button8" onClick="button8Click">
+    <i xid="i8"></i>
+    <span xid="span158">确定</span></a> </div></div>
+      </div>
+    </div>
+  </div><div component="$UI/system/components/justep/popOver/popOver" class="x-popOver"
     xid="give" opacity="0.9" style="box-shadow:0 0px 2px 2px #c9B9B9;"> 
     <div class="x-popOver-overlay" xid="div26"/>  
     <div class="x-popOver-content" xid="div27" style="width:95%;height:96%;">

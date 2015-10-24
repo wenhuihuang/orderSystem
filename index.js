@@ -5,7 +5,8 @@ define(function(require){
 	var ip="http://192.168.1.20:8080/OrderSystemWeX5/";
 	//var url="UI2/orderSystem_a/index.w#!index";
 	var Baas = require("$UI/demo/baas/baas");
-	var Language = require('$UI/orderSystem/language')
+	var Language = require('$UI/orderSystem/language');
+	var myBaas = require('$UI/orderSystem/myBaas');
 	var Model = function(){
 		this.callParent();
 	};
@@ -1078,7 +1079,7 @@ define(function(require){
 					var shareBillMasterId = currentDeskData.val('billMasterId');
 					var shareConsumeRoomId = currentDeskData.val('consumeRoomId');
 								
-					$(this).find(".table-con").css({"background":"#18AEB6"})
+					$(this).find(".table-con").css({"background":"#18AEB6"});
 					var success = function(param){
 						if(param.code == '1'){
 							$('.left-menu').find('li').eq(0).trigger('click');//刷新房台
@@ -1216,6 +1217,70 @@ define(function(require){
 	
 	Model.prototype.li1Dblclick = function(event){
 
+	};
+
+	
+	//从这里进入菜单详细
+	Model.prototype.li8Click = function(event){
+		alert()
+		//获取当前行数据
+		var row = event.bindingContext.$rawData;
+		 
+		var currentGoodsData = this.comp('currentGoodsData');
+		currentGoodsData.newData({
+			index:0,
+			defaultValues:[{
+				"goodsName":row.val('goodsName'),
+				"sprice":row.val('sprice'),
+				"qty":row.val('qty'),
+				"goodsId":row.val('goodsId'),
+				"addMoney":row.val('addMoney')
+			}]
+		});
+		
+		var sendCookWayData = this.comp('sendCookWayData');
+		//清空购物车加钱文本
+		var cart = this.comp('cartData');
+		cart.eachAll(function(param){		 
+			if(param.row.val('goodsId') == currentGoodsData.val('goodsId')){
+				param.row.val('cookWay','');
+			}
+		});
+		//清空当前加收钱项目
+		var currentCookWayData = this.comp('currentCookWayData');
+		currentCookWayData.clear();
+		debugger;
+		this.comp("popOver2").show();
+	};
+
+	
+	//零结帐
+	Model.prototype.button22Click = function(event){
+			var currentDeskData = this.comp('currentDeskData');
+			var userData = this.comp('userData');
+			var success = function(param){
+				$('.left-menu').find('li').eq(0).trigger('click');//刷新房台
+			}
+			Baas.sendRequest({
+				//RoomFunctionServlet.do?func=cleanRoom&currentBillMasterId=xxx&checkEmpCodeId=xxx&bankTerminalID=xxx
+				"url" : 'RoomFunctionServlet.do?func=cleanRoom&currentBillMasterId='+currentDeskData.val('billMasterId')+'&checkEmpCodeId='+userData.val('userId')+'&bankTerminalID=0001000000000106',
+				"dataType": "json",
+				"success" : success
+			});
+	};
+
+	
+	//埋单
+	Model.prototype.button23Click = function(event){
+		var button = this.comp('button23');//埋单	
+		var currentDeskData = this.comp('currentDeskData');
+		if(currentDeskData.val('state')!='埋单'){
+		var userData = this.comp('userData');
+			var a = myBaas.cleanRoom({'currentBillMasterId':currentDeskData.val('billMasterId'),'userId':userId.val('userId'),'currentConsumeRoomId':currentDeskData.val('consumeRoomId')});
+		}else{//取消埋单
+			var a = myBaas.uncheckBill({'currentBillMasterId':currentDeskData.val('billMasterId'),'userId':userId.val('userId')});
+			
+		}
 	};
 
 	
