@@ -80,6 +80,21 @@ define(function(require) {
 				"success" : success
 			});	
 			return obj;
+		},
+		//已分单修改价格
+		editPrice:function(data){
+			var obj;
+			var success = function(param){
+				var a = param;
+				obj = a;
+			};
+			///RoomFunctionServlet.do?func=editPrice&billDetailId=xxx&price=xxx&empcode=xxx
+			Baas.sendRequest({
+				"url" : data.ip + 'RoomFunctionServlet.do?func=editPrice&billDetailId='+data.billDetail+'&price='+data.price+'&empcode='+data.userId,
+				"dataType": "json",
+				"success" : success
+			});	
+			return obj;
 		}
 	};
 
