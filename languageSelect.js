@@ -16,6 +16,7 @@ define(function(require){
 		console.log(lanJson)
 		language.clear();
 		for(var o in lanJson){
+		console.log(lanJson[o]);
 			language.newData({
 				defaultValues:[{
 					'languageId':lanJson[o].languageId,
@@ -29,7 +30,7 @@ define(function(require){
 
 	Model.prototype.language_selectClick = function(event){
 		var row = event.bindingContext.$rawData;
-		console.log(row);
+		//console.log(row);
 		//location.href('index.w');
 		//console.log(row.val("languageName"));
 		//var as = lan.getTranslation({'internalCode':'xxx'});

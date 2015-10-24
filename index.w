@@ -1228,31 +1228,31 @@
            <a component="$UI/system/components/justep/button/button" class="btn x-orange" label="返回" xid="button51" bind-click="button44Click">
             <i xid="i54"></i>
             <span xid="span96">返回</span></a> </div> </div> </div> </div> </div> 
+      
       <div class="x-contents-content" xid="content28">
-       <div component="$UI/system/components/justep/panel/panel" class="x-panel x-full" xid="panel15">
-        <div class="x-panel-top" xid="top13">
-         <div component="$UI/system/components/justep/titleBar/titleBar" class="x-titlebar" xid="titleBar6" title="修改菜名">
-          <div class="x-titlebar-left" xid="div126"></div>
-          <div class="x-titlebar-title" xid="div93">修改菜名</div>
-          <div class="x-titlebar-right reverse" xid="div92"></div></div> </div> 
-        <div class="x-panel-content" xid="content30">
-         <div xid="div103" class="pop-con">
-          <div class="con-con" xid="div112">
-           <div xid="div116">
-            <div component="$UI/system/components/justep/labelEdit/labelEdit" class="x-label-edit x-label30" xid="labelInput13">
-             <label class="x-label" xid="label13">菜名</label>
-             <input component="$UI/system/components/justep/input/input" class="form-control x-edit" xid="input9" placeHolder="请输入菜名" id="noOrderChangeName"></input></div> </div> </div> </div> </div> 
-        <div class="x-panel-bottom bottom-btn-wrap" xid="bottom12">
-         <div component="$UI/system/components/bootstrap/row/row" class="row" xid="row23">
-          <div class="col col-xs-6" xid="col74">
-           <a component="$UI/system/components/justep/button/button" class="btn btn-success" label="确认" xid="button48" onClick="button43Click">
-            <i xid="i55"></i>
-            <span xid="span102">确认</span></a> </div> 
-          <div class="col col-xs-6" xid="col73">
-           <a component="$UI/system/components/justep/button/button" class="btn x-orange" label="返回" xid="button51" bind-click="closeGive">
-            <i xid="i54"></i>
-            <span xid="span96">返回</span></a> </div> </div> </div> </div> </div> 
-      <div class="x-contents-content" xid="content29">
+   <div component="$UI/system/components/justep/panel/panel" class="x-panel x-full" xid="panel15">
+    <div class="x-panel-top" xid="top13">
+     <div component="$UI/system/components/justep/titleBar/titleBar" class="x-titlebar" xid="titleBar6" title="修改菜名">
+      <div class="x-titlebar-left" xid="div126"></div>
+      <div class="x-titlebar-title" xid="div93">修改菜名</div>
+      <div class="x-titlebar-right reverse" xid="div92"></div></div> </div> 
+    <div class="x-panel-content" xid="content30">
+     <div xid="div103" class="pop-con">
+      <div class="con-con" xid="div112">
+       <div xid="div116">
+        <div component="$UI/system/components/justep/labelEdit/labelEdit" class="x-label-edit x-label30" xid="labelInput13">
+         <label class="x-label" xid="label13">菜名</label>
+         <input component="$UI/system/components/justep/input/input" class="form-control x-edit" xid="input9" placeHolder="请输入菜名" id="noOrderChangeName"></input></div> </div> </div> </div> </div> 
+    <div class="x-panel-bottom bottom-btn-wrap" xid="bottom12">
+     <div component="$UI/system/components/bootstrap/row/row" class="row" xid="row23">
+      <div class="col col-xs-6" xid="col74">
+       <a component="$UI/system/components/justep/button/button" class="btn btn-success" label="确认" xid="button48" onClick="button43Click">
+        <i xid="i55"></i>
+        <span xid="span102">确认</span></a> </div> 
+      <div class="col col-xs-6" xid="col73">
+       <a component="$UI/system/components/justep/button/button" class="btn x-orange" label="返回" xid="button51" bind-click="closeGive">
+        <i xid="i54"></i>
+        <span xid="span96">返回</span></a> </div> </div> </div> </div> </div><div class="x-contents-content" xid="content29">
        <div component="$UI/system/components/justep/panel/panel" class="x-panel x-full" xid="panel14">
         <div class="x-panel-top" xid="top14">
          <div component="$UI/system/components/justep/titleBar/titleBar" class="x-titlebar" xid="titleBar7" title="修改价格">
