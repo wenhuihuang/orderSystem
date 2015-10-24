@@ -25,8 +25,8 @@ define(function(require) {
 				}
 			});	
 		},
-		//data可以直接loadData
-		getgiftReason:function(param){
+		//赠送原因
+		getgiftReason:function(data){
 			var success = function(param){
 				return {'rows':param};
 			}
@@ -36,8 +36,18 @@ define(function(require) {
 				"success" : success
 			});	
 		},
-		//RoomFunctionServlet.do?func=gift&billDetailId=xxx&reasonId=xxx&cancelQty=xxx&empcode=xxx
+		//赠关
 		gift:function(data){
+			var success = function(param){
+				return {'rows':param};
+			}
+			
+			Baas.sendRequest({
+				"url" : data.ip + 'RoomFunctionServlet.do?func=gift&billDetailId='+data.billDetailId+'&reasonId='+data.reasonId+'&cancelQty='+data.qty+'&empcode='+data.userId,
+				"success" : success
+			});	
+		},
+		cancelReason:function(data){
 			var success = function(param){
 				return {'rows':param};
 			}

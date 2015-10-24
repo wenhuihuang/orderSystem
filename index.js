@@ -835,10 +835,13 @@ define(function(require){
 		var user = this.comp('userData');
 		//整理presents的东西
 		var sendPresentsReasonData = this.comp('sendPresentsReasonData');
+		var presents = '';
+		sendPresentsReasonData.eachAll(function(param){
+			presents += param.row.val('goodsId')+'_'+param.row.val('qty')+'_'+param.row.val('tfzReasonId')+',';
+		});
+		presents = presents.substring(0,cookways.length-1);
 		
-		
-		
-		var url = 'ShopCartServlet.do?func=orderByReturnJson&billMasterId='+billMasterId+'&roomId='+roomId+'&goods='+goods+'&cookways='+cookways+'&orderempcode='+user.val('userId')+'&presents=';	
+		var url = 'ShopCartServlet.do?func=orderByReturnJson&billMasterId='+billMasterId+'&roomId='+roomId+'&goods='+goods+'&cookways='+cookways+'&orderempcode='+user.val('userId')+'&presents='+presents;	
 		var menuTypeData = this.comp('menuTypeData');//用于清0数据
 		var goodsListData = this.comp('goodsListData');
 		 ;
@@ -1135,7 +1138,7 @@ define(function(require){
 	//弹出赠送框
 	Model.prototype.span35Click = function(event){
 		this.comp("give").show();
-		this.comp("contents4").to("content16");
+		this.comp("contents4").to("content21");
 	};
 
 	
@@ -1345,7 +1348,7 @@ define(function(require){
 	
 	//赠送原因model
 	Model.prototype.presentsDataCustomRefresh = function(event){
-		var param = order.getgiftReason();
+		var param = order.getgiftReason({'ip':ip});
 		var presentsData = this.comp('presentsReasonData');
 		presentsData.loadData(param);
 	};
