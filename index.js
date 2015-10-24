@@ -7,6 +7,7 @@ define(function(require){
 	var Baas = require("$UI/demo/baas/baas");
 	var Language = require('$UI/orderSystem/language');
 	var myBaas = require('$UI/orderSystem/myBaas');
+	var order = require('$UI/orderSystem/order');
 	var Model = function(){
 		this.callParent();
 	};
@@ -831,6 +832,11 @@ define(function(require){
 		});
 		cookways = cookways.substring(0,cookways.length-1);
 		var user = this.comp('userData');
+		//整理presents的东西
+		var sendPresentsReasonData = this.comp('sendPresentsReasonData');
+		
+		
+		
 		var url = 'ShopCartServlet.do?func=orderByReturnJson&billMasterId='+billMasterId+'&roomId='+roomId+'&goods='+goods+'&cookways='+cookways+'&orderempcode='+user.val('userId')+'&presents=';	
 		var menuTypeData = this.comp('menuTypeData');//用于清0数据
 		var goodsListData = this.comp('goodsListData');
@@ -1275,6 +1281,100 @@ define(function(require){
 			var a = myBaas.uncheckBill({'currentBillMasterId':currentDeskData.val('billMasterId'),'userId':userId.val('userId')});
 			
 		}
+	};
+
+	
+	
+	Model.prototype.button44Click = function(event){
+		this.comp('give').hide();
+	};
+
+	
+	//未分单长按来解决
+	Model.prototype.span32Touchstart = function(event){
+		var currentGooodsData = this.comp('currentGoodsData');
+		var row = event.bindingContext.$rawData;
+		//选将当前行缓存下来
+		currentGoodsData.newData({
+			index:0,
+			defaultValues:[{
+				'goodsName':row.val('goodsName'),
+				'goodsId':row.val('goodsId'),
+				'qty':row.val('qty'),
+				'sprice':row.val('sprice'),
+				'addMoney':row.val('addMoney'),
+				'cookWay':row.val('cookWay'),
+				'totalPrice':row.val('totalPrice'),
+				'typeCode':row.val('typeCode')
+			}]
+		});
+		
+		
+	};
+
+	
+	//未分单修改菜名
+	Model.prototype.button43Click = function(event){
+		var goodsName = $('#noOrderChangeName').val();
+		var goodsId = this.comp('currentGoodsData').val('goodsId');		
+		var cartData = this.comp('cartData');
+		order.changeGoodsName({'goodsName':goodsName,'goodsId':goodsId,'cartData':cartData});
+	};
+
+	
+	//未分单修改价格
+	Model.prototype.button34Click = function(event){
+		var sprice = $('#noOrderChangePrice').val();
+		order.changeGoodsPrice({'sprice':sprice,'goodsId':this.comp('currentGoodsData').val('goodsId'),'cartData':this.comp('cartData')})
+	};
+
+	
+	//未分单修改数量
+	Model.prototype.button38Click = function(event){
+		var qty = $('#noOrderChangeQty').val();
+		order.changeGoodsQty({'qty':qty,'goodsId':this.comp('currentGoodsData').val('goodsId'),'cartData':this.comp('cartData')})
+		
+	};
+
+	
+	//赠送原因model
+	Model.prototype.presentsDataCustomRefresh = function(event){
+		var param = order.getgiftReason();
+		var presentsData = this.comp('presentsReasonData');
+		presentsData.loadData(param);
+	};
+
+	
+	//赠送确定---保存到本地
+	Model.prototype.buttonGitClick = function(event){
+		var currentGoodsData = this.val('currentGoodsData');
+		var qty = $('noOrderPresentsQty').val();
+		var currentPresentsReasonData = this.comp('currentPresentsReasonData');
+		var sendPresentsReasonData = this.comp('sendPresentsReasonData');
+		sendPresentsReasonData.newData({
+			defaultValues:[{
+				'goodsId':currentGoodsData.val('goodsId'),
+				'qty':qty,
+				'tfzReansonId':currentPresentsReasonData.val('tfzReansonId')
+			}]		
+		});
+	};
+
+	
+	//记录下当前的赠送原因
+	Model.prototype.gitliClick = function(event){
+		var currentPresentsReasonData = this.comp('currentPresentsReasonData');
+		var row = event.bindingContext.$rawData;
+		currentPresentsReasonData.newData({
+			index:0,
+			defaultValues:[{
+				'tfzReasonId':row.val('tfzReasonId'),
+				'zReason':row.val('zReason'),
+				'zReasonCode':row.val('zReasonCode'),
+				'zType':row.val('zType')
+			}
+			]
+		});
 	};
 
 	
