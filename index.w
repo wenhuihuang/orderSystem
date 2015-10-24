@@ -2,7 +2,7 @@
 
 <div xmlns="http://www.w3.org/1999/xhtml" xid="window" class="window" component="$UI/system/components/justep/window/window"
   design="device:mobile">  
-  <div component="$UI/system/components/justep/model/model" xid="model" style="height:auto;left:794px;top:351px;" onLoad="modelLoad"><div component="$UI/system/components/justep/data/data" autoLoad="true" xid="roomData" idColumn="typeName" onCustomRefresh="fan_nameCustomRefresh" autoNew="false"><column label="房类型" name="typeName" type="String" xid="xid4"></column>
+  <div component="$UI/system/components/justep/model/model" xid="model" style="height:auto;left:759px;top:167px;" onLoad="modelLoad"><div component="$UI/system/components/justep/data/data" autoLoad="true" xid="roomData" idColumn="typeName" onCustomRefresh="fan_nameCustomRefresh" autoNew="false"><column label="房类型" name="typeName" type="String" xid="xid4"></column>
   <column label="房类号" name="typeCode" type="Long" xid="xid6"></column></div><div component="$UI/system/components/justep/data/data" autoLoad="true" xid="deskData" idColumn="tai_number"><column label="台号" name="tai_number" type="String" xid="xid5"></column>
   <column label="状态" name="state" type="String" xid="xid7"></column>
   <column label="房号id" name="roomId" type="String" xid="xid8"></column>
@@ -10,8 +10,7 @@
   <column label="颜色" name="color" type="String" xid="xid40"></column>
   <column name="typeCode" type="String" xid="xid49"></column>
   <column label="在餐人数" name="custQty" type="Integer" xid="xid51"></column>
-  <column name="consumeRoomId" type="String" xid="xid54"></column>
-  <column label="shareNo" name="shareNo" type="String" xid="xid56"></column></div><div component="$UI/system/components/justep/data/data" autoLoad="true" xid="userData" idColumn="userId"><column label="用户id" name="userId" type="String" xid="xid1"></column>
+  <column name="consumeRoomId" type="String" xid="xid54"></column></div><div component="$UI/system/components/justep/data/data" autoLoad="true" xid="userData" idColumn="userId"><column label="用户id" name="userId" type="String" xid="xid1"></column>
   <column label="手机号" name="fetionNO" type="Long" xid="xid2"></column>
   <column label="用户名" name="userName" type="String" xid="xid3"></column></div>
   <div component="$UI/system/components/justep/data/data" autoLoad="true" xid="enterDeskData" idColumn="roomId"><column label="房台ID" name="roomId" type="Long" xid="xid9"></column>
@@ -34,8 +33,7 @@
   <column label="台" name="roomCode" type="String" xid="xid17"></column>
   <column name="typeCode" type="String" xid="xid50"></column>
   <column name="custQty" type="Integer" xid="xid52"></column>
-  <column label="消费房间id" name="consumeRoomId" type="String" xid="xid53"></column>
-  <column label="shareNO" name="shareNO" type="String" xid="xid57"></column></div>
+  <column label="消费房间id" name="consumeRoomId" type="String" xid="xid53"></column></div>
   <div component="$UI/system/components/justep/data/data" autoLoad="true" xid="cartData" idColumn="goodsId" confirmDelete="false">
    <column label="商品id" name="goodsId" type="String" xid="column3"></column>
   <column label="商品名称" name="goodsName" type="String" xid="column4"></column>
@@ -162,7 +160,8 @@
             <div component="$UI/system/components/justep/list/list" class="x-list"
               xid="list2" data="deskData"> 
               <ul class="x-list-template clearfix main-ul" xid="listTemplateUl2"> 
-                <li xid="li1" bind-click="li1Click" bind-attr-roomId="val('roomId')" bind-attr-state="val('state')" bin-attr-billmasterid="val('billmasterid')" bind-attr-consumeRoomId="val('consumeRoomId')" bind-touchstart="li1Touchstart" bind-touchmove="li1Touchmove" bind-touchend="li1Touchend">                   <div xid="div5" class="table-con use"  bind-css="{'blue':val('color')=='blue','gray':val('color')=='gray','yellow':val('color')=='yellow','red':val('color')=='red','green':val('color')=='green'}"> 
+                <li xid="li1" bind-click="li1Click" bind-attr-roomId="val('roomId')" bind-attr-state="val('state')"  bind-attr-consumeRoomId="val('consumeRoomId')" bind-attr-custQty="val('custQty')" bind-touchstart="li1Touchstart" bind-touchmove="li1Touchmove" bind-touchend="li1Touchend"> 
+                  <div xid="div5" class="table-con use"  bind-css="{'blue':val('color')=='blue','gray':val('color')=='gray','yellow':val('color')=='yellow','red':val('color')=='red','green':val('color')=='green'}"> 
                     <p xid="p87"> 
                       <div component="$UI/system/components/justep/output/output"
                         class="x-output" xid="roomNum" bind-ref="ref('state')" id="roomNum"
