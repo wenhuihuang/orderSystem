@@ -2,7 +2,8 @@
 
 <div xmlns="http://www.w3.org/1999/xhtml" xid="window" class="window" component="$UI/system/components/justep/window/window"
   design="device:mobile">  
-  <div component="$UI/system/components/justep/model/model" xid="model" style="width:190px;height:auto;left:577px;top:130px;" onLoad="modelLoad"><div component="$UI/system/components/justep/data/data" autoLoad="true" xid="roomData" idColumn="typeName" onCustomRefresh="fan_nameCustomRefresh" autoNew="false"><column label="房类型" name="typeName" type="String" xid="xid4"></column>  <column label="房类号" name="typeCode" type="Long" xid="xid6"></column></div><div component="$UI/system/components/justep/data/data" autoLoad="true" xid="deskData" idColumn="tai_number"><column label="台号" name="tai_number" type="String" xid="xid5"></column>
+  <div component="$UI/system/components/justep/model/model" xid="model" style="width:185px;height:auto;left:669px;top:113px;" onLoad="modelLoad"><div component="$UI/system/components/justep/data/data" autoLoad="true" xid="roomData" idColumn="typeName" onCustomRefresh="fan_nameCustomRefresh" autoNew="false"><column label="房类型" name="typeName" type="String" xid="xid4"></column>
+  <column label="房类号" name="typeCode" type="Long" xid="xid6"></column></div><div component="$UI/system/components/justep/data/data" autoLoad="true" xid="deskData" idColumn="tai_number"><column label="台号" name="tai_number" type="String" xid="xid5"></column>
   <column label="状态" name="state" type="String" xid="xid7"></column>
   <column label="房号id" name="roomId" type="String" xid="xid8"></column>
   <column label="订单号" name="billMasterId" type="String" xid="xid16"></column>
@@ -1175,6 +1176,7 @@
         <input component="$UI/system/components/justep/input/input" class="form-control x-edit" xid="input6" placeHolder="请输入菜名" id="noOrderChangeName"></input></div> 
   <div component="$UI/system/components/justep/labelEdit/labelEdit" class="x-label-edit x-label30" xid="labelInput8">
    <label class="x-label" xid="label10"><![CDATA[数量]]></label>
+   <input component="$UI/system/components/justep/input/input" class="form-control x-edit" xid="input8" placeHolder="请输入菜名" id="noOrderChangeName"></input></div></div> </div> </div> </div> 
    <div class="x-panel-bottom bottom-btn-wrap" xid="bottom8">
     <div component="$UI/system/components/bootstrap/row/row" class="row" xid="row19">
      <div class="col col-xs-6" xid="col58">
