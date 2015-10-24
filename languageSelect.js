@@ -13,6 +13,7 @@ define(function(require){
 		var language = this.comp('language');
 		//获取地区语言各类
 		var lanJson = lan.getLanguages({'ip':ip});
+		console.log(lanJson)
 		language.clear();
 		for(var o in lanJson){
 			language.newData({
@@ -22,7 +23,7 @@ define(function(require){
 				}]
 			});
 		}
-
+			
 
 	};
 

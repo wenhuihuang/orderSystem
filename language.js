@@ -9,6 +9,7 @@ define(function(require) {
 		//输入参数	{'ip':xxx}
 		getLanguages:function(data){
 			var success = function(param){
+				console.log(param)
 				//在这里要保存ip到本地和当前语言到本地
 				return param;
 			}
