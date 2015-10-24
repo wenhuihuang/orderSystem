@@ -892,3 +892,12 @@ ul.menu-item li{
 .main-con  ul{
 	margin-bottom:0px;
 }
+.box-style{
+	box-shadow:0 0px 2px 2px #c9B9B9;
+}
+.box-style .x-popOver-content{
+	width:95%;height:96%;
+}
+.box-style .x-popOver-content .pop-wrap{
+	height:94%;
+}

@@ -273,12 +273,11 @@ define(function(require){
 						state="空台";
 						color="green";
 					}	
-				 rowss[i]={'tai_number':{'value':msg.rooms[i].roomName},'state':{'value':state},'roomId':{'value':msg.rooms[i].roomId},'billMasterId':{'value':msg.rooms[i].consumeBillMasterID},'color':{'value':color},'typeCode':{'value':msg.rooms[i].typeCode},'custQty':{'value':msg.rooms[i].custQty},'consumeRoomId':{'value':msg.rooms[i].consumeRoomID},'shareNo':{'value':msg.rooms[i].shareNo}};
+				 rowss[i]={'tai_number':{'value':msg.rooms[i].roomName},'state':{'value':state},'roomId':{'value':msg.rooms[i].roomId},'billMasterId':{'value':msg.rooms[i].billMasterId},'color':{'value':color},'typeCode':{'value':msg.rooms[i].typeCode},'custQty':{'value':msg.rooms[i].custQty},'consumeRoomId':{'value':msg.rooms[i].consumeRoomID},'shareNo':{'value':msg.rooms[i].shareNo}};
 			 	}
-			 	debugger
+			 	
 			var ffdata={"rows":rowss};
 		 	mydata.loadData(ffdata);	
-		 	;	
 	        },
 	        error: function(){
 	          throw justep.Error.create("加载数据失败");
@@ -359,7 +358,7 @@ define(function(require){
 			oneDeskData.newData({
 				index: 0,
 				defaultValues:[{
-					 "billMasterId":param.rooms[0].consumeBillMasterID,
+					 "billMasterId":param.rooms[0].billMasterId,
 					 "roomId":param.rooms[0].roomId,
 					 "typeCode":param.rooms[0].typeCode,
 					 "state":param.rooms[0].state,
@@ -1141,23 +1140,19 @@ define(function(require){
 		this.comp("contents4").to("content21");
 	};
 
-	
 	//转台
 	Model.prototype.button21Click = function(event){
 		var currentDeskData = this.comp('currentDeskData');
 		//当前房间的roomId
 		var currentRoomId = currentDeskData.val('roomId');
 		//当前台BillMasterID
-		var currentBillMasterId	= currentDeskData.val('billMasterId')
+		var currentBillMasterId	= currentDeskData.val('billMasterId');
 		//当前台ConsumeRoomID
 		var currentConsumeRoomId =currentDeskData.val("consumeRoomId");
 		//当前台currentShareNo
 		var currentShareNo = currentDeskData.val("shareNO");
 		//判断shareNo是否是undefind
-		if(currentShareNo == "undefind"){
-			currentShareNo=" ";
-		}
-		
+		currentShareNo= (currentShareNo== undefined || currentShareNo=="") ? "" : currentShareNo;
 		//当前房间的名称
 		var currentRoomName	= currentDeskData.val("tai_number");
 		//选择的房间的名称，如果有【xx】 需要截断字符串再上传  --去【xx】
@@ -1179,14 +1174,13 @@ define(function(require){
 					//记录下当前房台的信息
 					var changeRoomId = $(this).attr('roomid');
 					//要改变的台名
-					var changeRoomName = $(this).attr('billmasterid');
+					var changeRoomName = $(this).attr('tai_number');
 					//选择的房间的名称，如果有【xx】 需要截断字符串再上传  --去【xx】
-					//changeRoomName = changeRoomName.replace(/【.*/g," ");
+					changeRoomName = changeRoomName.replace(/【.*/g," ");
 					alert(changeRoomName);
 					$(this).find(".table-con").css({"background":"#18AEB6"});
-					
 					var url=ip + 'RoomFunctionServlet.do';
-					var data='func=changeRoom&changeRoomId='+changeRoomId+'&changeRoomName='+changeRoomName+'&currentRoomId='+currentRoomId+'&currentBillMasterId='+currentBillMasterId+'&currentConsumeRoomId='+currentConsumeRoomId+'&currentShareNo='+currentShareNo+'&currentRoomName='+currentRoomName;
+					var data='func=changeRoom&changeRoomId='+changeRoomId+'&changeRoomName='+changeRoomName+'&currentRoomId='+currentRoomId+'&current='+currentBillMasterId+'&currentConsumeRoomId='+currentConsumeRoomId+'&currentShareNo='+currentShareNo+'&currentRoomName='+currentRoomName;
 					console.log(data)
 						$.ajax({
 					        type: "GET",
@@ -1196,15 +1190,13 @@ define(function(require){
 					        async: false,//使用同步方式，目前data组件有同步依赖
 					        cache: false,
 					        success: function(msg){
-					        alert(msg)
-					        /*
-					            var rowss=[];
-								for(var i=0;i<msg.typeCodes.length;i++){
-								 rowss[i]={'typeName':{'value':msg.typeCodes[i].typeName},'typeCode':{'value':msg.typeCodes[i].typeCode},'qty':{'value':0}};
-							 	}
-							 	var ffdata={"@type":"table","rows":rowss};
-							 	menuTypeData.loadData(ffdata);//将返回的数据加载到data组件
-						 	*/
+					        	if(msg.code == 1){
+					        		alert(msg.result);
+					        		location.reload();
+					        	}else{
+					        		alert("转台失败！");
+					        	}
+					        	
 					        },
 					        error: function(){
 					          throw justep.Error.create("加载数据失败");
