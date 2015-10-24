@@ -1192,7 +1192,7 @@ define(function(require){
 					        success: function(msg){
 					        	if(msg.code == 1){
 					        		alert(msg.result);
-					        		//location.href('index.w')
+					        		location.reload();
 					        	}else{
 					        		alert("转台失败！");
 					        	}
