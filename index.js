@@ -1379,6 +1379,37 @@ define(function(require){
 	};
 
 	
+	//退菜原因model刷新
+	Model.prototype.cancelReasonReasonDataCustomRefresh = function(event){
+		var a = order.cancelReason({'ip':ip});
+		debugger
+		this.comp('cancelReasonData').loadData(a);
+	};
+
+	
+	//点击菜单获取当前退菜原因
+	Model.prototype.li7Click = function(event){
+		var currentCancelReasonData = this.comp('currentCancelReasonData');
+		var row = event.bindingContext.$rawData;
+		currentCancelReasonData.newData({
+			index:0,
+			defaultValues:[{
+				'tfzReasonId':row.val('tfzReasonId'),
+				'zReason':row.val('zReason'),
+				'zReasonCode':row.val('zReasonCode'),
+				'zType':row.val('zType')
+			}
+			]
+		});
+	};
+
+	
+	//发送退菜原因
+	Model.prototype.cancelReasonTrueClick = function(event){
+		
+	};
+
+	
 	
 	return Model;
 });

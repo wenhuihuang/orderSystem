@@ -2,7 +2,7 @@
 
 <div xmlns="http://www.w3.org/1999/xhtml" xid="window" class="window" component="$UI/system/components/justep/window/window"
   design="device:mobile">  
-  <div component="$UI/system/components/justep/model/model" xid="model" style="height:479px;width:185px;left:716px;top:176px;" onLoad="modelLoad"><div component="$UI/system/components/justep/data/data" autoLoad="true" xid="roomData" idColumn="typeName" onCustomRefresh="fan_nameCustomRefresh" autoNew="false"><column label="房类型" name="typeName" type="String" xid="xid4"></column>
+  <div component="$UI/system/components/justep/model/model" xid="model" style="height:450px;width:190px;left:877px;top:198px;" onLoad="modelLoad"><div component="$UI/system/components/justep/data/data" autoLoad="true" xid="roomData" idColumn="typeName" onCustomRefresh="fan_nameCustomRefresh" autoNew="false"><column label="房类型" name="typeName" type="String" xid="xid4"></column>
   <column label="房类号" name="typeCode" type="Long" xid="xid6"></column></div><div component="$UI/system/components/justep/data/data" autoLoad="true" xid="deskData" idColumn="tai_number"><column label="台号" name="tai_number" type="String" xid="xid5"></column>
   <column label="状态" name="state" type="String" xid="xid7"></column>
   <column label="房号id" name="roomId" type="String" xid="xid8"></column>
@@ -134,7 +134,18 @@
    <column name="tfzReansonId" type="Integer" xid="default35"></column>
    <column name="zReason" type="String" xid="default38"></column>
    <column name="zReasonCode" type="String" xid="default37"></column>
-   <column name="zType" type="String" xid="default34"></column></div></div>  
+   <column name="zType" type="String" xid="default34"></column></div>
+  <div component="$UI/system/components/justep/data/data" autoLoad="true" xid="cancelReasonData" idColumn="col0" onCustomRefresh="cancelReasonReasonDataCustomRefresh"><column name="col0" type="String" xid="xid63"></column>
+  <column name="tfzReasonId" type="Integer" xid="xid64"></column>
+  <column name="zReason" type="String" xid="xid65"></column>
+  <column name="zReasonCode" type="String" xid="xid66"></column>
+  <column name="zType" type="String" xid="xid67"></column></div>
+  <div component="$UI/system/components/justep/data/data" autoLoad="true" xid="currentCancelReasonData" idColumn="col0" onCustomRefresh="cancelReasonReasonDataCustomRefresh">
+   <column name="col0" type="String" xid="default39"></column>
+   <column name="tfzReasonId" type="Integer" xid="default40"></column>
+   <column name="zReason" type="String" xid="default32"></column>
+   <column name="zReasonCode" type="String" xid="default33"></column>
+   <column name="zType" type="String" xid="default29"></column></div></div>  
   <div component="$UI/system/components/justep/contents/contents" class="x-contents x-full"
     active="0" xid="contents1" swipe="false"> 
     <div class="x-contents-content" xid="login">
@@ -1170,16 +1181,16 @@
     <div xid="div36" class="pop-con">
      <div class="con-con" xid="div37">
       <div xid="div42">
-       <div component="$UI/system/components/justep/labelEdit/labelEdit" class="x-label-edit x-label30" xid="labelInput6">
-        <label class="x-label" xid="label8"><![CDATA[原因]]></label>
-        <input component="$UI/system/components/justep/input/input" class="form-control x-edit" xid="input6" placeHolder="请输入菜名" id="noOrderChangeName"></input></div> 
-  <div component="$UI/system/components/justep/labelEdit/labelEdit" class="x-label-edit x-label30" xid="labelInput8">
+       <div component="$UI/system/components/justep/labelEdit/labelEdit" class="x-label-edit x-label30" xid="labelInput8">
    <label class="x-label" xid="label10"><![CDATA[数量]]></label>
-   <input component="$UI/system/components/justep/input/input" class="form-control x-edit" xid="input8" placeHolder="请输入菜名" id="noOrderChangeName"></input></div></div> </div> </div> </div> 
+   <input component="$UI/system/components/justep/input/input" class="form-control x-edit" xid="input8" placeHolder="请输入菜名" id="noOrderChangeName"></input></div></div> </div> </div> 
+  <div component="$UI/system/components/justep/list/list" class="x-list" xid="list12" data="cancelReasonData">
+   <ul class="x-list-template" xid="listTemplateUl12">
+    <li xid="li7" bind-text="val('zReason')" bind-click="li7Click"></li></ul> </div></div> 
    <div class="x-panel-bottom bottom-btn-wrap" xid="bottom8">
     <div component="$UI/system/components/bootstrap/row/row" class="row" xid="row19">
      <div class="col col-xs-6" xid="col58">
-      <a component="$UI/system/components/justep/button/button" class="btn btn-success" label="确认" xid="button36" onClick="button43Click">
+      <a component="$UI/system/components/justep/button/button" class="btn btn-success" label="确认" onClick="cancelReasonTrueClick" xid="cancelReasonTrue">
        <i xid="i39"></i>
        <span xid="span92">确认</span></a> </div> 
      <div class="col col-xs-6" xid="col56">
