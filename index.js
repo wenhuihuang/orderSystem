@@ -1494,7 +1494,7 @@ define(function(require){
 		var a = order.reminder({'ip':ip,'billDetailId':currentOrderData.val('billDetailId')});
 		debugger
 //		if()
-		alert(a.);
+		//alert(a.);
 	};
 
 	
@@ -1524,18 +1524,18 @@ define(function(require){
 	
 	//已分单赠送实际操作
 	Model.prototype.hbutton58Click = function(event){
-		//data.ip + 'RoomFunctionServlet.do?func=gift&billDetailId='+data.billDetailId+'&reasonId='+data.reasonId+'&cancelQty='+data.cancelQty+'&empcode='+data.userId
+//		data.ip + 'RoomFunctionServlet.do?func=gift&billDetailId='+data.billDetailId+'&reasonId='+data.reasonId+'&cancelQty='+data.cancelQty+'&empcode='+data.userId
 		var currentOrderData = this.comp('currentOrderData');
 		var userData = this.comp('userData');
 		var currentOrderData = this.comp('currentOrderData');
 		var qty = $('#hOrderPresentsQty').val();
-		ordr.hGift({'billDetailId':currentOrderData.val('billDetailId'),'reasonId':currentOrderData.val('reasonId'),'qty':qty,'userId':userData.val('userId')});
+		ordr.hGift({'ip':ip,'billDetailId':currentOrderData.val('billDetailId'),'reasonId':currentOrderData.val('reasonId'),'qty':qty,'userId':userData.val('userId')});
 		
 	};
 
 	
 	//全单催菜
-	Model.prototype.hspan37Click = function(event){
+	Model.prototype.hhspan35Click = function(event){
 
 	};
 

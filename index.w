@@ -718,7 +718,7 @@
                     <div component="$UI/system/components/bootstrap/row/row"
                       class="row" xid="row9"> 
                       <div class="col col-xs-3" xid="col33">
-                        <span xid="hspan35" bind-click="hspan35Click"><![CDATA[赠送]]></span>
+                        <span xid="hspan35" bind-click="hhspan35Click"><![CDATA[赠送]]></span>
                       </div>  
                       <div class="col col-xs-3" xid="col34">
                         <span xid="hspan36" bind-click="span36Click"><![CDATA[单品打折]]></span>

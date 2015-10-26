@@ -180,7 +180,8 @@ define(function(require) {
 				"success" : success
 			});	
 			return obj;
-		},
+		}
+		,
 		//已分单赠送
 		hGift:function(data){
 			var obj;
@@ -194,6 +195,20 @@ define(function(require) {
 				"success" : success
 			});	
 			return obj;
+		},
+		//全单催菜
+		hurryAll:function(data){
+			var obj;
+			var success = function(param){
+				var a = param;
+				obj = a;
+			};
+			Baas.sendRequest({
+				"url" : data.ip + 'RoomFunctionServlet.do?func=hurryAll&billMasterId='+data.billMasterId+'&consumeRoomId='+data.consumeRoomId,
+				"dataType": "json",
+				"success" : success
+			});	
+			return obj;			
 		}
 	};
 
