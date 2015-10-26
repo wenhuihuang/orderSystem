@@ -901,3 +901,23 @@ ul.menu-item li{
 .box-style .x-popOver-content .pop-wrap{
 	height:94%;
 }
+.login-bottom {
+	text-align:right;
+	line-height:48px;
+	padding:0 20px;
+}
+.bottom-copy{
+	display:inline-block;
+	float:left;
+}
+.settings .x-panel-bottom{
+	line-height:48px;
+	text-align:right;
+	padding:0 20px;
+}
+.box-style .x-popOver-content{
+	    box-shadow: 0 0px 2px 2px rgb(201, 185, 185);
+}
+.box-style .x-titlebar{
+	border-radius:4px 4px 0 0;
+}

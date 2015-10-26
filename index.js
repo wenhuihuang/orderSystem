@@ -1430,6 +1430,18 @@ define(function(require){
 	};
 
 	
+	//登录页面设置
+	Model.prototype.button70Click = function(event){
+		this.comp("Settings").show();
+	};
+
+	
+	//关闭登录页面设置弹框
+	Model.prototype.button71Click = function(event){
+		this.comp("Settings").hide();
+	};
+
+	
 	
 	return Model;
 });
