@@ -2,7 +2,12 @@
 
 <div xmlns="http://www.w3.org/1999/xhtml" xid="window" class="window" component="$UI/system/components/justep/window/window"
   design="device:mobile">  
-  <div component="$UI/system/components/justep/model/model" xid="model" style="height:459px;width:234px;left:823px;top:62px;" onLoad="modelLoad"><div component="$UI/system/components/justep/data/data" autoLoad="true" xid="roomData" idColumn="typeName" onCustomRefresh="fan_nameCustomRefresh" autoNew="false"><column label="房类型" name="typeName" type="String" xid="xid4"></column>
+  <div component="$UI/system/components/justep/model/model" xid="model" style="height:459px;width:234px;left:823px;top:62px;" onLoad="modelLoad">
+
+  <div component="$UI/system/components/justep/data/data" autoLoad="true" xid="runModel" idColumn="col0"><column name="col0" type="String" xid="xid63"></column>
+  <column label="模式" name="model" type="String" xid="xid64"></column>
+  <data xid="default29">[{&quot;model&quot;:&quot;服务员手机&quot;},{&quot;model&quot;:&quot;服务员平板&quot;},{&quot;model&quot;:&quot;自助手机&quot;},{&quot;model&quot;:&quot;自助平板&quot;}]</data></div>
+  <div component="$UI/system/components/justep/data/data" autoLoad="true" xid="roomData" idColumn="typeName" onCustomRefresh="fan_nameCustomRefresh" autoNew="false"><column label="房类型" name="typeName" type="String" xid="xid4"></column>
   <column label="房类号" name="typeCode" type="Long" xid="xid6"></column></div><div component="$UI/system/components/justep/data/data" autoLoad="true" xid="deskData" idColumn="tai_number"><column label="台号" name="tai_number" type="String" xid="xid5"></column>
   <column label="状态" name="state" type="String" xid="xid7"></column>
   <column label="房号id" name="roomId" type="String" xid="xid8"></column>
@@ -150,46 +155,69 @@
     <calculate xid="calculate7">
      <expr xid="default40">(val('price')+val('addMoney'))*val('qty')</expr></calculate> </col> </rule>
   <column name="billDetailId" type="String" xid="default43"></column></div></div>  
+  <div component="$UI/system/components/justep/popOver/popOver" class="x-popOver  settings box-style" xid="Settings" opacity="0.9">
+   <div class="x-popOver-overlay" xid="div157"></div>
+   <div class="x-popOver-content  pop-container" xid="div158"><div xid="div159" class="pop-wrap" style="height:94%;">
+   <div component="$UI/system/components/justep/panel/panel" class="x-panel x-full" xid="panel27">
+    <div class="x-panel-top" xid="top24" height="48">
+     <div component="$UI/system/components/justep/titleBar/titleBar" class="x-titlebar" xid="titleBar14" title="参数设置">
+   <div class="x-titlebar-left" xid="div173"></div>
+   <div class="x-titlebar-title" xid="div174">参数设置</div>
+   <div class="x-titlebar-right reverse" xid="div175"></div></div></div> 
+    <div class="x-panel-content" xid="content52">
+     <div xid="div176"><div class="form-horizontal container-fluid" component="$UI/system/components/bootstrap/form/form" xid="form2"><h5 xid="h51"><![CDATA[1、服务器连接参数设置:]]></h5><div component="$UI/system/components/justep/labelEdit/labelEdit" class="x-label-edit x-label30" xid="labelInput19">
+   <label class="x-label" xid="label21"><![CDATA[服务器地址:]]></label>
+   <input component="$UI/system/components/justep/input/input" class="form-control x-edit" xid="input19" placeHolder="请输入服务器地址"></input></div>
+  <div component="$UI/system/components/justep/labelEdit/labelEdit" class="x-label-edit x-label30" xid="labelInput23">
+   <label class="x-label" xid="label25"><![CDATA[端口号:]]></label>
+   <input component="$UI/system/components/justep/input/input" class="form-control x-edit" xid="input23" placeHolder="请输入端口号"></input></div>
+  <h5 xid="h55"><![CDATA[2、其它参数设置]]></h5><div component="$UI/system/components/justep/labelEdit/labelEdit" class="x-label-edit x-label30" xid="labelSelect1">
+   <label class="x-label" xid="label28"><![CDATA[运行模式:]]></label>
+   <select component="$UI/system/components/justep/select/select" class="form-control x-edit" xid="select1" bind-optionsCaption="--请选择运行模式--" bind-optionsValue="model" bind-optionsLabel="model" bind-options="runModel"></select></div><div component="$UI/system/components/justep/labelEdit/labelEdit" class="x-label-edit x-label30" xid="labelInput25">
+   <label class="x-label" xid="label27"><![CDATA[默认打印机:]]></label>
+   <input component="$UI/system/components/justep/input/input" class="form-control x-edit" xid="input25" placeHolder="请输入打印机"></input></div>
+  </div></div>
+  </div> 
+    <div class="x-panel-bottom" xid="bottom22">
+     
+  <a component="$UI/system/components/justep/button/button" class="btn btn-default send-order-btn" label="应用" xid="button72">
+   <i xid="i72"></i>
+   <span xid="span133">应用</span></a>
+  <a component="$UI/system/components/justep/button/button" class="btn btn-default close-btn" label="返回" xid="button71" onClick="button6Click" bind-click="button71Click">
+   <i xid="i71"></i>
+   <span xid="span132">返回</span></a></div> </div> </div></div></div>
+  
   <div component="$UI/system/components/justep/contents/contents" class="x-contents x-full"
     active="0" xid="contents1" swipe="false"> 
     <div class="x-contents-content" xid="login">
-      <div xid="div48" class="login-wrap">
-        <div xid="div52">
-          <h2 xid="h21"><![CDATA[欢迎使用点餐系统]]></h2>
-        </div>  
-        <div xid="div56">
-          <h4 xid="h41"><![CDATA[请输入用户名和密码登录]]></h4>
-          <div class="form-horizontal container-fluid" component="$UI/system/components/bootstrap/form/form"
-            xid="form1">
-            <div component="$UI/system/components/justep/labelEdit/labelEdit"
-              class="x-label-edit x-label30" xid="labelInput1"> 
-              <label class="x-label" xid="label1"><![CDATA[用户名:]]></label>  
-              <input component="$UI/system/components/justep/input/input" class="form-control x-edit"
-                xid="userName" placeHolder="用户名"/>
-            </div>
-            <div component="$UI/system/components/justep/labelEdit/labelEdit"
-              class="x-label-edit x-label30" xid="labelPassword1"> 
-              <label class="x-label" xid="label2"><![CDATA[密码:]]></label>  
-              <input component="$UI/system/components/justep/input/password"
-                class="form-control x-edit" xid="userPwd" placeHolder="密码"/>
-            </div>
-            <p xid="p79" class="login-wrap">
-              <div component="$UI/system/components/bootstrap/row/row" class="row" xid="row1">
-   <div class="col col-xs-6" xid="col2"><a component="$UI/system/components/justep/button/button" class="btn btn-default btn-exit" label="退出" xid="exit"> 
-                <i xid="i17" />  
-                <span xid="span86">退出</span>
-              </a></div>
-   <div class="col col-xs-6" xid="col3"><a component="$UI/system/components/justep/button/button" class="btn btn-default btn-login" label="登录" xid="login_btn" bind-click="login_btnClick"> 
-                <i xid="i16" />  
-                <span xid="span85">登录</span>
-              </a></div>
-   </div>  
-              
-            </p>
-          </div>
-        </div>
-      </div> 
-    </div>
+      <div component="$UI/system/components/justep/panel/panel" class="x-panel x-full" xid="panel26">
+   <div class="x-panel-content" xid="content50"><div xid="div48" class="login-wrap">
+   <div xid="div52">
+    <h2 xid="h21">欢迎使用点餐系统</h2></div> 
+   <div xid="div56">
+    <h4 xid="h41">请输入用户名和密码登录</h4>
+    <div class="form-horizontal container-fluid" component="$UI/system/components/bootstrap/form/form" xid="form1">
+     <div component="$UI/system/components/justep/labelEdit/labelEdit" class="x-label-edit x-label30" xid="labelInput1">
+      <label class="x-label" xid="label1">用户名:</label>
+      <input component="$UI/system/components/justep/input/input" class="form-control x-edit" xid="userName" placeHolder="用户名"></input></div> 
+     <div component="$UI/system/components/justep/labelEdit/labelEdit" class="x-label-edit x-label30" xid="labelPassword1">
+      <label class="x-label" xid="label2">密码:</label>
+      <input component="$UI/system/components/justep/input/password" class="form-control x-edit" xid="userPwd" placeHolder="密码"></input></div> 
+     <p xid="p79" class="login-wrap">
+      <div component="$UI/system/components/bootstrap/row/row" class="row" xid="row1">
+       <div class="col col-xs-6" xid="col2">
+        <a component="$UI/system/components/justep/button/button" class="btn btn-default btn-exit" label="退出" xid="exit">
+         <i xid="i17"></i>
+         <span xid="span86">退出</span></a> </div> 
+       <div class="col col-xs-6" xid="col3">
+        <a component="$UI/system/components/justep/button/button" class="btn btn-success btn-login" label="登录" xid="login1" bind-click="login_btnClick">
+         <i xid="i16"></i>
+         <span xid="span85">登录</span></a> </div> </div> </p> </div> </div> </div>
+  </div>
+   <div class="x-panel-bottom login-bottom" xid="bottom21">
+  <span xid="span94" class="bottom-copy">CoptyRight©启旭科技有限公司</span><a component="$UI/system/components/justep/button/button" class="btn btn-success" label="设置" xid="button70" target="Settings-con">
+   <i xid="i70"></i>
+   <span xid="span40">设置</span></a></div></div></div>
     <div class="x-contents-content" xid="index" onActive="indexActive">
       <div component="$UI/system/components/justep/panel/panel" class="x-panel x-full"
         xid="panel1"> 
@@ -355,6 +383,38 @@
         </div>
       </div>
     </div> 
+      <div class="x-contents-content" xid="Settings-con">
+  <div component="$UI/system/components/justep/panel/panel" class="x-panel x-full" xid="panel29">
+   <div class="x-panel-top" xid="top26"><div component="$UI/system/components/justep/titleBar/titleBar" class="x-titlebar" xid="titleBar16" title="参数设置">
+   <div class="x-titlebar-left" xid="div187"></div>
+   <div class="x-titlebar-title" xid="div188">参数设置</div>
+   <div class="x-titlebar-right reverse" xid="div189"></div></div></div>
+   <div class="x-panel-content" xid="content55"><div xid="div186">
+   <div xid="div184">
+    <div class="form-horizontal container-fluid" component="$UI/system/components/bootstrap/form/form" xid="form6">
+     <h5 xid="h56">1、服务器连接参数设置:</h5>
+     <div component="$UI/system/components/justep/labelEdit/labelEdit" class="x-label-edit x-label30" xid="labelInput28">
+      <label class="x-label" xid="label30">服务器地址:</label>
+      <input component="$UI/system/components/justep/input/input" class="form-control x-edit" xid="input26" placeHolder="请输入服务器地址"></input></div> 
+     <div component="$UI/system/components/justep/labelEdit/labelEdit" class="x-label-edit x-label30" xid="labelInput26">
+      <label class="x-label" xid="label29">端口号:</label>
+      <input component="$UI/system/components/justep/input/input" class="form-control x-edit" xid="input27" placeHolder="请输入端口号"></input></div> 
+     <h5 xid="h57">2、其它参数设置</h5>
+     <div component="$UI/system/components/justep/labelEdit/labelEdit" class="x-label-edit x-label30" xid="labelSelect2">
+      <label class="x-label" xid="label31">运行模式:</label>
+      <select component="$UI/system/components/justep/select/select" class="form-control x-edit" xid="select2" bind-optionsCaption="--请选择运行模式--" bind-optionsValue="model" bind-optionsLabel="model" bind-options="runModel"></select></div> 
+     <div component="$UI/system/components/justep/labelEdit/labelEdit" class="x-label-edit x-label30" xid="labelInput27">
+      <label class="x-label" xid="label32">默认打印机:</label>
+      <input component="$UI/system/components/justep/input/input" class="form-control x-edit" xid="input28" placeHolder="请输入打印机"></input></div> </div> </div> 
+    </div></div>
+   <div class="x-panel-bottom" xid="bottom24"><div xid="div185">
+    <a component="$UI/system/components/justep/button/button" class="btn btn-default send-order-btn" label="应用" xid="button73">
+     <i xid="i74"></i>
+     <span xid="span148">应用</span></a> 
+    <a component="$UI/system/components/justep/button/button" class="btn btn-default close-btn" label="返回" xid="button74" onClick="button6Click" bind-click="button71Click">
+     <i xid="i73"></i>
+     <span xid="span147">返回</span></a> </div></div></div></div>
+    
   </div>
   <div component="$UI/system/components/justep/popOver/popOver" class="x-popOver"
     xid="popOver1" opacity="0.9" style="box-shadow:0 0px 2px 2px #c9B9B9;"> 
@@ -727,7 +787,7 @@
                         <span xid="hspan37" bind-click="hspan37Click"><![CDATA[全单催菜]]></span>
                       </div>
                     <div class="col col-xs-3" xid="col69">
-   <span xid="hspan95" bind-click="span34Click"><![CDATA[全单叫起]]></span></div></div>
+   <span xid="hspan95" bind-click="hspan95Click"><![CDATA[全单叫起]]></span></div></div>
                   <div component="$UI/system/components/bootstrap/row/row" class="row" xid="row11">
    <div class="col col-xs-3" xid="col45">
     <span xid="hspan40" bind-click="hspan40Click"><![CDATA[退菜]]></span></div> 

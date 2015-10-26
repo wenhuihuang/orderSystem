@@ -1535,7 +1535,19 @@ define(function(require){
 
 	
 	//全单催菜
-	Model.prototype.hhspan35Click = function(event){
+	Model.prototype.hspan37Click = function(event){
+		var  currentDeskData = this.comp('currentDeskData');
+		var result = order.hurryAll({'ip':ip,'billMasterId':currentDeskData.val('billMasterId'),'consumeRoomId':currentDeskData.val('consumeRoomId')});
+		alert('催菜成功');
+	};
+
+	
+	
+
+
+	
+	//全单叫起
+	Model.prototype.hspan95Click = function(event){
 
 	};
 
