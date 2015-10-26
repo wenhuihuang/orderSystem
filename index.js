@@ -26,6 +26,9 @@ define(function(require){
 						price:param.consumeDetails[o].price,
 						addMoney:param.consumeDetails[o].addMoney,
 						qty:param.consumeDetails[o].qty
+						qty:param.consumeDetails[o].qty,
+						billDetailId:param.consumeDetails[o].billDetailId,
+						unitName:param.consumeDetails[o].unitName
 					}]
 				});
 			}
@@ -844,12 +847,14 @@ define(function(require){
 		var menuTypeData = this.comp('menuTypeData');//用于清0数据
 		var goodsListData = this.comp('goodsListData');
 
+		debugger
 		//送单成功
 		var success = function(param){	
 			debugger;
 			alert(param.result[0].msg);
 			localStorage.setItem(roomId,'');//清空购物车缓存
 			cartData.clear();//发送订单成功，清空cartData
+			sendCook.clear();//清空sendCook
 			//menuList清0
 			menuTypeData.eachAll(function(menuData){
 				menuData.row.val('qty',0);
@@ -871,6 +876,7 @@ define(function(require){
 					 
 					
 					
+			var billDetailId = param.result[0].billmasterid;
 					//更新orderData
 							var successOrder = function(param){
 									//清空现有的订单数据
@@ -883,6 +889,9 @@ define(function(require){
 												price:param.consumeDetails[o].price,
 												addMoney:param.consumeDetails[o].addMoney,
 												qty:param.consumeDetails[o].qty
+												qty:param.consumeDetails[o].qty,
+												billDetailId:billDetailId,
+												unitName:param.consumeDetails[o].unitName
 											}]
 										});
 									}
@@ -894,6 +903,21 @@ define(function(require){
 									"dataType": "json",
 									"success" : successOrder
 								});
+								});			
+			//
+			var testPrintSuccess = function(printData){
+//			alert(printData)
+			//----------------------------------------------------start of print----------------------------------
+			
+//			alert(param.result[0].msg);
+			 
+			//当有订单时才打印
+			if(param.result[0].billmasterid != ''&&param.result[0].billmasterid != undefined){
+				//打印成功
+				var success1 = function(param){
+					 
+					
+					
 				}
 				//打印
 				Baas.sendRequest({
@@ -907,6 +931,7 @@ define(function(require){
 			//打印前检测端口
 			Baas.sendRequest({
 					"url" : ip + '/PrintOrder?RptNO=TotalBillLocal&ParamName1=ConsumeRoomID&ParamValue1='+param.result[0].msg.split('=')[1],
+					"url" : ip + 'ShopCartServlet.do?func=printOrder&consumeRoomId='+param.result[0].msg.split('=')[1],
 					"dataType": "json",
 					"success" : testPrintSuccess
 			});
@@ -1109,6 +1134,7 @@ define(function(require){
 
 	
 	//弹出修改菜名框
+	//未分单弹出修改菜名框
 	Model.prototype.span32Click = function(event){
 		this.comp("give").show();
 		this.comp("contents4").to("content17");
@@ -1116,6 +1142,7 @@ define(function(require){
 
 	
 	//关闭give pop框
+	//未分单关闭give pop框
 	Model.prototype.closeGive = function(event){
 		this.comp("give").hide();
 	};
@@ -1129,16 +1156,20 @@ define(function(require){
 
 	
 	//弹出修改数量框
+	//未分单弹出修改数量框
 	Model.prototype.span34Click = function(event){
 		this.comp("give").show();
 		this.comp("contents4").to("content21");
+		this.comp("contents4").to("content23");
 	};
 
 	
 	//弹出赠送框
+	//未分单弹出赠送框
 	Model.prototype.span35Click = function(event){
 		this.comp("give").show();
 		this.comp("contents4").to("content21");
+		this.comp("contents4").to("content16");
 	};
 
 	//转台
@@ -1413,6 +1444,7 @@ define(function(require){
 		var reasonId = currentCancelReasonData.val('tfzReasonId');
 		var qty = $('#noOrderChangeName').val();
 		var result = order.cancelGoods({'userId':userId,'reasonId':reasonId,'qty':qty});
+		var result = order.cancelGoods({'ip':ip,'userId':userId,'reasonId':reasonId,'qty':qty});
 		this.comp('give').hide();
 	};
 
@@ -1423,27 +1455,139 @@ define(function(require){
 		this.comp("contents5").to("content29");
 	};
 
+
+
 	
 	//修改价格
 	Model.prototype.button57Click = function(event){
-
+	//已分单的点击(获取点击的订单)
+	Model.prototype.horderliClick = function(event){
+		var currentOrderData = this.comp('currentOrderData');
+		var row = event.bindingContext.$rawData;
+		currentOrderData.newData({
+			index:0,
+			defaultValues:[{
+				goodsName:row.val('goodsName'),
+				price:row.val('price'),
+				addMoney:row.val('addMoney'),
+				qty:row.val('qty'),
+				billDetailId:row.val('billDetailId'),
+				unitName:row.val('unitName')
+			}]
+		});
 	};
 
 	
-	//登录页面设置
+	//已分单订单界面退菜跳转
+	Model.prototype.hspan40Click = function(event){
+		this.comp('contents5').to('content33');
+	};
+
+	
+
+
+
+	//已分单修改价格
+	Model.prototype.hbutton57Click = function(event){
+		var currentOrderData = this.comp('currentOrderData');
+		var userData = this.comp('userData');
+		var price = $('#hOrderChangePrice').val();
+		var currentDeskData = this.comp('currentDeskData');
+		order.hEditPrice({'ip':ip,'billDetailId':currentOrderData.val('billDetailId'),'price':price,'userId':userData.val('userId')});
+		//刷新orderData
+		debugger
+		order.updateOrderData({'ip':ip,'orderData':this.comp('orderData'),'billMasterId':currentDeskData.val('billMasterId'),'roomId':currentDeskData.val('roomId')});
+	};
+
+	
+
+
+
+	
+	//已分单界面数量跳转
+	Model.prototype.hspan33Click = function(event){
+		this.comp('contents5').to('content35');
+	};
+
+	
+	
+	//已分单界面数量
+	Model.prototype.hbutton53Click = function(event){
+		var currentOrderData = this.comp('currentOrderData');
+		var userData = this.comp('userData');
+		var qty = $('#hOrderChangeQty').val();
+		order.hEditCout({'ip':ip,'billDetailId':currentOrderData.val('billDetailId'),'userId':userData.val('userId'),'qty':qty,'unitName':currentOrderData.val('unitName')});
+		order.updateOrderData({'ip':ip,'orderData':this.comp('orderData'),'billMasterId':currentDeskData.val('billMasterId'),'roomId':currentDeskData.val('roomId')});
+		
+	};
+
+	
+	
+	//催菜
+	Model.prototype.hspan34Click = function(event){
+		var currentOrderData = this.comp('currentOrderData');
+		var a = order.reminder({'ip':ip,'billDetailId':currentOrderData.val('billDetailId')});
+		debugger
+//		if()
+		alert(a.);
+	};
+
+	
+	
+	//隐藏yet-sort popOver
+	Model.prototype.hbutton44Click = function(event){
+		this.comp('yet-sort').hide();
+	};
+
+	
+	
+	//叫起
+	Model.prototype.hspan94Click = function(event){
+		var currentOrderData = this.comp('currentOrderData');
+		var a = order.respite({'ip':ip,'billDetailId':currentOrderData.val('billDetailId')});
+		debugger
+		alert('叫起成功');
+	};
+
+	
+	//已分单赠送跳转
+	Model.prototype.hspan35Click = function(event){
+		this.comp('contents5').to('content30');
+		this.comp('presentsReasonData').refreshData();
+	};
+
+	
+	//已分单赠送实际操作
+	Model.prototype.hbutton58Click = function(event){
+		//data.ip + 'RoomFunctionServlet.do?func=gift&billDetailId='+data.billDetailId+'&reasonId='+data.reasonId+'&cancelQty='+data.cancelQty+'&empcode='+data.userId
+		var currentOrderData = this.comp('currentOrderData');
+		var userData = this.comp('userData');
+		var currentOrderData = this.comp('currentOrderData');
+		var qty = $('#hOrderPresentsQty').val();
+		ordr.hGift({'billDetailId':currentOrderData.val('billDetailId'),'reasonId':currentOrderData.val('reasonId'),'qty':qty,'userId':userData.val('userId')});
+		
+	};
+
+	
+	//全单催菜
+	Model.prototype.hspan37Click = function(event){
+
+	};
+    //登录页面设置
 	Model.prototype.button70Click = function(event){
 		this.comp("Settings").show();
 	};
 
-	
 	//关闭登录页面设置弹框
 	Model.prototype.button71Click = function(event){
 		this.comp("Settings").hide();
 	};
+	
+	
+
 
 	
 	
 	return Model;
 });
-
 
