@@ -2,7 +2,7 @@
 
 <div xmlns="http://www.w3.org/1999/xhtml" xid="window" class="window" component="$UI/system/components/justep/window/window"
   design="device:mobile">  
-  <div component="$UI/system/components/justep/model/model" xid="model" style="width:185px;height:auto;left:916px;top:104px;" onLoad="modelLoad"><div component="$UI/system/components/justep/data/data" autoLoad="true" xid="roomData" idColumn="typeName" onCustomRefresh="fan_nameCustomRefresh" autoNew="false"><column label="房类型" name="typeName" type="String" xid="xid4"></column>
+  <div component="$UI/system/components/justep/model/model" xid="model" style="height:459px;width:234px;left:823px;top:62px;" onLoad="modelLoad"><div component="$UI/system/components/justep/data/data" autoLoad="true" xid="roomData" idColumn="typeName" onCustomRefresh="fan_nameCustomRefresh" autoNew="false"><column label="房类型" name="typeName" type="String" xid="xid4"></column>
   <column label="房类号" name="typeCode" type="Long" xid="xid6"></column></div><div component="$UI/system/components/justep/data/data" autoLoad="true" xid="deskData" idColumn="tai_number"><column label="台号" name="tai_number" type="String" xid="xid5"></column>
   <column label="状态" name="state" type="String" xid="xid7"></column>
   <column label="房号id" name="roomId" type="String" xid="xid8"></column>
@@ -46,7 +46,8 @@
   <rule xid="rule2">
    <col name="totalPrice" xid="ruleCol3">
     <calculate xid="calculate3">
-     <expr xid="default19">(val('sprice')+val('addMoney'))*val('qty')</expr></calculate> </col> </rule></div>
+     <expr xid="default19">(val('sprice')+val('addMoney'))*val('qty')</expr></calculate> </col> </rule>
+  <column name="unitId" type="String" xid="xid63"></column></div>
   <div component="$UI/system/components/justep/data/data" autoLoad="true" xid="orderData" idColumn="col4"><column name="col4" type="String" xid="xid20"></column>
   <column name="goodsName" type="String" xid="xid21"></column>
   <column name="price" type="Double" xid="xid22"></column>
@@ -56,7 +57,8 @@
   <rule xid="rule3">
    <col name="totalPrice" xid="ruleCol4">
     <calculate xid="calculate4">
-     <expr xid="default20">(val('price')+val('addMoney'))*val('qty')</expr></calculate> </col> </rule></div>
+     <expr xid="default20">(val('price')+val('addMoney'))*val('qty')</expr></calculate> </col> </rule>
+  <column name="billDetailId" type="String" xid="xid64"></column></div>
   <div component="$UI/system/components/justep/data/data" autoLoad="false" xid="statusData" idColumn="col2" autoNew="true"><column name="col2" type="String" xid="xid27"></column>
   <column label="订单总价" name="orderTotal" type="Double" xid="xid25"></column>
   <column label="购物车总价" name="cartTotal" type="Double" xid="xid26"></column>
@@ -134,7 +136,20 @@
    <column name="tfzReansonId" type="Integer" xid="default35"></column>
    <column name="zReason" type="String" xid="default38"></column>
    <column name="zReasonCode" type="String" xid="default37"></column>
-   <column name="zType" type="String" xid="default34"></column></div></div>  
+   <column name="zType" type="String" xid="default34"></column></div>
+  <div component="$UI/system/components/justep/data/data" autoLoad="true" xid="currentOrderData" idColumn="col4">
+   
+   <column name="col4" type="String" xid="default42"></column>
+  <column name="goodsName" type="String" xid="default41"></column>
+  <column name="price" type="Double" xid="default39"></column>
+  <column name="addMoney" type="Double" xid="default33"></column>
+  <column name="qty" type="Integer" xid="default32"></column>
+  <column name="totalPrice" type="Double" xid="default29"></column>
+  <rule xid="rule6">
+   <col name="totalPrice" xid="ruleCol7">
+    <calculate xid="calculate7">
+     <expr xid="default40">(val('price')+val('addMoney'))*val('qty')</expr></calculate> </col> </rule>
+  <column name="billDetailId" type="String" xid="default43"></column></div></div>  
   <div component="$UI/system/components/justep/contents/contents" class="x-contents x-full"
     active="0" xid="contents1" swipe="false"> 
     <div class="x-contents-content" xid="login">
@@ -598,7 +613,7 @@
                         <span xid="span35" bind-click="span35Click"><![CDATA[赠送]]></span>
                       </div>  
                       <div class="col col-xs-4" xid="col34">
-                        <span xid="span36" bind-click="span36Click"><![CDATA[多食]]></span>
+                        <span xid="span36"><![CDATA[多食]]></span>
                       </div>  
                       <div class="col col-xs-4" xid="col35">
                         <span xid="span37" bind-click="span37Click"><![CDATA[返回]]></span>
@@ -637,7 +652,7 @@
                     <div component="$UI/system/components/justep/list/list"
                       class="x-list" xid="list11" data="orderData"> 
                       <ul class="x-list-template" xid="listTemplateUl11"> 
-                        <li xid="li4"> 
+                        <li xid="horderli" bind-click="horderliClick"> 
                           <div component="$UI/system/components/bootstrap/row/row"
                             class="row" xid="row7"> 
                             <div class="col col-xs-5dot2" xid="col15"> 
@@ -693,29 +708,29 @@
                         <span xid="hspan32" bind-click="hspan32Click"><![CDATA[价格]]></span>
                       </div>  
                       <div class="col col-xs-3" xid="col31">
-                        <span xid="hspan33" bind-click="span33Click"><![CDATA[数量]]></span>
+                        <span xid="hspan33" bind-click="hspan33Click"><![CDATA[数量]]></span>
                       </div>  
                       <div class="col col-xs-3" xid="col32">
-                        <span xid="hspan34" bind-click="span34Click"><![CDATA[催菜]]></span>
+                        <span xid="hspan34" bind-click="hspan34Click"><![CDATA[催菜]]></span>
                       </div>
                     <div class="col col-xs-3" xid="col68">
-   <span xid="hspan94" bind-click="span34Click"><![CDATA[叫起]]></span></div></div>  
+   <span xid="hspan94" bind-click="hspan94Click"><![CDATA[叫起]]></span></div></div>  
                     <div component="$UI/system/components/bootstrap/row/row"
                       class="row" xid="row9"> 
                       <div class="col col-xs-3" xid="col33">
-                        <span xid="hspan35" bind-click="span35Click"><![CDATA[赠送]]></span>
+                        <span xid="hspan35" bind-click="hspan35Click"><![CDATA[赠送]]></span>
                       </div>  
                       <div class="col col-xs-3" xid="col34">
                         <span xid="hspan36" bind-click="span36Click"><![CDATA[单品打折]]></span>
                       </div>  
                       <div class="col col-xs-3" xid="col35">
-                        <span xid="hspan37" bind-click="span37Click"><![CDATA[全单催菜]]></span>
+                        <span xid="hspan37" bind-click="hspan37Click"><![CDATA[全单催菜]]></span>
                       </div>
                     <div class="col col-xs-3" xid="col69">
    <span xid="hspan95" bind-click="span34Click"><![CDATA[全单叫起]]></span></div></div>
                   <div component="$UI/system/components/bootstrap/row/row" class="row" xid="row11">
    <div class="col col-xs-3" xid="col45">
-    <span xid="hspan40"><![CDATA[退菜]]></span></div> 
+    <span xid="hspan40" bind-click="hspan40Click"><![CDATA[退菜]]></span></div> 
    
    
    </div></div> 
@@ -1089,9 +1104,9 @@
                   xid="panel12"> 
                   <div class="x-panel-top" xid="top12"> 
                     <div component="$UI/system/components/justep/titleBar/titleBar"
-                      class="x-titlebar" xid="titleBar5" title="多食"> 
+                      class="x-titlebar" xid="titleBar5" title="数量"> 
                       <div class="x-titlebar-left" xid="div64"/>  
-                      <div class="x-titlebar-title" xid="div57">多食</div>  
+                      <div class="x-titlebar-title" xid="div57">数量</div>  
                       <div class="x-titlebar-right reverse" xid="div58"/>
                     </div> 
                   </div>  
@@ -1161,32 +1176,7 @@
    <div class="x-panel-bottom order-info-button" xid="bottom10"><a component="$UI/system/components/justep/button/button" class="btn x-orange" label="返回" xid="button50" bind-click="button50Click">
    <i xid="i52"></i>
    <span xid="span90">返回</span></a></div></div></div>
-  <div class="x-contents-content" xid="content21"><div component="$UI/system/components/justep/panel/panel" class="x-panel x-full" xid="panel11">
-   <div class="x-panel-top" xid="top11">
-    <div component="$UI/system/components/justep/titleBar/titleBar" class="x-titlebar" xid="titleBar4" title="退菜">
-     <div class="x-titlebar-left" xid="div41"></div>
-     <div class="x-titlebar-title" xid="div44">退菜</div>
-     <div class="x-titlebar-right reverse" xid="div39"></div></div> </div> 
-   <div class="x-panel-content" xid="content22">
-    <div xid="div36" class="pop-con">
-     <div class="con-con" xid="div37">
-      <div xid="div42">
-       <div component="$UI/system/components/justep/labelEdit/labelEdit" class="x-label-edit x-label30" xid="labelInput6">
-        <label class="x-label" xid="label8"><![CDATA[原因]]></label>
-        <input component="$UI/system/components/justep/input/input" class="form-control x-edit" xid="input6" placeHolder="请输入菜名" id="noOrderChangeName"></input></div> 
-  <div component="$UI/system/components/justep/labelEdit/labelEdit" class="x-label-edit x-label30" xid="labelInput8">
-   <label class="x-label" xid="label10"><![CDATA[数量]]></label>
-   <input component="$UI/system/components/justep/input/input" class="form-control x-edit" xid="input8" placeHolder="请输入菜名" id="noOrderChangeName"></input></div></div> </div> </div> </div> 
-   <div class="x-panel-bottom bottom-btn-wrap" xid="bottom8">
-    <div component="$UI/system/components/bootstrap/row/row" class="row" xid="row19">
-     <div class="col col-xs-6" xid="col58">
-      <a component="$UI/system/components/justep/button/button" class="btn btn-success" label="确认" xid="button36" onClick="button43Click">
-       <i xid="i39"></i>
-       <span xid="span92">确认</span></a> </div> 
-     <div class="col col-xs-6" xid="col56">
-      <a component="$UI/system/components/justep/button/button" class="btn x-orange" label="返回" xid="button37" bind-click="closeGive">
-       <i xid="i38"></i>
-       <span xid="span91">返回</span></a> </div> </div> </div> </div></div></div> 
+  </div> 
           </div> 
         </div> 
       </div>
@@ -1212,7 +1202,7 @@
            <div xid="div116">
             <div component="$UI/system/components/justep/labelEdit/labelEdit" class="x-label-edit x-label30" xid="labelInput13">
              <label class="x-label" xid="label13">数量</label>
-             <input component="$UI/system/components/justep/input/input" class="form-control x-edit" xid="input9" placeHolder="请输入数量" id="noOrderPresentsQty"></input></div> </div> 
+             <input component="$UI/system/components/justep/input/input" class="form-control x-edit" xid="input9" placeHolder="请输入数量" id="hOrderPresentsQty"></input></div> </div> 
            <div xid="div122">
             <div class="select-con-wrap" xid="div120">
              <div component="$UI/system/components/justep/list/list" class="x-list require-con" xid="list12" data="presentsReasonData">
@@ -1221,11 +1211,11 @@
         <div class="x-panel-bottom bottom-btn-wrap" xid="bottom12">
          <div component="$UI/system/components/bootstrap/row/row" class="row" xid="row23">
           <div class="col col-xs-6" xid="col74">
-           <a component="$UI/system/components/justep/button/button" class="btn btn-success" label="确认" xid="button58" onClick="buttonGitClick">
+           <a component="$UI/system/components/justep/button/button" class="btn btn-success" label="确认" xid="hbutton58" onClick="hbutton58Click">
             <i xid="i55"></i>
             <span xid="span102">确认</span></a> </div> 
           <div class="col col-xs-6" xid="col73">
-           <a component="$UI/system/components/justep/button/button" class="btn x-orange" label="返回" xid="button51" bind-click="button44Click">
+           <a component="$UI/system/components/justep/button/button" class="btn x-orange" label="返回" xid="button51" bind-click="hbutton44Click">
             <i xid="i54"></i>
             <span xid="span96">返回</span></a> </div> </div> </div> </div> </div> 
       <div class="x-contents-content" xid="content28">
@@ -1249,7 +1239,7 @@
             <i xid="i55"></i>
             <span xid="span102">确认</span></a> </div> 
           <div class="col col-xs-6" xid="col73">
-           <a component="$UI/system/components/justep/button/button" class="btn x-orange" label="返回" xid="button51" bind-click="closeGive">
+           <a component="$UI/system/components/justep/button/button" class="btn x-orange" label="返回" xid="button51" bind-click="hbutton44Click">
             <i xid="i54"></i>
             <span xid="span96">返回</span></a> </div> </div> </div> </div> </div> 
       <div class="x-contents-content" xid="content29">
@@ -1265,23 +1255,23 @@
            <div xid="div100">
             <div component="$UI/system/components/justep/labelEdit/labelEdit" class="x-label-edit x-label30" xid="labelInput12">
              <label class="x-label" xid="label12">价格</label>
-             <input component="$UI/system/components/justep/input/input" class="form-control x-edit" xid="input10" placeHolder="请输入价格" id="noOrderChangePrice"></input></div> </div> </div> </div> </div> 
+             <input component="$UI/system/components/justep/input/input" class="form-control x-edit" xid="hinput10" placeHolder="请输入价格" id="hOrderChangePrice"></input></div> </div> </div> </div> </div> 
         <div class="x-panel-bottom bottom-btn-wrap" xid="bottom14">
          <div component="$UI/system/components/bootstrap/row/row" class="row" xid="row21">
           <div class="col col-xs-6" xid="col78">
-           <a component="$UI/system/components/justep/button/button" class="btn btn-success" label="确认" xid="button57" onClick="button57Click">
+           <a component="$UI/system/components/justep/button/button" class="btn btn-success" label="确认" xid="hbutton57" onClick="hbutton57Click">
             <i xid="i56"></i>
             <span xid="span88">确认</span></a> </div> 
           <div class="col col-xs-6" xid="col79">
-           <a component="$UI/system/components/justep/button/button" class="btn x-orange" label="返回" xid="button56" bind-click="closeGive">
+           <a component="$UI/system/components/justep/button/button" class="btn x-orange" label="返回" xid="button56" bind-click="hbutton44Click">
             <i xid="i57"></i>
             <span xid="span93">返回</span></a> </div> </div> </div> </div> </div> 
       <div class="x-contents-content" xid="content35">
        <div component="$UI/system/components/justep/panel/panel" class="x-panel x-full" xid="panel19">
         <div class="x-panel-top" xid="top17">
-         <div component="$UI/system/components/justep/titleBar/titleBar" class="x-titlebar" xid="titleBar9" title="多食">
+         <div component="$UI/system/components/justep/titleBar/titleBar" class="x-titlebar" xid="titleBar9" title="数量">
           <div class="x-titlebar-left" xid="div119"></div>
-          <div class="x-titlebar-title" xid="div114">多食</div>
+          <div class="x-titlebar-title" xid="div114">数量</div>
           <div class="x-titlebar-right reverse" xid="div115"></div></div> </div> 
         <div class="x-panel-content" xid="content36">
          <div xid="div121" class="pop-con">
@@ -1289,15 +1279,15 @@
            <div xid="div118">
             <div component="$UI/system/components/justep/labelEdit/labelEdit" class="x-label-edit x-label30" xid="labelInput10">
              <label class="x-label" xid="label14">数量</label>
-             <input component="$UI/system/components/justep/input/input" class="form-control x-edit" xid="input11" placeHolder="请输入数量" id="noOrderChangeQty"></input></div> </div> </div> </div> </div> 
+             <input component="$UI/system/components/justep/input/input" class="form-control x-edit" xid="hinput11" placeHolder="请输入数量" id="hOrderChangeQty"></input></div> </div> </div> </div> </div> 
         <div class="x-panel-bottom bottom-btn-wrap" xid="bottom13">
          <div component="$UI/system/components/bootstrap/row/row" class="row" xid="row20">
           <div class="col col-xs-6" xid="col82">
-           <a component="$UI/system/components/justep/button/button" class="btn btn-success" label="确认" xid="button53" onClick="button38Click">
+           <a component="$UI/system/components/justep/button/button" class="btn btn-success" label="确认" xid="hbutton53" onClick="hbutton53Click">
             <i xid="i51"></i>
             <span xid="span59">确认</span></a> </div> 
           <div class="col col-xs-6" xid="col81">
-           <a component="$UI/system/components/justep/button/button" class="btn x-orange" label="返回" xid="button52" bind-click="button44Click">
+           <a component="$UI/system/components/justep/button/button" class="btn x-orange" label="返回" xid="button52" bind-click="hbutton44Click">
             <i xid="i53"></i>
             <span xid="span42">返回</span></a> </div> </div> </div> </div> </div> 
       <div class="x-contents-content" xid="content25">
@@ -1365,7 +1355,7 @@
             <i xid="i58"></i>
             <span xid="span98">确认</span></a> </div> 
           <div class="col col-xs-6" xid="col70">
-           <a component="$UI/system/components/justep/button/button" class="btn x-orange" label="返回" xid="button54" bind-click="closeGive">
+           <a component="$UI/system/components/justep/button/button" class="btn x-orange" label="返回" xid="button54" bind-click="hbutton44Click">
             <i xid="i59"></i>
             <span xid="span101">返回</span></a> </div> </div> </div> </div> </div> </div> </div> </div> </div></div></div><div component="$UI/system/components/justep/popOver/popOver" class="x-popOver box-style" xid="account">
    <div class="x-popOver-overlay" xid="div89"></div>
