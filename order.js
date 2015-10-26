@@ -209,6 +209,77 @@ define(function(require) {
 				"success" : success
 			});	
 			return obj;			
+		},
+		//全单叫起
+		respiteAllL:function(data){
+			var obj;
+			var success = function(param){
+				var a = param;
+				obj = a;
+			};
+			Baas.sendRequest({
+				"url" : data.ip + 'RoomFunctionServlet.do?func=respiteAll&billMasterId='+data.billMasterId+'&consumeRoomId='+data.consumeRoomId,
+				"dataType": "json",
+				"success" : success
+			});	
+			return obj;					
+		},
+		//预览结帐单
+		showBill:function(data){
+			var obj;
+			var success = function(param){
+				var a = param;
+				obj = a;
+			};
+			Baas.sendRequest({
+				"url" : data.ip + 'RoomFunctionServlet.do?func=showBill&consumeRoomId='+data.consumeRoomId,
+				"dataType": "json",
+				"success" : success
+			});	
+			return obj;					
+		},
+		//结帐单会员打折
+		//RoomFunctionServlet.do?func=memberDiscount&cardno=xxx&pwd=xxx&billMasterId=xxx
+		memberDiscount:function(data){
+			var obj;
+			var success = function(param){
+				var a = param;
+				obj = a;
+			};
+			Baas.sendRequest({
+				"url" : data.ip + 'RoomFunctionServlet.do?func=memberDiscount&cardno='+data.cardno+'&pwd='+data.pwd+'&billMasterId='+data.billMasterId,
+				"dataType": "json",
+				"success" : success
+			});	
+			return obj;	
+		},
+		//结帐单修改人数
+		editCustQty:function(data){
+			var obj;
+			var success = function(param){
+				var a = param;
+				obj = a;
+			};
+			Baas.sendRequest({
+				"url" : data.ip + 'RoomFunctionServlet.do?func=editCustQty&billMasterId='+data.billMasterId+'&consumeRoomId='+data.consumeRoomId+'&custQty='+data.qty,
+				"dataType": "json",
+				"success" : success
+			});	
+			return obj;				
+		},
+		//结帐单打折RoomFunctionServlet.do?func=allDiscout&billMasterId=xxx&empCode=xxx&discountTypeId=xxx&discount=xxx
+		allDiscout:function(data){
+			var obj;
+			var success = function(param){
+				var a = param;
+				obj = a;
+			};
+			Baas.sendRequest({
+				"url" : data.ip + 'RoomFunctionServlet.do?func=allDiscout&billMasterId='+data.billMasterId+'&empCode='+data.userId+'&discountTypeId='+data.discountTypeId+'&discount='+data.discount,
+				"dataType": "json",
+				"success" : success
+			});	
+			return obj;				
 		}
 	};
 
