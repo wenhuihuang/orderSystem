@@ -2,7 +2,7 @@ define(function(require){
 	var $ = require("jquery");
 	var justep = require("$UI/system/lib/justep");
 	//var ip = "http://qixusoft.vicp.net";
-	var ip="http://192.168.1.20:8080/OrderSystemWeX5/";
+	var ip="http://120.25.244.95/OrderSystemWeX5/";
 	//var url="UI2/orderSystem_a/index.w#!index";
 	var Baas = require("$UI/demo/baas/baas");
 	var Language = require('$UI/orderSystem/language');
@@ -1425,6 +1425,7 @@ define(function(require){
 	
 	//已分单价格修改
 	Model.prototype.hspan32Click = function(event){
+		debugger
 		this.comp("yet-sort").show();
 		this.comp("contents5").to("content29");
 	};
@@ -1537,12 +1538,11 @@ define(function(require){
 	
 	//已分单赠送实际操作
 	Model.prototype.hbutton58Click = function(event){
-		var currentOrderData = this.comp('currentOrderData');
+		//data.ip + 'RoomFunctionServlet.do?func=gift&billDetailId='+data.billDetailId+'&reasonId='+data.reasonId+'&cancelQty='+data.cancelQty+'&empcode='+data.userId		var currentOrderData = this.comp('currentOrderData');
 		var userData = this.comp('userData');
 		var currentOrderData = this.comp('currentOrderData');
 		var qty = $('#hOrderPresentsQty').val();
-		order.hGift({'ip':ip,'billDetailId':currentOrderData.val('billDetailId'),'reasonId':currentOrderData.val('reasonId'),'qty':qty,'userId':userData.val('userId')});
-		
+		ordr.hGift({'ip':ip,'billDetailId':currentOrderData.val('billDetailId'),'reasonId':currentOrderData.val('reasonId'),'qty':qty,'userId':userData.val('userId')});		
 	};
 
 	
@@ -1553,9 +1553,6 @@ define(function(require){
 		alert('催菜成功');
 	};
 
-	
-	
-	
 	//全单叫起
 	Model.prototype.hspan95Click = function(event){
 		var  currentDeskData = this.comp('currentDeskData');
@@ -1603,15 +1600,6 @@ define(function(require){
 	};
 	
 
-	
-	//修改人数
-	Model.prototype.jspan75Click = function(event){
-		
-//		order.editCustQty()
-	};
-	
-
-
 
 	
 	//结帐单修改人数
@@ -1623,6 +1611,83 @@ define(function(require){
 		
 		order.editCustQty({'ip':ip,'qty':qty,'billMasterId':billMasterId});
 		this.comp('account').hide();
+	};
+	
+
+
+
+	//打拆跳转
+	Model.prototype.span60Click = function(event){
+		debugger
+		this.comp('account').show();
+		this.comp('contents6').to('content39');
+	};
+	
+
+
+	
+	//结帐单修改人数跳转
+	Model.prototype.jspan75Click = function(event){
+		this.comp('account').show();
+		this.comp('contents6').to('content47');
+	};
+	
+
+
+	//折扣类型model
+	Model.prototype.discountTypesDataCustomRefresh = function(event){
+		var discountTypesData = this.comp('discountTypesData');
+		var data = order.discountTypes({'ip':ip});
+		discountTypesData.loadData({'rows':data.discountTypes});
+	};
+	
+
+	//当前打折类型
+	Model.prototype.li9Click = function(event){
+		var currentDisCountTypesData = this.comp('currentDisCountTypesData');
+		var row = event.bindingContext.$rawData;
+		currentDisCountTypesData.newData({
+			index:0,
+			defaultValues:[{
+				discount:row.val('discount'),
+				discountTypeId:row.val('discountTypeId'),
+				discountTypeName:row.val('discountTypeName')
+			}]
+		})
+	};
+	
+
+
+	//确认打折
+	Model.prototype.button68Click = function(event){
+		//				"url" : data.ip + 'RoomFunctionServlet.do?func=allDiscout&billMasterId='+data.billMasterId+'&empCode='+data.userId+'&discountTypeId='+data.discountTypeId+'&discount='+data.discount,
+		var currentDeskData = this.comp('currentDeskData');
+		var userData = this.comp('userData');
+		var a = this.comp('currentDisCountTypesData');
+		var currentDisCountTypesData = this.comp('currentDisCountTypesData');
+		order.allDiscout({'ip':ip,'billMasterId':currentDeskData.val('billMasterId'),'userId':userData.val('userId'),'discount':a.val('discount'),'discountTypeId':a.val('discountTypeId')});
+	};
+	
+
+
+
+	
+	//重打总单
+	Model.prototype.span72Click = function(event){
+		order.reprintAll({'ip':ip,'consumeRoomId':this.comp('currentDeskData').val('consumeRoomId')});
+	};
+	
+
+
+
+	
+	
+
+
+	
+	
+	Model.prototype.hhspan35Click = function(event){
+		debugger
 	};
 	
 

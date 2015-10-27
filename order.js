@@ -280,6 +280,35 @@ define(function(require) {
 				"success" : success
 			});	
 			return obj;				
+		},
+		//拆扣类型
+		discountTypes:function(data){
+			var obj;
+			var success = function(param){
+				var a = param;
+				obj = a;
+			};
+			Baas.sendRequest({
+				"url" : data.ip + 'RoomFunctionServlet.do?func=getDiscountType',
+				"dataType": "json",
+				"success" : success
+			});	
+			return obj;		
+		},
+		//重打订单
+		//RoomFunctionServlet.do?func=reprintAll&consumeRoomId=000100000000000003LV
+		reprintAll:function(data){
+			var obj;
+			var success = function(param){
+				var a = param;
+				obj = a;
+			};
+			Baas.sendRequest({
+				"url" : data.ip + 'RoomFunctionServlet.do?func=reprintAll&consumeRoomId='+data.consumeRoomId,
+				"dataType": "json",
+				"success" : success
+			});	
+			return obj;		
 		}
 	};
 

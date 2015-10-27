@@ -2,13 +2,12 @@
 
 <div xmlns="http://www.w3.org/1999/xhtml" xid="window" class="window" component="$UI/system/components/justep/window/window"
   design="device:mobile">  
-  <div component="$UI/system/components/justep/model/model" xid="model" style="width:246px;height:auto;left:862px;top:59px;" onLoad="modelLoad">
+  <div component="$UI/system/components/justep/model/model" xid="model" style="width:234px;height:auto;left:836px;top:88px;" onLoad="modelLoad">
 
   <div component="$UI/system/components/justep/data/data" autoLoad="true" xid="runModel" idColumn="col0"><column name="col0" type="String" xid="xid63"></column>
   <column label="模式" name="model" type="String" xid="xid64"></column>
   <data xid="default29">[{&quot;model&quot;:&quot;服务员手机&quot;},{&quot;model&quot;:&quot;服务员平板&quot;},{&quot;model&quot;:&quot;自助手机&quot;},{&quot;model&quot;:&quot;自助平板&quot;}]</data></div>
-  <div component="$UI/system/components/justep/data/data" autoLoad="true" xid="roomData" idColumn="typeName" onCustomRefresh="fan_nameCustomRefresh" autoNew="false"><column label="房类型" name="typeName" type="String" xid="xid4"></column>
-  <column label="房类号" name="typeCode" type="Long" xid="xid6"></column></div><div component="$UI/system/components/justep/data/data" autoLoad="true" xid="deskData" idColumn="tai_number"><column label="台号" name="tai_number" type="String" xid="xid5"></column>
+  <div component="$UI/system/components/justep/data/data" autoLoad="true" xid="roomData" idColumn="typeName" onCustomRefresh="fan_nameCustomRefresh" autoNew="false"><column label="房类型" name="typeName" type="String" xid="xid4"></column>  <column label="房类号" name="typeCode" type="Long" xid="xid6"></column></div><div component="$UI/system/components/justep/data/data" autoLoad="true" xid="deskData" idColumn="tai_number"><column label="台号" name="tai_number" type="String" xid="xid5"></column>
   <column label="状态" name="state" type="String" xid="xid7"></column>
   <column label="房号id" name="roomId" type="String" xid="xid8"></column>
   <column label="订单号" name="billMasterId" type="String" xid="xid16"></column>
@@ -176,7 +175,48 @@
    <col name="totalMoney" xid="ruleCol8">
     <calculate xid="calculate8">
      <expr xid="default44">$model.showBillData.sum('checkOutMoney')</expr></calculate> </col> </rule>
-  <column name="billMasterID" type="String" xid="xid70"></column></div></div>  
+  <column name="billMasterID" type="String" xid="xid70"></column></div>
+  <div component="$UI/system/components/justep/data/data" autoLoad="true" xid="discountTypesData" idColumn="col0" onCustomRefresh="discountTypesDataCustomRefresh"><column name="col0" type="String" xid="xid71"></column>
+  <column name="discount" type="String" xid="xid72"></column>
+  <column name="discountTypeId" type="String" xid="xid73"></column>
+  <column name="discountTypeName" type="String" xid="xid74"></column></div>
+  <div component="$UI/system/components/justep/data/data" autoLoad="true" xid="currentDisCountTypesData" idColumn="col0" onCustomRefresh="discountTypesDataCustomRefresh">
+   <column name="col0" type="String" xid="default45"></column>
+   <column name="discount" type="String" xid="default47"></column>
+   <column name="discountTypeId" type="String" xid="default46"></column>
+   <column name="discountTypeName" type="String" xid="default48"></column></div></div>  
+  <div component="$UI/system/components/justep/popOver/popOver" class="x-popOver  settings box-style" xid="Settings" opacity="0.9">
+   <div class="x-popOver-overlay" xid="div157"></div>
+   <div class="x-popOver-content  pop-container" xid="div158"><div xid="div159" class="pop-wrap" style="height:94%;">
+   <div component="$UI/system/components/justep/panel/panel" class="x-panel x-full" xid="panel27">
+    <div class="x-panel-top" xid="top24" height="48">
+     <div component="$UI/system/components/justep/titleBar/titleBar" class="x-titlebar" xid="titleBar14" title="参数设置">
+   <div class="x-titlebar-left" xid="div173"></div>
+   <div class="x-titlebar-title" xid="div174">参数设置</div>
+   <div class="x-titlebar-right reverse" xid="div175"></div></div></div> 
+    <div class="x-panel-content" xid="content52">
+     <div xid="div176"><div class="form-horizontal container-fluid" component="$UI/system/components/bootstrap/form/form" xid="form2"><h5 xid="h51"><![CDATA[1、服务器连接参数设置:]]></h5><div component="$UI/system/components/justep/labelEdit/labelEdit" class="x-label-edit x-label30" xid="labelInput19">
+   <label class="x-label" xid="label21"><![CDATA[服务器地址:]]></label>
+   <input component="$UI/system/components/justep/input/input" class="form-control x-edit" xid="input19" placeHolder="请输入服务器地址"></input></div>
+  <div component="$UI/system/components/justep/labelEdit/labelEdit" class="x-label-edit x-label30" xid="labelInput23">
+   <label class="x-label" xid="label25"><![CDATA[端口号:]]></label>
+   <input component="$UI/system/components/justep/input/input" class="form-control x-edit" xid="input23" placeHolder="请输入端口号"></input></div>
+  <h5 xid="h55"><![CDATA[2、其它参数设置]]></h5><div component="$UI/system/components/justep/labelEdit/labelEdit" class="x-label-edit x-label30" xid="labelSelect1">
+   <label class="x-label" xid="label28"><![CDATA[运行模式:]]></label>
+   <select component="$UI/system/components/justep/select/select" class="form-control x-edit" xid="select1" bind-optionsCaption="--请选择运行模式--" bind-optionsValue="model" bind-optionsLabel="model" bind-options="runModel"></select></div><div component="$UI/system/components/justep/labelEdit/labelEdit" class="x-label-edit x-label30" xid="labelInput25">
+   <label class="x-label" xid="label27"><![CDATA[默认打印机:]]></label>
+   <input component="$UI/system/components/justep/input/input" class="form-control x-edit" xid="input25" placeHolder="请输入打印机"></input></div>
+  </div></div>
+  </div> 
+    <div class="x-panel-bottom" xid="bottom22">
+     
+  <a component="$UI/system/components/justep/button/button" class="btn btn-default send-order-btn" label="应用" xid="button72">
+   <i xid="i72"></i>
+   <span xid="span133">应用</span></a>
+  <a component="$UI/system/components/justep/button/button" class="btn btn-default close-btn" label="返回" xid="button71" onClick="button6Click" bind-click="button71Click">
+   <i xid="i71"></i>
+   <span xid="span132">返回</span></a></div> </div> </div></div></div>
+  
   <div component="$UI/system/components/justep/popOver/popOver" class="x-popOver  settings box-style" xid="Settings" opacity="0.9">
    <div class="x-popOver-overlay" xid="div157"></div>
    <div class="x-popOver-content  pop-container" xid="div158"><div xid="div159" class="pop-wrap" style="height:94%;">
@@ -884,11 +924,11 @@
      <span xid="span76"><![CDATA[修改最低消费]]></span></div> </div> 
    <div component="$UI/system/components/bootstrap/row/row" class="row" xid="row14">
     <div class="col col-xs-3" xid="col53">
-     <span xid="span60"><![CDATA[打折]]></span></div> 
+     <span xid="span60" bind-click="span60Click"><![CDATA[打折]]></span></div> 
     <div class="col col-xs-3" xid="col52">
      <span xid="span71" bind-click="span71Click"><![CDATA[会员打折]]></span></div> 
     <div class="col col-xs-3" xid="col51">
-     <span xid="span72"><![CDATA[重打总单]]></span></div> 
+     <span xid="span72" bind-click="span72Click"><![CDATA[重打总单]]></span></div> 
     <div class="col col-xs-3" xid="col47">
      <span xid="span77"><![CDATA[埋单]]></span></div> </div> <div component="$UI/system/components/bootstrap/row/row" class="row" xid="row19">
    <div class="col col-xs-3" xid="col56"><span xid="span92" bind-click="span92Click"><![CDATA[预览结账单]]></span></div>
@@ -1452,9 +1492,9 @@
       <div class="x-contents-content" xid="content39">
        <div component="$UI/system/components/justep/panel/panel" class="x-panel x-full" xid="panel21">
         <div class="x-panel-top" xid="top18">
-         <div component="$UI/system/components/justep/titleBar/titleBar" class="x-titlebar" xid="titleBar10" title="赠送">
+         <div component="$UI/system/components/justep/titleBar/titleBar" class="x-titlebar" xid="titleBar10" title="打折">
           <div class="x-titlebar-left" xid="div156"></div>
-          <div class="x-titlebar-title" xid="div129" title="赠送"></div>
+          <div class="x-titlebar-title" xid="div129" title="赠送">打折</div>
           <div class="x-titlebar-right reverse" xid="div128"></div></div> </div> 
         <div class="x-panel-content" xid="content42">
          <div xid="div139" class="pop-con">
@@ -1465,13 +1505,13 @@
              <input component="$UI/system/components/justep/input/input" class="form-control x-edit" xid="input14" placeHolder="请输入数量" id="noOrderPresentsQty"></input></div> </div> 
            <div xid="div152">
             <div class="select-con-wrap" xid="div150">
-             <div component="$UI/system/components/justep/list/list" class="x-list require-con" xid="list13" data="presentsReasonData">
+             <div component="$UI/system/components/justep/list/list" class="x-list require-con" xid="list13" data="discountTypesData">
               <ul class="x-list-template clearfix" xid="listTemplateUl13">
-               <li xid="li9" bind-text="val('zReason')" bind-click="gitliClick"></li></ul> </div> </div> </div> </div> </div> </div> 
+               <li xid="li9" bind-text="val('discountTypeName')" bind-click="li9Click"></li></ul> </div> </div> </div> </div> </div> </div> 
         <div class="x-panel-bottom bottom-btn-wrap" xid="bottom17">
          <div component="$UI/system/components/bootstrap/row/row" class="row" xid="row30">
           <div class="col col-xs-6" xid="col91">
-           <a component="$UI/system/components/justep/button/button" class="btn btn-success" label="确认" xid="button68" onClick="buttonGitClick">
+           <a component="$UI/system/components/justep/button/button" class="btn btn-success" label="确认" xid="button68" onClick="button68Click">
             <i xid="i64"></i>
             <span xid="span118">确认</span></a> </div> 
           <div class="col col-xs-6" xid="col90">
