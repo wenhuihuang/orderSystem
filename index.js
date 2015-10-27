@@ -8,6 +8,7 @@ define(function(require){
 	var Language = require('$UI/orderSystem/language');
 	var myBaas = require('$UI/orderSystem/myBaas');
 	var order = require('$UI/orderSystem/order');
+	var lan = require('$UI/orderSystem/language');
 	var Model = function(){
 		this.callParent();
 	};
@@ -126,12 +127,38 @@ define(function(require){
 
 
 
-	//用户登录 ,并记录下当前的userId
+//用户登录 ,并记录下当前的userId
 	Model.prototype.login_btnClick = function(event){
 		var userData = this.comp('userData');
 		var contents1 = this.comp('contents1');
-		var username=this.comp('userName').val();
-		var pwd=this.comp('userPwd').val();
+		var username=$("#"+this.getIDByXID("userName")).val();
+			
+		var pwd=$("#"+this.getIDByXID("userPwd")).val();
+		/*记住密码*/
+		var userName=$("#"+this.getIDByXID("userName")).val();
+		var userPwd=$("#"+this.getIDByXID("userPwd")).val();
+		console.log(userName +" "+userPwd)
+		if($("#rememberPwd").is(':checked'))
+		{
+			localStorage.setItem("userName",userName);
+			localStorage.setItem("userPwd",userPwd)
+		}else
+		{
+			localStorage.setItem("userName","");
+			localStorage.setItem("userPwd","")
+		}
+		/*记住密码结束*/
+		/*自动登录*/
+		if($("#autoLogin").is(':checked'))
+		{
+			localStorage.setItem("checked",'1');
+		}else
+		{
+			localStorage.setItem("checked","0");
+		}
+		/*自动登录结束*/
+		console.log(username +" "+ pwd)
+		//debugger
 		var mydata = this.comp('user_inof');
 		var success = function(data){
 			     if(data.admin[0].userId != "")   {
@@ -153,7 +180,7 @@ define(function(require){
 			"async" : true,
 			"success" : success
 		});
-				
+	
 	};
 
 
@@ -217,6 +244,7 @@ define(function(require){
 
 
 	
+	
 	//data加载完成，调整顶部宽度
 	Model.prototype.modelLoad = function(event){
 			//设置菜单宽度
@@ -236,6 +264,55 @@ define(function(require){
 			$(".top-menu-li").eq(0).trigger("click");
 			var row = this.comp('deskData');
 			console.log(row)	
+			
+			/*加载语言*/
+			var languageData=this.comp("language");
+			var languageId = localStorage.getItem("languageId");
+			console.log(languageId);
+			var result = lan.getTranslation();
+			console.log(result)
+			console.log(result.length)
+			var str="{";
+			for(var i=0;i<result.length;i++){
+				if(i==result.length-1){
+					str += result[i].internalCode+":'"+result[i].translation+"'}";
+				}else{
+					str += result[i].internalCode+":'"+result[i].translation+"',";
+				}
+				
+			}
+			var obj = eval('(' + str + ')');
+			console.log("str="+str)
+			console.log(obj)
+			//加载语言数据
+			languageData.newData({
+				index: 0,
+				defaultValues:[
+				               obj 
+				]
+			});//end
+			//加载时加载记录的登录用户名和密码
+			var userName=localStorage.getItem("userName");
+			var userPwd=localStorage.getItem("userPwd");
+			//将记录下来的用户名和密码自动填写
+			$("#"+this.getIDByXID("userName")).val(userName);
+			$("#"+this.getIDByXID("userPwd")).val(userPwd);
+			//实现自动登录
+			var checked=localStorage.getItem("checked");
+			debugger
+			if(checked == '1'){
+				$('#autoLogin').attr("checked","true");
+			}else{
+				$('#autoLogin').removeAttr("checked");
+			}
+			if($('#autoLogin').is(':checked')){
+				$("#"+this.getIDByXID("login1")).trigger("click");
+				$('#autoLogin').attr("checked","true");
+			}else{
+				
+			}
+			
+			
 	};
 
 	//mydata为deskData

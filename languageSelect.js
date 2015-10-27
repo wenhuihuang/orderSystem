@@ -29,13 +29,17 @@ define(function(require){
 
 	Model.prototype.button1Click = function(event){
 		//获取所选语言
-		var lan=$("#__baseID___language-select option:selected").val();
-		console.log(lan)
+		var languageId=$("#__baseID___language-select option:selected").val();
+		console.log(languageId)
+		console.log()
+		lan.setLanguage(ip,languageId);
+		debugger;
 		//lan.setLanguage();
 		//var row = event.bindingContext.$rawData;
 		//console.log(row);
-		//location.href('index.w');
-		//console.log(row.val("languageName"));
+		var result = lan.getTranslation({'internalCode':'WELCOME'});
+		location.href='./index.w';
+		console.log(result)
 		//var as = lan.getTranslation({'internalCode':'xxx'});
 		//this.comp('titleBar1').title = as;
 	};
