@@ -8,6 +8,7 @@ define(function(require){
 	var Language = require('$UI/orderSystem/language');
 	var myBaas = require('$UI/orderSystem/myBaas');
 	var order = require('$UI/orderSystem/order');
+	var lan = require('$UI/orderSystem/language');
 	var Model = function(){
 		this.callParent();
 	};
@@ -235,6 +236,88 @@ define(function(require){
 			$(".top-menu-li").eq(0).trigger("click");
 			var row = this.comp('deskData');
 			console.log(row)	
+			
+			/*加载语言*/
+			var languageData=this.comp("language");
+			var languageId = localStorage.getItem("languageId");
+			console.log(languageId);
+			var result = lan.getTranslation();
+			console.log(result)
+			console.log(result.length)
+			var str="{";
+			for(var i=0;i<result.length;i++){
+				if(i==result.length-1){
+					str += result[i].internalCode+":'"+result[i].translation+"'}";
+				}else{
+					str += result[i].internalCode+":'"+result[i].translation+"',";
+				}
+				
+			}
+			var obj = eval('(' + str + ')');
+			console.log("str="+str)
+			console.log(obj)
+			//加载数据
+			languageData.newData({
+				index: 0,
+				defaultValues:[
+				               obj 
+		/*		
+					USING :lan.getTranslation({'internalCode':'USING'}),
+					USERNAME :lan.getTranslation({'internalCode':'USING'}),
+					PASSWORD :lan.getTranslation({'internalCode':'USING'}),
+					WELCOME	:lan.getTranslation({'internalCode':'USING'}),
+					CHECKLOGIN	:lan.getTranslation({'internalCode':'USING'}),
+					EXIT :lan.getTranslation({'internalCode':'USING'}),
+					LOGIN :lan.getTranslation({'internalCode':'USING'}),
+					MENU :lan.getTranslation({'internalCode':'USING'}),
+					EMPTY :lan.getTranslation({'internalCode':'USING'}),
+					PAY :lan.getTranslation({'internalCode':'USING'}),
+					RESERVE :lan.getTranslation({'internalCode':'USING'}),
+					OFF :lan.getTranslation({'internalCode':'USING'}),
+					DETAILS :lan.getTranslation({'internalCode':'USING'}),
+					NOSORT :lan.getTranslation({'internalCode':'USING'}),
+					COMPLETESORT :lan.getTranslation({'internalCode':'USING'}),
+					SETTLEMENT :lan.getTranslation({'internalCode':'USING'}),
+					DISHNAME :lan.getTranslation({'internalCode':'USING'}),
+					PRICE :lan.getTranslation({'internalCode':'USING'}),
+					QUANTITY :lan.getTranslation({'internalCode':'USING'}),
+					ADDED :lan.getTranslation({'internalCode':'USING'}),
+					TOTALPRICES :lan.getTranslation({'internalCode':'USING'}),
+					GIVE :lan.getTranslation({'internalCode':'USING'}),
+					POLYPHAGIA :lan.getTranslation({'internalCode':'USING'}),
+					BACK :lan.getTranslation({'internalCode':'USING'}),
+					SENDSHEET :lan.getTranslation({'internalCode':'USING'}),
+					CLOSE :lan.getTranslation({'internalCode':'USING'}),
+					EDITSISH :lan.getTranslation({'internalCode':'USING'}),
+					CONFIRM	:lan.getTranslation({'internalCode':'USING'}),
+					EDITPRICE :lan.getTranslation({'internalCode':'USING'}),
+					EDITQUANTITY :lan.getTranslation({'internalCode':'USING'}),
+					URGE :lan.getTranslation({'internalCode':'USING'}),
+					CALLUP :lan.getTranslation({'internalCode':'USING'}),
+					DISCOUNT :lan.getTranslation({'internalCode':'USING'}),
+					ALLURGE :lan.getTranslation({'internalCode':'USING'}),
+					ALLCALLUP :lan.getTranslation({'internalCode':'USING'}),
+					EDITOODNUM :lan.getTranslation({'internalCode':'USING'}),
+					EDITSERVER :lan.getTranslation({'internalCode':'USING'}),
+					MEMBERDISCOUNT :lan.getTranslation({'internalCode':'USING'}),
+					ALLSHEET :lan.getTranslation({'internalCode':'USING'}),
+					EDITPEOPLENUMBER :lan.getTranslation({'internalCode':'USING'}),
+					EDITPEOPLENUMBER :lan.getTranslation({'internalCode':'USING'}),
+					EDITMINIMUM :lan.getTranslation({'internalCode':'USING'}),
+					ADMIN :lan.getTranslation({'internalCode':'USING'}),
+					ODDNUM :lan.getTranslation({'internalCode':'USING'}),
+					MEMBERNUM :lan.getTranslation({'internalCode':'USING'}),
+					CANCEL :lan.getTranslation({'internalCode':'USING'}),
+					TOTAL :lan.getTranslation({'internalCode':'USING'}),
+					SERVICECHARGE :lan.getTranslation({'internalCode':'USING'}),
+					DEDUCTION :lan.getTranslation({'internalCode':'USING'}),
+					ACCRUEDEXP :lan.getTranslation({'internalCode':'USING'}),
+					INPUTNUM :lan.getTranslation({'internalCode':'USING'})
+*/
+				]
+			});//end
+			
+			
 	};
 
 	//mydata为deskData
