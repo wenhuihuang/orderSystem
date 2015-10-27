@@ -309,6 +309,36 @@ define(function(require) {
 				"success" : success
 			});	
 			return obj;		
+		},
+		//埋单
+		//RoomFunctionServlet.do?func=checkBill&currentBillMasterId=xxx&checkEmpCodeId=xxxx&currentConsumeRoomId=xxx
+		checkBill:function(data){
+			var obj;
+			var success = function(param){
+				var a = param;
+				obj = a;
+			};
+			Baas.sendRequest({
+				"url" : data.ip + 'RoomFunctionServlet.do?func=checkBill&currentBillMasterId='+data.billMasterId+'&checkEmpCodeId='+data.userId+'&currentConsumeRoomId='+data.consumeRoomId,
+				"dataType": "json",
+				"success" : success
+			});	
+			return obj;				
+		},
+		//取消埋单
+		///RoomFunctionServlet.do?func=uncheckBill&currentBillMasterId=xxx&checkEmpCodeId=xxx
+		unCheckBill:function(data){
+			var obj;
+			var success = function(param){
+				var a = param;
+				obj = a;
+			};
+			Baas.sendRequest({
+				"url" : data.ip + 'RoomFunctionServlet.do?func=uncheckBill&currentBillMasterId='+data.billMaster+'&checkEmpCodeId='+data.userId,
+				"dataType": "json",
+				"success" : success
+			});	
+			return obj;		
 		}
 	};
 

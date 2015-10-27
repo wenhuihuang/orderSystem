@@ -299,8 +299,8 @@ define(function(require){
 	//2.重新加载菜单类型信息
 	//3.通过购物车重新菜单数量和
 	Model.prototype.li1Click = function(event){
-		 event.preventDefault(); 
-		 //event.stopPropagation();
+//		event.preventDefault(); 
+		event.stopPropagation();
 		var oneDeskData = this.comp('currentDeskData');
 		var row = event.bindingContext.$rawData;
 		var deskData = this.comp('deskData');
@@ -997,7 +997,7 @@ define(function(require){
 	};
 		
 	
-  //定时器 
+    //定时器 
     var timeOutEvent=0;
     //长按开始
     Model.prototype.li1Touchstart = function(event){
@@ -1031,9 +1031,8 @@ define(function(require){
 					 "consumeRoomId":row.val('consumeRoomId'),
 					 "shareNO":row.val('shareNO')
 				}]
-			})
-            
-        },500);//这里设置定时器，定义长按500毫秒触发长按事件，时间可以自己改，个人感觉500毫秒非常合适  
+			});
+        },1000);//这里设置定时器，定义长按500毫秒触发长按事件，时间可以自己改，个人感觉500毫秒非常合适  
         return false;
     };
     
@@ -1390,6 +1389,7 @@ define(function(require){
 	//退菜原因model刷新
 	Model.prototype.cancelReasonDataCustomRefresh = function(event){
 		var a = order.cancelReason({'ip':ip});
+		debugger
 		this.comp('cancelReasonData').loadData(a);
 	};
 
@@ -1679,15 +1679,29 @@ define(function(require){
 	
 
 
-
-	
-	
-
-
-	
-	
-	Model.prototype.hhspan35Click = function(event){
+	//埋单
+	Model.prototype.span77Click = function(event){
+		var currentDeskData = this.comp('currentDeskData');
+		var userId = this.comp('userData').val('userId');
 		debugger
+		if($(event.currentTarget).text() == '埋单'){
+			var a= order.checkBill({'ip':ip,'userId':userId,'billMasterId':currentDeskData.val('billMasterId'),'consumeRoomId':currentDeskData.val('consumeRoomId')});
+			if(a.code == '1'){
+				this.comp('message').show({'title':'埋单成功','message':'成功'});
+				currentDeskData.getFirstRow().val('state','4');
+			}else{
+				this.comp('message').show({'title':'error','message':'失败'});
+			}
+		}else{
+			var a = order.unCheckBill({'ip':ip,'billMasterId':currentDeskData.val('billMasterId'),'userId':userId});
+			if(a.code == '1'){
+				this.comp('message').show({'title':'取消埋单成功','message':'取消成功'});
+				currentDeskData.getFirstRow().val('state','3');
+			}else{
+				this.comp('message').show({'title':'error','message':'失败'});
+			}
+		}
+
 	};
 	
 
