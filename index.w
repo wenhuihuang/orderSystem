@@ -892,7 +892,7 @@
     <div class="col col-xs-3" xid="col47">
      <span xid="span77"><![CDATA[埋单]]></span></div> </div> <div component="$UI/system/components/bootstrap/row/row" class="row" xid="row19">
    <div class="col col-xs-3" xid="col56"><span xid="span92" bind-click="span92Click"><![CDATA[预览结账单]]></span></div>
-   <div class="col col-xs-3" xid="col58"><span xid="span91"></span></div>
+   <div class="col col-xs-3" xid="col58"></div>
    <div class="col col-xs-3" xid="col100"></div>
   <div class="col col-xs-3" xid="col101"></div></div></div></div></div>
   </div>
