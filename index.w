@@ -239,14 +239,21 @@
        <div class="col col-xs-6" xid="col2">
         <a component="$UI/system/components/justep/button/button" class="btn btn-default btn-exit" label="退出" xid="exit">
          <i xid="i17"></i>
-         <span xid="span86">退出</span></a> </div> 
+         <span xid="span86" bind-text="language.val('EXIT')">退出</span></a> </div> 
        <div class="col col-xs-6" xid="col3">
         <a component="$UI/system/components/justep/button/button" class="btn btn-success btn-login" label="登录" xid="login1" bind-click="login_btnClick">
          <i xid="i16"></i>
-         <span xid="span85">登录</span></a> </div> </div> </p> </div> </div> </div>
+         <span xid="span85" bind-text="language.val('LOGIN')">登录</span></a> </div> </div> </p> </div> </div> </div>
+  
+  <div xid="div160" class="login-check">
+  
+  <div component="$UI/system/components/bootstrap/row/row" class="row" xid="row34">
+   <div class="col col-xs-6" xid="col100"><input type="checkbox" id="rememberPwd" checked="true" bind-click="checkbox3Click"></input><label for="rememberPwd">记住密码</label></div>
+   <div class="col col-xs-6" xid="col101"><input type="checkbox" id="autoLogin"></input><label for="autoLogin">自动登录</label></div>
+   </div></div>
   </div>
    <div class="x-panel-bottom login-bottom" xid="bottom21">
-  <span xid="span94" class="bottom-copy">CoptyRight©启旭科技有限公司</span><a component="$UI/system/components/justep/button/button" class="btn btn-success" label="设置" xid="button70" target="Settings-con">
+  <span xid="span94" class="bottom-copy">CopyRight©启旭科技有限公司</span><a component="$UI/system/components/justep/button/button" class="btn btn-success" label="设置" xid="button70" target="Settings-con">
    <i xid="i70"></i>
    <span xid="span40">设置</span></a></div></div></div>
     <div class="x-contents-content" xid="index" onActive="indexActive">

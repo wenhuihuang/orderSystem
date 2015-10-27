@@ -131,8 +131,34 @@ define(function(require){
 	Model.prototype.login_btnClick = function(event){
 		var userData = this.comp('userData');
 		var contents1 = this.comp('contents1');
-		var username=this.comp('userName').val();
-		var pwd=this.comp('userPwd').val();
+		var username=$("#"+this.getIDByXID("userName")).val();
+			
+		var pwd=$("#"+this.getIDByXID("userPwd")).val();
+		/*记住密码*/
+		var userName=$("#"+this.getIDByXID("userName")).val();
+		var userPwd=$("#"+this.getIDByXID("userPwd")).val();
+		console.log(userName +" "+userPwd)
+		if($("#rememberPwd").is(':checked'))
+		{
+			localStorage.setItem("userName",userName);
+			localStorage.setItem("userPwd",userPwd)
+		}else
+		{
+			localStorage.setItem("userName","");
+			localStorage.setItem("userPwd","")
+		}
+		/*记住密码结束*/
+		/*自动登录*/
+		if($("#autoLogin").is(':checked'))
+		{
+			localStorage.setItem("checked",'1');
+		}else
+		{
+			localStorage.setItem("checked","0");
+		}
+		/*自动登录结束*/
+		console.log(username +" "+ pwd)
+		//debugger
 		var mydata = this.comp('user_inof');
 		var success = function(data){
 			     if(data.admin[0].userId != "")   {
@@ -153,7 +179,7 @@ define(function(require){
 			"async" : true,
 			"success" : success
 		});
-				
+	
 	};
 
 
@@ -256,66 +282,33 @@ define(function(require){
 			var obj = eval('(' + str + ')');
 			console.log("str="+str)
 			console.log(obj)
-			//加载数据
+			//加载语言数据
 			languageData.newData({
 				index: 0,
 				defaultValues:[
 				               obj 
-		/*		
-					USING :lan.getTranslation({'internalCode':'USING'}),
-					USERNAME :lan.getTranslation({'internalCode':'USING'}),
-					PASSWORD :lan.getTranslation({'internalCode':'USING'}),
-					WELCOME	:lan.getTranslation({'internalCode':'USING'}),
-					CHECKLOGIN	:lan.getTranslation({'internalCode':'USING'}),
-					EXIT :lan.getTranslation({'internalCode':'USING'}),
-					LOGIN :lan.getTranslation({'internalCode':'USING'}),
-					MENU :lan.getTranslation({'internalCode':'USING'}),
-					EMPTY :lan.getTranslation({'internalCode':'USING'}),
-					PAY :lan.getTranslation({'internalCode':'USING'}),
-					RESERVE :lan.getTranslation({'internalCode':'USING'}),
-					OFF :lan.getTranslation({'internalCode':'USING'}),
-					DETAILS :lan.getTranslation({'internalCode':'USING'}),
-					NOSORT :lan.getTranslation({'internalCode':'USING'}),
-					COMPLETESORT :lan.getTranslation({'internalCode':'USING'}),
-					SETTLEMENT :lan.getTranslation({'internalCode':'USING'}),
-					DISHNAME :lan.getTranslation({'internalCode':'USING'}),
-					PRICE :lan.getTranslation({'internalCode':'USING'}),
-					QUANTITY :lan.getTranslation({'internalCode':'USING'}),
-					ADDED :lan.getTranslation({'internalCode':'USING'}),
-					TOTALPRICES :lan.getTranslation({'internalCode':'USING'}),
-					GIVE :lan.getTranslation({'internalCode':'USING'}),
-					POLYPHAGIA :lan.getTranslation({'internalCode':'USING'}),
-					BACK :lan.getTranslation({'internalCode':'USING'}),
-					SENDSHEET :lan.getTranslation({'internalCode':'USING'}),
-					CLOSE :lan.getTranslation({'internalCode':'USING'}),
-					EDITSISH :lan.getTranslation({'internalCode':'USING'}),
-					CONFIRM	:lan.getTranslation({'internalCode':'USING'}),
-					EDITPRICE :lan.getTranslation({'internalCode':'USING'}),
-					EDITQUANTITY :lan.getTranslation({'internalCode':'USING'}),
-					URGE :lan.getTranslation({'internalCode':'USING'}),
-					CALLUP :lan.getTranslation({'internalCode':'USING'}),
-					DISCOUNT :lan.getTranslation({'internalCode':'USING'}),
-					ALLURGE :lan.getTranslation({'internalCode':'USING'}),
-					ALLCALLUP :lan.getTranslation({'internalCode':'USING'}),
-					EDITOODNUM :lan.getTranslation({'internalCode':'USING'}),
-					EDITSERVER :lan.getTranslation({'internalCode':'USING'}),
-					MEMBERDISCOUNT :lan.getTranslation({'internalCode':'USING'}),
-					ALLSHEET :lan.getTranslation({'internalCode':'USING'}),
-					EDITPEOPLENUMBER :lan.getTranslation({'internalCode':'USING'}),
-					EDITPEOPLENUMBER :lan.getTranslation({'internalCode':'USING'}),
-					EDITMINIMUM :lan.getTranslation({'internalCode':'USING'}),
-					ADMIN :lan.getTranslation({'internalCode':'USING'}),
-					ODDNUM :lan.getTranslation({'internalCode':'USING'}),
-					MEMBERNUM :lan.getTranslation({'internalCode':'USING'}),
-					CANCEL :lan.getTranslation({'internalCode':'USING'}),
-					TOTAL :lan.getTranslation({'internalCode':'USING'}),
-					SERVICECHARGE :lan.getTranslation({'internalCode':'USING'}),
-					DEDUCTION :lan.getTranslation({'internalCode':'USING'}),
-					ACCRUEDEXP :lan.getTranslation({'internalCode':'USING'}),
-					INPUTNUM :lan.getTranslation({'internalCode':'USING'})
-*/
 				]
 			});//end
+			//加载时加载记录的登录用户名和密码
+			var userName=localStorage.getItem("userName");
+			var userPwd=localStorage.getItem("userPwd");
+			//将记录下来的用户名和密码自动填写
+			$("#"+this.getIDByXID("userName")).val(userName);
+			$("#"+this.getIDByXID("userPwd")).val(userPwd);
+			//实现自动登录
+			var checked=localStorage.getItem("checked");
+			debugger
+			if(checked == '1'){
+				$('#autoLogin').attr("checked","true");
+			}else{
+				$('#autoLogin').removeAttr("checked");
+			}
+			if($('#autoLogin').is(':checked')){
+				$("#"+this.getIDByXID("login1")).trigger("click");
+				$('#autoLogin').attr("checked","true");
+			}else{
+				
+			}
 			
 			
 	};
@@ -1634,11 +1627,7 @@ define(function(require){
 
 	};
 
-	
-	
 
-
-	
 	
 	return Model;
 });
