@@ -25,21 +25,19 @@ define(function(require){
 			});
 		}
 			
-
 	};
 
 	Model.prototype.button1Click = function(event){
 		//获取所选语言
 		var languageId=$("#__baseID___language-select option:selected").val();
-		debugger;
-		lan.setLanguage(ip,languageId);
+		//lan.setLanguage();
+		lan.setLanguage(ip,languageId);		
 		//var row = event.bindingContext.$rawData;
 		//console.log(row);
 		var result = lan.getTranslation({'internalCode':'WELCOME'});
 		location.href='./index.w';
 		console.log(result)
-		localStorage.setItem('isEnterLanguageUI',false);
-		//var as = lan.getTranslation({'internalCode':'xxx'});
+		localStorage.setItem('isEnterLanguageUI',false);		//var as = lan.getTranslation({'internalCode':'xxx'});
 		//this.comp('titleBar1').title = as;
 	};
 
