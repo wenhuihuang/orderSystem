@@ -27,21 +27,21 @@ define(function(require) {
 		getTranslation:function(data){
 			var obj;
 			var success = function(param){
-				obj = param.result;
+				obj = param;
 			}
 			Baas.sendRequest({
 				//getTranslation&languageId=00010000000000000101&internalCode=USING
-				"url" : localStorage.getItem('ip') + 'getTranslation&languageId='+localStorage.getItem('languageId')+'&internalCode='+data.internalCode,
+				"url" : localStorage.getItem('ip') + 'LanguageServlet.do?func=getTranslation&languageId='+localStorage.getItem('languageId'),
 				"dataType": "json",
 				"success" : success
 			});	
 			return obj;
 		},
 		//设置语言
-		//list的click事件时调用
-		setLanguage:function(data){
-			localStorage.setItem('ip', data.ip);
-			localStorage.setItem('languageId',param.languages[0].languageId);
+		//把ip和languageId保存到本地
+		setLanguage:function(ip,languageId){
+			localStorage.setItem('ip', ip);
+			localStorage.setItem('languageId',languageId);
 		}
 		
 	};

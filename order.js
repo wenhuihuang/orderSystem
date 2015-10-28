@@ -333,8 +333,9 @@ define(function(require) {
 				var a = param;
 				obj = a;
 			};
+			debugger;
 			Baas.sendRequest({
-				"url" : data.ip + 'RoomFunctionServlet.do?func=uncheckBill&currentBillMasterId='+data.billMaster+'&checkEmpCodeId='+data.userId,
+				"url" : data.ip + 'RoomFunctionServlet.do?func=uncheckBill&currentBillMasterId='+data.billMasterId+'&checkEmpCodeId='+data.userId,
 				"dataType": "json",
 				"success" : success
 			});	

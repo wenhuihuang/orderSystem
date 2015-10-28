@@ -2,8 +2,58 @@
 
 <div xmlns="http://www.w3.org/1999/xhtml" xid="window" class="window" component="$UI/system/components/justep/window/window"
   design="device:mobile">  
-  <div component="$UI/system/components/justep/model/model" xid="model" style="width:234px;height:auto;left:723px;top:104px;" onLoad="modelLoad">
-
+  <div component="$UI/system/components/justep/model/model" xid="model" style="width:234px;height:auto;left:762px;top:238px;" onLoad="modelLoad">
+ <div component="$UI/system/components/justep/data/data" autoLoad="true" xid="language" idColumn="col0" confirmDelete="false" autoNew="true"><column name="col0" type="String" xid="xid65"></column>
+  <column label="在用" name="USING" type="String" xid="xid66"></column>
+  <column label="用户名" name="USERNAME" type="String" xid="xid67"></column>
+  <column label="密码" name="PASSWORD" type="String" xid="xid68"></column>
+  <column label="欢迎使用点餐系统" name="WELCOME" type="String" xid="xid69"></column>
+  <column label="请输入用户名和密码登录" name="CHECKLOGIN" type="String" xid="xid70"></column>
+  <column label="退出" name="EXIT" type="String" xid="xid71"></column>
+  <column label="登录" name="LOGIN" type="String" xid="xid72"></column>
+  <column label="菜单" name="MENU" type="String" xid="xid73"></column>
+  <column label="空台" name="EMPTY" type="String" xid="xid74"></column>
+  <column label="埋单" name="PAY" type="String" xid="xid75"></column>
+  <column label="预定" name="RESERVE" type="String" xid="xid76"></column>
+  <column label="禁用" name="OFF" type="String" xid="xid77"></column>
+  <column label="已点详情" name="DETAILS" type="String" xid="xid78"></column>
+  <column label="没分单" name="NOSORT" type="String" xid="xid79"></column>
+  <column label="已分单" name="COMPLETESORT" type="String" xid="xid80"></column>
+  <column label="结算单" name="SETTLEMENT" type="String" xid="xid81"></column>
+  <column label="菜名" name="DISHNAME" type="String" xid="xid82"></column>
+  <column label="单价" name="PRICE" type="String" xid="xid83"></column>
+  <column label="数量" name="QUANTITY" type="String" xid="xid84"></column>
+  <column label="加收" name="ADDED" type="String" xid="xid85"></column>
+  <column label="总价" name="TOTALPRICES" type="String" xid="xid86"></column>
+  <column label="赠送" name="GIVE" type="String" xid="xid87"></column>
+  <column label="多食" name="POLYPHAGIA" type="String" xid="xid88"></column>
+  <column label="返回" name="BACK" type="String" xid="xid89"></column>
+  <column label="送单" name="SENDSHEET" type="String" xid="xid90"></column>
+  <column label="关闭" name="CLOSE" type="String" xid="xid91"></column>
+  <column label="修改菜名" name="EDITSISH" type="String" xid="xid92"></column>
+  <column label="确认" name="CONFIRM" type="String" xid="xid93"></column>
+  <column label="修改价格" name="EDITPRICE" type="String" xid="xid94"></column>
+  <column label="修改数量" name="EDITQUANTITY" type="String" xid="xid95"></column>
+  <column label="催菜" name="URGE" type="String" xid="xid96"></column>
+  <column label="收起" name="CALLUP" type="String" xid="xid97"></column>
+  <column label="打折" name="DISCOUNT" type="String" xid="xid98"></column>
+  <column label="全单催菜" name="ALLURGE" type="String" xid="xid99"></column>
+  <column label="全单叫起" name="ALLCALLUP" type="String" xid="xid100"></column>
+  <column label="修改单号" name="EDITOODNUM" type="String" xid="xid101"></column>
+  <column label="修改原始单号" name="EDITSERVER" type="String" xid="xid102"></column>
+  <column label="会员打折" name="MEMBERDISCOUNT" type="String" xid="xid103"></column>
+  <column label="重打总单" name="ALLSHEET" type="String" xid="xid104"></column>
+  <column label="修改人数" name="EDITPEOPLENUMBER" type="String" xid="xid105"></column>
+  <column label="最低消费" name="EDITMINIMUM" type="String" xid="xid106"></column>
+  <column label="管理员" name="ADMIN" type="String" xid="xid107"></column>
+  <column label="原始单号" name="ODDNUM" type="String" xid="xid108"></column>
+  <column label="会员卡号" name="MEMBERNUM" type="String" xid="xid109"></column>
+  <column label="取消埋单" name="CANCEL" type="String" xid="xid110"></column>
+  <column label="消费合计" name="TOTAL" type="String" xid="xid111"></column>
+  <column label="服务费" name="SERVICECHARGE" type="String" xid="xid112"></column>
+  <column label="折扣额" name="DEDUCTION" type="String" xid="xid113"></column>
+  <column label="应付合计" name="ACCRUEDEXP" type="String" xid="xid114"></column>
+  <column label="请输入就餐人数" name="INPUTNUM" type="String" xid="xid115"></column></div>
   <div component="$UI/system/components/justep/data/data" autoLoad="true" xid="runModel" idColumn="col0"><column name="col0" type="String" xid="xid63"></column>
   <column label="模式" name="model" type="String" xid="xid64"></column>
   <data xid="default29">[{&quot;model&quot;:&quot;服务员手机&quot;},{&quot;model&quot;:&quot;服务员平板&quot;},{&quot;model&quot;:&quot;自助手机&quot;},{&quot;model&quot;:&quot;自助平板&quot;}]</data></div>
@@ -251,33 +301,40 @@
   
   <div component="$UI/system/components/justep/contents/contents" class="x-contents x-full"
     active="0" xid="contents1" swipe="false"> 
-    <div class="x-contents-content" xid="login">
+   <div class="x-contents-content" xid="login">
       <div component="$UI/system/components/justep/panel/panel" class="x-panel x-full" xid="panel26">
    <div class="x-panel-content" xid="content50"><div xid="div48" class="login-wrap">
    <div xid="div52">
-    <h2 xid="h21">欢迎使用点餐系统</h2></div> 
+    <h2 xid="h21" bind-text="language.val('WELCOME')"><![CDATA[]]></h2></div> 
    <div xid="div56">
-    <h4 xid="h41">请输入用户名和密码登录</h4>
+    <h4 xid="h41" bind-text="language.val('CHECKLOGIN')"><![CDATA[]]></h4>
     <div class="form-horizontal container-fluid" component="$UI/system/components/bootstrap/form/form" xid="form1">
      <div component="$UI/system/components/justep/labelEdit/labelEdit" class="x-label-edit x-label30" xid="labelInput1">
-      <label class="x-label" xid="label1">用户名:</label>
-      <input component="$UI/system/components/justep/input/input" class="form-control x-edit" xid="userName" placeHolder="用户名"></input></div> 
+      <label class="x-label" xid="label1" bind-text="language.val('USERNAME')">用户名:</label>
+      <input component="$UI/system/components/justep/input/input" class="form-control x-edit" xid="userName" bind-attr-placeHolder="language.val('USERNAME')"></input></div> 
      <div component="$UI/system/components/justep/labelEdit/labelEdit" class="x-label-edit x-label30" xid="labelPassword1">
-      <label class="x-label" xid="label2">密码:</label>
-      <input component="$UI/system/components/justep/input/password" class="form-control x-edit" xid="userPwd" placeHolder="密码"></input></div> 
+      <label class="x-label" xid="label2" bind-text="language.val('PASSWORD')">密码:</label>
+      <input component="$UI/system/components/justep/input/password" class="form-control x-edit" xid="userPwd" bind-attr-placeHolder="language.val('PASSWORD')"></input></div> 
      <p xid="p79" class="login-wrap">
       <div component="$UI/system/components/bootstrap/row/row" class="row" xid="row1">
        <div class="col col-xs-6" xid="col2">
         <a component="$UI/system/components/justep/button/button" class="btn btn-default btn-exit" label="退出" xid="exit">
          <i xid="i17"></i>
-         <span xid="span86">退出</span></a> </div> 
+         <span xid="span86" bind-text="language.val('EXIT')">退出</span></a> </div> 
        <div class="col col-xs-6" xid="col3">
         <a component="$UI/system/components/justep/button/button" class="btn btn-success btn-login" label="登录" xid="login1" bind-click="login_btnClick">
          <i xid="i16"></i>
-         <span xid="span85">登录</span></a> </div> </div> </p> </div> </div> </div>
+         <span xid="span85" bind-text="language.val('LOGIN')">登录</span></a> </div> </div> </p> </div> </div> </div>
+  
+  <div xid="div160" class="login-check">
+  
+  <div component="$UI/system/components/bootstrap/row/row" class="row" xid="row34">
+   <div class="col col-xs-6" xid="col100"><input type="checkbox" id="rememberPwd" checked="true"></input><label for="rememberPwd">记住密码</label></div>
+   <div class="col col-xs-6" xid="col101"><input type="checkbox" id="autoLogin"></input><label for="autoLogin">自动登录</label></div>
+   </div></div>
   </div>
    <div class="x-panel-bottom login-bottom" xid="bottom21">
-  <span xid="span94" class="bottom-copy">CoptyRight©启旭科技有限公司</span><a component="$UI/system/components/justep/button/button" class="btn btn-success" label="设置" xid="button70" target="Settings-con">
+  <span xid="span94" class="bottom-copy">CopyRight©启旭科技有限公司</span><a component="$UI/system/components/justep/button/button" class="btn btn-success" label="设置" xid="button70" target="Settings-con">
    <i xid="i70"></i>
    <span xid="span40">设置</span></a></div></div></div>
     <div class="x-contents-content" xid="index" onActive="indexActive">
