@@ -29,6 +29,7 @@ define(function(require) {
 			var success = function(param){
 				obj = param;
 			}
+			debugger;
 			Baas.sendRequest({
 				//getTranslation&languageId=00010000000000000101&internalCode=USING
 				"url" : localStorage.getItem('ip') + 'LanguageServlet.do?func=getTranslation&languageId='+localStorage.getItem('languageId'),
@@ -40,7 +41,8 @@ define(function(require) {
 		//设置语言
 		//把ip和languageId保存到本地
 		setLanguage:function(ip,languageId){
-			localStorage.setItem('ip', ip);
+//			var ip = 'http://'+localStorage.getItem('pureip')+':'+localStorage.getItem('com')+'/OrderSystemWeX5/';
+//			localStorage.setItem('ip', ip);
 			localStorage.setItem('languageId',languageId);
 		}
 		

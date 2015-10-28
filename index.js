@@ -2,7 +2,9 @@ define(function(require){
 	var $ = require("jquery");
 	var justep = require("$UI/system/lib/justep");
 	//var ip = "http://qixusoft.vicp.net";
-	var ip="http://120.25.244.95/OrderSystemWeX5/";
+//	var ip="http://120.25.244.95/OrderSystemWeX5/";
+//	var ip ="http://192.168.1.128:8080/OrderSystemWeX5/"
+	var ip = 'http://'+localStorage.getItem('pureip')+':'+localStorage.getItem('com')+'/OrderSystemWeX5/';
 	//var url="UI2/orderSystem_a/index.w#!index";
 	var Baas = require("$UI/demo/baas/baas");
 	var Language = require('$UI/orderSystem/language');
@@ -311,8 +313,7 @@ define(function(require){
 			}else{
 				
 			}
-			
-			
+			debugger			
 	};
 
 	//mydata为deskData
@@ -926,7 +927,6 @@ define(function(require){
 		debugger
 		//送单成功
 		var success = function(param){	
-			debugger;
 			alert(param.result[0].msg);
 			localStorage.setItem(roomId,'');//清空购物车缓存
 			cartData.clear();//发送订单成功，清空cartData
@@ -964,7 +964,6 @@ define(function(require){
 									"dataType": "json",
 									"success" : successOrder
 								});			
-			//
 			var testPrintSuccess = function(printData){
 //			alert(printData)
 			//----------------------------------------------------start of print----------------------------------
@@ -975,11 +974,11 @@ define(function(require){
 			if(param.result[0].billmasterid != ''&&param.result[0].billmasterid != undefined){
 				//打印成功
 				var success1 = function(param){
-					 
+					 debugger
 					
 					
 				}
-				//打印
+				//打印之后更新状态
 				Baas.sendRequest({
 					"url" : ip + 'ShopCartServlet.do?func=afterPrint&isReturnJson=true&billMasterId='+billMasterId+'&roomId='+roomId,
 					"dataType": "json",
@@ -988,7 +987,7 @@ define(function(require){
 			}
 			//----------------------------------------------end of print------------------------------
 			}
-			//打印前检测端口
+			//打印
 			Baas.sendRequest({
 					"url" : ip + 'ShopCartServlet.do?func=printOrder&consumeRoomId='+param.result[0].msg.split('=')[1],
 					"dataType": "json",
@@ -1779,6 +1778,40 @@ define(function(require){
 			}
 		}
 
+	};
+	
+
+
+
+
+	//应用设置ip
+	Model.prototype.button73Click = function(event){
+		localStorage.setItem('pureip',$('#settingIp').val());
+		localStorage.setItem('com',$('#settingCOM').val());
+		ip = 'http://'+$('#settingIp').val()+':'+$('#settingCOM').val()+'/OrderSystemWeX5/';
+		localStorage.setItem('ip',ip);
+		this.comp('contents1').to('login');
+		location.href= 'languageSelect.w'; 
+	};
+	
+
+
+
+
+	//设置返回
+	Model.prototype.Settings_conActive = function(event){
+		$('#settingIp').val(localStorage.getItem('pureip'));
+		$('#settingCOM').val(localStorage.getItem('com'));
+	};
+	
+
+
+
+
+	
+	Model.prototype.languageBtnClick = function(event){
+		localStorage.setItem('isEnterLanguageUI',true);
+		location.href = 'languageSelect.w';
 	};
 	
 

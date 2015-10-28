@@ -2,7 +2,7 @@
 
 <div xmlns="http://www.w3.org/1999/xhtml" xid="window" class="window" component="$UI/system/components/justep/window/window"
   design="device:mobile">  
-  <div component="$UI/system/components/justep/model/model" xid="model" style="width:234px;height:auto;left:762px;top:238px;" onLoad="modelLoad">
+  <div component="$UI/system/components/justep/model/model" xid="model" style="width:234px;height:auto;left:572px;top:90px;" onLoad="modelLoad">
  <div component="$UI/system/components/justep/data/data" autoLoad="true" xid="language" idColumn="col0" confirmDelete="false" autoNew="true"><column name="col0" type="String" xid="xid65"></column>
   <column label="在用" name="USING" type="String" xid="xid66"></column>
   <column label="用户名" name="USERNAME" type="String" xid="xid67"></column>
@@ -336,7 +336,10 @@
    <div class="x-panel-bottom login-bottom" xid="bottom21">
   <span xid="span94" class="bottom-copy">CopyRight©启旭科技有限公司</span><a component="$UI/system/components/justep/button/button" class="btn btn-success" label="设置" xid="button70" target="Settings-con">
    <i xid="i70"></i>
-   <span xid="span40">设置</span></a></div></div></div>
+   <span xid="span40">设置</span></a>
+  <a component="$UI/system/components/justep/button/button" class="btn btn-success" label="语言" xid="languageBtn" onClick="languageBtnClick">
+   <i xid="i38"></i>
+   <span xid="span95">语言</span></a></div></div></div>
     <div class="x-contents-content" xid="index" onActive="indexActive">
       <div component="$UI/system/components/justep/panel/panel" class="x-panel x-full"
         xid="panel1"> 
@@ -502,7 +505,7 @@
         </div>
       </div>
     </div> 
-      <div class="x-contents-content" xid="Settings-con">
+      <div class="x-contents-content" xid="Settings-con" onActive="Settings_conActive">
   <div component="$UI/system/components/justep/panel/panel" class="x-panel x-full" xid="panel29">
    <div class="x-panel-top" xid="top26"><div component="$UI/system/components/justep/titleBar/titleBar" class="x-titlebar" xid="titleBar16" title="参数设置">
    <div class="x-titlebar-left" xid="div187"></div>
@@ -514,10 +517,10 @@
      <h5 xid="h56">1、服务器连接参数设置:</h5>
      <div component="$UI/system/components/justep/labelEdit/labelEdit" class="x-label-edit x-label30" xid="labelInput28">
       <label class="x-label" xid="label30">服务器地址:</label>
-      <input component="$UI/system/components/justep/input/input" class="form-control x-edit" xid="input26" placeHolder="请输入服务器地址"></input></div> 
+      <input component="$UI/system/components/justep/input/input" class="form-control x-edit" xid="input26" placeHolder="请输入服务器地址" id="settingIp"></input></div> 
      <div component="$UI/system/components/justep/labelEdit/labelEdit" class="x-label-edit x-label30" xid="labelInput26">
       <label class="x-label" xid="label29">端口号:</label>
-      <input component="$UI/system/components/justep/input/input" class="form-control x-edit" xid="input27" placeHolder="请输入端口号"></input></div> 
+      <input component="$UI/system/components/justep/input/input" class="form-control x-edit" xid="input27" placeHolder="请输入端口号" id="settingCOM"></input></div> 
      <h5 xid="h57">2、其它参数设置</h5>
      <div component="$UI/system/components/justep/labelEdit/labelEdit" class="x-label-edit x-label30" xid="labelSelect2">
       <label class="x-label" xid="label31">运行模式:</label>
@@ -527,10 +530,10 @@
       <input component="$UI/system/components/justep/input/input" class="form-control x-edit" xid="input28" placeHolder="请输入打印机"></input></div> </div> </div> 
     </div></div>
    <div class="x-panel-bottom" xid="bottom24"><div xid="div185">
-    <a component="$UI/system/components/justep/button/button" class="btn btn-default send-order-btn" label="应用" xid="button73">
+    <a component="$UI/system/components/justep/button/button" class="btn btn-default send-order-btn" label="应用" xid="button73" bind-click="button73Click">
      <i xid="i74"></i>
      <span xid="span148">应用</span></a> 
-    <a component="$UI/system/components/justep/button/button" class="btn btn-default close-btn" label="返回" xid="button74" onClick="button6Click" bind-click="button71Click">
+    <a component="$UI/system/components/justep/button/button" class="btn btn-default close-btn" label="返回" xid="button74" onClick="button6Click" bind-click="button71Click" target="login">
      <i xid="i73"></i>
      <span xid="span147">返回</span></a> </div></div></div></div>
     
