@@ -854,7 +854,7 @@ ul.menu-item li{
 	bottom:48px;
 	background:#fff;
 	width:100%;
-	display:block;
+	display:none;
 }
 .more-wrap .row .col{
 	text-align:center;
