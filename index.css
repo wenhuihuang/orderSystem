@@ -14,7 +14,13 @@
 .gray{
 	background:#ccc;
 }
-.main-ul li div.active{
+.main-ul li{
+	border:1px solid #ccc;
+	box-shadow:0px 0px 8px 2px #acacac;
+	/*background:#fff;*/
+	margin:2%;
+}
+.main-ul li.active{
 	background:#1ECAD3;
 }
 /*台颜色结束*/
@@ -214,12 +220,13 @@ img.subtract,img.add{
 	padding-top:15px;
 	padding-bottom:15px;
 }
+/*
 .table-con{
 	border:1px solid #ccc;
 	box-shadow:0px 0px 8px 2px #acacac;
-	/*background:#fff;*/
 	margin:4%;
 }
+*/
 /*menu*/
 .home-wrap{
 	/*position:absolute;*/
@@ -393,7 +400,7 @@ img.subtract,img.add{
 .main-con ul li{
 	display:block;
 	float:left;
-	width:25%;
+	width:20%;
 	/*margin:2%;*/
 }
 .main-con ul li .x-output{
@@ -854,7 +861,7 @@ ul.menu-item li{
 	bottom:48px;
 	background:#fff;
 	width:100%;
-	display:block;
+	display:none;
 }
 .more-wrap .row .col{
 	text-align:center;
