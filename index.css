@@ -442,7 +442,9 @@ img.subtract,img.add{
 	border-bottom:1px solid #acacac;
 }
 .con-con ul li.active{
-	background:red;
+	color: rgb(255, 255, 255);
+    border-color: rgb(95, 178, 111);
+    background: rgb(105, 193, 122);
 }
 .pop-con-title{
 	padding:6px 0;
@@ -463,6 +465,7 @@ img.subtract,img.add{
 	position: fixed;
     bottom: 57px;
     background-color: #E8E8E8;
+    display:none;
 }
 .pop-menuSub-btn span{
 	padding: 8px 0;
