@@ -11,6 +11,8 @@ var ip = 'http://'+localStorage.getItem('pureip')+':'+localStorage.getItem('com'
 	var myBaas = require('$UI/orderSystem/myBaas');
 	var order = require('$UI/orderSystem/order');
 	var lan = require('$UI/orderSystem/language');
+	    //定时器 
+    var timeOutEvent=0;
 	var Model = function(){
 		this.callParent();
 	};
@@ -970,25 +972,14 @@ var ip = 'http://'+localStorage.getItem('pureip')+':'+localStorage.getItem('com'
 									"success" : successOrder
 								});			
 			var testPrintSuccess = function(printData){
-//			alert(printData)
+			alert(printData);
 			//----------------------------------------------------start of print----------------------------------
 			
 //			alert(param.result[0].msg);
-			 
 			//当有订单时才打印
 			if(param.result[0].billmasterid != ''&&param.result[0].billmasterid != undefined){
 				//打印成功
-				var success1 = function(param){
-					 debugger
-					
-					
-				}
-				//打印之后更新状态
-				Baas.sendRequest({
-					"url" : ip + 'ShopCartServlet.do?func=afterPrint&isReturnJson=true&billMasterId='+billMasterId+'&roomId='+roomId,
-					"dataType": "json",
-					"success" : success1
-				});
+
 			}
 			//----------------------------------------------end of print------------------------------
 			}
@@ -998,7 +989,7 @@ var ip = 'http://'+localStorage.getItem('pureip')+':'+localStorage.getItem('com'
 					"dataType": "json",
 					"success" : testPrintSuccess
 			});
-		}
+		};
 			//送单
 		Baas.sendRequest({
 			"url" : ip + url,
@@ -1078,14 +1069,12 @@ var ip = 'http://'+localStorage.getItem('pureip')+':'+localStorage.getItem('com'
 	};
 		
 	
-    //定时器 
-    var timeOutEvent=0;
+
     //长按开始
     Model.prototype.li1Touchstart = function(event){
-    	var currentDeskData = this.comp('currentDeskData');
+    	//event.stopPropagation();		event.stopPropagation();    	var currentDeskData = this.comp('currentDeskData');
     	var row = event.bindingContext.$rawData;
         timeOutEvent = setTimeout(function(){
-        alert('长按开始')
     	timeOutEvent = 0; 
             //执行长按要执行的内容，如弹出菜单         
             //找出台li里的attr=mydata     
@@ -1094,7 +1083,7 @@ var ip = 'http://'+localStorage.getItem('pureip')+':'+localStorage.getItem('com'
             var divObj= $(event.target).is("li") ? $(event.target).find(".table-con") : $(event.target).parents("li").find(".table-con");
             //alert( divObj.html());
             //为选中的台加上active
-            divObj.addClass("active").siblings().removeClass("active") //? $(event.target).addClass("active").siblings().removeClass("active") : $(event.target).parents("li").addClass("active").siblings().removeClass("active");
+            divObj.addClass("active").siblings().removeClass("active"); //? $(event.target).addClass("active").siblings().removeClass("active") : $(event.target).parents("li").addClass("active").siblings().removeClass("active");
             $(".more-wrap").show();
             $(".main-ul").css({"margin-bottom":"94px"});
             $(".more-wrap").find(".btn").each(function(){
@@ -1113,9 +1102,7 @@ var ip = 'http://'+localStorage.getItem('pureip')+':'+localStorage.getItem('com'
 					 "shareNO":row.val('shareNO')
 				}]
 			});
-        },1000);//这里设置定时器，定义长按500毫秒触发长按事件，时间可以自己改，个人感觉500毫秒非常合适  
-        return false;
-    };
+        return false;    };
     
     //移动
     Model.prototype.li1Touchmove = function(event){
@@ -1125,13 +1112,108 @@ var ip = 'http://'+localStorage.getItem('pureip')+':'+localStorage.getItem('com'
     
     //结束
     Model.prototype.li1Touchend = function(event){
-           clearTimeout(timeOutEvent);//清除定时器  
-            if(timeOutEvent!=0){  
-                //这里写要执行的内容（尤如onclick事件）  
-              alert("你这是点击，不是长按");  
+    	event.preventDefault();
+        clearTimeout(timeOutEvent);//清除定时器  
+//        alert(timeOutEvent)
+        if(timeOutEvent!=0){              
+        //这里写要执行的内容（尤如onclick事件）  
+        var oneDeskData = this.comp('currentDeskData');
+		var row = event.bindingContext.$rawData;
+		var deskData = this.comp('deskData');
+		var state=row.val("state");
+		var contents1 = this.comp('contents1');
+		var popOver_renshu = this.comp("popOver_renshu");
+		var cartData = this.comp('cartData');
+		var goodsListData = this.comp('goodsListData');
+		var menuTypeData = this.comp('menuTypeData');
+		//下面用于刷新当前房台状态
+		var deskData = this.comp('deskData');
+		var success = function(param){
+			
+			//重新加载房台
+			$('#more').slideUp();
+			//清空购物车
+			cartData.clear();
+			//重新加载菜单类型信息
+			$.ajax({
+		        type: "GET",
+		        url: ip + 'GoodsTypeServlet.do?func=listGoodsType&getJson=1',
+		        dataType: 'json',
+		        async: false,//使用同步方式，目前data组件有同步依赖
+		        cache: false,
+		        success: function(data){
+		            var rowss=[];
+					for(var i=0;i<data.typeCodes.length;i++){
+					 rowss[i]={'typeName':{'value':data.typeCodes[i].typeName},'typeCode':{'value':data.typeCodes[i].typeCode},'qty':{'value':0}};
+				 	}
+				 	var ffdata={"@type":"table","rows":rowss};
+				 	menuTypeData.loadData(ffdata);//将返回的数据加载到data组件
+			 	
+		        },
+		        error: function(){
+		          throw justep.Error.create("加载数据失败");
+		        }
+			});
+			//---------end of ajax-------------
+			
+			//从localStorage中获取购物车数据
+			 ;
+			if(localStorage.getItem(param.rooms[0].roomId)!=null&&localStorage.getItem(param.rooms[0].roomId)!=""){
+				cartData.loadData(JSON.parse(localStorage.getItem(param.rooms[0].roomId)));
+			}
+			//通过购物车计算，各商品类型中的数量和商品的数据
+			menuTypeData.eachAll(function(data){
+				cartData.eachAll(function(data1){
+					if(data.row.val('typeCode')==data1.row.val('typeCode')){
+						data.row.val('qty',data.row.val('qty')+data1.row.val('qty'));
+					}
+				});
+			});
+			//清空商品列表
+			goodsListData.clear();	
+			debugger		
+			//记录当前台号
+			oneDeskData.newData({
+				index: 0,
+				defaultValues:[{
+					 "tai_number":param.rooms[0].tai_number,
+					 "billMasterId":param.rooms[0].consumeBillMasterID,
+					 "roomId":param.rooms[0].roomId,
+					 "typeCode":param.rooms[0].typeCode,
+					 "state":param.rooms[0].state,
+					 "custQty":param.rooms[0].custQty,
+					 "consumeRoomId":param.rooms[0].consumeRoomID,
+					 "shareNo":param.rooms[0].shareNo
+				}]
+			});//end
+			if(state=="在用"){
+				contents1.to("menu"); 
+			}else if(state=="埋单"){
+				contents1.to("menu");
+			}else if(state="空台"){
+				clearTimeout(timeOutEvent);//清除定时器  
+				popOver_renshu.show();
+				//让文本框架
+				$('#custNum').focus();
+			}	
+		}
+		
+		var room = '' ;
+		var room1 = '';
+		if( row.val('consumeRoomId')==null||row.val('consumeRoomId')==undefined||row.val('consumeRoomId')==''){
+			 room = row.val('roomId');			
+		}else{
+			 room1 = row.val('consumeRoomId');
+		}
+		
+		Baas.sendRequest({		
+			"url" : ip + 'RoomServlet.do?func=getRoomById&getJson=1&consumeRoomId='+room1+'&roomId='+room,
+			"dataType": "json",
+			"success" : success
+		});
+                //-------------end of click
               timeOutEvent = 0
             }  
-          
     };
 
     //刷新房台
