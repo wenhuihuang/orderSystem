@@ -1241,11 +1241,10 @@ var ip = 'http://'+localStorage.getItem('pureip')+':'+localStorage.getItem('com'
 		//当a节点点击的时候，当前节点变红其它节点变灰
 		$(".main-ul").find("li").each(function(){
 			$(this).unbind("click");
-			console.log($(this))
-			alert($(this).attr("state"))
+//			console.log($(this))
+//			alert($(this).attr("state"))
 			if($(this).attr("roomid") == roomId){
 				$(this).find(".table-con").css({"background":"red"});
-				
 			}else{
 				if($(this).attr("state") == '在用'){
 					$(this).find(".table-con").css({"background":"#ccc"});
@@ -1269,7 +1268,8 @@ var ip = 'http://'+localStorage.getItem('pureip')+':'+localStorage.getItem('com'
 						if(param.code == '1'){
 							$('.left-menu').find('li').eq(0).trigger('click');//刷新房台
 							return;
-						}else{}
+						}else{
+						}
 					};
 					Baas.sendRequest({
 						"url" : ip + 'RoomFunctionServlet.do?func=mergeRoom&shareRoomId='+shareRoomId+'&shareConsumeRoomId='+shareConsumeRoomId+'&shareBillMasterId='+shareBillMasterId+'&currentRoomId='+currentRoomId+'&currentBillMasterId='+currentBillMasterId+'&currentConsumeRoomId='+currentConsumeRoomId+'&currentCustQty='+currentCustQty,
@@ -1277,7 +1277,7 @@ var ip = 'http://'+localStorage.getItem('pureip')+':'+localStorage.getItem('com'
 						"success" : success
 					});
 				}else{//如果当前房间不为在用状态，不允许并单
-					alert('当前桌子不允许并台');
+					this.comp('message').show({'title':'当前桌子不允许并台','message':'error'});
 				}
 			});
 		});
