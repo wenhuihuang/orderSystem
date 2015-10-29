@@ -672,8 +672,8 @@ var ip = 'http://'+localStorage.getItem('pureip')+':'+localStorage.getItem('com'
 
 	//隐藏订单 
 	Model.prototype.button6Click = function(event){
-		this.comp("order").hide();
-		//$(".no-single").hide();
+		//this.comp("order").hide();
+		$(".no-single").hide();
 	};
 
 
@@ -2033,6 +2033,14 @@ var ip = 'http://'+localStorage.getItem('pureip')+':'+localStorage.getItem('com'
 			var data=param.row.val("typeCode");
 			search(data);
 		})
+	};
+	
+
+
+
+	//关闭order弹框
+	Model.prototype.closeBtnClick = function(event){
+		this.comp("order").hide();
 	};
 	
 

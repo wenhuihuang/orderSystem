@@ -963,7 +963,7 @@
                   <span xid="span19" bind-text="language.ref('SENDSHEET')">送单</span>
                 </a>  
                 <a component="$UI/system/components/justep/button/button"
-                  class="btn btn-default close-btn" label="关闭" xid="button25" onClick="button6Click"> 
+                  class="btn btn-default close-btn" label="关闭" xid="closeBtn" bind-click="closeBtnClick"> 
                   <i xid="i27"/>  
                   <span xid="span18" bind-text="language.ref('CLOSE')">关闭</span>
                 </a> 
