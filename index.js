@@ -1241,8 +1241,6 @@ var ip = 'http://'+localStorage.getItem('pureip')+':'+localStorage.getItem('com'
 		//当a节点点击的时候，当前节点变红其它节点变灰
 		$(".main-ul").find("li").each(function(){
 			$(this).unbind("click");
-//			console.log($(this))
-//			alert($(this).attr("state"))
 			if($(this).attr("roomid") == roomId){
 				$(this).find(".table-con").css({"background":"red"});
 			}else{
