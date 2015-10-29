@@ -1997,8 +1997,41 @@ var ip = 'http://'+localStorage.getItem('pureip')+':'+localStorage.getItem('com'
 	Model.prototype.m_searchClick = function(event){
 		var menuTypeData = this.comp("menuTypeData");
 		var allMenuData = this.comp("allMenuData");
+		var search=function(typeCode){
+			
+					var url= ip+'GoodsServlet.do?func=listByTypeCode&typeCode='+typeCode+'&getJson=1';//http://192.168.1.20:8080
+					var success = function(msg){
+									var rowss=[];
+									for(var i=0;i<msg.goods.length;i++){
+									 rowss[i]={'goodsId':{'value':msg.goods[i].goodsId},'goodsName':{'value':msg.goods[i].goodsName},'sprice':{'value':msg.goods[i].sprice},'qty':{'value':0},'typeCode':{'value':msg.goods[i].typeCode},'unitId':{'value':msg.goods[i].unitId}};
+								 	}
+								 	var ffdata={"rows":rowss};
+								 	allMenuData.loadData(ffdata,true);
+								 	
+							//从购物车中统计当前各商品购买数量，并将数量显示在商品列中
+//							goodsListData.eachAll(function(param){
+//									cartData.eachAll(function(data){
+//										if(param.row.val('goodsId')==data.row.val('goodsId')){
+//											param.row.val('qty',param.row.val('qty')+data.row.val('qty'));
+//										}
+//									});
+//							}); 	
+								 	
+								 		 	
+				    }
+				   
+					Baas.sendRequest({
+						"url" : url,
+						"dataType": "json",
+						"success" : success
+					});
+			
+		}
+		
+		
 		menuTypeData.eachAll(function(param){
-			param.row.val("typeCode")
+			var data=param.row.val("typeCode");
+			search(data);
 		})
 	};
 	
