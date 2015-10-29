@@ -1027,9 +1027,8 @@ var ip = 'http://'+localStorage.getItem('pureip')+':'+localStorage.getItem('com'
 	};
 	//搭台
 	Model.prototype.button18Click = function(event){
-		this.comp("popOver-take").show();
-		$('#more').slideUp();
-
+		$('#more').css({'display':'none'});
+		this.comp("popOver-take").show();	
 	};
 
 	Model.prototype.button26Click = function(event){
@@ -1051,8 +1050,15 @@ var ip = 'http://'+localStorage.getItem('pureip')+':'+localStorage.getItem('com'
 	
 
 	//搭台确定
+	//当什么的时候就不能搭台
 	Model.prototype.button25Click = function(event){
 		var currentDeskData = this.comp('currentDeskData');
+		debugger
+		if(currentDeskData.val('state')!='在用'){
+			this.comp('popOver-take').hide();
+			this.comp('message').show({'message':'error','title':'当前台不允许搭台'});
+			return;
+		}
 		var url = 'RoomFunctionServlet.do?func=shareRoom&roomId='+currentDeskData.val('roomId')+'&custQty='+$('#'+this.getIDByXID('input4')).val();
 		var contents1 = this.comp('contents1');
 		var success = function(param){
@@ -1069,26 +1075,26 @@ var ip = 'http://'+localStorage.getItem('pureip')+':'+localStorage.getItem('com'
 	};
 		
 	
-
     //长按开始
     Model.prototype.li1Touchstart = function(event){
-    	//event.stopPropagation();		event.stopPropagation();    	var currentDeskData = this.comp('currentDeskData');
+    	event.stopPropagation();
+    	var currentDeskData = this.comp('currentDeskData');
     	var row = event.bindingContext.$rawData;
         timeOutEvent = setTimeout(function(){
-    	timeOutEvent = 0; 
             //执行长按要执行的内容，如弹出菜单         
-            //找出台li里的attr=mydata     
-            var liObj= $(event.target).is("li") ? $(event.target).attr("mydata") : $(event.target).parents("li").attr("mydata");
-            //找出台下主体
-            var divObj= $(event.target).is("li") ? $(event.target).find(".table-con") : $(event.target).parents("li").find(".table-con");
-            //alert( divObj.html());
-            //为选中的台加上active
+            //找出台li里的attr=mydata    
+             debugger 
+//            var liObj= $(event.target).is("li") ? $(event.target).attr("mydata") : $(event.target).parents("li").attr("mydata");
+//            //找出台下主体
+            var divObj= $(event.target).parents("li");
+//            //alert( divObj.html());
+//            //为选中的台加上active
             divObj.addClass("active").siblings().removeClass("active"); //? $(event.target).addClass("active").siblings().removeClass("active") : $(event.target).parents("li").addClass("active").siblings().removeClass("active");
-            $(".more-wrap").show();
-            $(".main-ul").css({"margin-bottom":"94px"});
-            $(".more-wrap").find(".btn").each(function(){
-            	$(this).attr({"roomId":liObj});
-            });
+              $(".more-wrap").show();
+              $(".main-ul").css({"margin-bottom":"94px"});
+//            $(".more-wrap").find(".btn").each(function(){
+//            	$(this).attr({"roomId":liObj});
+//            });
             //记录下当前长按的桌子信息
             currentDeskData.newData({
 				index: 0,
@@ -1101,10 +1107,10 @@ var ip = 'http://'+localStorage.getItem('pureip')+':'+localStorage.getItem('com'
 					 "consumeRoomId":row.val('consumeRoomId'),
 					 "shareNO":row.val('shareNO')
 				}]
-				});
-			},500);
-        return false;    
-        };
+			});
+			timeOutEvent = 0;
+        },500);//这里设置定时器，定义长按500毫秒触发长按事件，时间可以自己改，个人感觉500毫秒非常合适 
+    };
     
     //移动
     Model.prototype.li1Touchmove = function(event){
@@ -1116,7 +1122,7 @@ var ip = 'http://'+localStorage.getItem('pureip')+':'+localStorage.getItem('com'
     Model.prototype.li1Touchend = function(event){
     	event.preventDefault();
         clearTimeout(timeOutEvent);//清除定时器  
-//        alert(timeOutEvent)
+//      alert(timeOutEvent)
         if(timeOutEvent!=0){              
         //这里写要执行的内容（尤如onclick事件）  
         var oneDeskData = this.comp('currentDeskData');
@@ -1159,7 +1165,6 @@ var ip = 'http://'+localStorage.getItem('pureip')+':'+localStorage.getItem('com'
 			//---------end of ajax-------------
 			
 			//从localStorage中获取购物车数据
-			 ;
 			if(localStorage.getItem(param.rooms[0].roomId)!=null&&localStorage.getItem(param.rooms[0].roomId)!=""){
 				cartData.loadData(JSON.parse(localStorage.getItem(param.rooms[0].roomId)));
 			}
@@ -1214,7 +1219,6 @@ var ip = 'http://'+localStorage.getItem('pureip')+':'+localStorage.getItem('com'
 			"success" : success
 		});
                 //-------------end of click
-              timeOutEvent = 0
             }  
     };
 

@@ -368,9 +368,7 @@
             <div component="$UI/system/components/justep/list/list" class="x-list"
               xid="list2" data="deskData"> 
               <ul class="x-list-template clearfix main-ul" xid="listTemplateUl2"> 
-                <li xid="li1" bind-attr-roomId="val('roomId')" bind-attr-state="val('state')" bind-attr-tai_number="val('tai_number')"  bind-attr-consumeRoomId="val('consumeRoomId')" bind-attr-custQty="val('custQty')" bind-touchstart="li1Touchstart" bind-touchend="li1Touchend" bind-touchmove="li1Touchmove"> 
-                  <div xid="div5" class="table-con use"  bind-css="{'blue':val('color')=='blue','gray':val('color')=='gray','yellow':val('color')=='yellow','red':val('color')=='red','green':val('color')=='green'}"> 
-                    <p xid="p87"> 
+                <li xid="li1" bind-attr-roomId="val('roomId')" bind-attr-state="val('state')" bind-attr-tai_number="val('tai_number')"  bind-attr-consumeRoomId="val('consumeRoomId')" bind-attr-custQty="val('custQty')" bind-touchstart="li1Touchstart" bind-touchend="li1Touchend" bind-touchmove="li1Touchmove" bind-css="{'blue':val('color')=='blue','gray':val('color')=='gray','yellow':val('color')=='yellow','red':val('color')=='red','green':val('color')=='green'}">                   <div xid="div5" class="table-con use" >                     <p xid="p87"> 
                       <div component="$UI/system/components/justep/output/output"
                         class="x-output" xid="roomNum" bind-ref="ref('state')" id="roomNum"
                         style="color:#FFFFFF;"/>
@@ -385,7 +383,7 @@
               </ul> 
             </div>
           </div>  
-          <div xid="more" class="more-wrap"> 
+          <div xid="more" class="more-wrap" id="more"> 
             <div component="$UI/system/components/bootstrap/row/row" class="row"
               xid="row3"> 
               <div class="col col-xs-4" xid="col4"> 
