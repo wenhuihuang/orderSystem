@@ -553,35 +553,34 @@
      <i xid="i73"></i>
      <span xid="span147">返回</span></a> </div></div></div></div>
     
-  <div class="x-contents-content" xid="menu-search"><div component="$UI/system/components/justep/panel/panel" class="x-panel x-full" xid="panel3">
+  <div class="x-contents-content menu-search" xid="menu-search"><div component="$UI/system/components/justep/panel/panel" class="x-panel x-full" xid="panel3">
    <div class="x-panel-top" xid="top3">
     <div component="$UI/system/components/justep/titleBar/titleBar" class="x-titlebar" xid="titleBar4" title="菜单">
      <div class="x-titlebar-left" xid="div45">
       <a component="$UI/system/components/justep/button/button" class="btn btn-link btn-only-icon color-green" xid="button6" icon="icon-android-arrow-back" bind-click="button19Click">
        <i xid="i13" class="icon-android-arrow-back"></i>
        <span xid="span134"></span></a> </div> 
-     <div class="x-titlebar-title" xid="div47">菜单</div>
+     <div class="x-titlebar-title" xid="div47">菜单
+  </div>
      <div class="x-titlebar-right reverse" xid="div46"></div></div> </div> 
-   <div class="x-panel-content home" xid="content22">
-    <div xid="div44" class="div44">
-     <div component="$UI/system/components/justep/list/list" class="x-list" xid="list4" data="menuTypeData">
-      <ul class="x-list-template" xid="listTemplateUl5">
-       <li xid="li13" bind-click="li2Click">
-        <div component="$UI/system/components/justep/output/output" class="x-output" xid="output7" bind-ref="ref('typeName')"></div>
-        <div component="$UI/system/components/justep/output/output" class="x-output count" xid="output1" bind-ref="ref('qty')" bind-visible="val('qty')&gt;0"></div></li> </ul> </div> </div> 
-    <div xid="div42" class="div42">
-     <div component="$UI/system/components/justep/list/list" class="x-list" xid="list5" data="goodsListData">
-      <ul class="x-list-template" xid="listTemplateUl4">
-       <li xid="li12">
-        <ul xid="ul1">
-         <li xid="li11" bind-text="val('goodsName')">
-          <h3 xid="h39" bind-text="val('goodsName')">菜名</h3></li> 
-         <li class="clearfix" xid="li14">
-          <p class="price fl" xid="p6" bind-text="val('sprice')">0.00</p>
-          <p class="number fr" xid="p5">
-           <img class="subtract" xid="image4" bind-attr-src='$model.getImageUrl("./images/jiangreen.png")' bind-click="image1Click"></img>
-           <label xid="label8" class="num" bind-text="val('qty')">label</label>
-           <img class="add" xid="image3" bind-attr-src='$model.getImageUrl("./images/jiagreen.png")' bind-click="image2Click"></img></p> </li> </ul> </li> </ul> </div> </div> </div> 
+   <div class="x-panel-content " xid="content22">
+     
+  <div component="$UI/system/components/justep/panel/panel" class="x-panel x-full" xid="panel11">
+   <div class="x-panel-top" xid="top6"><div xid="div37"><div component="$UI/system/components/bootstrap/row/row" class="row" xid="row37">
+   <div class="col col-xs-9" xid="col105"><input component="$UI/system/components/justep/input/input" class="form-control" xid="input6"></input></div>
+   <div class="col col-xs-3" xid="col106"><a component="$UI/system/components/justep/button/button" class="btn btn-default" label="搜索" xid="button5">
+   <i xid="i14"></i>
+   <span xid="span139">搜索</span></a></div>
+   </div>
+  </div></div>
+   <div class="x-panel-content goodsList" xid="content5"><div xid="div42" class="div42">
+     <div component="$UI/system/components/bootstrap/row/row" class="row" xid="row36">
+   <div component="$UI/system/components/justep/list/list" class="x-list" xid="list15" data="allMenuData">
+   <ul class="x-list-template" xid="listTemplateUl16">
+    <div class="col col-xs-6" xid="col45">
+   <span xid="span37" bind-text="val('goodsName')"></span></div></ul> </div> </div></div>
+  </div>
+   </div></div> 
    <div class="x-panel-bottom menu-bottom-wrap" xid="bottom3">
     <div xid="div54" class="menu-bottom-left">
      <span xid="span137">共

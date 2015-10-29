@@ -930,3 +930,18 @@ ul.menu-item li{
 .login-check .row .col{
 	text-align:center;
 }
+/*搜索菜名*/
+.menu-search .row{
+	margin:0;
+}
+.menu-search .goodsList .row .col{
+	text-align:center;
+	margin:5px 0;
+}
+.menu-search .goodsList .row .col span{
+	display:block;
+	background:rgb(43, 184, 170);
+	border-radius:3px;
+	padding:3px 0;
+	color:#fff;
+}
