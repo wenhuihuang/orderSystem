@@ -1101,8 +1101,10 @@ var ip = 'http://'+localStorage.getItem('pureip')+':'+localStorage.getItem('com'
 					 "consumeRoomId":row.val('consumeRoomId'),
 					 "shareNO":row.val('shareNO')
 				}]
-			});
-        return false;    };
+				});
+			},500);
+        return false;    
+        };
     
     //移动
     Model.prototype.li1Touchmove = function(event){
