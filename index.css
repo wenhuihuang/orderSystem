@@ -18,7 +18,7 @@
 	border:1px solid #ccc;
 	box-shadow:0px 0px 8px 2px #acacac;
 	/*background:#fff;*/
-	margin:2%;
+	margin:1%;
 }
 .main-ul li.active{
 	background:#1ECAD3;
@@ -400,7 +400,7 @@ img.subtract,img.add{
 .main-con ul li{
 	display:block;
 	float:left;
-	width:20%;
+	width:22%;
 	/*margin:2%;*/
 }
 .main-con ul li .x-output{
@@ -938,6 +938,16 @@ ul.menu-item li{
 	text-align:center;
 }
 /*搜索菜名*/
+.menu-search .x-panel-top{
+	/*line-height:48px;*/
+}
+.menu-search .x-panel-top .row .col{
+	line-height:48px;
+	height:48px;
+}
+.menu-search .x-panel-top .row .col input{
+	margin-top:6px;
+}
 .menu-search .row{
 	margin:0;
 }
@@ -952,4 +962,7 @@ ul.menu-item li{
 	border-radius:3px;
 	padding:3px 0;
 	color:#fff;
+}
+.info-table th{
+	padding:0;
 }

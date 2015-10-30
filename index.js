@@ -1121,7 +1121,7 @@ var ip = 'http://'+localStorage.getItem('pureip')+':'+localStorage.getItem('com'
     var action;//记录当前的操作方法
     //结束
     Model.prototype.li1Touchend = function(event){
-    debugger
+    	var _this=$(event.target).parents("li");
     	event.preventDefault();
         clearTimeout(timeOutEvent);//清除定时器  
 //      alert(timeOutEvent)
@@ -1224,6 +1224,98 @@ var ip = 'http://'+localStorage.getItem('pureip')+':'+localStorage.getItem('com'
 			"success" : success
 		});
 	    //-------------end of click-----------------
+	    }else if(action == "turntable"){//转台-----------
+	    
+	    var currentDeskData = this.comp('currentDeskData');
+		//当前房间的roomId
+		var currentRoomId = currentDeskData.val('roomId');
+		//当前台BillMasterID
+		var currentBillMasterId	= currentDeskData.val('billMasterId');
+		//当前台ConsumeRoomID
+		var currentConsumeRoomId =currentDeskData.val("consumeRoomId");
+		//当前台currentShareNo
+		var currentShareNo = currentDeskData.val("shareNO");
+		//判断shareNo是否是undefind
+		currentShareNo= currentShareNo === undefined? "" : currentShareNo;
+		//当前房间的名称
+		var currentRoomName	= currentDeskData.val("tai_number");
+		//选择的房间的名称，如果有【xx】 需要截断字符串再上传  --去【xx】
+			currentRoomName = currentRoomName.replace(/【.*/g," ");
+			//当a节点点击的时候，当前节点变红其它节点变灰
+	    		
+				if(_this.attr("state") == '空台'){
+					//记录下当前房台的信息
+					var changeRoomId = _this.attr('roomid');
+					debugger
+					//要改变的台名
+					var changeRoomName = _this.attr('tai_number');
+					//选择的房间的名称，如果有【xx】 需要截断字符串再上传  --去【xx】
+					changeRoomName = changeRoomName.replace(/【.*/g," ");
+					alert(changeRoomName);
+					_this.css({"background":"#18AEB6"});
+					var url=ip + 'RoomFunctionServlet.do';
+					var data='func=changeRoom&changeRoomId='+changeRoomId+'&changeRoomName='+changeRoomName+'&currentRoomId='+currentRoomId+'&current='+currentBillMasterId+'&currentConsumeRoomId='+currentConsumeRoomId+'&currentShareNo='+currentShareNo+'&currentRoomName='+currentRoomName;
+					console.log(data)
+						$.ajax({
+					        type: "GET",
+					        url: url,
+					        data:data,
+					        dataType: 'json',
+					        async: false,//使用同步方式，目前data组件有同步依赖
+					        cache: false,
+					        success: function(msg){
+					        	if(msg.code == 1){
+					        		alert(msg.result);
+					        		location.reload();
+					        	}else{
+					        		alert("转台失败！");
+					        	}
+					        	
+					        },
+					        error: function(){
+					          throw justep.Error.create("加载数据失败");
+					        }
+						});
+			
+				
+			}else{
+				alert("此台已有人，不能转");
+			}
+			
+	
+	    }else if(action=="shareRoom"){//并台------
+	    		var currentDeskData = this.comp('currentDeskData');
+	    		var mergeRoomData = this.comp('mergeRoomData');
+	    		if(_this.attr("state") == '在用'){
+			
+					//记录下当前房台的信息
+					var currentRoomId = _this.attr('roomid');
+					var currentBillMasterId = _this.attr('billmasterid');	
+					var currentConsumeRoomId = _this.attr('consumeRoomId');
+					var currentCustQty = _this.attr('custQty');
+					var custQty = _this.attr('custQty');
+					
+					var shareRoomId = currentDeskData.val('roomId');
+					var shareBillMasterId = currentDeskData.val('billMasterId');
+					var shareConsumeRoomId = currentDeskData.val('consumeRoomId');
+								
+					_this.css({"background":"#18AEB6"});
+					var success = function(param){
+						if(param.code == '1'){
+							$('.left-menu').find('li').eq(0).trigger('click');//刷新房台
+							return;
+						}else{
+						}
+					};
+					Baas.sendRequest({
+						"url" : ip + 'RoomFunctionServlet.do?func=mergeRoom&shareRoomId='+shareRoomId+'&shareConsumeRoomId='+shareConsumeRoomId+'&shareBillMasterId='+shareBillMasterId+'&currentRoomId='+currentRoomId+'&currentBillMasterId='+currentBillMasterId+'&currentConsumeRoomId='+currentConsumeRoomId+'&currentCustQty='+currentCustQty,
+						"dataType": "json",
+						"success" : success
+					});
+				}else{//如果当前房间不为在用状态，不允许并单
+					this.comp('message').show({'title':'当前桌子不允许并台','message':'error'});
+				}
+	    	
 	    }
       }  
     };
@@ -1239,54 +1331,27 @@ var ip = 'http://'+localStorage.getItem('pureip')+':'+localStorage.getItem('com'
 		var currentDeskData = this.comp('currentDeskData');
 		//当前房间的roomId
 		var roomId = currentDeskData.val('roomId');
-		var mergeRoomData = this.comp('mergeRoomData');
+		
 		//选判断当前节点是否为已点节点
 		//1.如果当前节点为空房，则不允许点击
 		//2.如果点击的房间为当前房间，则不允许点击 
 		
 		//当a节点点击的时候，当前节点变红其它节点变灰
 		$(".main-ul").find("li").each(function(){
-			debugger
-			$(this).unbind("click");
+		
+			//$(this).unbind("click");
 			$(this).attr('action','shareRoom');
+//			if($(this).attr("action")=="shareRoom"){
+//				//alert("a")
+//			}
 			if($(this).attr("roomid") == roomId){
-				$(this).find(".table-con").css({"background":"red"});
+				$(this).css({"background":"red"});
 			}else{
 				if($(this).attr("state") == '在用'){
-					$(this).find(".table-con").css({"background":"#ccc"});
+					$(this).css({"background":"#ccc"});
 				}
 			}
-			$(this).bind("click",function(event){				
-				if($(this).attr("state") == '在用'){
-				debugger
-					//记录下当前房台的信息
-//					var currentRoomId = $(this).attr('roomid');
-//					var currentBillMasterId = $(this).attr('billmasterid');	
-//					var currentConsumeRoomId = $(this).attr('consumeRoomId');
-//					var currentCustQty = $(this).attr('custQty');
-//					var custQty = $(this).attr('custQty');
-//					
-//					var shareRoomId = currentDeskData.val('roomId');
-//					var shareBillMasterId = currentDeskData.val('billMasterId');
-//					var shareConsumeRoomId = currentDeskData.val('consumeRoomId');
-//								
-//					$(this).find(".table-con").css({"background":"#18AEB6"});
-//					var success = function(param){
-//						if(param.code == '1'){
-//							$('.left-menu').find('li').eq(0).trigger('click');//刷新房台
-//							return;
-//						}else{
-//						}
-//					};
-//					Baas.sendRequest({
-//						"url" : ip + 'RoomFunctionServlet.do?func=mergeRoom&shareRoomId='+shareRoomId+'&shareConsumeRoomId='+shareConsumeRoomId+'&shareBillMasterId='+shareBillMasterId+'&currentRoomId='+currentRoomId+'&currentBillMasterId='+currentBillMasterId+'&currentConsumeRoomId='+currentConsumeRoomId+'&currentCustQty='+currentCustQty,
-//						"dataType": "json",
-//						"success" : success
-//					});
-				}else{//如果当前房间不为在用状态，不允许并单
-					this.comp('message').show({'title':'当前桌子不允许并台','message':'error'});
-				}
-			});
+		
 		});
 	};
 
@@ -1326,26 +1391,16 @@ var ip = 'http://'+localStorage.getItem('pureip')+':'+localStorage.getItem('com'
 
 	//转台
 	Model.prototype.button21Click = function(event){
-		var currentDeskData = this.comp('currentDeskData');
+		 var currentDeskData = this.comp('currentDeskData');
 		//当前房间的roomId
 		var currentRoomId = currentDeskData.val('roomId');
-		//当前台BillMasterID
-		var currentBillMasterId	= currentDeskData.val('billMasterId');
-		//当前台ConsumeRoomID
-		var currentConsumeRoomId =currentDeskData.val("consumeRoomId");
-		//当前台currentShareNo
-		var currentShareNo = currentDeskData.val("shareNO");
-		//判断shareNo是否是undefind
-		currentShareNo= currentShareNo === undefined? "" : currentShareNo;
-		//当前房间的名称
-		var currentRoomName	= currentDeskData.val("tai_number");
-		//选择的房间的名称，如果有【xx】 需要截断字符串再上传  --去【xx】
-			currentRoomName = currentRoomName.replace(/【.*/g," ");
-			//当a节点点击的时候，当前节点变红其它节点变灰
+
 		$(".main-ul").find("li").each(function(){
-			$(this).unbind("click");
+			//$(this).unbind("click");
+			$(this).attr('action','turntable');
 			//console.log($(this))
-			if($(this).attr("roomid") == currentRoomId){
+			
+			  	if($(this).attr("roomid") == currentRoomId){
 				$(this).css({"background":"red"});
 				
 			}else{
@@ -1353,46 +1408,7 @@ var ip = 'http://'+localStorage.getItem('pureip')+':'+localStorage.getItem('com'
 					$(this).css({"background":"#ccc"});
 				}
 			}
-			$(this).bind("click",function(event){	
-				if($(this).attr("state") == '空台'){
-					//记录下当前房台的信息
-					var changeRoomId = $(this).attr('roomid');
-					//要改变的台名
-					var changeRoomName = $(this).attr('tai_number');
-					//选择的房间的名称，如果有【xx】 需要截断字符串再上传  --去【xx】
-					changeRoomName = changeRoomName.replace(/【.*/g," ");
-					alert(changeRoomName);
-					$(this).find(".table-con").css({"background":"#18AEB6"});
-					var url=ip + 'RoomFunctionServlet.do';
-					var data='func=changeRoom&changeRoomId='+changeRoomId+'&changeRoomName='+changeRoomName+'&currentRoomId='+currentRoomId+'&current='+currentBillMasterId+'&currentConsumeRoomId='+currentConsumeRoomId+'&currentShareNo='+currentShareNo+'&currentRoomName='+currentRoomName;
-					console.log(data)
-						$.ajax({
-					        type: "GET",
-					        url: url,
-					        data:data,
-					        dataType: 'json',
-					        async: false,//使用同步方式，目前data组件有同步依赖
-					        cache: false,
-					        success: function(msg){
-					        	if(msg.code == 1){
-					        		alert(msg.result);
-					        		location.reload();
-					        	}else{
-					        		alert("转台失败！");
-					        	}
-					        	
-					        },
-					        error: function(){
-					          throw justep.Error.create("加载数据失败");
-					        }
-						});
-			
-				
-			}else{
-				alert("此台已有人，不能转");
-			}
-			
-		})
+		
 	
 	})
 	};
@@ -1422,7 +1438,7 @@ var ip = 'http://'+localStorage.getItem('pureip')+':'+localStorage.getItem('com'
 				"addMoney":row.val('addMoney')
 			}]
 		});
-		
+		debugger
 		var sendCookWayData = this.comp('sendCookWayData');
 		//清空购物车加钱文本
 		var cart = this.comp('cartData');
@@ -1952,40 +1968,43 @@ var ip = 'http://'+localStorage.getItem('pureip')+':'+localStorage.getItem('com'
 
 	//删除商品
 	Model.prototype.button32Click = function(event){
-		
+		var currentGoodsData = this.comp('currentGoodsData');
 		var cartData = this.comp('cartData');
-		var row = event.bindingContext.$rawData;
+		//var row = event.bindingContext.$rawData;
+		debugger
 		var menuType = this.comp('menuTypeData');	
 			cartData.eachAll(function(param){
-				if(param.row.val('goodsId') == row.val('goodsId')){//已经存在
+				if(param.row.val('goodsId') == currentGoodsData.val('goodsId')){//已经存在
+					console.log(param.row.val('goodsId') + " "+currentGoodsData.val('goodsId'))
+					debugger
 					cartData.deleteData(param.row);
-					row.val('qty',row.val('qty')-1);//将显示数量置0
-							//向菜单类型右侧添减数量
-							//---1.抽出与当前相同菜单类型的菜单类型
-							
-							menuType.eachAll(function(data){
-								if(data.row.val('typeCode') == row.val('typeCode')){
-									data.row.val('qty',data.row.val('qty')-1);
-								}
-							});
-							//---end of 减数量
+//					currentGoodsData.val('qty',currentGoodsData.val('qty')-1);//将显示数量置0
+//							//向菜单类型右侧添减数量
+//							//---1.抽出与当前相同菜单类型的菜单类型
+//							
+//							menuType.eachAll(function(data){
+//								if(data.row.val('typeCode') == currentGoodsData.val('typeCode')){
+//									data.row.val('qty',data.row.val('qty')-1);
+//								}
+//							});
+//							//---end of 减数量
 				}
 			});
 		
 		cartData.eachAll(function(param){
-			if(param.row.val('goodsId') == row.val('goodsId')){//已经存在
+			if(param.row.val('goodsId') == currentGoodsData.val('goodsId')){//已经存在
 				param.row.val('qty',param.row.val('qty')-1);
 			}
 		});
 		
 		//购物车显示数量显示在goodsList
-		row.val('qty',row.val('qty')-1);
+		currentGoodsData.val('qty',currentGoodsData.val('qty')-1);
 		
 		//向菜单类型右侧添减数量
 		//---1.抽出与当前相同菜单类型的菜单类型
 		
 		menuType.eachAll(function(data){
-			if(data.row.val('typeCode') == row.val('typeCode')){
+			if(data.row.val('typeCode') == currentGoodsData.val('typeCode')){
 				data.row.val('qty',data.row.val('qty')-1);
 			}
 		});

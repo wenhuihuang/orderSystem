@@ -2,7 +2,7 @@
 
 <div xmlns="http://www.w3.org/1999/xhtml" xid="window" class="window" component="$UI/system/components/justep/window/window"
   design="device:mobile">  
-  <div component="$UI/system/components/justep/model/model" xid="model" style="width:234px;height:auto;left:660px;top:165px;" onLoad="modelLoad"> <div component="$UI/system/components/justep/data/data" autoLoad="true" xid="language" idColumn="col0" confirmDelete="false" autoNew="true"><column name="col0" type="String" xid="xid65"></column>
+  <div component="$UI/system/components/justep/model/model" xid="model" style="width:234px;height:auto;left:642px;top:65px;" onLoad="modelLoad"> <div component="$UI/system/components/justep/data/data" autoLoad="true" xid="language" idColumn="col0" confirmDelete="false" autoNew="true"><column name="col0" type="String" xid="xid65"></column>
   <column label="在用" name="USING" type="String" xid="xid66"></column>
   <column label="用户名" name="USERNAME" type="String" xid="xid67"></column>
   <column label="密码" name="PASSWORD" type="String" xid="xid68"></column>
@@ -553,19 +553,16 @@
     
   <div class="x-contents-content menu-search" xid="menu-search"><div component="$UI/system/components/justep/panel/panel" class="x-panel x-full" xid="panel3">
    <div class="x-panel-top" xid="top3">
-    <div component="$UI/system/components/justep/titleBar/titleBar" class="x-titlebar" xid="titleBar4" title="菜单">
+    <div component="$UI/system/components/justep/titleBar/titleBar" class="x-titlebar" xid="titleBar4" title="按拼音或编码查找">
      <div class="x-titlebar-left" xid="div45">
-      <a component="$UI/system/components/justep/button/button" class="btn btn-link btn-only-icon color-green" xid="button6" icon="icon-android-arrow-back" bind-click="button19Click">
-       <i xid="i13" class="icon-android-arrow-back"></i>
-       <span xid="span134"></span></a> </div> 
-     <div class="x-titlebar-title" xid="div47">菜单
-  </div>
+      </div> 
+     <div class="x-titlebar-title" xid="div47">按拼音或编码查找</div>
      <div class="x-titlebar-right reverse" xid="div46"></div></div> </div> 
    <div class="x-panel-content " xid="content22">
      
   <div component="$UI/system/components/justep/panel/panel" class="x-panel x-full" xid="panel11">
    <div class="x-panel-top" xid="top6"><div xid="div37"><div component="$UI/system/components/bootstrap/row/row" class="row" xid="row37">
-   <div class="col col-xs-9" xid="col105"><input component="$UI/system/components/justep/input/input" class="form-control" xid="input6"></input></div>
+   <div class="col col-xs-9" xid="col105"><input component="$UI/system/components/justep/input/input" class="form-control" xid="input6" placeHolder="请输入拼音或编码"></input></div>
    <div class="col col-xs-3" xid="col106"><a component="$UI/system/components/justep/button/button" class="btn btn-default" label="搜索" xid="button5">
    <i xid="i14"></i>
    <span xid="span139">搜索</span></a></div>
@@ -580,20 +577,10 @@
   </div>
    </div></div> 
    <div class="x-panel-bottom menu-bottom-wrap" xid="bottom3">
-    <div xid="div54" class="menu-bottom-left">
-     <span xid="span137">共
-              
-份
-      <b bind-text="$model.cartData.sum('qty') " class="color-price" xid="default49">0</b></span> 
-     <span xid="span138">元
-      <b bind-text="statusData.val('cartTotal')" class="color-price" xid="default50">0</b></span> </div> 
     <div xid="div53" class="menu-bottom-right">
-     <a component="$UI/system/components/justep/button/button" class="btn btn-default" xid="button13" label="按类别点菜" target="menu-search">
-      <i xid="i12"></i>
-      <span xid="span135">按类别点菜</span></a> 
-     <a component="$UI/system/components/justep/button/button" class="btn btn-default" label="已点详情" xid="button12" bind-click="button9Click">
+     <a component="$UI/system/components/justep/button/button" class="btn btn-default" label="返回菜单" xid="button12" target="menu">
       <i xid="i6"></i>
-      <span xid="span136">已点详情</span></a> </div> </div> </div></div></div>
+      <span xid="span136">返回菜单</span></a> </div> </div> </div></div></div>
   <div component="$UI/system/components/justep/popOver/popOver" class="x-popOver renShu" xid="popOver_renshu" opacity="0.9">
    <div class="x-popOver-overlay" xid="div1"></div>
    <div class="x-popOver-content con-wrap" xid="div6"><div xid="div7" class="con-con"><h2 xid="h22" bind-text="language.val('INPUTNUM')"><![CDATA[请输入就餐人数]]></h2><input component="$UI/system/components/justep/input/input" class="form-control" xid="input1" id="custNum" dataType="Integer" autoFocus="true" placeHolder="输入人数"></input><div xid="div8" class="btn-wrap"><a component="$UI/system/components/justep/button/button" class="btn btn-default do-btn" label="确认" xid="button16" onClick="button16Click">
@@ -623,7 +610,7 @@
       <i xid="i27"></i>
       <span xid="span14" bind-text="language.ref('CANCEL')">取消</span></a></div> </div></div></div>
       
-    <span component="$UI/system/components/justep/messageDialog/messageDialog" xid="message"></span><div component="$UI/system/components/justep/popOver/popOver" class="x-popOver"
+    <span component="$UI/system/components/justep/messageDialog/messageDialog" xid="message" style="left:77px;top:34px;"></span><div component="$UI/system/components/justep/popOver/popOver" class="x-popOver"
     xid="order" style="box-shadow:0 0px 2px 2px #c9B9B9;" opacity="0.9"> 
     <div class="x-popOver-overlay" xid="div10"/>  
     <div class="x-popOver-content  pop-container" xid="div11" style="width:95%;height:96%;"> 
@@ -1612,7 +1599,7 @@
            <p xid="p4">
             <span xid="span122">欢迎下次光临
   </span></p> </div> </div> 
-  <div component="$UI/system/components/justep/dataTables/dataTables" flexibleWidth="true" rowActiveClass="active" class="table table-hover table-striped" xid="dataTables2" data="showBillData">
+  <div component="$UI/system/components/justep/dataTables/dataTables" flexibleWidth="true" rowActiveClass="active" class="table table-hover table-striped info-table" xid="dataTables2" data="showBillData">
    <columns xid="columns2"><column name="billMasterID" xid="column50"></column>
   <column name="goodsName" xid="column51"></column>
   <column name="qty" xid="column52"></column>
