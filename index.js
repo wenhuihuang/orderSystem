@@ -1270,11 +1270,11 @@ var ip = 'http://'+localStorage.getItem('pureip')+':'+localStorage.getItem('com'
 					        cache: false,
 					        success: function(msg){
 					        	if(msg.code == 1){
+					        		 $(".more-wrap").hide();
+					        		 $(".main-ul").css({"margin-bottom":"0"});
 					        		alert(msg.result);
-					        	//	location.reload();
-					        		//刷新
-					        	getDesk(deskData,status.val('typeCode'),2);
-					        	}else{
+									//刷新
+									getDesk(deskData,status.val('typeCode'),2);					        	}else{
 					        		alert("转台失败！");
 					        	}
 					        	
