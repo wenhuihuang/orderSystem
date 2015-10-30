@@ -144,7 +144,8 @@
   <rule xid="rule4">
    <col name="addMoney" xid="ruleCol5">
     <calculate xid="calculate5">
-     <expr xid="default21">$model.currentCookWayData.sum(&quot;addMoney&quot;)</expr></calculate> </col> </rule></div>
+     <expr xid="default21">$model.currentCookWayData.sum(&quot;addMoney&quot;)</expr></calculate> </col> </rule>
+  <column name="typeCode" type="String" xid="xid124"></column></div>
   <div component="$UI/system/components/justep/data/data" autoLoad="true" xid="cookTypeData" idColumn="typeCode"><column name="typeCode" type="String" xid="xid30"></column>
   <column name="typeName" type="String" xid="xid31"></column></div>
   <div component="$UI/system/components/justep/data/data" autoLoad="true" xid="cookTypeDetailData" idColumn="col3"><column name="col3" type="String" xid="xid32"></column>
