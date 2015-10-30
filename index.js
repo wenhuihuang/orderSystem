@@ -1118,13 +1118,19 @@ var ip = 'http://'+localStorage.getItem('pureip')+':'+localStorage.getItem('com'
         timeOutEvent = 0;  
     };
     
+    var action;//记录当前的操作方法
     //结束
     Model.prototype.li1Touchend = function(event){
+    debugger
     	event.preventDefault();
         clearTimeout(timeOutEvent);//清除定时器  
 //      alert(timeOutEvent)
         if(timeOutEvent!=0){              
         //这里写要执行的内容（尤如onclick事件）  
+        $(".main-ul").find("li").each(function(){
+        	action = $(this).attr('action');
+		});
+		if(action == undefined ||action == ''){
         var oneDeskData = this.comp('currentDeskData');
 		var row = event.bindingContext.$rawData;
 		var deskData = this.comp('deskData');
@@ -1137,7 +1143,6 @@ var ip = 'http://'+localStorage.getItem('pureip')+':'+localStorage.getItem('com'
 		//下面用于刷新当前房台状态
 		var deskData = this.comp('deskData');
 		var success = function(param){
-			
 			//重新加载房台
 			$('#more').slideUp();
 			//清空购物车
@@ -1218,8 +1223,9 @@ var ip = 'http://'+localStorage.getItem('pureip')+':'+localStorage.getItem('com'
 			"dataType": "json",
 			"success" : success
 		});
-                //-------------end of click
-            }  
+	    //-------------end of click-----------------
+	    }
+      }  
     };
 
     //刷新房台
@@ -1240,12 +1246,11 @@ var ip = 'http://'+localStorage.getItem('pureip')+':'+localStorage.getItem('com'
 		
 		//当a节点点击的时候，当前节点变红其它节点变灰
 		$(".main-ul").find("li").each(function(){
+			debugger
 			$(this).unbind("click");
-			console.log($(this))
-			alert($(this).attr("state"))
+			$(this).attr('action','shareRoom');
 			if($(this).attr("roomid") == roomId){
 				$(this).find(".table-con").css({"background":"red"});
-				
 			}else{
 				if($(this).attr("state") == '在用'){
 					$(this).find(".table-con").css({"background":"#ccc"});
@@ -1253,31 +1258,33 @@ var ip = 'http://'+localStorage.getItem('pureip')+':'+localStorage.getItem('com'
 			}
 			$(this).bind("click",function(event){				
 				if($(this).attr("state") == '在用'){
+				debugger
 					//记录下当前房台的信息
-					var currentRoomId = $(this).attr('roomid');
-					var currentBillMasterId = $(this).attr('billmasterid');	
-					var currentConsumeRoomId = $(this).attr('consumeRoomId');
-					var currentCustQty = $(this).attr('custQty');
-					var custQty = $(this).attr('custQty');
-					
-					var shareRoomId = currentDeskData.val('roomId');
-					var shareBillMasterId = currentDeskData.val('billMasterId');
-					var shareConsumeRoomId = currentDeskData.val('consumeRoomId');
-								
-					$(this).find(".table-con").css({"background":"#18AEB6"});
-					var success = function(param){
-						if(param.code == '1'){
-							$('.left-menu').find('li').eq(0).trigger('click');//刷新房台
-							return;
-						}else{}
-					};
-					Baas.sendRequest({
-						"url" : ip + 'RoomFunctionServlet.do?func=mergeRoom&shareRoomId='+shareRoomId+'&shareConsumeRoomId='+shareConsumeRoomId+'&shareBillMasterId='+shareBillMasterId+'&currentRoomId='+currentRoomId+'&currentBillMasterId='+currentBillMasterId+'&currentConsumeRoomId='+currentConsumeRoomId+'&currentCustQty='+currentCustQty,
-						"dataType": "json",
-						"success" : success
-					});
+//					var currentRoomId = $(this).attr('roomid');
+//					var currentBillMasterId = $(this).attr('billmasterid');	
+//					var currentConsumeRoomId = $(this).attr('consumeRoomId');
+//					var currentCustQty = $(this).attr('custQty');
+//					var custQty = $(this).attr('custQty');
+//					
+//					var shareRoomId = currentDeskData.val('roomId');
+//					var shareBillMasterId = currentDeskData.val('billMasterId');
+//					var shareConsumeRoomId = currentDeskData.val('consumeRoomId');
+//								
+//					$(this).find(".table-con").css({"background":"#18AEB6"});
+//					var success = function(param){
+//						if(param.code == '1'){
+//							$('.left-menu').find('li').eq(0).trigger('click');//刷新房台
+//							return;
+//						}else{
+//						}
+//					};
+//					Baas.sendRequest({
+//						"url" : ip + 'RoomFunctionServlet.do?func=mergeRoom&shareRoomId='+shareRoomId+'&shareConsumeRoomId='+shareConsumeRoomId+'&shareBillMasterId='+shareBillMasterId+'&currentRoomId='+currentRoomId+'&currentBillMasterId='+currentBillMasterId+'&currentConsumeRoomId='+currentConsumeRoomId+'&currentCustQty='+currentCustQty,
+//						"dataType": "json",
+//						"success" : success
+//					});
 				}else{//如果当前房间不为在用状态，不允许并单
-					alert('当前桌子不允许并台');
+					this.comp('message').show({'title':'当前桌子不允许并台','message':'error'});
 				}
 			});
 		});
