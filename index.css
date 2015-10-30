@@ -944,6 +944,7 @@ ul.menu-item li{
 .menu-search .goodsList .row .col{
 	text-align:center;
 	margin:5px 0;
+	padding:0 2px;
 }
 .menu-search .goodsList .row .col span{
 	display:block;

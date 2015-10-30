@@ -1339,11 +1339,11 @@ var ip = 'http://'+localStorage.getItem('pureip')+':'+localStorage.getItem('com'
 			$(this).unbind("click");
 			//console.log($(this))
 			if($(this).attr("roomid") == currentRoomId){
-				$(this).find(".table-con").css({"background":"red"});
+				$(this).css({"background":"red"});
 				
 			}else{
 				if($(this).attr("state") == '空台'){
-					$(this).find(".table-con").css({"background":"#ccc"});
+					$(this).css({"background":"#ccc"});
 				}
 			}
 			$(this).bind("click",function(event){	
