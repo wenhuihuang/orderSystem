@@ -341,23 +341,29 @@ var ip = 'http://'+localStorage.getItem('pureip')+':'+localStorage.getItem('com'
 				for(var i=0;i<msg.rooms.length;i++){
 					var state="空台";
 					var color="black";
+					var stateLang;
 					if(msg.rooms[i].state=="3"){
 						state="在用";
 						color="blue";
+						stateLang="USING";
 					}else if(msg.rooms[i].state=="4"){
 						state="埋单";
 						color="gray";
+						stateLang="PAY";
 					}else if(msg.rooms[i].state=="2"){
 						state="预定";
 						color="yellow";
+						stateLang="RESERVE";
 					}else if(msg.rooms[i].state=="0"){
 						state="禁用";
 						color="red";
+						stateLang="OFF";
 					}else{
 						state="空台";
 						color="green";
+						stateLang="EMPTY";
 					}	
-				 rowss[i]={'tai_number':{'value':msg.rooms[i].roomName},'state':{'value':state},'roomId':{'value':msg.rooms[i].roomId},'billMasterId':{'value':msg.rooms[i].billMasterId},'color':{'value':color},'typeCode':{'value':msg.rooms[i].typeCode},'custQty':{'value':msg.rooms[i].custQty},'consumeRoomId':{'value':msg.rooms[i].consumeRoomID},'shareNo':{'value':msg.rooms[i].shareNo}};
+				 rowss[i]={'tai_number':{'value':msg.rooms[i].roomName},'state':{'value':state},'roomId':{'value':msg.rooms[i].roomId},'billMasterId':{'value':msg.rooms[i].billMasterId},'color':{'value':color},'typeCode':{'value':msg.rooms[i].typeCode},'custQty':{'value':msg.rooms[i].custQty},'consumeRoomId':{'value':msg.rooms[i].consumeRoomID},'shareNo':{'value':msg.rooms[i].shareNo},'stateLang':stateLang};
 			 	}
 			 	
 			var ffdata={"rows":rowss};
@@ -1053,6 +1059,9 @@ var ip = 'http://'+localStorage.getItem('pureip')+':'+localStorage.getItem('com'
 	//当什么的时候就不能搭台
 	Model.prototype.button25Click = function(event){
 		var currentDeskData = this.comp('currentDeskData');
+		//---用于刷新
+		var status = this.comp('statusData');
+		var deskData = this.comp('deskData');
 		debugger
 		if(currentDeskData.val('state')!='在用'){
 			this.comp('popOver-take').hide();
@@ -1072,6 +1081,8 @@ var ip = 'http://'+localStorage.getItem('pureip')+':'+localStorage.getItem('com'
 			"dataType": "json",
 			"success" : success
 		});
+		this.comp("popOver-take").hide();
+		getDesk(deskData,status.val('typeCode'),2);		
 	};
 		
 	
@@ -1274,7 +1285,8 @@ var ip = 'http://'+localStorage.getItem('pureip')+':'+localStorage.getItem('com'
 					        		 $(".main-ul").css({"margin-bottom":"0"});
 					        		alert(msg.result);
 									//刷新
-									getDesk(deskData,status.val('typeCode'),2);					        	}else{
+									getDesk(deskData,status.val('typeCode'),2);					        	
+								}else{
 					        		alert("转台失败！");
 					        	}
 					        	
@@ -1474,12 +1486,16 @@ var ip = 'http://'+localStorage.getItem('pureip')+':'+localStorage.getItem('com'
 	Model.prototype.button22Click = function(event){
 			var currentDeskData = this.comp('currentDeskData');
 			var userData = this.comp('userData');
+			//---用于刷新
+    		var status = this.comp('statusData');
+    		var deskData = this.comp('deskData');
 			var success = function(param){
-				$('.left-menu').find('li').eq(0).trigger('click');//刷新房台
+				//$('.left-menu').find('li').eq(0).trigger('click');//刷新房台
+				getDesk(deskData,status.val('typeCode'),2);	
 			}
 			Baas.sendRequest({
 				//RoomFunctionServlet.do?func=cleanRoom&currentBillMasterId=xxx&checkEmpCodeId=xxx&bankTerminalID=xxx
-				"url" : 'RoomFunctionServlet.do?func=cleanRoom&currentBillMasterId='+currentDeskData.val('billMasterId')+'&checkEmpCodeId='+userData.val('userId')+'&bankTerminalID=0001000000000106',
+				"url" :ip+ 'RoomFunctionServlet.do?func=cleanRoom&currentBillMasterId='+currentDeskData.val('billMasterId')+'&checkEmpCodeId='+userData.val('userId')+'&bankTerminalID=0001000000000106',
 				"dataType": "json",
 				"success" : success
 			});
@@ -2085,8 +2101,6 @@ var ip = 'http://'+localStorage.getItem('pureip')+':'+localStorage.getItem('com'
 	
 
 
-
-	
 	return Model;
 });
 
