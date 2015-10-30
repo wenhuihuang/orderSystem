@@ -1265,8 +1265,10 @@ var ip = 'http://'+localStorage.getItem('pureip')+':'+localStorage.getItem('com'
 					        cache: false,
 					        success: function(msg){
 					        	if(msg.code == 1){
+					        		 $(".more-wrap").hide();
+					        		 $(".main-ul").css({"margin-bottom":"0"});
 					        		alert(msg.result);
-					        		location.reload();
+					        		//location.reload();
 					        	}else{
 					        		alert("转台失败！");
 					        	}

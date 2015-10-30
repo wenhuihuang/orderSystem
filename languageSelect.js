@@ -3,14 +3,15 @@ define(function(require){
 	var justep = require("$UI/system/lib/justep");
 	var lan = require('$UI/orderSystem/language');
 	var ip=localStorage.getItem('ip');
-	require("css!./orderSystem/index.css").load();
+	require("css!./index").load();
 	var Model = function(){
 		this.callParent();
 	};
 
 	Model.prototype.languageCustomRefresh = function(event){
 		
-		
+		if(ip != null || ip != undefined){
+			
 		var language = this.comp('language');
 		//获取地区语言各类
 		var lanJson = lan.getLanguages({'ip':ip});
@@ -24,6 +25,12 @@ define(function(require){
 				}]
 			});
 		}
+			
+		}else{
+			location.href="languageSelect.w#!content3";
+		
+		}
+
 			
 	};
 
@@ -47,7 +54,8 @@ define(function(require){
 		localStorage.setItem('com',$('#settingCOM').val());
 		ip = 'http://'+$('#settingIp').val()+':'+$('#settingCOM').val()+'/OrderSystemWeX5/';
 		localStorage.setItem('ip',ip);
-		location.href= 'languageSelect.w'; 
+		location.href= 'languageSelect.w#!content2'; 
+		this.languageCustomRefresh(event);
 	};
 
 	Model.prototype.modelActive = function(event){
