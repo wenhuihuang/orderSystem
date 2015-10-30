@@ -321,7 +321,7 @@ var ip = 'http://'+localStorage.getItem('pureip')+':'+localStorage.getItem('com'
 
 	//mydata为deskData
 	function getDesk(mydata,row,type){
-			var typeCode ;
+		var typeCode ;
 		if(type == 1){
 			typeCode = row.val("typeCode");
 		}else{
@@ -332,7 +332,7 @@ var ip = 'http://'+localStorage.getItem('pureip')+':'+localStorage.getItem('com'
 		$.ajax({
 			type: "GET",
 	        url: url,
-	        data:data,
+	        data: data,
 	        dataType: 'json',
 	        async: false,//使用同步方式，目前data组件有同步依赖
 	        cache: false,
@@ -1080,11 +1080,14 @@ var ip = 'http://'+localStorage.getItem('pureip')+':'+localStorage.getItem('com'
     	event.stopPropagation();
     	var currentDeskData = this.comp('currentDeskData');
     	var row = event.bindingContext.$rawData;
+    	var status = this.comp('statusData');
+    	status.getFirstRow().val('typeCode',row.val('typeCode'));
+    	
         timeOutEvent = setTimeout(function(){
             //执行长按要执行的内容，如弹出菜单         
             //找出台li里的attr=mydata    
              debugger 
-//            var liObj= $(event.target).is("li") ? $(event.target).attr("mydata") : $(event.target).parents("li").attr("mydata");
+//          var liObj= $(event.target).is("li") ? $(event.target).attr("mydata") : $(event.target).parents("li").attr("mydata");
 //            //找出台下主体
             var divObj= $(event.target).parents("li");
 //            //alert( divObj.html());
@@ -1124,7 +1127,6 @@ var ip = 'http://'+localStorage.getItem('pureip')+':'+localStorage.getItem('com'
     	var _this=$(event.target).parents("li");
     	event.preventDefault();
         clearTimeout(timeOutEvent);//清除定时器  
-//      alert(timeOutEvent)
         if(timeOutEvent!=0){              
         //这里写要执行的内容（尤如onclick事件）  
         $(".main-ul").find("li").each(function(){
@@ -1225,7 +1227,11 @@ var ip = 'http://'+localStorage.getItem('pureip')+':'+localStorage.getItem('com'
 		});
 	    //-------------end of click-----------------
 	    }else if(action == "turntable"){//转台-----------
-	    
+	    	var status = this.comp('statusData');
+	    	var deskData = this.comp('deskData');
+	    	$(".main-ul").find("li").each(function(){
+	    		$(this).attr('action','');
+			});
 	    var currentDeskData = this.comp('currentDeskData');
 		//当前房间的roomId
 		var currentRoomId = currentDeskData.val('roomId');
@@ -1242,7 +1248,6 @@ var ip = 'http://'+localStorage.getItem('pureip')+':'+localStorage.getItem('com'
 		//选择的房间的名称，如果有【xx】 需要截断字符串再上传  --去【xx】
 			currentRoomName = currentRoomName.replace(/【.*/g," ");
 			//当a节点点击的时候，当前节点变红其它节点变灰
-	    		
 				if(_this.attr("state") == '空台'){
 					//记录下当前房台的信息
 					var changeRoomId = _this.attr('roomid');
@@ -1266,7 +1271,9 @@ var ip = 'http://'+localStorage.getItem('pureip')+':'+localStorage.getItem('com'
 					        success: function(msg){
 					        	if(msg.code == 1){
 					        		alert(msg.result);
-					        		location.reload();
+					        	//	location.reload();
+					        		//刷新
+					        	getDesk(deskData,status.val('typeCode'),2);
 					        	}else{
 					        		alert("转台失败！");
 					        	}
@@ -1284,8 +1291,14 @@ var ip = 'http://'+localStorage.getItem('pureip')+':'+localStorage.getItem('com'
 			
 	
 	    }else if(action=="shareRoom"){//并台------
+	    		$(".main-ul").find("li").each(function(){
+	    		$(this).attr('action','');
+	    		});
 	    		var currentDeskData = this.comp('currentDeskData');
 	    		var mergeRoomData = this.comp('mergeRoomData');
+	    		//---用于刷新
+	    		var status = this.comp('statusData');
+	    		var deskData = this.comp('deskData');
 	    		if(_this.attr("state") == '在用'){
 			
 					//记录下当前房台的信息
@@ -1302,7 +1315,9 @@ var ip = 'http://'+localStorage.getItem('pureip')+':'+localStorage.getItem('com'
 					_this.css({"background":"#18AEB6"});
 					var success = function(param){
 						if(param.code == '1'){
-							$('.left-menu').find('li').eq(0).trigger('click');//刷新房台
+//							location.reload();//刷新房台
+							//刷新台
+							getDesk(deskData,status.val('typeCode'),2);
 							return;
 						}else{
 						}
@@ -2053,7 +2068,6 @@ var ip = 'http://'+localStorage.getItem('pureip')+':'+localStorage.getItem('com'
 					});
 			
 		}
-		
 		
 		menuTypeData.eachAll(function(param){
 			var data=param.row.val("typeCode");

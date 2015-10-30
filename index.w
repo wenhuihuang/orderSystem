@@ -2,7 +2,7 @@
 
 <div xmlns="http://www.w3.org/1999/xhtml" xid="window" class="window" component="$UI/system/components/justep/window/window"
   design="device:mobile">  
-  <div component="$UI/system/components/justep/model/model" xid="model" style="width:234px;height:auto;left:642px;top:65px;" onLoad="modelLoad"> <div component="$UI/system/components/justep/data/data" autoLoad="true" xid="language" idColumn="col0" confirmDelete="false" autoNew="true"><column name="col0" type="String" xid="xid65"></column>
+  <div component="$UI/system/components/justep/model/model" xid="model" style="width:234px;height:auto;left:694px;top:181px;" onLoad="modelLoad"> <div component="$UI/system/components/justep/data/data" autoLoad="true" xid="language" idColumn="col0" confirmDelete="false" autoNew="true"><column name="col0" type="String" xid="xid65"></column>
   <column label="在用" name="USING" type="String" xid="xid66"></column>
   <column label="用户名" name="USERNAME" type="String" xid="xid67"></column>
   <column label="密码" name="PASSWORD" type="String" xid="xid68"></column>
@@ -128,7 +128,8 @@
      <expr xid="default1">$model.orderData.sum('totalPrice')</expr></calculate> </col> 
    <col name="cartTotal" xid="ruleCol2">
     <calculate xid="calculate2">
-     <expr xid="default3">$model.cartData.sum('totalPrice')</expr></calculate> </col> </rule></div>
+     <expr xid="default3">$model.cartData.sum('totalPrice')</expr></calculate> </col> </rule>
+  <column label="房间层数类型" name="typeCode" type="String" xid="xid123"></column></div>
   <div component="$UI/system/components/justep/data/data" autoLoad="true" xid="currentGoodsData" idColumn="goodsId">
    <column label="商品id" name="goodsId" type="String" xid="default5"></column>
   <column label="商品名称" name="goodsName" type="String" xid="default7"></column>
