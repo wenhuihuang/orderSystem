@@ -1438,6 +1438,7 @@ var ip = 'http://'+localStorage.getItem('pureip')+':'+localStorage.getItem('com'
 	
 	//从这里进入菜单详细
 	Model.prototype.li8Click = function(event){
+		debugger
 		var liObj= $(event.target).is("li") ? $(event.target).addClass("active").siblings().removeClass("active") : $(event.target).parents("li").addClass("active").siblings().removeClass("active");
 		//获取当前行数据
 		var row = event.bindingContext.$rawData;
@@ -1450,10 +1451,10 @@ var ip = 'http://'+localStorage.getItem('pureip')+':'+localStorage.getItem('com'
 				"sprice":row.val('sprice'),
 				"qty":row.val('qty'),
 				"goodsId":row.val('goodsId'),
-				"addMoney":row.val('addMoney')
+				"addMoney":row.val('addMoney'),
+				'typeCode':row.val('typeCode')
 			}]
 		});
-		debugger
 		var sendCookWayData = this.comp('sendCookWayData');
 		//清空购物车加钱文本
 		var cart = this.comp('cartData');
@@ -1465,8 +1466,6 @@ var ip = 'http://'+localStorage.getItem('pureip')+':'+localStorage.getItem('com'
 		//清空当前加收钱项目
 		var currentCookWayData = this.comp('currentCookWayData');
 		currentCookWayData.clear();
-		////debugger;
-		//this.comp("popOver2").show();
 	};
 
 	
@@ -1983,52 +1982,33 @@ var ip = 'http://'+localStorage.getItem('pureip')+':'+localStorage.getItem('com'
 
 	//删除商品
 	Model.prototype.button32Click = function(event){
-		var currentGoodsData = this.comp('currentGoodsData');
-		var cartData = this.comp('cartData');
-		//var row = event.bindingContext.$rawData;
-		debugger
-		var menuType = this.comp('menuTypeData');	
-			cartData.eachAll(function(param){
-				if(param.row.val('goodsId') == currentGoodsData.val('goodsId')){//已经存在
-					console.log(param.row.val('goodsId') + " "+currentGoodsData.val('goodsId'))
-					debugger
-					cartData.deleteData(param.row);
-//					currentGoodsData.val('qty',currentGoodsData.val('qty')-1);//将显示数量置0
-//							//向菜单类型右侧添减数量
-//							//---1.抽出与当前相同菜单类型的菜单类型
-//							
-//							menuType.eachAll(function(data){
-//								if(data.row.val('typeCode') == currentGoodsData.val('typeCode')){
-//									data.row.val('qty',data.row.val('qty')-1);
-//								}
-//							});
-//							//---end of 减数量
-				}
-			});
-		
-		cartData.eachAll(function(param){
-			if(param.row.val('goodsId') == currentGoodsData.val('goodsId')){//已经存在
-				param.row.val('qty',param.row.val('qty')-1);
-			}
-		});
-		
-		//购物车显示数量显示在goodsList
-		currentGoodsData.val('qty',currentGoodsData.val('qty')-1);
-		
-		//向菜单类型右侧添减数量
-		//---1.抽出与当前相同菜单类型的菜单类型
-		
-		menuType.eachAll(function(data){
-			if(data.row.val('typeCode') == currentGoodsData.val('typeCode')){
-				data.row.val('qty',data.row.val('qty')-1);
-			}
-		});
-		//---end of 减数量
-		//将购物车数据写入到localStorage
+		var row = this.comp('currentGoodsData');
+		var goodsId = row.val('goodsId');
+		var goodsList = this.comp('goodsListData');
 		var currentDeskData = this.comp('currentDeskData');
 		var roomId = currentDeskData.val('roomId');
-		localStorage.setItem(roomId,JSON.stringify(cartData.toJson()));
-	
+		var typeCode = row.getFirstRow().val('typeCode');
+		var menuTypeData = this.comp('menuTypeData');
+
+		
+		var cartData = this.comp('cartData');
+		if(confirm('确定删除<'+row.val('goodsName')+'>')){
+			cartData.deleteData(cartData.getRowByID(row.val('goodsId')));
+			//用于进入房台时加载购物车数据
+			localStorage.setItem(roomId,JSON.stringify(cartData.toJson()));
+			goodsList.eachAll(function(data){//菜单数量置0
+				if(data.row.val('goodsId') == goodsId){
+					data.row.val('qty',0);
+				}
+			});
+			//菜单类型数量减
+			menuTypeData.eachAll(function(param){
+				debugger
+				if(param.row.val('typeCode')==typeCode){
+					param.row.val('qty',param.row.val('qty')-row.val('qty'));
+				}
+			});
+		}
 	};
 	
 
