@@ -3,7 +3,7 @@ define(function(require){
 	var justep = require("$UI/system/lib/justep");
 	var lan = require('$UI/orderSystem/language');
 	var ip=localStorage.getItem('ip');
-	require("css!./index").load();
+	//require("css!./index").load();
 	var Model = function(){
 		this.callParent();
 	};

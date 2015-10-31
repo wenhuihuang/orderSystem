@@ -178,7 +178,14 @@ var ip = 'http://'+localStorage.getItem('pureip')+':'+localStorage.getItem('com'
 			    	 });
 			    	 contents1.to('index');
 			     }else{
-			    	 justep.Util.hint("登陆失败");
+			    	 if(username == '' || pwd == ''){
+			    		 $(".login-error-info").hide();
+			    		 $(".login-error-info-a").show();
+			    	 }else{
+			    		 $(".login-error-info").hide();
+			    		 $(".login-error-info-b").show();
+			    	 }
+			    	 //justep.Util.hint("登陆失败");
 			     }                                            
 		}
 		Baas.sendRequest({
@@ -367,7 +374,12 @@ var ip = 'http://'+localStorage.getItem('pureip')+':'+localStorage.getItem('com'
 			 	}
 			 	
 			var ffdata={"rows":rowss};
-		 	mydata.loadData(ffdata);	
+		 	mydata.loadData(ffdata);
+		 	$(".more-wrap").find(".col").removeClass("active");
+		 	$(".more-wrap").hide();	
+		 	$(".main-ul").find("li").each(function(){
+	    		$(this).attr('action','');
+			});
 	        },
 	        error: function(){
 	          throw justep.Error.create("加载数据失败");
@@ -1033,7 +1045,9 @@ var ip = 'http://'+localStorage.getItem('pureip')+':'+localStorage.getItem('com'
 	};
 	//搭台
 	Model.prototype.button18Click = function(event){
-		$('#more').css({'display':'none'});
+		//加active
+		this.bgColor(event);
+		//$('#more').css({'display':'none'});
 		this.comp("popOver-take").show();	
 	};
 
@@ -1041,7 +1055,11 @@ var ip = 'http://'+localStorage.getItem('pureip')+':'+localStorage.getItem('com'
 		this.comp("popOver-take").hide();
 	};
 	
-	
+	//切换主页底按钮bgcolor
+	Model.prototype.bgColor=function(event){
+		$(event.target).parents(".col").addClass("active");
+		$(event.target).parents(".col").siblings().removeClass("active");
+	}
 
 
 	
@@ -1101,9 +1119,9 @@ var ip = 'http://'+localStorage.getItem('pureip')+':'+localStorage.getItem('com'
 //          var liObj= $(event.target).is("li") ? $(event.target).attr("mydata") : $(event.target).parents("li").attr("mydata");
 //            //找出台下主体
             var divObj= $(event.target).parents("li");
-//            //alert( divObj.html());
+             	divObj.removeClass("ccc");
 //            //为选中的台加上active
-            divObj.addClass("active").siblings().removeClass("active"); //? $(event.target).addClass("active").siblings().removeClass("active") : $(event.target).parents("li").addClass("active").siblings().removeClass("active");
+            divObj.addClass("active").siblings().removeClass("active").addClass("ccc"); //? $(event.target).addClass("active").siblings().removeClass("active") : $(event.target).parents("li").addClass("active").siblings().removeClass("active");
               $(".more-wrap").show();
               $(".main-ul").css({"margin-bottom":"94px"});
 //            $(".more-wrap").find(".btn").each(function(){
@@ -1123,6 +1141,9 @@ var ip = 'http://'+localStorage.getItem('pureip')+':'+localStorage.getItem('com'
 				}]
 			});
 			timeOutEvent = 0;
+			 $(".main-ul").find("li").each(function(){
+				 action = $(this).attr('action','action');
+			 });
         },500);//这里设置定时器，定义长按500毫秒触发长按事件，时间可以自己改，个人感觉500毫秒非常合适 
     };
     
@@ -1136,13 +1157,12 @@ var ip = 'http://'+localStorage.getItem('pureip')+':'+localStorage.getItem('com'
     //结束
     Model.prototype.li1Touchend = function(event){
     	var _this=$(event.target).parents("li");
+    	var action=_this.attr("action");
     	event.preventDefault();
         clearTimeout(timeOutEvent);//清除定时器  
         if(timeOutEvent!=0){              
         //这里写要执行的内容（尤如onclick事件）  
-        $(".main-ul").find("li").each(function(){
-        	action = $(this).attr('action');
-		});
+       
 		if(action == undefined ||action == ''){
         var oneDeskData = this.comp('currentDeskData');
 		var row = event.bindingContext.$rawData;
@@ -1240,9 +1260,7 @@ var ip = 'http://'+localStorage.getItem('pureip')+':'+localStorage.getItem('com'
 	    }else if(action == "turntable"){//转台-----------
 	    	var status = this.comp('statusData');
 	    	var deskData = this.comp('deskData');
-	    	$(".main-ul").find("li").each(function(){
-	    		$(this).attr('action','');
-			});
+	    	
 	    var currentDeskData = this.comp('currentDeskData');
 		//当前房间的roomId
 		var currentRoomId = currentDeskData.val('roomId');
@@ -1267,7 +1285,7 @@ var ip = 'http://'+localStorage.getItem('pureip')+':'+localStorage.getItem('com'
 					var changeRoomName = _this.attr('tai_number');
 					//选择的房间的名称，如果有【xx】 需要截断字符串再上传  --去【xx】
 					changeRoomName = changeRoomName.replace(/【.*/g," ");
-					alert(changeRoomName);
+					//alert(changeRoomName);
 					_this.css({"background":"#18AEB6"});
 					var url=ip + 'RoomFunctionServlet.do';
 					var data='func=changeRoom&changeRoomId='+changeRoomId+'&changeRoomName='+changeRoomName+'&currentRoomId='+currentRoomId+'&current='+currentBillMasterId+'&currentConsumeRoomId='+currentConsumeRoomId+'&currentShareNo='+currentShareNo+'&currentRoomName='+currentRoomName;
@@ -1303,9 +1321,7 @@ var ip = 'http://'+localStorage.getItem('pureip')+':'+localStorage.getItem('com'
 			
 	
 	    }else if(action=="shareRoom"){//并台------
-	    		$(".main-ul").find("li").each(function(){
-	    		$(this).attr('action','');
-	    		});
+	    		
 	    		var currentDeskData = this.comp('currentDeskData');
 	    		var mergeRoomData = this.comp('mergeRoomData');
 	    		//---用于刷新
@@ -1355,6 +1371,8 @@ var ip = 'http://'+localStorage.getItem('pureip')+':'+localStorage.getItem('com'
 	
 	//并台	
 	Model.prototype.button20Click = function(event){
+		//加active
+		this.bgColor(event);
 		var currentDeskData = this.comp('currentDeskData');
 		//当前房间的roomId
 		var roomId = currentDeskData.val('roomId');
@@ -1372,9 +1390,11 @@ var ip = 'http://'+localStorage.getItem('pureip')+':'+localStorage.getItem('com'
 //				//alert("a")
 //			}
 			if($(this).attr("roomid") == roomId){
-				$(this).css({"background":"red"});
+				$(this).css({"background":"rgb(0, 204, 102)"});
 			}else{
 				if($(this).attr("state") == '在用'){
+					$(this).css({"background":"#2BB8AA"});
+				}else if($(this).attr("state") == '空台'){
 					$(this).css({"background":"#ccc"});
 				}
 			}
@@ -1418,6 +1438,8 @@ var ip = 'http://'+localStorage.getItem('pureip')+':'+localStorage.getItem('com'
 
 	//转台
 	Model.prototype.button21Click = function(event){
+		//加active
+		this.bgColor(event);
 		 var currentDeskData = this.comp('currentDeskData');
 		//当前房间的roomId
 		var currentRoomId = currentDeskData.val('roomId');
@@ -1483,6 +1505,8 @@ var ip = 'http://'+localStorage.getItem('pureip')+':'+localStorage.getItem('com'
 	
 	//零结帐
 	Model.prototype.button22Click = function(event){
+			//加active
+			this.bgColor(event);
 			var currentDeskData = this.comp('currentDeskData');
 			var userData = this.comp('userData');
 			//---用于刷新
