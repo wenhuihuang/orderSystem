@@ -794,6 +794,10 @@ ul.menu-item li{
 /*登录*/
 .login-wrap{
 	text-align:center;
+	padding-top:20px;
+}
+.big-title{
+	margin-bottom:20px;
 }
 .login-wrap .btn{
 	width:100%;

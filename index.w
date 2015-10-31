@@ -327,7 +327,7 @@
       <div component="$UI/system/components/justep/panel/panel" class="x-panel x-full" xid="panel26">
    <div class="x-panel-content" xid="content50"><div xid="div48" class="login-wrap">
    <div xid="div52">
-    <h2 xid="h21" bind-text="language.val('WELCOME')"><![CDATA[]]></h2></div> 
+    <h2 xid="h21" bind-text="language.val('WELCOME')" class="big-title"><![CDATA[]]></h2></div> 
    <div xid="div56">
     <h4 xid="h41" class="login-error-info login-error-info-a" bind-text="language.val('CHECKLOGIN')"><![CDATA[]]></h4>
     <h4 xid="h42" class="login-error-info login-error-info-b" bind-text="language.val('USERORPWD')"><![CDATA[]]></h4><div class="form-horizontal container-fluid" component="$UI/system/components/bootstrap/form/form" xid="form1">
