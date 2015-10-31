@@ -1450,10 +1450,12 @@ var ip = 'http://'+localStorage.getItem('pureip')+':'+localStorage.getItem('com'
 			//console.log($(this))
 			
 			  	if($(this).attr("roomid") == currentRoomId){
-				$(this).css({"background":"red"});
+				$(this).css({"background":"rgb(0, 204, 102)"});
 				
 			}else{
 				if($(this).attr("state") == '空台'){
+					$(this).css({"background":"#2BB8AA"});
+				}else{
 					$(this).css({"background":"#ccc"});
 				}
 			}
