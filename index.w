@@ -2,7 +2,7 @@
 
 <div xmlns="http://www.w3.org/1999/xhtml" xid="window" class="window" component="$UI/system/components/justep/window/window"
   design="device:mobile">  
-  <div component="$UI/system/components/justep/model/model" xid="model" style="width:234px;height:auto;left:694px;top:181px;" onLoad="modelLoad"> <div component="$UI/system/components/justep/data/data" autoLoad="true" xid="language" idColumn="col0" confirmDelete="false" autoNew="true"><column name="col0" type="String" xid="xid65"></column>
+  <div component="$UI/system/components/justep/model/model" xid="model" style="width:234px;height:auto;left:745px;top:141px;" onLoad="modelLoad"> <div component="$UI/system/components/justep/data/data" autoLoad="true" xid="language" idColumn="col0" confirmDelete="false" autoNew="true"><column name="col0" type="String" xid="xid65"></column>
   <column label="在用" name="USING" type="String" xid="xid66"></column>
   <column label="用户名" name="USERNAME" type="String" xid="xid67"></column>
   <column label="密码" name="PASSWORD" type="String" xid="xid68"></column>
@@ -724,7 +724,7 @@
                     <div component="$UI/system/components/bootstrap/row/row"
                       class="row" xid="row8"> 
                       <div class="col col-xs-4" xid="col30">
-                        <span xid="span32" bind-click="span32Click" bind-touchstart="span32Touchstart" bind-text="language.ref('DISHNAME')"><![CDATA[菜名]]></span>
+                        <span xid="span32" bind-click="span32Click" bind-text="language.ref('DISHNAME')"><![CDATA[菜名]]></span>
                       </div>  
                       <div class="col col-xs-4" xid="col31">
                         <span xid="span33" bind-click="span33Click" bind-text="language.ref('PRICES')"><![CDATA[价格]]></span>

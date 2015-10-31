@@ -777,7 +777,7 @@ var ip = 'http://'+localStorage.getItem('pureip')+':'+localStorage.getItem('com'
 		});
 	};
 
-	//-
+	//购物车-
 	Model.prototype.a2Click = function(event){
 		var currentGoodsData = this.comp('currentGoodsData');
 		var cartData = this.comp('cartData');
@@ -1505,27 +1505,27 @@ var ip = 'http://'+localStorage.getItem('pureip')+':'+localStorage.getItem('com'
 	};
 
 	
-	//未分单长按来解决
-	Model.prototype.span32Touchstart = function(event){
-		var currentGooodsData = this.comp('currentGoodsData');
-		var row = event.bindingContext.$rawData;
-		//选将当前行缓存下来
-		currentGoodsData.newData({
-			index:0,
-			defaultValues:[{
-				'goodsName':row.val('goodsName'),
-				'goodsId':row.val('goodsId'),
-				'qty':row.val('qty'),
-				'sprice':row.val('sprice'),
-				'addMoney':row.val('addMoney'),
-				'cookWay':row.val('cookWay'),
-				'totalPrice':row.val('totalPrice'),
-				'typeCode':row.val('typeCode')
-			}]
-		});
-		
-		
-	};
+//	//未分单长按来解决
+//	Model.prototype.span32Touchstart = function(event){
+//		var currentGooodsData = this.comp('currentGoodsData');
+//		var row = event.bindingContext.$rawData;
+//		//选将当前行缓存下来
+//		currentGoodsData.newData({
+//			index:0,
+//			defaultValues:[{
+//				'goodsName':row.val('goodsName'),
+//				'goodsId':row.val('goodsId'),
+//				'qty':row.val('qty'),
+//				'sprice':row.val('sprice'),
+//				'addMoney':row.val('addMoney'),
+//				'cookWay':row.val('cookWay'),
+//				'totalPrice':row.val('totalPrice'),
+//				'typeCode':row.val('typeCode')
+//			}]
+//		});
+//		
+//		
+//	};
 
 	
 	//未分单修改菜名
@@ -1534,6 +1534,7 @@ var ip = 'http://'+localStorage.getItem('pureip')+':'+localStorage.getItem('com'
 		var goodsId = this.comp('currentGoodsData').val('goodsId');		
 		var cartData = this.comp('cartData');
 		order.changeGoodsName({'goodsName':goodsName,'goodsId':goodsId,'cartData':cartData});
+		this.comp('give').hide();
 	};
 
 	
@@ -1541,6 +1542,7 @@ var ip = 'http://'+localStorage.getItem('pureip')+':'+localStorage.getItem('com'
 	Model.prototype.button34Click = function(event){
 		var sprice = $('#noOrderChangePrice').val();
 		order.changeGoodsPrice({'sprice':sprice,'goodsId':this.comp('currentGoodsData').val('goodsId'),'cartData':this.comp('cartData')})
+		this.comp('give').hide();
 	};
 
 	
@@ -1548,7 +1550,7 @@ var ip = 'http://'+localStorage.getItem('pureip')+':'+localStorage.getItem('com'
 	Model.prototype.button38Click = function(event){
 		var qty = $('#noOrderChangeQty').val();
 		order.changeGoodsQty({'qty':qty,'goodsId':this.comp('currentGoodsData').val('goodsId'),'cartData':this.comp('cartData')})
-		
+		this.comp('give').hide();
 	};
 
 	
