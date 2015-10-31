@@ -1,15 +1,22 @@
+/*重置row*/
+.row{
+	margin:0;
+}
+label{
+	text-align:center;
+}
 /*台颜色*/
 .green{
-	background:green;
+	background:#00CC66;
 }
 .red{
-	background:red;
+	background:#CC3300;
 }
 .yellow{
-	background:yellow;
+	background:#FFFF33;
 }
 .blue{
-	background:blue;
+	background:#3366FF;
 }
 .gray{
 	background:#ccc;
@@ -18,10 +25,13 @@
 	border:1px solid #ccc;
 	box-shadow:0px 0px 8px 2px #acacac;
 	/*background:#fff;*/
-	margin:1%;
+	margin:2%;
 }
 .main-ul li.active{
 	background:#1ECAD3;
+}
+.main-ul li.ccc{
+	background:#ccc;
 }
 /*台颜色结束*/
 /*一行五列*/
@@ -105,6 +115,9 @@ width: 46.5%;
 .fr{
 	float:right;
 }
+.ml20{
+	margin-left:20px;
+}
 .dib{
 	display:inline-block;
 }
@@ -182,15 +195,30 @@ img.subtract,img.add{
 .menu-con ul li .x-output{
 	color:#fff;
 }
+/*
 .bottom-left,.bottom-right{
 	box-flex:1.0;
 	-webkit-box-flex:1.0;
 	-moz-box-flex:1.0;
 	padding:7px;
 }
+*/
+/*
 .bottom-left .btn{
 	background:#BDC3C2;
 	border:none;
+}
+*/
+.btn-style{
+	background:rgb(43, 184, 170);
+	color:#fff;
+	border:rgb(43, 184, 170);
+}
+.color-style{
+	color:#18AEB6;
+}
+.delete-color{
+	color:red;
 }
 .bottom-left .btn span{
 	color:#fff;
@@ -206,11 +234,9 @@ img.subtract,img.add{
 	background:#2BB8AA;
 }
 .bottom-wrap{
-	display:box;
-	display:-webkit-box;
-	display:-moz-box;
-	background:#E6E2E2;
-	padding:10px;
+	/*background:#E6E2E2;*/
+	padding:0;
+	line-height:48px;
 }
 .main-con .row{
 	margin:0;
@@ -219,6 +245,10 @@ img.subtract,img.add{
 	text-align:center;
 	padding-top:15px;
 	padding-bottom:15px;
+}
+.index .bottom-left{
+	width:30%;
+	text-align:center;
 }
 /*
 .table-con{
@@ -400,19 +430,20 @@ img.subtract,img.add{
 .main-con ul li{
 	display:block;
 	float:left;
-	width:22%;
+	width:21%;
 	/*margin:2%;*/
 }
 .main-con ul li .x-output{
 	text-align:center;
 }
 /*详情弹框*/
-
 .bottom-wrap{
 	display:box;
 	display:-webkit-box;
 	display:-moz-box;
+	padding:0 10px;
 }
+
 .bottom-wrap .pop-bottom-left{
 	box-flex:2.0;
 	-webkit-box-flex:2.0;
@@ -445,7 +476,7 @@ img.subtract,img.add{
 	text-align:center;
 }
 .con-con ul li{
-	padding:8px 0;
+	padding:8px 5px;
 	border-bottom:1px solid #acacac;
 }
 .con-con ul li.active{
@@ -456,8 +487,14 @@ img.subtract,img.add{
 .pop-con-title{
 	padding:6px 0;
 	border-bottom:1px solid #acacac;
+	border-top:1px solid #acacac;
 }
-
+.pop-con-title span{
+	font-weight:bold;
+}
+.order-info-title span{
+	font-weight:bold;
+}
 .pop-con-title .col{
 	text-align:center;
 }
@@ -599,6 +636,10 @@ img.subtract,img.add{
 	background:#2BB8AA;
 	border:none;
 	color:#fff;
+}
+.send-order-btn{
+	padding-left:30px;
+	padding-right:30px;
 }
 .close-btn,.close-btn:hover{
 	background:#E5642A;
@@ -753,6 +794,10 @@ ul.menu-item li{
 /*登录*/
 .login-wrap{
 	text-align:center;
+	padding-top:20px;
+}
+.big-title{
+	margin-bottom:20px;
 }
 .login-wrap .btn{
 	width:100%;
@@ -868,15 +913,24 @@ ul.menu-item li{
 	width:100%;
 	display:none;
 }
+.more-wrap .row {
+	margin:0;
+}
 .more-wrap .row .col{
 	text-align:center;
 	padding-top:5px;
 	padding-bottom:5px;
+	padding-left:10px;
+	padding-right:10px;
 }
 .more-wrap .row .col .btn{
 	background:#2BB8AA;
 	color:#fff;
 	border:none;
+	width:100%;
+}
+.more-wrap .row div.active a.btn{
+	background:#00CC66;
 }
 .have-wrap h3{
 	text-align:center;
@@ -933,6 +987,9 @@ ul.menu-item li{
 .box-style .x-titlebar{
 	border-radius:4px 4px 0 0;
 }
+.login-check{
+	margin-top:10px;
+}
 .login-check .row{
 	margin:0;
 }
@@ -956,16 +1013,44 @@ ul.menu-item li{
 .menu-search .goodsList .row .col{
 	text-align:center;
 	margin:5px 0;
-	padding:0 2px;
+	padding:0 5px;
 }
 .menu-search .goodsList .row .col span{
 	display:block;
 	background:rgb(43, 184, 170);
 	border-radius:3px;
-	padding:3px 0;
+	padding:6px 0;
 	color:#fff;
 }
 .info-table th{
 	padding:0;
 }
-.more-wrap .btn
+#rememberPwd,#autoLogin{
+	width:18px;
+	height:18px;
+	display:inline-block;
+	vertical-align:middle;
+	margin:0;
+}
+.login-check label{
+	margin:0;
+	vertical-align:middle;
+}
+.order-info-all-btn{
+	font-weight:bold;
+}
+.login-error-info{
+	display:none;
+	color:red;
+	font-size:14px;
+}
+.order-info-title-btn .btn{
+	border-bottom-left-radius:0;
+	border-bottom-right-radius:0;
+}
+.settings-btn{
+	margin-top:20px;
+}
+.settings-btn .btn{
+	width:100%;
+}
