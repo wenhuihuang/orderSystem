@@ -1044,3 +1044,9 @@ ul.menu-item li{
 	border-bottom-left-radius:0;
 	border-bottom-right-radius:0;
 }
+.settings-btn{
+	margin-top:20px;
+}
+.settings-btn .btn{
+	width:100%;
+}

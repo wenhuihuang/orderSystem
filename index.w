@@ -545,14 +545,19 @@
      <div component="$UI/system/components/justep/labelEdit/labelEdit" class="x-label-edit x-label30" xid="labelInput27">
       <label class="x-label" xid="label32">默认打印机:</label>
       <input component="$UI/system/components/justep/input/input" class="form-control x-edit" xid="input28" placeHolder="请输入打印机"></input></div> </div> </div> 
-    </div></div>
-   <div class="x-panel-bottom" xid="bottom24"><div xid="div185">
-    <a component="$UI/system/components/justep/button/button" class="btn btn-default send-order-btn" label="应用" xid="button73" bind-click="button73Click">
+    <div xid="div185">
+     
+     
+  <div component="$UI/system/components/bootstrap/row/row" class="row settings-btn" xid="row38">
+   <div class="col col-xs-6" xid="col107"><a component="$UI/system/components/justep/button/button" class="btn btn-default send-order-btn" label="应用" xid="button73" bind-click="button73Click">
      <i xid="i74"></i>
-     <span xid="span148">应用</span></a> 
-    <a component="$UI/system/components/justep/button/button" class="btn btn-default close-btn" label="返回" xid="button74" onClick="button6Click" bind-click="button71Click" target="login">
+     <span xid="span148">应用</span></a></div>
+   <div class="col col-xs-6" xid="col108"><a component="$UI/system/components/justep/button/button" class="btn btn-default close-btn" label="返回" xid="button74" onClick="button6Click" bind-click="button71Click" target="login">
      <i xid="i73"></i>
-     <span xid="span147">返回</span></a> </div></div></div></div>
+     <span xid="span147">返回</span></a></div>
+   </div></div></div>
+  </div>
+   </div></div>
     
   <div class="x-contents-content menu-search" xid="menu-search"><div component="$UI/system/components/justep/panel/panel" class="x-panel x-full" xid="panel3">
    <div class="x-panel-top" xid="top3">
