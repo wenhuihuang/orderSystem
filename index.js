@@ -1964,6 +1964,8 @@ var ip = 'http://'+localStorage.getItem('pureip')+':'+localStorage.getItem('com'
 	//没分单更多菜单
 	Model.prototype.button33Click = function(event){
 		 $(".no-single").show();
+		 //$(event.target).parents(".pop-menu-btn").hide();
+		 //alert($(".no-single").height())
 		// $(event.target).parents(".pop-menuSub-btn").show();
 		 
 	};
