@@ -933,6 +933,9 @@ ul.menu-item li{
 .box-style .x-titlebar{
 	border-radius:4px 4px 0 0;
 }
+.login-check{
+	margin-top:10px;
+}
 .login-check .row{
 	margin:0;
 }
@@ -968,4 +971,14 @@ ul.menu-item li{
 .info-table th{
 	padding:0;
 }
-.more-wrap .btn
+#rememberPwd,#autoLogin{
+	width:18px;
+	height:18px;
+	display:inline-block;
+	vertical-align:middle;
+	margin:0;
+}
+.login-check label{
+	margin:0;
+	vertical-align:middle;
+}

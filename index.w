@@ -688,9 +688,9 @@
               <div component="$UI/system/components/justep/panel/panel" class="x-panel x-full con-con" xid="panel28">
    <div class="x-panel-top" xid="top11" height="53"><p class="no-send" xid="p10">
    <span xid="span91" bind-text="language.ref('TOTALQ')">总数量：</span>
-   <span xid="span24" bind-text="$model.cartData.sum('qty')"></span>
+   <span xid="span24" bind-text="$model.cartData.sum('qty')" class="color-price"></span>
    <span xid="span84" bind-text="language.ref('TOTALPRICESYUN')"></span>
-   <span xid="span23" bind-text='$model.statusData.val("cartTotal")'></span></p>
+   <span xid="span23" bind-text='$model.statusData.val("cartTotal")' class="color-price"></span></p>
   <div xid="div14" class="pop-con-title">
    <div component="$UI/system/components/bootstrap/row/row" class="row" xid="row4">
     <div class="col col-xs-5dot2 " xid="col10">
@@ -717,7 +717,7 @@
        <span xid="span65" bind-text="val('addMoney')">加收</span></div> 
       <div class="col col-xs-1dot7" xid="col23">
        <span xid="span66" bind-text="val('sprice') * val('qty')+val('addMoney')">总价</span></div> </div> </li> </ul> </div></div>
-   <div class="x-panel-bottom" xid="bottom8"><div xid="div32" class="pop-menu-btn">
+   <div class="x-panel-bottom" xid="bottom8" height="35"><div xid="div32" class="pop-menu-btn">
                     <div component="$UI/system/components/justep/button/buttonGroup" class="btn-group btn-group-justified" tabbed="true" xid="buttonGroup3">
                       <a component="$UI/system/components/justep/button/button" class="btn btn-link btn-only-icon" xid="button30" icon="icon-android-add" bind-click="a1Click"> 
                         <i xid="i32" class="icon-android-add" />  
@@ -806,7 +806,7 @@
        <span xid="span44" bind-text="val('addMoney')">加收</span></div> 
       <div class="col col-xs-1dot7" xid="col28">
        <span xid="span43" bind-text="val('totalPrice')">总价</span></div> </div> </li> </ul> </div></div>
-   <div class="x-panel-bottom" xid="bottom23"><div xid="div68" class="pop-menu-btn"> 
+   <div class="x-panel-bottom" xid="bottom23" height="35"><div xid="div68" class="pop-menu-btn"> 
                     <div component="$UI/system/components/justep/button/buttonGroup" class="btn-group btn-group-justified" tabbed="true" xid="buttonGroup4"> 
                       <a component="$UI/system/components/justep/button/button" class="btn btn-link btn-only-icon" xid="button40" icon="icon-android-add"> 
                         <i xid="i43" class="icon-android-add" />  
