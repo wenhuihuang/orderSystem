@@ -1981,7 +1981,7 @@ var ip = 'http://'+localStorage.getItem('pureip')+':'+localStorage.getItem('com'
 	
 	Model.prototype.languageBtnClick = function(event){
 		localStorage.setItem('isEnterLanguageUI',true);
-		location.href = 'languageSelect.w';
+		location.href = 'languageSelect.w#!content2';
 	};
 	
 
