@@ -1779,7 +1779,7 @@ var ip = 'http://'+localStorage.getItem('pureip')+':'+localStorage.getItem('com'
 
 	//登录页面设置
 	Model.prototype.button70Click = function(event){
-		this.comp("Settings").show();
+		location.href = 'languageSelect.w#!settings';
 	};
 
 	
@@ -2039,7 +2039,7 @@ var ip = 'http://'+localStorage.getItem('pureip')+':'+localStorage.getItem('com'
 	
 	Model.prototype.languageBtnClick = function(event){
 		localStorage.setItem('isEnterLanguageUI',true);
-		location.href = 'languageSelect.w';
+		location.href = 'languageSelect.w#!content2';
 	};
 	
 
