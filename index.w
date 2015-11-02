@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <div xmlns="http://www.w3.org/1999/xhtml" xid="window" class="window" component="$UI/system/components/justep/window/window" design="device:mobile">  
-<div component="$UI/system/components/justep/model/model" xid="model" style="width:234px;height:auto;left:757px;top:84px;" onLoad="modelLoad"> <div component="$UI/system/components/justep/data/data" autoLoad="true" xid="language" idColumn="col0" confirmDelete="false" autoNew="true"><column name="col0" type="String" xid="xid65"></column>
+<div component="$UI/system/components/justep/model/model" xid="model" style="width:234px;height:auto;left:690px;top:143px;" onLoad="modelLoad"> <div component="$UI/system/components/justep/data/data" autoLoad="true" xid="language" idColumn="col0" confirmDelete="false" autoNew="true"><column name="col0" type="String" xid="xid65"></column>
   <column label="在用" name="USING" type="String" xid="xid66"></column>
   <column label="用户名" name="USERNAME" type="String" xid="xid67"></column>
   <column label="密码" name="PASSWORD" type="String" xid="xid68"></column>
@@ -827,7 +827,7 @@
                       </a> 
                     </div> 
                   </div></div></div></div>  
-              <div class="x-contents-content" xid="content14"><div xid="div23" class="have-wrap"><div xid="div72"><h3 xid="h32"><![CDATA[十号台（1人）]]></h3><table class="table table-bordered table-hover table-striped" component="$UI/system/components/bootstrap/table/table" xid="table1">
+              <div class="x-contents-content" xid="content14"><div xid="div23" class="have-wrap"><div xid="div72"><h3 xid="h32" bind-text=" $model.currentDeskData.val(&quot;tai_number&quot;) +'（'+ $model.currentDeskData.val(&quot;custQty&quot;)+'）'"><![CDATA[十号台（1人）]]></h3><table class="table table-bordered table-hover table-striped" component="$UI/system/components/bootstrap/table/table" xid="table1">
    <thead xid="thead1">
     <tr xid="tr1">
      <th xid="col42"><![CDATA[管理员]]></th>
@@ -1068,17 +1068,19 @@
                     <div component="$UI/system/components/bootstrap/row/row"
                       class="row" xid="row16"> 
                       <div class="col col-xs-6" xid="col62">
-                        <a component="$UI/system/components/justep/button/button" class="btn x-orange" label="返回" xid="button44" bind-click="button44Click"> 
-                          <i xid="i46" />  
-                          <span xid="span100">返回</span>
+                        <a component="$UI/system/components/justep/button/button"
+                          class="btn btn-success" label="确认" xid="buttonGit" onClick="buttonGitClick"> 
+                          <i xid="i45"/>  
+                          <span xid="span99">确认</span>
                         </a>
                       </div>  
                       <div class="col col-xs-6" xid="col63">
-                        
-                      <a component="$UI/system/components/justep/button/button" class="btn btn-success" label="确认" xid="buttonGit" onClick="buttonGitClick"> 
-                          <i xid="i45" />  
-                          <span xid="span99">确认</span>
-                        </a></div> 
+                        <a component="$UI/system/components/justep/button/button"
+                          class="btn x-orange" label="返回" xid="button44" bind-click="button44Click"> 
+                          <i xid="i46"/>  
+                          <span xid="span100">返回</span>
+                        </a>
+                      </div> 
                     </div>
                   </div> 
                 </div>
@@ -1112,17 +1114,19 @@
                     <div component="$UI/system/components/bootstrap/row/row"
                       class="row" xid="row16"> 
                       <div class="col col-xs-6" xid="col62">
-                        <a component="$UI/system/components/justep/button/button" class="btn x-orange" label="返回" xid="button44" bind-click="closeGive"> 
-                          <i xid="i46" />  
-                          <span xid="span100">返回</span>
+                        <a component="$UI/system/components/justep/button/button"
+                          class="btn btn-success" label="确认" xid="button43" onClick="button43Click"> 
+                          <i xid="i45"/>  
+                          <span xid="span99">确认</span>
                         </a>
                       </div>  
                       <div class="col col-xs-6" xid="col63">
-                        
-                      <a component="$UI/system/components/justep/button/button" class="btn btn-success" label="确认" xid="button43" onClick="button43Click"> 
-                          <i xid="i45" />  
-                          <span xid="span99">确认</span>
-                        </a></div> 
+                        <a component="$UI/system/components/justep/button/button"
+                          class="btn x-orange" label="返回" xid="button44" bind-click="closeGive"> 
+                          <i xid="i46"/>  
+                          <span xid="span100">返回</span>
+                        </a>
+                      </div> 
                     </div>
                   </div> 
                 </div> 
@@ -1156,17 +1160,19 @@
                     <div component="$UI/system/components/bootstrap/row/row"
                       class="row" xid="row10"> 
                       <div class="col col-xs-6" xid="col37"> 
-                        <a component="$UI/system/components/justep/button/button" class="btn x-orange" label="返回" xid="button35" bind-click="closeGive"> 
-                          <i xid="i36" />  
-                          <span xid="span38">返回</span>
+                        <a component="$UI/system/components/justep/button/button"
+                          class="btn btn-success" label="确认" xid="button34" onClick="button34Click"> 
+                          <i xid="i37"/>  
+                          <span xid="span39">确认</span>
                         </a> 
                       </div>  
                       <div class="col col-xs-6" xid="col36"> 
-                         
-                      <a component="$UI/system/components/justep/button/button" class="btn btn-success" label="确认" xid="button34" onClick="button34Click"> 
-                          <i xid="i37" />  
-                          <span xid="span39">确认</span>
-                        </a></div> 
+                        <a component="$UI/system/components/justep/button/button"
+                          class="btn x-orange" label="返回" xid="button35" bind-click="closeGive"> 
+                          <i xid="i36"/>  
+                          <span xid="span38">返回</span>
+                        </a> 
+                      </div> 
                     </div> 
                   </div> 
                 </div>
@@ -1201,17 +1207,19 @@
                     <div component="$UI/system/components/bootstrap/row/row"
                       class="row" xid="row12"> 
                       <div class="col col-xs-6" xid="col41"> 
-                        <a component="$UI/system/components/justep/button/button" class="btn x-orange" label="返回" xid="button39" bind-click="button44Click"> 
-                          <i xid="i40" />  
-                          <span xid="span46">返回</span>
+                        <a component="$UI/system/components/justep/button/button"
+                          class="btn btn-success" label="确认" xid="button38" onClick="button38Click"> 
+                          <i xid="i41"/>  
+                          <span xid="span47">确认</span>
                         </a> 
                       </div>  
                       <div class="col col-xs-6" xid="col40"> 
-                         
-                      <a component="$UI/system/components/justep/button/button" class="btn btn-success" label="确认" xid="button38" onClick="button38Click"> 
-                          <i xid="i41" />  
-                          <span xid="span47">确认</span>
-                        </a></div> 
+                        <a component="$UI/system/components/justep/button/button"
+                          class="btn x-orange" label="返回" xid="button39" bind-click="button44Click"> 
+                          <i xid="i40"/>  
+                          <span xid="span46">返回</span>
+                        </a> 
+                      </div> 
                     </div> 
                   </div> 
                 </div>
@@ -1244,7 +1252,7 @@
      <td xid="td7"></td>
      </tr> </tbody> </table><div xid="div86"><h3 xid="h34"><![CDATA[总金额：]]></h3><p xid="p2"><span xid="span89"><![CDATA[欢迎下次光临]]></span></p></div>
   </div></div>
-   <div class="x-panel-bottom order-info-button" xid="bottom10"><a component="$UI/system/components/justep/button/button" class="btn x-orange p30" label="返回" xid="button50" bind-click="button50Click">
+   <div class="x-panel-bottom order-info-button" xid="bottom10"><a component="$UI/system/components/justep/button/button" class="btn x-orange" label="返回" xid="button50" bind-click="button50Click">
    <i xid="i52"></i>
    <span xid="span90">返回</span></a></div></div></div>
   </div> 
@@ -1282,13 +1290,13 @@
         <div class="x-panel-bottom bottom-btn-wrap" xid="bottom12">
          <div component="$UI/system/components/bootstrap/row/row" class="row" xid="row23">
           <div class="col col-xs-6" xid="col74">
+           <a component="$UI/system/components/justep/button/button" class="btn btn-success" label="确认" xid="hbutton58" onClick="hbutton58Click">
+            <i xid="i55"></i>
+            <span xid="span102">确认</span></a> </div> 
+          <div class="col col-xs-6" xid="col73">
            <a component="$UI/system/components/justep/button/button" class="btn x-orange" label="返回" xid="button51" bind-click="hbutton44Click">
             <i xid="i54"></i>
-            <span xid="span96">返回</span></a> </div> 
-          <div class="col col-xs-6" xid="col73">
-            <a component="$UI/system/components/justep/button/button" class="btn btn-success" label="确认" xid="hbutton58" onClick="hbutton58Click">
-            <i xid="i55"></i>
-            <span xid="span102">确认</span></a></div> </div> </div> </div> </div> 
+            <span xid="span96">返回</span></a> </div> </div> </div> </div> </div> 
       <div class="x-contents-content" xid="content28">
        <div component="$UI/system/components/justep/panel/panel" class="x-panel x-full" xid="panel15">
         <div class="x-panel-top" xid="top13">
@@ -1306,13 +1314,13 @@
         <div class="x-panel-bottom bottom-btn-wrap" xid="bottom12">
          <div component="$UI/system/components/bootstrap/row/row" class="row" xid="row23">
           <div class="col col-xs-6" xid="col74">
+           <a component="$UI/system/components/justep/button/button" class="btn btn-success" label="确认" xid="button48" onClick="button43Click">
+            <i xid="i55"></i>
+            <span xid="span102">确认</span></a> </div> 
+          <div class="col col-xs-6" xid="col73">
            <a component="$UI/system/components/justep/button/button" class="btn x-orange" label="返回" xid="button51" bind-click="hbutton44Click">
             <i xid="i54"></i>
-            <span xid="span96">返回</span></a> </div> 
-          <div class="col col-xs-6" xid="col73">
-            <a component="$UI/system/components/justep/button/button" class="btn btn-success" label="确认" xid="button48" onClick="button43Click">
-            <i xid="i55"></i>
-            <span xid="span102">确认</span></a></div> </div> </div> </div> </div> 
+            <span xid="span96">返回</span></a> </div> </div> </div> </div> </div> 
       <div class="x-contents-content" xid="content29">
        <div component="$UI/system/components/justep/panel/panel" class="x-panel x-full" xid="panel14">
         <div class="x-panel-top" xid="top14">
@@ -1330,13 +1338,13 @@
         <div class="x-panel-bottom bottom-btn-wrap" xid="bottom14">
          <div component="$UI/system/components/bootstrap/row/row" class="row" xid="row21">
           <div class="col col-xs-6" xid="col78">
+           <a component="$UI/system/components/justep/button/button" class="btn btn-success" label="确认" xid="hbutton57" onClick="hbutton57Click">
+            <i xid="i56"></i>
+            <span xid="span88">确认</span></a> </div> 
+          <div class="col col-xs-6" xid="col79">
            <a component="$UI/system/components/justep/button/button" class="btn x-orange" label="返回" xid="button56" bind-click="hbutton44Click">
             <i xid="i57"></i>
-            <span xid="span93">返回</span></a> </div> 
-          <div class="col col-xs-6" xid="col79">
-            <a component="$UI/system/components/justep/button/button" class="btn btn-success" label="确认" xid="hbutton57" onClick="hbutton57Click">
-            <i xid="i56"></i>
-            <span xid="span88">确认</span></a></div> </div> </div> </div> </div> 
+            <span xid="span93">返回</span></a> </div> </div> </div> </div> </div> 
       <div class="x-contents-content" xid="content35">
        <div component="$UI/system/components/justep/panel/panel" class="x-panel x-full" xid="panel19">
         <div class="x-panel-top" xid="top17">
@@ -1354,13 +1362,13 @@
         <div class="x-panel-bottom bottom-btn-wrap" xid="bottom13">
          <div component="$UI/system/components/bootstrap/row/row" class="row" xid="row20">
           <div class="col col-xs-6" xid="col82">
+           <a component="$UI/system/components/justep/button/button" class="btn btn-success" label="确认" xid="hbutton53" onClick="hbutton53Click">
+            <i xid="i51"></i>
+            <span xid="span59">确认</span></a> </div> 
+          <div class="col col-xs-6" xid="col81">
            <a component="$UI/system/components/justep/button/button" class="btn x-orange" label="返回" xid="button52" bind-click="hbutton44Click">
             <i xid="i53"></i>
-            <span xid="span42">返回</span></a> </div> 
-          <div class="col col-xs-6" xid="col81">
-            <a component="$UI/system/components/justep/button/button" class="btn btn-success" label="确认" xid="hbutton53" onClick="hbutton53Click">
-            <i xid="i51"></i>
-            <span xid="span59">确认</span></a></div> </div> </div> </div> </div> 
+            <span xid="span42">返回</span></a> </div> </div> </div> </div> </div> 
       <div class="x-contents-content" xid="content25">
        <div component="$UI/system/components/justep/panel/panel" class="x-panel x-full" xid="panel17">
         <div class="x-panel-top" xid="top16">
@@ -1399,7 +1407,7 @@
            <p xid="p3">
             <span xid="span106">欢迎下次光临</span></p> </div> </div> </div> 
         <div class="x-panel-bottom order-info-button" xid="bottom15">
-         <a component="$UI/system/components/justep/button/button" class="btn x-orange p30" label="返回" xid="button59" bind-click="button50Click">
+         <a component="$UI/system/components/justep/button/button" class="btn x-orange" label="返回" xid="button59" bind-click="button50Click">
           <i xid="i60"></i>
           <span xid="span97">返回</span></a> </div> </div> </div> 
       <div class="x-contents-content" xid="content33">
@@ -1423,13 +1431,13 @@
         <div class="x-panel-bottom bottom-btn-wrap" xid="bottom11">
          <div component="$UI/system/components/bootstrap/row/row" class="row" xid="row26">
           <div class="col col-xs-6" xid="col72">
+           <a component="$UI/system/components/justep/button/button" class="btn btn-success" label="确认" xid="button55" onClick="button43Click">
+            <i xid="i58"></i>
+            <span xid="span98">确认</span></a> </div> 
+          <div class="col col-xs-6" xid="col70">
            <a component="$UI/system/components/justep/button/button" class="btn x-orange" label="返回" xid="button54" bind-click="hbutton44Click">
             <i xid="i59"></i>
-            <span xid="span101">返回</span></a> </div> 
-          <div class="col col-xs-6" xid="col70">
-            <a component="$UI/system/components/justep/button/button" class="btn btn-success" label="确认" xid="button55" onClick="button43Click">
-            <i xid="i58"></i>
-            <span xid="span98">确认</span></a></div> </div> </div> </div> </div> </div> </div> </div> </div></div></div><div component="$UI/system/components/justep/popOver/popOver" class="x-popOver box-style" xid="account" opacity="1">
+            <span xid="span101">返回</span></a> </div> </div> </div> </div> </div> </div> </div> </div> </div></div></div><div component="$UI/system/components/justep/popOver/popOver" class="x-popOver box-style" xid="account" opacity="1">
    <div class="x-popOver-overlay" xid="div89"></div>
    <div class="x-popOver-content pop-container" xid="div90"><div xid="div132" class="pop-wrap" style="height:94%;">
    <div component="$UI/system/components/justep/panel/panel" class="x-panel x-full" xid="panel22">
@@ -1457,13 +1465,13 @@
         <div class="x-panel-bottom bottom-btn-wrap" xid="bottom17">
          <div component="$UI/system/components/bootstrap/row/row" class="row" xid="row30">
           <div class="col col-xs-6" xid="col91">
+           <a component="$UI/system/components/justep/button/button" class="btn btn-success" label="确认" xid="button68" onClick="button68Click">
+            <i xid="i64"></i>
+            <span xid="span118">确认</span></a> </div> 
+          <div class="col col-xs-6" xid="col90">
            <a component="$UI/system/components/justep/button/button" class="btn x-orange" label="返回" xid="button61" bind-click="closeAccount">
             <i xid="i63"></i>
-            <span xid="span114">返回</span></a> </div> 
-          <div class="col col-xs-6" xid="col90">
-            <a component="$UI/system/components/justep/button/button" class="btn btn-success" label="确认" xid="button68" onClick="button68Click">
-            <i xid="i64"></i>
-            <span xid="span118">确认</span></a></div> </div> </div> </div> </div> 
+            <span xid="span114">返回</span></a> </div> </div> </div> </div> </div> 
       <div class="x-contents-content" xid="content40">
        <div component="$UI/system/components/justep/panel/panel" class="x-panel x-full" xid="panel21">
         <div class="x-panel-top" xid="top18">
@@ -1481,13 +1489,13 @@
         <div class="x-panel-bottom bottom-btn-wrap" xid="bottom17">
          <div component="$UI/system/components/bootstrap/row/row" class="row" xid="row30">
           <div class="col col-xs-6" xid="col91">
+           <a component="$UI/system/components/justep/button/button" class="btn btn-success" label="确认" xid="button60" onClick="button43Click">
+            <i xid="i64"></i>
+            <span xid="span118">确认</span></a> </div> 
+          <div class="col col-xs-6" xid="col90">
            <a component="$UI/system/components/justep/button/button" class="btn x-orange" label="返回" xid="button61" bind-click="closeAccount">
             <i xid="i63"></i>
-            <span xid="span114">返回</span></a> </div> 
-          <div class="col col-xs-6" xid="col90">
-            <a component="$UI/system/components/justep/button/button" class="btn btn-success" label="确认" xid="button60" onClick="button43Click">
-            <i xid="i64"></i>
-            <span xid="span118">确认</span></a></div> </div> </div> </div> </div> 
+            <span xid="span114">返回</span></a> </div> </div> </div> </div> </div> 
       <div class="x-contents-content" xid="content41">
        <div component="$UI/system/components/justep/panel/panel" class="x-panel x-full" xid="panel20">
         <div class="x-panel-top" xid="top19">
@@ -1505,13 +1513,13 @@
         <div class="x-panel-bottom bottom-btn-wrap" xid="bottom19">
          <div component="$UI/system/components/bootstrap/row/row" class="row" xid="row28">
           <div class="col col-xs-6" xid="col95">
+           <a component="$UI/system/components/justep/button/button" class="btn btn-success" label="确认" xid="button67" onClick="button34Click">
+            <i xid="i65"></i>
+            <span xid="span112">确认</span></a> </div> 
+          <div class="col col-xs-6" xid="col96">
            <a component="$UI/system/components/justep/button/button" class="btn x-orange" label="返回" xid="button66" bind-click="closeAccount">
             <i xid="i66"></i>
-            <span xid="span113">返回</span></a> </div> 
-          <div class="col col-xs-6" xid="col96">
-            <a component="$UI/system/components/justep/button/button" class="btn btn-success" label="确认" xid="button67" onClick="button34Click">
-            <i xid="i65"></i>
-            <span xid="span112">确认</span></a></div> </div> </div> </div> </div> 
+            <span xid="span113">返回</span></a> </div> </div> </div> </div> </div> 
       <div class="x-contents-content" xid="content47">
        <div component="$UI/system/components/justep/panel/panel" class="x-panel x-full" xid="panel25">
         <div class="x-panel-top" xid="top22">
@@ -1529,13 +1537,13 @@
         <div class="x-panel-bottom bottom-btn-wrap" xid="bottom18">
          <div component="$UI/system/components/bootstrap/row/row" class="row" xid="row27">
           <div class="col col-xs-6" xid="col99">
+           <a component="$UI/system/components/justep/button/button" class="btn btn-success" label="确认" xid="button63" onClick="button63Click">
+            <i xid="i61"></i>
+            <span xid="span111">确认</span></a> </div> 
+          <div class="col col-xs-6" xid="col98">
            <a component="$UI/system/components/justep/button/button" class="btn x-orange" label="返回" xid="button62" bind-click="closeAccount">
             <i xid="i62"></i>
-            <span xid="span110">返回</span></a> </div> 
-          <div class="col col-xs-6" xid="col98">
-            <a component="$UI/system/components/justep/button/button" class="btn btn-success" label="确认" xid="button63" onClick="button63Click">
-            <i xid="i61"></i>
-            <span xid="span111">确认</span></a></div> </div> </div> </div> </div> 
+            <span xid="span110">返回</span></a> </div> </div> </div> </div> </div> 
       <div class="x-contents-content" xid="content38">
        <div component="$UI/system/components/justep/panel/panel" class="x-panel x-full" xid="panel23">
         <div class="x-panel-top" xid="top21">
@@ -1569,7 +1577,7 @@
   <column name="qty" xid="column52"></column>
   <column name="checkOutMoney" xid="column53"></column></columns></div></div> 
         <div class="x-panel-bottom order-info-button" xid="bottom20">
-         <a component="$UI/system/components/justep/button/button" class="btn x-orange p30" label="返回" xid="button69" bind-click="closeAccount">
+         <a component="$UI/system/components/justep/button/button" class="btn x-orange" label="返回" xid="button69" bind-click="closeAccount">
           <i xid="i69"></i>
           <span xid="span115">返回</span></a> </div> </div> </div> 
       <div class="x-contents-content" xid="content45">
@@ -1592,10 +1600,10 @@
         <div class="x-panel-bottom bottom-btn-wrap" xid="bottom16">
          <div component="$UI/system/components/bootstrap/row/row" class="row" xid="row33">
           <div class="col col-xs-6" xid="col89">
+           <a component="$UI/system/components/justep/button/button" class="btn btn-success" label="确认" xid="jbutton65" onClick="jbutton65Click">
+            <i xid="i67"></i>
+            <span xid="span116">确认</span></a> </div> 
+          <div class="col col-xs-6" xid="col87">
            <a component="$UI/system/components/justep/button/button" class="btn x-orange" label="返回" xid="jbutton64" bind-click="closeAccount">
             <i xid="i68"></i>
-            <span xid="span117">返回</span></a> </div> 
-          <div class="col col-xs-6" xid="col87">
-            <a component="$UI/system/components/justep/button/button" class="btn btn-success" label="确认" xid="jbutton65" onClick="jbutton65Click">
-            <i xid="i67"></i>
-            <span xid="span116">确认</span></a></div> </div> </div> </div> </div> </div> </div> </div> </div></div></div><resource xid="resource2"><require xid="require1" url="$UI/demo/baas/baas"></require></resource></div>
+            <span xid="span117">返回</span></a> </div> </div> </div> </div> </div> </div> </div> </div> </div></div></div><resource xid="resource2"><require xid="require1" url="$UI/demo/baas/baas"></require></resource></div>

@@ -1182,7 +1182,8 @@ var ip = 'http://'+localStorage.getItem('pureip')+':'+localStorage.getItem('com'
 					 "typeCode":row.val('typeCode'),
 					 "state":row.val('state'),
 					 "consumeRoomId":row.val('consumeRoomId'),
-					 "shareNO":row.val('shareNO')
+					 "shareNO":row.val('shareNO'),
+					 "custQty":row.val('custQty')
 				}]
 			});
 			timeOutEvent = 0;
