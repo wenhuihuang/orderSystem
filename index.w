@@ -2,7 +2,7 @@
 
 <div xmlns="http://www.w3.org/1999/xhtml" xid="window" class="window" component="$UI/system/components/justep/window/window"
   design="device:mobile">  
-  <div component="$UI/system/components/justep/model/model" xid="model" style="width:234px;height:auto;left:275px;top:424px;" onLoad="modelLoad"> <div component="$UI/system/components/justep/data/data" autoLoad="true" xid="language" idColumn="col0" confirmDelete="false" autoNew="true"><column name="col0" type="String" xid="xid65"></column>
+  <div component="$UI/system/components/justep/model/model" xid="model" style="width:234px;height:auto;left:481px;top:98px;" onLoad="modelLoad"> <div component="$UI/system/components/justep/data/data" autoLoad="true" xid="language" idColumn="col0" confirmDelete="false" autoNew="true"><column name="col0" type="String" xid="xid65"></column>
   <column label="在用" name="USING" type="String" xid="xid66"></column>
   <column label="用户名" name="USERNAME" type="String" xid="xid67"></column>
   <column label="密码" name="PASSWORD" type="String" xid="xid68"></column>
@@ -249,7 +249,7 @@
    <column name="discount" type="String" xid="default47"></column>
    <column name="discountTypeId" type="String" xid="default46"></column>
    <column name="discountTypeName" type="String" xid="default48"></column></div>
-  <div component="$UI/system/components/justep/data/data" autoLoad="true" xid="allMenuData">
+  <div component="$UI/system/components/justep/data/data" autoLoad="true" xid="searchGoodsData">
      <column label="商品id" name="goodsId" type="String" xid="xid14"></column>
   <column label="商品名称" name="goodsName" type="String" xid="xid15"></column>
   <column name="sprice" type="Double" xid="xid18"></column>
@@ -438,7 +438,7 @@
             </span> 
           </div>  
           <div xid="div106" class="menu-bottom-right">
-            <a component="$UI/system/components/justep/button/button" class="btn btn-default" xid="m-search" label="按拼音点菜" target="menu-search" bind-click="m_searchClick">
+            <a component="$UI/system/components/justep/button/button" class="btn btn-default" xid="m-search" label="按拼音点菜" target="menu-search">
    <i xid="i5"></i>
    <span xid="span92">按拼音点菜</span></a><a component="$UI/system/components/justep/button/button" class="btn btn-default"
               label="已点详情" xid="button9" bind-click="button9Click"> 
@@ -462,17 +462,17 @@
      
   <div component="$UI/system/components/justep/panel/panel" class="x-panel x-full" xid="panel11">
    <div class="x-panel-top" xid="top6"><div xid="div37"><div component="$UI/system/components/bootstrap/row/row" class="row w100" xid="row37">
-   <div class="col col-xs-9" xid="col105"><input component="$UI/system/components/justep/input/input" class="form-control" xid="input6" placeHolder="请输入拼音或编码"></input></div>
-   <div class="col col-xs-3" xid="col106"><a component="$UI/system/components/justep/button/button" class="btn btn-style" label="搜索" xid="button5">
+   <div class="col col-xs-9" xid="col105"><input component="$UI/system/components/justep/input/input" class="form-control" xid="searchGoodsInput" placeHolder="请输入拼音或编码"></input></div>
+   <div class="col col-xs-3" xid="col106"><a component="$UI/system/components/justep/button/button" class="btn btn-style" label="搜索" xid="searchGoodsBtn" onClick="searchGoodsBtnClick">
    <i xid="i14"></i>
    <span xid="span139">搜索</span></a></div>
    </div>
   </div></div>
    <div class="x-panel-content goodsList" xid="content5"><div xid="div42" class="div42">
      <div component="$UI/system/components/bootstrap/row/row" class="row" xid="row36">
-   <div component="$UI/system/components/justep/list/list" class="x-list" xid="list15" data="allMenuData">
+   <div component="$UI/system/components/justep/list/list" class="x-list" xid="list15" data="searchGoodsData">
    <ul class="x-list-template" xid="listTemplateUl16">
-    <div class="col col-xs-6" xid="col45">
+    <div class="col col-xs-6" xid="col45" bind-click="col45Click">
    <span xid="span37" bind-text="val('goodsName')"></span></div></ul> </div> </div></div>
   </div>
    </div></div> 
