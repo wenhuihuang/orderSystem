@@ -1076,10 +1076,18 @@ ul.menu-item li{
 }
 /*iphone4 iphone5 小于320px*/
 @media screen and (max-width:320px){
+	/*台变成3个一排*/
 	.main-con.cyUb2Ir ul.cyUb2Ir li.cyUb2Ir{
 		display:block;
 		float:left;
 		width:29%;
 		/*margin:2%;*/
+	}
+	.close-btn.cyUb2Ir, .close-btn.cyUb2Ir:hover{
+		background:#E5642A;
+		border:none;
+		color:#fff;
+		padding-left:20px;
+		padding-right:20px;
 	}
 }
