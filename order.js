@@ -340,6 +340,21 @@ define(function(require) {
 				"success" : success
 			});	
 			return obj;		
+		},
+		//按拼音点菜
+		//OrderSystemWeX5/GoodsServlet.do?func=getGoodsByCondition&condition=ZSM
+		getGoodsByCondition:function(data){
+			var obj;
+			var success = function(param){
+				var a = param;
+				obj = a;
+			};
+			Baas.sendRequest({
+				"url" : data.ip + 'GoodsServlet.do?func=getGoodsByCondition&condition='+data.condition,
+				"dataType": "json",
+				"success" : success
+			});	
+			return obj;		
 		}
 	};
 
