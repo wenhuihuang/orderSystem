@@ -964,9 +964,9 @@ var ip = 'http://'+localStorage.getItem('pureip')+':'+localStorage.getItem('com'
 
 	//送单
 	Model.prototype.button5Click = function(event){
-		var currentDeskData = this.comp('currentDeskData');
+		var currentDeskData = this.comp('currentDeskData').getFirstRow();
 		var billMasterId = currentDeskData.val('billMasterId');
-		var roomId = currentDeskData.getFirstRow().val('roomId');
+		var roomId = currentDeskData.val('roomId');
 		var orderData = this.comp('orderData');
 		var goods = '';
 		var cartData = this.comp('cartData');
@@ -1156,24 +1156,8 @@ var ip = 'http://'+localStorage.getItem('pureip')+':'+localStorage.getItem('com'
     	var row = event.bindingContext.$rawData;
     	var status = this.comp('statusData');
     	status.getFirstRow().val('typeCode',row.val('typeCode'));
-    	
-        timeOutEvent = setTimeout(function(){
-            //执行长按要执行的内容，如弹出菜单         
-            //找出台li里的attr=mydata    
-             debugger 
-//          var liObj= $(event.target).is("li") ? $(event.target).attr("mydata") : $(event.target).parents("li").attr("mydata");
-//            //找出台下主体
-            var divObj= $(event.target).parents("li");
-             	divObj.removeClass("ccc");
-//            //为选中的台加上active
-            divObj.addClass("active").siblings().removeClass("active").addClass("ccc"); //? $(event.target).addClass("active").siblings().removeClass("active") : $(event.target).parents("li").addClass("active").siblings().removeClass("active");
-              $(".more-wrap").show();
-              $(".main-ul").css({"margin-bottom":"94px"});
-//            $(".more-wrap").find(".btn").each(function(){
-//            	$(this).attr({"roomId":liObj});
-//            });
-            //记录下当前长按的桌子信息
-            currentDeskData.newData({
+    	 //记录下当前长按的桌子信息
+        currentDeskData.newData({
 				index: 0,
 				defaultValues:[{
 					 "tai_number":row.val('tai_number'),
@@ -1185,7 +1169,22 @@ var ip = 'http://'+localStorage.getItem('pureip')+':'+localStorage.getItem('com'
 					 "shareNO":row.val('shareNO'),
 					 "custQty":row.val('custQty')
 				}]
-			});
+		});
+        timeOutEvent = setTimeout(function(){
+            //执行长按要执行的内容，如弹出菜单         
+            //找出台li里的attr=mydata    
+//          var liObj= $(event.target).is("li") ? $(event.target).attr("mydata") : $(event.target).parents("li").attr("mydata");
+//            //找出台下主体
+            var divObj= $(event.target).parents("li");
+             	divObj.removeClass("ccc");
+//            //为选中的台加上active
+            divObj.addClass("active").siblings().removeClass("active").addClass("ccc"); //? $(event.target).addClass("active").siblings().removeClass("active") : $(event.target).parents("li").addClass("active").siblings().removeClass("active");
+              $(".more-wrap").show();
+              $(".main-ul").css({"margin-bottom":"94px"});
+//            $(".more-wrap").find(".btn").each(function(){
+//            	$(this).attr({"roomId":liObj});
+//            });
+			debugger;
 			timeOutEvent = 0;
 			 $(".main-ul").find("li").each(function(){
 				 action = $(this).attr('action','action');
@@ -1221,19 +1220,6 @@ var ip = 'http://'+localStorage.getItem('pureip')+':'+localStorage.getItem('com'
 		var menuTypeData = this.comp('menuTypeData');
 		//下面用于刷新当前房台状态
 		var deskData = this.comp('deskData');
-		var currentDeskData = this.comp('currentDeskData');
-		currentDeskData.newData({
-				index: 0,
-				defaultValues:[{
-					 "tai_number":row.val('tai_number'),
-					 "billMasterId":row.val('billMasterId'),
-					 "roomId":row.val('roomId'),
-					 "typeCode":row.val('typeCode'),
-					 "state":row.val('state'),
-					 "consumeRoomId":row.val('consumeRoomId'),
-					 "shareNO":row.val('shareNO')
-				}]
-		});
 		var success = function(param){
 			//重新加载房台
 			$('#more').slideUp();
