@@ -42,6 +42,27 @@ var ip = 'http://'+localStorage.getItem('pureip')+':'+localStorage.getItem('com'
 			"dataType": "json",
 			"success" : success
 		});
+		//为addMoney加上数据
+		 var sendCookWayData = this.comp('sendCookWayData');
+		 var cartData = this.comp('cartData');
+		 var currentDeskData = this.comp('currentDeskData');
+		 debugger
+		 sendCookWayData.clear();
+		 if(localStorage.getItem('sendCookWayData') == undefined ||localStorage.getItem('sendCookWayData')==null||localStorage.getItem('sendCookWayData')==''){
+//			 return false;
+		 }else{
+			 sendCookWayData.loadData(JSON.parse(localStorage.getItem('sendCookWayData'+currentDeskData.getFirstRow().val('roomId'))));
+			 cartData.each(function(data){
+				 data.row.val('addMoney',0);
+			 });
+			 cartData.each(function(data){
+				 sendCookWayData.each(function(data1){
+					 if(data1.row.val('goodsId')==data.row.val('goodsId')){
+						 data.row.val('addMoney',data.row.val('addMoney')+data1.row.val('addMoney'));
+					 }
+				 });
+			 });
+		 }
 		this.comp("order").show();
 	};
 
@@ -112,14 +133,18 @@ var ip = 'http://'+localStorage.getItem('pureip')+':'+localStorage.getItem('com'
 	//删除选中的口味
 	Model.prototype.button11Click = function(event){
 		var deletingCookWayData = this.comp('deletingCookWayData');
-		var currentCookWayData = this.comp('currentCookWayData');
-		currentCookWayData.eachAll(function(param){
+		var sendCookWayData = this.comp('sendCookWayData');
+		var currentGoodsData = this.comp('currentGoodsData');
+		var row;
+		sendCookWayData.each(function(param){
 			if(param.row.val('goodsId')==deletingCookWayData.val('goodsId')&&param.row.val('cookWayId')==deletingCookWayData.val('cookWayId')){
-				currentCookWayData.deleteData(param.row);
-				return;
+//				sendCookWayData.deleteData(sendCookWayData.getCurrentRow());
+				row = sendCookWayData.getCurrentRow();
+				currentGoodsData.getFirstRow().val('addMoney',currentGoodsData.val('addMoney')-param.row.val('addMoney'))
+				 return;
 			}
 		});
-		
+		sendCookWayData.deleteData(row);
 	};
 
 
@@ -128,8 +153,16 @@ var ip = 'http://'+localStorage.getItem('pureip')+':'+localStorage.getItem('com'
 
 	//清空口味
 	Model.prototype.button10Click = function(event){
-		var currentCookWayData = this.comp('currentCookWayData');
-		currentCookWayData.clear();
+		var sendCookWayData = this.comp('sendCookWayData');
+		var currentGoodsData = this.comp('currentGoodsData');
+		var rows= new Array();
+		sendCookWayData.eachAll(function(data){
+			if(data.row.val('goodsId') == currentGoodsData.val('goodsId')){
+				rows.push(data.row);
+			}
+		});
+		sendCookWayData.deleteData(rows);
+		currentGoodsData.getFirstRow().val('addMoney',0);
 	};
 
 
@@ -626,7 +659,8 @@ var ip = 'http://'+localStorage.getItem('pureip')+':'+localStorage.getItem('com'
 		
 		//将购物车数据写入到localStorage
 		var currentDeskData = this.comp('currentDeskData');
-		var roomId = currentDeskData.val('roomId');
+		var roomId = currentDeskData.getFirstRow().val('roomId');
+		debugger
 		localStorage.setItem(roomId,JSON.stringify(cartData.toJson()));
 	};
 
@@ -645,7 +679,6 @@ var ip = 'http://'+localStorage.getItem('pureip')+':'+localStorage.getItem('com'
 					row.val('qty',row.val('qty')-1);//将显示数量置0
 							//向菜单类型右侧添减数量
 							//---1.抽出与当前相同菜单类型的菜单类型
-							
 							menuType.eachAll(function(data){
 								if(data.row.val('typeCode') == row.val('typeCode')){
 									data.row.val('qty',data.row.val('qty')-1);
@@ -677,7 +710,7 @@ var ip = 'http://'+localStorage.getItem('pureip')+':'+localStorage.getItem('com'
 		//---end of 减数量
 		//将购物车数据写入到localStorage
 		var currentDeskData = this.comp('currentDeskData');
-		var roomId = currentDeskData.val('roomId');
+		var roomId = currentDeskData.getFirstRow().val('roomId');
 		localStorage.setItem(roomId,JSON.stringify(cartData.toJson()));
 	};
 
@@ -747,27 +780,35 @@ var ip = 'http://'+localStorage.getItem('pureip')+':'+localStorage.getItem('com'
 		var sendCookWayData = this.comp('sendCookWayData');
 		//为cart补上cookWay字段，主要用于菜单页面显示,加上附加费用
 		cart.eachAll(function(param){
-			currentCookWayData.eachAll(function(data){
+			param.row.val('addMoney',0);
+		});
+		cart.eachAll(function(param){
+			sendCookWayData.eachAll(function(data){
 				if(param.row.val('goodsId')== data.row.val('goodsId')){
 						param.row.val('cookWay',param.row.val('cookWay')+data.row.val('cookWay')+'('+data.row.val('addMoney')+')');
 				}
 			});
-			if(param.row.val('goodsId') ==  currentGoodsData.val('goodsId')){
-				param.row.val('addMoney',currentGoodsData.val('addMoney'));
-			}
-		})
-		//将currentCookWayData数据加入sendCookWayData，用于发送订单的数据
-		currentCookWayData.eachAll(function(param){
-			sendCookWayData.newData({
-				defaultValues:[{
-					'goodsId':param.row.val('goodsId'),
-					'cookWayId':param.row.val('cookWayId')
-				}]
+			sendCookWayData.each(function(data){
+				if(param.row.val('goodsId') ==  data.row.val('goodsId')){
+					param.row.val('addMoney',param.row.val('addMoney')+	data.row.val('addMoney'));
+				}
 			});
+
 		});
 		
-		//清空当前加收
-		currentCookWayData.clear();
+		localStorage.setItem('sendCookWayData'+this.comp('currentDeskData').getFirstRow().val('roomId'),JSON.stringify(sendCookWayData.toJson()));
+//		//将currentCookWayData数据加入sendCookWayData，用于发送订单的数据
+//		currentCookWayData.eachAll(function(param){
+//			sendCookWayData.newData({
+//				defaultValues:[{
+//					'goodsId':param.row.val('goodsId'),
+//					'cookWayId':param.row.val('cookWayId')
+//				}]
+//			});
+//		});
+//		
+//		//清空当前加收
+//		currentCookWayData.clear();
 		this.comp("popOver2").hide();
 	};
 
@@ -795,7 +836,7 @@ var ip = 'http://'+localStorage.getItem('pureip')+':'+localStorage.getItem('com'
 		});
 	};
 
-	//-
+	//购物车-
 	Model.prototype.a2Click = function(event){
 		var currentGoodsData = this.comp('currentGoodsData');
 		var cartData = this.comp('cartData');
@@ -843,6 +884,7 @@ var ip = 'http://'+localStorage.getItem('pureip')+':'+localStorage.getItem('com'
 				});
 			}
 		}
+		//获取做法要求分类：
 		Baas.sendRequest({
 			"url" : ip + 'CookWayServlet.do?func=getCookType&getJson=1',
 			"dataType": "json",
@@ -887,11 +929,11 @@ var ip = 'http://'+localStorage.getItem('pureip')+':'+localStorage.getItem('com'
 	//加收一项
 	Model.prototype.li5Click = function(event){
 		var row = event.bindingContext.$rawData;
-		var currentCookWayData = this.comp('currentCookWayData');
+		var currentCookWayData = this.comp('sendCookWayData');
 		var currentGoodsData = this.comp('currentGoodsData');
-		var flag = false;
+		var flag = false;//判断是否已经添加
 		currentCookWayData.eachAll(function(param){
-			if(param.row.val('cookWayId') == row.val('cookWayId')){
+			if(param.row.val('cookWayId') == row.val('cookWayId')&&param.row.val('goodsId')==currentGoodsData.val('goodsId')){
 				justep.Util.hint('已经添加');
 				flag = true;
 			}
@@ -900,7 +942,9 @@ var ip = 'http://'+localStorage.getItem('pureip')+':'+localStorage.getItem('com'
 			return;
 		}
 //		$('#showCookWays').append("<span"+" id='"+row.val('cookWayId')+"'>"+row.val('cookWay')+'('+row.val('addMoney')+')'+"</span>");
-		
+		var money = currentGoodsData.val('addMoney')+row.val('addMoney');
+		debugger
+		currentGoodsData.getFirstRow().val('addMoney',money);
 		currentCookWayData.newData({
 			defaultValues:[{
 				'cookWayId':row.val('cookWayId'),
@@ -910,7 +954,6 @@ var ip = 'http://'+localStorage.getItem('pureip')+':'+localStorage.getItem('com'
 				'detail':$('#showCookWays').text()
 			}]
 		});	
-		 ;
 		
 	};
 
@@ -922,7 +965,7 @@ var ip = 'http://'+localStorage.getItem('pureip')+':'+localStorage.getItem('com'
 	Model.prototype.button5Click = function(event){
 		var currentDeskData = this.comp('currentDeskData');
 		var billMasterId = currentDeskData.val('billMasterId');
-		var roomId = currentDeskData.val('roomId');
+		var roomId = currentDeskData.getFirstRow().val('roomId');
 		var orderData = this.comp('orderData');
 		var goods = '';
 		var cartData = this.comp('cartData');
@@ -954,6 +997,7 @@ var ip = 'http://'+localStorage.getItem('pureip')+':'+localStorage.getItem('com'
 
 			alert(param.result[0].msg);
 			localStorage.setItem(roomId,'');//清空购物车缓存
+			localStorage.setItem('sendCookWayData'+roomId, '');//清空sendCookWayData
 			cartData.clear();//发送订单成功，清空cartData
 			sendCook.clear();//清空sendCook
 			//menuList清0
@@ -1175,6 +1219,19 @@ var ip = 'http://'+localStorage.getItem('pureip')+':'+localStorage.getItem('com'
 		var menuTypeData = this.comp('menuTypeData');
 		//下面用于刷新当前房台状态
 		var deskData = this.comp('deskData');
+		var currentDeskData = this.comp('currentDeskData');
+		currentDeskData.newData({
+				index: 0,
+				defaultValues:[{
+					 "tai_number":row.val('tai_number'),
+					 "billMasterId":row.val('billMasterId'),
+					 "roomId":row.val('roomId'),
+					 "typeCode":row.val('typeCode'),
+					 "state":row.val('state'),
+					 "consumeRoomId":row.val('consumeRoomId'),
+					 "shareNO":row.val('shareNO')
+				}]
+		});
 		var success = function(param){
 			//重新加载房台
 			$('#more').slideUp();
@@ -1218,19 +1275,7 @@ var ip = 'http://'+localStorage.getItem('pureip')+':'+localStorage.getItem('com'
 			goodsListData.clear();	
 			debugger		
 			//记录当前台号
-			oneDeskData.newData({
-				index: 0,
-				defaultValues:[{
-					 "tai_number":param.rooms[0].tai_number,
-					 "billMasterId":param.rooms[0].consumeBillMasterID,
-					 "roomId":param.rooms[0].roomId,
-					 "typeCode":param.rooms[0].typeCode,
-					 "state":param.rooms[0].state,
-					 "custQty":param.rooms[0].custQty,
-					 "consumeRoomId":param.rooms[0].consumeRoomID,
-					 "shareNo":param.rooms[0].shareNo
-				}]
-			});//end
+			oneDeskData.newData( );//end
 			if(state=="在用"){
 				contents1.to("menu"); 
 			}else if(state=="埋单"){
@@ -1547,27 +1592,27 @@ var ip = 'http://'+localStorage.getItem('pureip')+':'+localStorage.getItem('com'
 	};
 
 	
-	//未分单长按来解决
-	Model.prototype.span32Touchstart = function(event){
-		var currentGooodsData = this.comp('currentGoodsData');
-		var row = event.bindingContext.$rawData;
-		//选将当前行缓存下来
-		currentGoodsData.newData({
-			index:0,
-			defaultValues:[{
-				'goodsName':row.val('goodsName'),
-				'goodsId':row.val('goodsId'),
-				'qty':row.val('qty'),
-				'sprice':row.val('sprice'),
-				'addMoney':row.val('addMoney'),
-				'cookWay':row.val('cookWay'),
-				'totalPrice':row.val('totalPrice'),
-				'typeCode':row.val('typeCode')
-			}]
-		});
-		
-		
-	};
+//	//未分单长按来解决
+//	Model.prototype.span32Touchstart = function(event){
+//		var currentGooodsData = this.comp('currentGoodsData');
+//		var row = event.bindingContext.$rawData;
+//		//选将当前行缓存下来
+//		currentGoodsData.newData({
+//			index:0,
+//			defaultValues:[{
+//				'goodsName':row.val('goodsName'),
+//				'goodsId':row.val('goodsId'),
+//				'qty':row.val('qty'),
+//				'sprice':row.val('sprice'),
+//				'addMoney':row.val('addMoney'),
+//				'cookWay':row.val('cookWay'),
+//				'totalPrice':row.val('totalPrice'),
+//				'typeCode':row.val('typeCode')
+//			}]
+//		});
+//		
+//		
+//	};
 
 	
 	//未分单修改菜名
@@ -1576,6 +1621,7 @@ var ip = 'http://'+localStorage.getItem('pureip')+':'+localStorage.getItem('com'
 		var goodsId = this.comp('currentGoodsData').val('goodsId');		
 		var cartData = this.comp('cartData');
 		order.changeGoodsName({'goodsName':goodsName,'goodsId':goodsId,'cartData':cartData});
+		this.comp('give').hide();
 	};
 
 	
@@ -1583,6 +1629,7 @@ var ip = 'http://'+localStorage.getItem('pureip')+':'+localStorage.getItem('com'
 	Model.prototype.button34Click = function(event){
 		var sprice = $('#noOrderChangePrice').val();
 		order.changeGoodsPrice({'sprice':sprice,'goodsId':this.comp('currentGoodsData').val('goodsId'),'cartData':this.comp('cartData')})
+		this.comp('give').hide();
 	};
 
 	
@@ -1590,7 +1637,7 @@ var ip = 'http://'+localStorage.getItem('pureip')+':'+localStorage.getItem('com'
 	Model.prototype.button38Click = function(event){
 		var qty = $('#noOrderChangeQty').val();
 		order.changeGoodsQty({'qty':qty,'goodsId':this.comp('currentGoodsData').val('goodsId'),'cartData':this.comp('cartData')})
-		
+		this.comp('give').hide();
 	};
 
 	
@@ -1755,6 +1802,7 @@ var ip = 'http://'+localStorage.getItem('pureip')+':'+localStorage.getItem('com'
 	Model.prototype.hspan34Click = function(event){
 		var currentOrderData = this.comp('currentOrderData');
 		var a = order.reminder({'ip':ip,'billDetailId':currentOrderData.val('billDetailId')});
+		alert('success');
 		////debugger
 //		if()
 		//alert(a.);
@@ -2105,6 +2153,15 @@ var ip = 'http://'+localStorage.getItem('pureip')+':'+localStorage.getItem('com'
 	//关闭order弹框
 	Model.prototype.closeBtnClick = function(event){
 		this.comp("order").hide();
+	};
+	
+
+	//app退出事件
+	Model.prototype.exitClick = function(event){
+		//这里要区分打包
+		if (justep.Browser.isX5App) {
+			navigator.app.exitApp();
+		}
 	};
 	
 

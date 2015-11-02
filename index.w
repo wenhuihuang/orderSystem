@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<div xmlns="http://www.w3.org/1999/xhtml" xid="window" class="window" component="$UI/system/components/justep/window/window"
-  design="device:mobile">  
-  <div component="$UI/system/components/justep/model/model" xid="model" style="width:234px;height:auto;left:806px;top:160px;" onLoad="modelLoad"> <div component="$UI/system/components/justep/data/data" autoLoad="true" xid="language" idColumn="col0" confirmDelete="false" autoNew="true"><column name="col0" type="String" xid="xid65"></column>
+<div xmlns="http://www.w3.org/1999/xhtml" xid="window" class="window" component="$UI/system/components/justep/window/window" design="device:mobile">  
+<div component="$UI/system/components/justep/model/model" xid="model" style="width:234px;height:auto;left:806px;top:160px;" onLoad="modelLoad"> <div component="$UI/system/components/justep/data/data" autoLoad="true" xid="language" idColumn="col0" confirmDelete="false" autoNew="true"><column name="col0" type="String" xid="xid65"></column>
   <column label="在用" name="USING" type="String" xid="xid66"></column>
   <column label="用户名" name="USERNAME" type="String" xid="xid67"></column>
   <column label="密码" name="PASSWORD" type="String" xid="xid68"></column>
@@ -142,11 +141,11 @@
   <column name="sprice" type="Double" xid="default4"></column>
   <column label="商品数量" name="qty" type="Integer" xid="default6"></column>
   <column name="addMoney" type="Double" xid="xid29"></column>
+  <column name="typeCode" type="String" xid="xid124"></column>
   <rule xid="rule4">
    <col name="addMoney" xid="ruleCol5">
     <calculate xid="calculate5">
-     <expr xid="default21">$model.currentCookWayData.sum(&quot;addMoney&quot;)</expr></calculate> </col> </rule>
-  <column name="typeCode" type="String" xid="xid124"></column></div>
+     <expr xid="default21">$model.sendCookWayData.sum(&quot;addMoney&quot;)</expr></calculate> </col> </rule></div>
   <div component="$UI/system/components/justep/data/data" autoLoad="true" xid="cookTypeData" idColumn="typeCode"><column name="typeCode" type="String" xid="xid30"></column>
   <column name="typeName" type="String" xid="xid31"></column></div>
   <div component="$UI/system/components/justep/data/data" autoLoad="true" xid="cookTypeDetailData" idColumn="col3"><column name="col3" type="String" xid="xid32"></column>
@@ -340,7 +339,7 @@
      <p xid="p79" class="login-wrap">
       <div component="$UI/system/components/bootstrap/row/row" class="row" xid="row1">
        <div class="col col-xs-6" xid="col2">
-        <a component="$UI/system/components/justep/button/button" class="btn btn-default btn-exit" label="退出" xid="exit">
+        <a component="$UI/system/components/justep/button/button" class="btn btn-default btn-exit" label="退出" xid="exit" onClick="exitClick">
          <i xid="i17"></i>
          <span xid="span86" bind-text="language.val('EXIT')">退出</span></a> </div> 
        <div class="col col-xs-6" xid="col3">
@@ -657,7 +656,7 @@
                     <div component="$UI/system/components/bootstrap/row/row"
                       class="row" xid="row8"> 
                       <div class="col col-xs-4" xid="col30">
-                        <span xid="span32" bind-click="span32Click" bind-touchstart="span32Touchstart" bind-text="language.ref('DISHNAME')"><![CDATA[菜名]]></span>
+                        <span xid="span32" bind-click="span32Click" bind-text="language.ref('DISHNAME')"><![CDATA[菜名]]></span>
                       </div>  
                       <div class="col col-xs-4" xid="col31">
                         <span xid="span33" bind-click="span33Click" bind-text="language.ref('PRICES')"><![CDATA[价格]]></span>
@@ -971,7 +970,7 @@
                     <span xid="span161"><![CDATA[汇总]]></span>
                   </li>  
                   <li> 
-                    <a component="$UI/system/components/justep/button/button" class="btn btn-default clear" label="清空" xid="button10" bind-click="button10Click" onClick="button10Click"> 
+                    <a component="$UI/system/components/justep/button/button" class="btn btn-default clear" label="清空" xid="button10" bind-click="button10Click"> 
                       <i xid="i10" />  
                       <span xid="span159">清空</span>
                     </a>
@@ -984,7 +983,7 @@
                   </li> 
                 </ul> 
               </div>  
-              <div component="$UI/system/components/justep/list/list" class="x-list ed-con-con " xid="list9" data="currentCookWayData">
+              <div component="$UI/system/components/justep/list/list" class="x-list ed-con-con " xid="list9" data="sendCookWayData" filter='$row.val("goodsId")== $model.currentGoodsData.val("goodsId")'>
    <ul class="x-list-template" xid="listTemplateUl9">
     <li xid="li6" bind-click="li6Click" class="clearfix"><div component="$UI/system/components/justep/labelEdit/labelEdit" class="x-label-edit x-label30" xid="labelOutput1" bind-text="val('cookWay')+'('+val('addMoney')+')'">
    <label class="x-label" xid="label4"></label>
