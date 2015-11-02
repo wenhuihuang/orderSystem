@@ -395,15 +395,11 @@
       <div component="$UI/system/components/justep/panel/panel" class="x-panel x-full"
         xid="panel2"> 
         <div class="x-panel-top" xid="top2">
-          <div component="$UI/system/components/justep/titleBar/titleBar" class="x-titlebar"
-            xid="titleBar1" title="菜单"> 
-            <div class="x-titlebar-left" xid="div49"><a component="$UI/system/components/justep/button/button" class="btn btn-link btn-only-icon color-green" xid="button19" icon="icon-android-arrow-back" bind-click="button19Click">
-   <i xid="i21" class="icon-android-arrow-back"></i>
-   <span xid="span41"></span></a></div>  
-            <div class="x-titlebar-title" xid="div50">菜单</div>  
-            <div class="x-titlebar-right reverse" xid="div51"/>
-          </div>
-        </div>  
+          <div xid="div39" class="menu-title-wrap"><div xid="div3" class="menu-title"><h5 xid="h51"><![CDATA[菜单]]></h5></div><div xid="div2" class="menu-all"><span>共
+              <b bind-text="$model.cartData.sum('qty') " class="color-price">0</b>份
+            </span><span>
+              <b bind-text="statusData.val('cartTotal')" class="color-price">0</b>元
+            </span></div></div></div>  
         <div class="x-panel-content home" xid="content4">
           <div xid="left-menu" class="left-menu"> 
             <div component="$UI/system/components/justep/list/list" class="x-list" xid="list3" data="menuTypeData">
@@ -430,22 +426,19 @@
         </div>  
         <div class="x-panel-bottom menu-bottom-wrap" xid="bottom2">
           <div xid="div105" class="menu-bottom-left"> 
-            <span>共
-              <b bind-text="$model.cartData.sum('qty') " class="color-price">0</b>份
-            </span>
-            <span>
-              <b bind-text="statusData.val('cartTotal')" class="color-price">0</b>元
-            </span> 
-          </div>  
-          <div xid="div106" class="menu-bottom-right">
-            <a component="$UI/system/components/justep/button/button" class="btn btn-default" xid="m-search" label="按拼音点菜" target="menu-search">
+            
+             
+          <a component="$UI/system/components/justep/button/button" class="btn btn-default" xid="m-search" label="按拼音点菜" target="menu-search">
    <i xid="i5"></i>
-   <span xid="span92">按拼音点菜</span></a><a component="$UI/system/components/justep/button/button" class="btn btn-default"
-              label="已点详情" xid="button9" bind-click="button9Click"> 
-              <i xid="i9"/>  
+   <span xid="span92">按拼音点菜</span></a><a component="$UI/system/components/justep/button/button" class="btn btn-default" label="已点详情" xid="button9" bind-click="button9Click"> 
+              <i xid="i9" />  
               <span xid="span181">已点详情</span>
-            </a>
-          </div>
+            </a></div>  
+          <div xid="div106" class="menu-bottom-right">
+            
+          <a component="$UI/system/components/justep/button/button" class="btn back-btn" xid="button19" bind-click="button19Click" label="返回">
+   <i xid="i21"></i>
+   <span xid="span41">返回</span></a></div>
         </div>
       </div>
     </div> 

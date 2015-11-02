@@ -1156,7 +1156,7 @@ var ip = 'http://'+localStorage.getItem('pureip')+':'+localStorage.getItem('com'
     	var row = event.bindingContext.$rawData;
     	var status = this.comp('statusData');
     	status.getFirstRow().val('typeCode',row.val('typeCode'));
-    	
+    
         timeOutEvent = setTimeout(function(){
             //执行长按要执行的内容，如弹出菜单         
             //找出台li里的attr=mydata    
@@ -1205,7 +1205,7 @@ var ip = 'http://'+localStorage.getItem('pureip')+':'+localStorage.getItem('com'
     	var _this=$(event.target).parents("li");
     	var action=_this.attr("action");
     	event.preventDefault();
-        clearTimeout(timeOutEvent);//清除定时器  
+        clearTimeout(timeOutEvent);//清除定时器   
         if(timeOutEvent!=0){              
         //这里写要执行的内容（尤如onclick事件）  
        

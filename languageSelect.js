@@ -90,7 +90,7 @@ define(function(require){
 	Model.prototype.modelModelConstruct = function(event){
 				//判断是否要显示设置语言界面
 		if(localStorage.getItem('isEnterLanguageUI')=='false'){
-			//location.href= 'index.w'; 
+			location.href= 'index.w'; 
 		}
 		$('#settingIp').val(localStorage.getItem("pureip"));
 		$('#settingCOM').val(localStorage.getItem("com"));
