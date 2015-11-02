@@ -27,6 +27,8 @@ label{
 	/*background:#fff;*/
 	margin:2%;
 }
+
+
 .main-ul li.active{
 	background:#1ECAD3;
 }
@@ -120,6 +122,15 @@ width: 46.5%;
 }
 .dib{
 	display:inline-block;
+}
+.w100{
+	width:100%;
+}
+.w100 .col .btn{
+	width:100%;	
+}
+.w100 .col{
+	padding:0 10px;
 }
 h3{
 	padding:0;
@@ -522,6 +533,13 @@ img.subtract,img.add{
     margin: 5px;
     display: block;
 }
+.p30{
+	padding-left:20px;
+	padding-right:20px;
+}
+.pop-menuSub-btn span.back{
+	background: rgb(229, 100, 42);
+}
 .x-popOver-content{
 	background:#fff;
 }
@@ -645,6 +663,8 @@ img.subtract,img.add{
 	background:#E5642A;
 	border:none;
 	color:#fff;
+	padding-left:30px;
+	padding-right:30px;
 }
 .ed-btn-wrap ul li{
 	width:100%;
@@ -1053,4 +1073,13 @@ ul.menu-item li{
 }
 .settings-btn .btn{
 	width:100%;
+}
+/*iphone4 iphone5 小于320px*/
+@media screen and (max-width:320px){
+	.main-con.cyUb2Ir ul.cyUb2Ir li.cyUb2Ir{
+		display:block;
+		float:left;
+		width:29%;
+		/*margin:2%;*/
+	}
 }
