@@ -25,9 +25,16 @@ define(function(require){
 				}]
 			});
 		}
-			
+		//为选中的语言加select
+		 var optionObj=$("#"+this.getIDByXID("language-select")).find("option");
+		optionObj.each(function(){	
+			 if( $(this).attr("value") == localStorage.getItem("languageId")){
+				 $(this).attr("selected","true");
+			 }
+		})
+		 
 		}else{
-			location.href="languageSelect.w#!content3";
+			location.href="languageSelect.w#!settings";
 		
 		}
 
@@ -42,7 +49,7 @@ define(function(require){
 		//var row = event.bindingContext.$rawData;
 		//console.log(row);
 		var result = lan.getTranslation({'internalCode':'WELCOME'});
-		location.href='./index.w';
+		location.href='./index.w#!login';
 		console.log(result)
 		localStorage.setItem('isEnterLanguageUI',false);		//var as = lan.getTranslation({'internalCode':'xxx'});
 		//this.comp('titleBar1').title = as;
@@ -50,14 +57,21 @@ define(function(require){
 
 	//设置iP和端口
 	Model.prototype.button73Click = function(event){
-		localStorage.setItem('pureip',$('#settingIp').val());
-		localStorage.setItem('com',$('#settingCOM').val());
-		ip = 'http://'+$('#settingIp').val()+':'+$('#settingCOM').val()+'/OrderSystemWeX5/';
-		localStorage.setItem('ip',ip);
-		location.href= 'languageSelect.w#!content2'; 
-		this.languageCustomRefresh(event);
+	
+		if($('#settingIp').val() != "" && $('#settingCOM').val() !=''){
+			localStorage.setItem('pureip',$('#settingIp').val());
+			localStorage.setItem('com',$('#settingCOM').val());
+			
+			ip = 'http://'+$('#settingIp').val()+':'+$('#settingCOM').val()+'/OrderSystemWeX5/';
+			localStorage.setItem('ip',ip);
+			location.href= 'languageSelect.w#!content2'; 
+			this.languageCustomRefresh(event);
+		}else{
+			alert("请输入ip和端口");
+		}
+		
 	};
-
+	/*
 	Model.prototype.modelActive = function(event){
 		debugger
 		//判断是否要显示设置语言界面
@@ -65,6 +79,7 @@ define(function(require){
 			location.href= 'index.w'; 
 		}
 	};
+	 */
 	//显示设置好的ip
 	Model.prototype.content3Active = function(event){
 		$('#settingIp').val(localStorage.getItem('pureip'));
@@ -75,8 +90,22 @@ define(function(require){
 	Model.prototype.modelModelConstruct = function(event){
 				//判断是否要显示设置语言界面
 		if(localStorage.getItem('isEnterLanguageUI')=='false'){
-			location.href= 'index.w'; 
+			//location.href= 'index.w'; 
 		}
+		$('#settingIp').val(localStorage.getItem("pureip"));
+		$('#settingCOM').val(localStorage.getItem("com"));
+	
+	
+	};
+
+	//返回登录界面
+	Model.prototype.button71Click = function(event){
+		location.href= 'index.w#!login'; 
+	};
+
+	//返回登录界面
+	Model.prototype.button2Click = function(event){
+		location.href= 'index.w#!login'; 
 	};
 
 

@@ -2199,6 +2199,15 @@ var ip = 'http://'+localStorage.getItem('pureip')+':'+localStorage.getItem('com'
 	
 	
 
+	//login激活
+	Model.prototype.loginActive = function(event){
+		$('#'+this.getIDByXID('userName')).focus();
+	};	
+	
+
+	
+	
+
 
 	return Model;
 });

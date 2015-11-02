@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <div xmlns="http://www.w3.org/1999/xhtml" xid="window" class="window" component="$UI/system/components/justep/window/window" design="device:mobile">  
-<div component="$UI/system/components/justep/model/model" xid="model" style="width:234px;height:auto;left:773px;top:160px;" onLoad="modelLoad"> <div component="$UI/system/components/justep/data/data" autoLoad="true" xid="language" idColumn="col0" confirmDelete="false" autoNew="true"><column name="col0" type="String" xid="xid65"></column>
+<div component="$UI/system/components/justep/model/model" xid="model" style="width:234px;height:auto;left:757px;top:84px;" onLoad="modelLoad"> <div component="$UI/system/components/justep/data/data" autoLoad="true" xid="language" idColumn="col0" confirmDelete="false" autoNew="true"><column name="col0" type="String" xid="xid65"></column>
   <column label="在用" name="USING" type="String" xid="xid66"></column>
   <column label="用户名" name="USERNAME" type="String" xid="xid67"></column>
   <column label="密码" name="PASSWORD" type="String" xid="xid68"></column>
@@ -322,7 +322,7 @@
   
   <div component="$UI/system/components/justep/contents/contents" class="x-contents x-full"
     active="0" xid="contents1" swipe="false"> 
-   <div class="x-contents-content" xid="login">
+   <div class="x-contents-content" xid="login" onActive="loginActive">
       <div component="$UI/system/components/justep/panel/panel" class="x-panel x-full" xid="panel26">
    <div class="x-panel-content" xid="content50"><div xid="div48" class="login-wrap">
    <div xid="div52">
