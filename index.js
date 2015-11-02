@@ -2,10 +2,10 @@ define(function(require){
 	var $ = require("jquery");
 	var justep = require("$UI/system/lib/justep");
 	//var ip = "http://qixusoft.vicp.net";
-	//	var ip="http://192.168.1.20:8080/OrderSystemWeX5/";
-	//	var ip ="http://192.168.1.128:8080/OrderSystemWeX5/";
-	var ip = 'http://'+localStorage.getItem('pureip')+':'+localStorage.getItem('com')+'/OrderSystemWeX5/';	
-	//var url="UI2/orderSystem_a/index.w#!index";
+//	var ip="http://192.168.1.20:8080/OrderSystemWeX5/";
+//	var ip ="http://192.168.1.128:8080/OrderSystemWeX5/";
+var ip = 'http://'+localStorage.getItem('pureip')+':'+localStorage.getItem('com')+'/OrderSystemWeX5/';	
+//var url="UI2/orderSystem_a/index.w#!index";
 	var Baas = require("$UI/demo/baas/baas");
 	var Language = require('$UI/orderSystem/language');
 	var myBaas = require('$UI/orderSystem/myBaas');
@@ -13,7 +13,6 @@ define(function(require){
 	var lan = require('$UI/orderSystem/language');
 	    //定时器 
     var timeOutEvent=0;
-     //require("./languageSelect");
 	var Model = function(){
 		this.callParent();
 	};
@@ -43,6 +42,27 @@ define(function(require){
 			"dataType": "json",
 			"success" : success
 		});
+		//为addMoney加上数据
+		 var sendCookWayData = this.comp('sendCookWayData');
+		 var cartData = this.comp('cartData');
+		 var currentDeskData = this.comp('currentDeskData');
+		 debugger
+		 sendCookWayData.clear();
+		 if(localStorage.getItem('sendCookWayData') == undefined ||localStorage.getItem('sendCookWayData')==null||localStorage.getItem('sendCookWayData')==''){
+//			 return false;
+		 }else{
+			 sendCookWayData.loadData(JSON.parse(localStorage.getItem('sendCookWayData'+currentDeskData.getFirstRow().val('roomId'))));
+			 cartData.each(function(data){
+				 data.row.val('addMoney',0);
+			 });
+			 cartData.each(function(data){
+				 sendCookWayData.each(function(data1){
+					 if(data1.row.val('goodsId')==data.row.val('goodsId')){
+						 data.row.val('addMoney',data.row.val('addMoney')+data1.row.val('addMoney'));
+					 }
+				 });
+			 });
+		 }
 		this.comp("order").show();
 	};
 
@@ -113,14 +133,18 @@ define(function(require){
 	//删除选中的口味
 	Model.prototype.button11Click = function(event){
 		var deletingCookWayData = this.comp('deletingCookWayData');
-		var currentCookWayData = this.comp('currentCookWayData');
-		currentCookWayData.eachAll(function(param){
+		var sendCookWayData = this.comp('sendCookWayData');
+		var currentGoodsData = this.comp('currentGoodsData');
+		var row;
+		sendCookWayData.each(function(param){
 			if(param.row.val('goodsId')==deletingCookWayData.val('goodsId')&&param.row.val('cookWayId')==deletingCookWayData.val('cookWayId')){
-				currentCookWayData.deleteData(param.row);
-				return;
+//				sendCookWayData.deleteData(sendCookWayData.getCurrentRow());
+				row = sendCookWayData.getCurrentRow();
+				currentGoodsData.getFirstRow().val('addMoney',currentGoodsData.val('addMoney')-param.row.val('addMoney'))
+				 return;
 			}
 		});
-		
+		sendCookWayData.deleteData(row);
 	};
 
 
@@ -129,8 +153,16 @@ define(function(require){
 
 	//清空口味
 	Model.prototype.button10Click = function(event){
-		var currentCookWayData = this.comp('currentCookWayData');
-		currentCookWayData.clear();
+		var sendCookWayData = this.comp('sendCookWayData');
+		var currentGoodsData = this.comp('currentGoodsData');
+		var rows= new Array();
+		sendCookWayData.eachAll(function(data){
+			if(data.row.val('goodsId') == currentGoodsData.val('goodsId')){
+				rows.push(data.row);
+			}
+		});
+		sendCookWayData.deleteData(rows);
+		currentGoodsData.getFirstRow().val('addMoney',0);
 	};
 
 
@@ -263,8 +295,6 @@ define(function(require){
 	
 	//data加载完成，调整顶部宽度
 	Model.prototype.modelLoad = function(event){
-	
-		
 			//设置菜单宽度
 			var liWidth=parseInt($(".menu-con").find('li').outerWidth(true));
 			var liMargin=$(".menu-con")
@@ -327,10 +357,7 @@ define(function(require){
 				$('#autoLogin').attr("checked","true");
 			}else{
 				
-			}
-		
-			
-	};
+			}	};
 
 	//mydata为deskData
 	function getDesk(mydata,row,type){
@@ -381,6 +408,7 @@ define(function(require){
 			 	
 			var ffdata={"rows":rowss};
 		 	mydata.loadData(ffdata);
+//		 	mydata.r
 		 	$(".more-wrap").find(".col").removeClass("active");
 		 	$(".more-wrap").hide();	
 		 	$(".main-ul").find("li").each(function(){
@@ -581,7 +609,7 @@ define(function(require){
 	    	contents1.to('menu');
 	    }				
 		Baas.sendRequest({
-			"url" : ip + 'OrderedNumServlet.do?func=newConsumeRoom&getJson=1&roomId='+currentDeskData.val('roomId')+'&custQty='+num,
+			"url" : ip + 'OrderedNumServlet.do?func=newConsumeRoom&getJson=1&roomId='+currentDeskData.getFirstRow().val('roomId')+'&custQty='+num,
 			"dataType": "json",
 			"success" : success
 		});
@@ -632,7 +660,8 @@ define(function(require){
 		
 		//将购物车数据写入到localStorage
 		var currentDeskData = this.comp('currentDeskData');
-		var roomId = currentDeskData.val('roomId');
+		var roomId = currentDeskData.getFirstRow().val('roomId');
+		debugger
 		localStorage.setItem(roomId,JSON.stringify(cartData.toJson()));
 	};
 
@@ -651,7 +680,6 @@ define(function(require){
 					row.val('qty',row.val('qty')-1);//将显示数量置0
 							//向菜单类型右侧添减数量
 							//---1.抽出与当前相同菜单类型的菜单类型
-							
 							menuType.eachAll(function(data){
 								if(data.row.val('typeCode') == row.val('typeCode')){
 									data.row.val('qty',data.row.val('qty')-1);
@@ -683,7 +711,7 @@ define(function(require){
 		//---end of 减数量
 		//将购物车数据写入到localStorage
 		var currentDeskData = this.comp('currentDeskData');
-		var roomId = currentDeskData.val('roomId');
+		var roomId = currentDeskData.getFirstRow().val('roomId');
 		localStorage.setItem(roomId,JSON.stringify(cartData.toJson()));
 	};
 
@@ -753,27 +781,35 @@ define(function(require){
 		var sendCookWayData = this.comp('sendCookWayData');
 		//为cart补上cookWay字段，主要用于菜单页面显示,加上附加费用
 		cart.eachAll(function(param){
-			currentCookWayData.eachAll(function(data){
+			param.row.val('addMoney',0);
+		});
+		cart.eachAll(function(param){
+			sendCookWayData.eachAll(function(data){
 				if(param.row.val('goodsId')== data.row.val('goodsId')){
 						param.row.val('cookWay',param.row.val('cookWay')+data.row.val('cookWay')+'('+data.row.val('addMoney')+')');
 				}
 			});
-			if(param.row.val('goodsId') ==  currentGoodsData.val('goodsId')){
-				param.row.val('addMoney',currentGoodsData.val('addMoney'));
-			}
-		})
-		//将currentCookWayData数据加入sendCookWayData，用于发送订单的数据
-		currentCookWayData.eachAll(function(param){
-			sendCookWayData.newData({
-				defaultValues:[{
-					'goodsId':param.row.val('goodsId'),
-					'cookWayId':param.row.val('cookWayId')
-				}]
+			sendCookWayData.each(function(data){
+				if(param.row.val('goodsId') ==  data.row.val('goodsId')){
+					param.row.val('addMoney',param.row.val('addMoney')+	data.row.val('addMoney'));
+				}
 			});
+
 		});
 		
-		//清空当前加收
-		currentCookWayData.clear();
+		localStorage.setItem('sendCookWayData'+this.comp('currentDeskData').getFirstRow().val('roomId'),JSON.stringify(sendCookWayData.toJson()));
+//		//将currentCookWayData数据加入sendCookWayData，用于发送订单的数据
+//		currentCookWayData.eachAll(function(param){
+//			sendCookWayData.newData({
+//				defaultValues:[{
+//					'goodsId':param.row.val('goodsId'),
+//					'cookWayId':param.row.val('cookWayId')
+//				}]
+//			});
+//		});
+//		
+//		//清空当前加收
+//		currentCookWayData.clear();
 		this.comp("popOver2").hide();
 	};
 
@@ -801,7 +837,7 @@ define(function(require){
 		});
 	};
 
-	//-
+	//购物车-
 	Model.prototype.a2Click = function(event){
 		var currentGoodsData = this.comp('currentGoodsData');
 		var cartData = this.comp('cartData');
@@ -849,6 +885,7 @@ define(function(require){
 				});
 			}
 		}
+		//获取做法要求分类：
 		Baas.sendRequest({
 			"url" : ip + 'CookWayServlet.do?func=getCookType&getJson=1',
 			"dataType": "json",
@@ -893,11 +930,11 @@ define(function(require){
 	//加收一项
 	Model.prototype.li5Click = function(event){
 		var row = event.bindingContext.$rawData;
-		var currentCookWayData = this.comp('currentCookWayData');
+		var currentCookWayData = this.comp('sendCookWayData');
 		var currentGoodsData = this.comp('currentGoodsData');
-		var flag = false;
+		var flag = false;//判断是否已经添加
 		currentCookWayData.eachAll(function(param){
-			if(param.row.val('cookWayId') == row.val('cookWayId')){
+			if(param.row.val('cookWayId') == row.val('cookWayId')&&param.row.val('goodsId')==currentGoodsData.val('goodsId')){
 				justep.Util.hint('已经添加');
 				flag = true;
 			}
@@ -906,7 +943,9 @@ define(function(require){
 			return;
 		}
 //		$('#showCookWays').append("<span"+" id='"+row.val('cookWayId')+"'>"+row.val('cookWay')+'('+row.val('addMoney')+')'+"</span>");
-		
+		var money = currentGoodsData.val('addMoney')+row.val('addMoney');
+		debugger
+		currentGoodsData.getFirstRow().val('addMoney',money);
 		currentCookWayData.newData({
 			defaultValues:[{
 				'cookWayId':row.val('cookWayId'),
@@ -916,7 +955,6 @@ define(function(require){
 				'detail':$('#showCookWays').text()
 			}]
 		});	
-		 ;
 		
 	};
 
@@ -928,7 +966,7 @@ define(function(require){
 	Model.prototype.button5Click = function(event){
 		var currentDeskData = this.comp('currentDeskData');
 		var billMasterId = currentDeskData.val('billMasterId');
-		var roomId = currentDeskData.val('roomId');
+		var roomId = currentDeskData.getFirstRow().val('roomId');
 		var orderData = this.comp('orderData');
 		var goods = '';
 		var cartData = this.comp('cartData');
@@ -960,6 +998,7 @@ define(function(require){
 
 			alert(param.result[0].msg);
 			localStorage.setItem(roomId,'');//清空购物车缓存
+			localStorage.setItem('sendCookWayData'+roomId, '');//清空sendCookWayData
 			cartData.clear();//发送订单成功，清空cartData
 			sendCook.clear();//清空sendCook
 			//menuList清0
@@ -1047,7 +1086,7 @@ define(function(require){
 
 	Model.prototype.button19Click = function(event){
 		this.comp("contents1").to("index");
-	
+//		$('.left-menu').find('li').eq(0).trigger('click');//刷新
 	};
 	//搭台
 	Model.prototype.button18Click = function(event){
@@ -1181,6 +1220,19 @@ define(function(require){
 		var menuTypeData = this.comp('menuTypeData');
 		//下面用于刷新当前房台状态
 		var deskData = this.comp('deskData');
+		var currentDeskData = this.comp('currentDeskData');
+		currentDeskData.newData({
+				index: 0,
+				defaultValues:[{
+					 "tai_number":row.val('tai_number'),
+					 "billMasterId":row.val('billMasterId'),
+					 "roomId":row.val('roomId'),
+					 "typeCode":row.val('typeCode'),
+					 "state":row.val('state'),
+					 "consumeRoomId":row.val('consumeRoomId'),
+					 "shareNO":row.val('shareNO')
+				}]
+		});
 		var success = function(param){
 			//重新加载房台
 			$('#more').slideUp();
@@ -1224,19 +1276,7 @@ define(function(require){
 			goodsListData.clear();	
 			debugger		
 			//记录当前台号
-			oneDeskData.newData({
-				index: 0,
-				defaultValues:[{
-					 "tai_number":param.rooms[0].tai_number,
-					 "billMasterId":param.rooms[0].consumeBillMasterID,
-					 "roomId":param.rooms[0].roomId,
-					 "typeCode":param.rooms[0].typeCode,
-					 "state":param.rooms[0].state,
-					 "custQty":param.rooms[0].custQty,
-					 "consumeRoomId":param.rooms[0].consumeRoomID,
-					 "shareNo":param.rooms[0].shareNo
-				}]
-			});//end
+			oneDeskData.newData( );//end
 			if(state=="在用"){
 				contents1.to("menu"); 
 			}else if(state=="埋单"){
@@ -1245,7 +1285,9 @@ define(function(require){
 				clearTimeout(timeOutEvent);//清除定时器  
 				popOver_renshu.show();
 				//让文本框架
+
 				$('#custNum').focus();
+				$('#custNum').val('');
 			}	
 		}
 		
@@ -1371,7 +1413,14 @@ define(function(require){
 
     //刷新房台
 	Model.prototype.indexActive = function(event){
-		$('.left-menu').find('li').eq(0).trigger('click');
+		var deskData = this.comp('deskData');
+		var status = this.comp('statusData');
+		debugger
+		if(status.val('typeCode') != undefined){
+			getDesk(deskData,status.val('typeCode'),2);
+		}else{
+			$('.left-menu').find('li').eq(0).trigger('click');
+		}
 	};
     
 	
@@ -1553,27 +1602,27 @@ define(function(require){
 	};
 
 	
-	//未分单长按来解决
-	Model.prototype.span32Touchstart = function(event){
-		var currentGooodsData = this.comp('currentGoodsData');
-		var row = event.bindingContext.$rawData;
-		//选将当前行缓存下来
-		currentGoodsData.newData({
-			index:0,
-			defaultValues:[{
-				'goodsName':row.val('goodsName'),
-				'goodsId':row.val('goodsId'),
-				'qty':row.val('qty'),
-				'sprice':row.val('sprice'),
-				'addMoney':row.val('addMoney'),
-				'cookWay':row.val('cookWay'),
-				'totalPrice':row.val('totalPrice'),
-				'typeCode':row.val('typeCode')
-			}]
-		});
-		
-		
-	};
+//	//未分单长按来解决
+//	Model.prototype.span32Touchstart = function(event){
+//		var currentGooodsData = this.comp('currentGoodsData');
+//		var row = event.bindingContext.$rawData;
+//		//选将当前行缓存下来
+//		currentGoodsData.newData({
+//			index:0,
+//			defaultValues:[{
+//				'goodsName':row.val('goodsName'),
+//				'goodsId':row.val('goodsId'),
+//				'qty':row.val('qty'),
+//				'sprice':row.val('sprice'),
+//				'addMoney':row.val('addMoney'),
+//				'cookWay':row.val('cookWay'),
+//				'totalPrice':row.val('totalPrice'),
+//				'typeCode':row.val('typeCode')
+//			}]
+//		});
+//		
+//		
+//	};
 
 	
 	//未分单修改菜名
@@ -1582,6 +1631,7 @@ define(function(require){
 		var goodsId = this.comp('currentGoodsData').val('goodsId');		
 		var cartData = this.comp('cartData');
 		order.changeGoodsName({'goodsName':goodsName,'goodsId':goodsId,'cartData':cartData});
+		this.comp('give').hide();
 	};
 
 	
@@ -1589,6 +1639,7 @@ define(function(require){
 	Model.prototype.button34Click = function(event){
 		var sprice = $('#noOrderChangePrice').val();
 		order.changeGoodsPrice({'sprice':sprice,'goodsId':this.comp('currentGoodsData').val('goodsId'),'cartData':this.comp('cartData')})
+		this.comp('give').hide();
 	};
 
 	
@@ -1596,7 +1647,7 @@ define(function(require){
 	Model.prototype.button38Click = function(event){
 		var qty = $('#noOrderChangeQty').val();
 		order.changeGoodsQty({'qty':qty,'goodsId':this.comp('currentGoodsData').val('goodsId'),'cartData':this.comp('cartData')})
-		
+		this.comp('give').hide();
 	};
 
 	
@@ -1728,7 +1779,7 @@ define(function(require){
 
 	//登录页面设置
 	Model.prototype.button70Click = function(event){
-		location.href = 'languageSelect.w#!settings';
+		this.comp("Settings").show();
 	};
 
 	
@@ -1761,6 +1812,7 @@ define(function(require){
 	Model.prototype.hspan34Click = function(event){
 		var currentOrderData = this.comp('currentOrderData');
 		var a = order.reminder({'ip':ip,'billDetailId':currentOrderData.val('billDetailId')});
+		alert('success');
 		////debugger
 //		if()
 		//alert(a.);
@@ -1969,9 +2021,8 @@ define(function(require){
 		localStorage.setItem('com',$('#settingCOM').val());
 		ip = 'http://'+$('#settingIp').val()+':'+$('#settingCOM').val()+'/OrderSystemWeX5/';
 		localStorage.setItem('ip',ip);
-		this.comp('contents1').to('lang');
-		//this.comp('contents1').to('login');
-		//location.href= 'languageSelect.w'; 
+		this.comp('contents1').to('login');
+		location.href= 'languageSelect.w'; 
 	};
 	
 
@@ -1988,7 +2039,7 @@ define(function(require){
 	
 	Model.prototype.languageBtnClick = function(event){
 		localStorage.setItem('isEnterLanguageUI',true);
-		location.href = 'languageSelect.w#!content2';
+		location.href = 'languageSelect.w';
 	};
 	
 
@@ -2064,55 +2115,97 @@ define(function(require){
 	
 
 
-
-	//查找菜单
-	Model.prototype.m_searchClick = function(event){
-		var menuTypeData = this.comp("menuTypeData");
-		var allMenuData = this.comp("allMenuData");
-		var search=function(typeCode){
-			
-					var url= ip+'GoodsServlet.do?func=listByTypeCode&typeCode='+typeCode+'&getJson=1';//http://192.168.1.20:8080
-					var success = function(msg){
-									var rowss=[];
-									for(var i=0;i<msg.goods.length;i++){
-									 rowss[i]={'goodsId':{'value':msg.goods[i].goodsId},'goodsName':{'value':msg.goods[i].goodsName},'sprice':{'value':msg.goods[i].sprice},'qty':{'value':0},'typeCode':{'value':msg.goods[i].typeCode},'unitId':{'value':msg.goods[i].unitId}};
-								 	}
-								 	var ffdata={"rows":rowss};
-								 	allMenuData.loadData(ffdata,true);
-								 	
-							//从购物车中统计当前各商品购买数量，并将数量显示在商品列中
-//							goodsListData.eachAll(function(param){
-//									cartData.eachAll(function(data){
-//										if(param.row.val('goodsId')==data.row.val('goodsId')){
-//											param.row.val('qty',param.row.val('qty')+data.row.val('qty'));
-//										}
-//									});
-//							}); 	
-								 	
-								 		 	
-				    }
-				   
-					Baas.sendRequest({
-						"url" : url,
-						"dataType": "json",
-						"success" : success
-					});
-			
-		}
-		
-		menuTypeData.eachAll(function(param){
-			var data=param.row.val("typeCode");
-			search(data);
-		})
-	};
-	
-
-
-
 	//关闭order弹框
 	Model.prototype.closeBtnClick = function(event){
 		this.comp("order").hide();
 	};
+	
+
+	//app退出事件
+	Model.prototype.exitClick = function(event){
+		//这里要区分打包
+		if (justep.Browser.isX5App) {
+			navigator.app.exitApp();
+		}
+	};
+	
+
+	
+	
+
+	//菜单拼音搜索
+	Model.prototype.searchGoodsBtnClick = function(event){
+
+		var condition = $('#'+this.getIDByXID('searchGoodsInput')).val();
+		var data = order.getGoodsByCondition({'ip':ip,'condition':condition});
+		this.comp('searchGoodsData').loadData({'rows':data.goods});
+		if(data.goods.length==0){
+			this.comp('message').show({'title':'结果','message':'没有查找到内容'});
+		}
+	};
+	
+
+	
+	
+
+	//搜索框查找内容后选菜
+	Model.prototype.col45Click = function(event){
+		$(event.target).css({'background':'orange'});
+		var cartData = this.comp('cartData');
+		var row = event.bindingContext.$rawData;
+		// ;
+		debugger
+		var flag = false;//该菜单是否存在
+		cartData.eachAll(function(param){
+		// ;
+			if(param.row.val('goodsId') == row.val('goodsId')){//已经存在
+				param.row.val('qty',param.row.val('qty')+1);
+				flag = true;
+			}
+		});
+		if(flag == false){
+			cartData.newData({
+				defaultValues:[{
+					'goodsId':row.val('goodsId'),
+					'qty':row.val('qty')+1,
+					'goodsName':row.val('goodsName'),
+					'sprice':row.val('sprice'),
+					'addMoney':0,
+					'typeCode':row.val('typeCode'),
+					'unitId':row.val('unitId')
+				}]
+			});
+		}
+		//购物车显示数量显示在goodsList
+		row.val('qty',row.val('qty')+1);
+		//向菜单类型右侧添加数量
+		//---1.抽出与当前相同菜单类型的菜单类型
+		var menuType = this.comp('menuTypeData');
+		menuType.eachAll(function(data){
+			if(data.row.val('typeCode') == row.val('typeCode')){
+				data.row.val('qty',data.row.val('qty')+1);
+			}
+		});
+		//---end of 加数量
+		
+		//将购物车数据写入到localStorage
+		var currentDeskData = this.comp('currentDeskData');
+		var roomId = currentDeskData.getFirstRow().val('roomId');
+		localStorage.setItem(roomId,JSON.stringify(cartData.toJson()));
+		this.comp('message').show({'message':'成功加入购物车','title':'结果'});
+	};	
+	
+
+	
+	
+
+	//login激活
+	Model.prototype.loginActive = function(event){
+		$('#'+this.getIDByXID('userName')).focus();
+	};	
+	
+
+	
 	
 
 
