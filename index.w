@@ -345,7 +345,8 @@
        <div class="col col-xs-6" xid="col3">
         <a component="$UI/system/components/justep/button/button" class="btn btn-success btn-login" label="登录" xid="login1" bind-click="login_btnClick">
          <i xid="i16"></i>
-         <span xid="span85" bind-text="language.val('LOGIN')">登录</span></a> </div> </div> </p> </div> </div> </div>
+         <span xid="span85" bind-text="language.val('LOGIN')">登录</span></a> </div> </div> 
+  </p> </div> </div> </div>
   
   <div xid="div160" class="login-check">
   
