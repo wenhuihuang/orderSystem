@@ -538,7 +538,7 @@
                   <div xid="pop-menuSub-btn" class="pop-menuSub-btn no-single">
                     <div component="$UI/system/components/bootstrap/row/row" class="row" xid="row8"> 
                       <div class="col col-xs-4" xid="col30">
-                        <span xid="span32" bind-click="span32Click" bind-touchstart="span32Touchstart" bind-text="language.ref('DISHNAME')"><![CDATA[菜名]]></span>
+                        <span xid="span32" bind-click="span32Click" bind-text="language.ref('DISHNAME')"><![CDATA[菜名]]></span>
                       </div>  
                       <div class="col col-xs-4" xid="col31">
                         <span xid="span33" bind-click="span33Click" bind-text="language.ref('PRICES')"><![CDATA[价格]]></span>
@@ -723,7 +723,7 @@
                       </a> 
                     </div> 
                   </div></div></div></div>  
-              <div class="x-contents-content" xid="content14"><div xid="div23" class="have-wrap"><div xid="div72"><h3 xid="h32"><![CDATA[十号台（1人）]]></h3><table class="table table-bordered table-hover table-striped" component="$UI/system/components/bootstrap/table/table" xid="table1">
+              <div class="x-contents-content" xid="content14"><div xid="div23" class="have-wrap"><div xid="div72"><h3 xid="h32" bind-text="currentDeskData.val('tai_number')"><![CDATA[十号台（1人）]]></h3><table class="table table-bordered table-hover table-striped" component="$UI/system/components/bootstrap/table/table" xid="table1">
    <thead xid="thead1">
     <tr xid="tr1">
      <th xid="col42"><![CDATA[管理员]]></th>
@@ -769,7 +769,7 @@
     <a component="$UI/system/components/justep/button/button" class="btn btn-link" xid="button46" label="预览结帐单" bind-click="span92Click">
      <i xid="i50"></i>
      <span xid="span57" class="color-style">预览结帐单</span></a> 
-    <a component="$UI/system/components/justep/button/button" class="btn btn-link" xid="button49" label="输入会员卡号">
+    <a component="$UI/system/components/justep/button/button" class="btn btn-link" xid="button49" label="输入会员卡号" bind-click="button49Click">
      <i xid="i48"></i>
      <span xid="span52" class="color-style">输入会员卡号</span></a> 
     
@@ -1476,4 +1476,30 @@
           <div class="col col-xs-6" xid="col87">
             <a component="$UI/system/components/justep/button/button" class="btn x-orange" label="返回" xid="jbutton64" bind-click="closeAccount">
             <i xid="i68"></i>
-            <span xid="span117">返回</span></a></div> </div> </div> </div> </div> </div> </div> </div> </div></div></div><resource xid="resource2"><require xid="require1" url="$UI/demo/baas/baas"></require></resource></div>
+            <span xid="span117">返回</span></a></div> </div> </div> </div> </div> 
+  <div class="x-contents-content" xid="content53"><div component="$UI/system/components/justep/panel/panel" class="x-panel x-full" xid="panel29">
+   <div class="x-panel-top" xid="top25">
+    <div component="$UI/system/components/justep/titleBar/titleBar" class="x-titlebar" xid="titleBar1" title="会员卡号">
+     <div class="x-titlebar-left" xid="div54"></div>
+     <div class="x-titlebar-title" xid="div55">会员卡号</div>
+     <div class="x-titlebar-right reverse" xid="div50"></div></div> </div> 
+   <div class="x-panel-content" xid="content54">
+    <div xid="div49" class="pop-con">
+     <div class="con-con" xid="div44">
+      <div xid="div51">
+       <div component="$UI/system/components/justep/labelEdit/labelEdit" class="x-label-edit x-label30" xid="labelInput6">
+        <label class="x-label" xid="label8"><![CDATA[卡号]]></label>
+        <input component="$UI/system/components/justep/input/input" class="form-control x-edit" xid="input6" placeHolder="请输入会员卡号" id="noOrderChangeName"></input></div> 
+  <div component="$UI/system/components/justep/labelEdit/labelEdit" class="x-label-edit x-label30" xid="labelInput8">
+   <label class="x-label" xid="label10"><![CDATA[密码]]></label>
+   <input component="$UI/system/components/justep/input/input" class="form-control x-edit" xid="input8" placeHolder="请输入密码" id="noOrderChangeName"></input></div></div> </div> </div> </div> 
+   <div class="x-panel-bottom bottom-btn-wrap" xid="bottom24">
+    <div component="$UI/system/components/bootstrap/row/row" class="row" xid="row39">
+     <div class="col col-xs-6" xid="col114">
+      <a component="$UI/system/components/justep/button/button" class="btn btn-success" label="确认" xid="button2" onClick="button43Click">
+       <i xid="i2"></i>
+       <span xid="span4">确认</span></a> </div> 
+     <div class="col col-xs-6" xid="col110">
+      <a component="$UI/system/components/justep/button/button" class="btn x-orange" label="返回" xid="button3" bind-click="closeAccount">
+       <i xid="i3"></i>
+       <span xid="span3">返回</span></a> </div> </div> </div> </div></div></div> </div> </div> </div></div></div><resource xid="resource2"><require xid="require1" url="$UI/demo/baas/baas"></require></resource></div>

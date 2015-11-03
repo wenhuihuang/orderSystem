@@ -2199,7 +2199,11 @@ var ip = 'http://'+localStorage.getItem('pureip')+':'+localStorage.getItem('com'
 		$('#'+this.getIDByXID('userName')).focus();
 	};	
 	
-
+	//输入会员卡
+	Model.prototype.button49Click = function(event){
+		this.comp("account").show();
+		this.comp("contents6").to("content53")
+	};	
 	
 	//清空搜索结果
 	Model.prototype.m_searchClick = function(event){
@@ -2208,13 +2212,6 @@ var ip = 'http://'+localStorage.getItem('pureip')+':'+localStorage.getItem('com'
 		$(this.getElementByXid('searchGoodsInput')).val('');
 	};	
 	
-
-	
-
-
-	
-	
-
 
 	return Model;
 });
