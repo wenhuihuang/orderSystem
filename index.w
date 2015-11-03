@@ -724,7 +724,10 @@
                       </a> 
                     </div> 
                   </div></div></div></div>  
-              <div class="x-contents-content" xid="content14"><div xid="div23" class="have-wrap"><div xid="div72"><h3 xid="h32" bind-text="currentDeskData.val('tai_number')"><![CDATA[十号台（1人）]]></h3><table class="table table-bordered table-hover table-striped" component="$UI/system/components/bootstrap/table/table" xid="table1">
+              <div class="x-contents-content" xid="content14"><div xid="div23" class="have-wrap"><div xid="div72"><div component="$UI/system/components/justep/list/list" class="x-list" xid="list4" data="currentDeskData">
+   <ul class="x-list-template" xid="listTemplateUl4">
+    <li xid="li11" bind-text=' $object.val("tai_number")'></li></ul> </div><h3 xid="h32" bind-text="currentDeskData.val('tai_number')"><![CDATA[十号台（1人）]]>
+  </h3><table class="table table-bordered table-hover table-striped" component="$UI/system/components/bootstrap/table/table" xid="table1">
    <thead xid="thead1">
     <tr xid="tr1">
      <th xid="col42"><![CDATA[管理员]]></th>
