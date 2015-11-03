@@ -364,10 +364,7 @@ img.subtract,img.add{
 	line-height:48px;
 	padding-left:10px;
 }
-.menu-bottom-wrap .menu-bottom-left span{
-	color:#000;
-	/*color:#000;*/
-}
+
 .menu-bottom-wrap .menu-bottom-left span b{
 	padding:0 8px;
 }
@@ -1000,7 +997,6 @@ ul.menu-item li{
 	height:94%;
 }
 .login-bottom {
-	text-align:right;
 	line-height:48px;
 	/*padding:0 20px;*/
 }
@@ -1012,7 +1008,7 @@ ul.menu-item li{
 }
 .bottom-copy{
 	display:inline-block;
-	float:left;
+	padding:0 5px;
 }
 .settings .x-panel-bottom{
 	line-height:48px;
@@ -1157,5 +1153,9 @@ ul.menu-item li{
 		color:#fff;
 		padding-left:20px;
 		padding-right:20px;
+	}
+	.login-bottom .p30{
+		padding-left:10px;
+		padding-right:10px;
 	}
 }
