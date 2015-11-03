@@ -5,6 +5,9 @@
 label{
 	text-align:center;
 }
+.x-orange span{
+	color:#fff;
+}
 /*台颜色*/
 .green{
 	background:#00CC66;
@@ -363,6 +366,7 @@ img.subtract,img.add{
 }
 .menu-bottom-wrap .menu-bottom-left span{
 	color:#000;
+	/*color:#000;*/
 }
 .menu-bottom-wrap .menu-bottom-left span b{
 	padding:0 8px;
@@ -651,6 +655,7 @@ img.subtract,img.add{
 	margin:0;
 }
 .send-order-btn,.send-order-btn:hover,.menu-bottom-right .btn{
+.send-order-btn,.send-order-btn:hover,.menu-bottom-left .btn{
 	background:#2BB8AA;
 	border:none;
 	color:#fff;
@@ -894,6 +899,11 @@ ul.menu-item li{
 	background:#2BB8AA;
 	border:none;
 }
+.edit-add-bottom .x-orange{
+	color: #ffffff;
+    background-color: #df691a;
+    border-color: #df691a;
+}
 .require-title-wrap ul{
 	margin:8px 0;
 }
@@ -1074,8 +1084,36 @@ ul.menu-item li{
 .settings-btn .btn{
 	width:100%;
 }
-.goodsList p{
-	display:none;
+
+
+.back-btn{
+	padding:8px 18px;
+	color: #fff;
+    background-color: #dd5600;
+    border-color: #dd5600;
+}
+.menu-title-wrap{
+	display:box;
+	display:-webkit-box;
+	background: rgb(43, 184, 170);
+    color: rgb(255, 255, 255);
+}
+.menu-title{
+	box-flex:1.0;
+	-webkit-box-flex:1.0;
+	text-align:center;
+	text-align:center;
+}
+.menu-title h5{
+	margin:0;
+	line-height:48px;
+	color:#fff;
+}
+.menu-all{
+	box-flex:2.0;
+	-webkit-box-flex:2.0;
+	text-align:center;
+	line-height:48px;
 }
 /*iphone4 iphone5 小于320px*/
 @media screen and (max-width:320px){

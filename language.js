@@ -12,11 +12,16 @@ define(function(require) {
 			var success = function(param){
 				//在这里要保存ip到本地和当前语言到本地
 				obj = param;
-			}		
+			};
+			var error = function(msg) {
+				alert("输入ip有错")
+				return;
+			};
 			Baas.sendRequest({
 				"url" : data.ip + 'LanguageServlet.do?func=getLanguages',
 				"dataType": "json",
-				"success" : success
+				"success" : success,
+				"error":error
 			});	
 			return obj;
 		},

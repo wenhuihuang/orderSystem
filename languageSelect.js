@@ -15,23 +15,31 @@ define(function(require){
 		var language = this.comp('language');
 		//获取地区语言各类
 		var lanJson = lan.getLanguages({'ip':ip});
-		console.log(lanJson.languages.length)
-		language.clear();
-		for(var o=0 ;o<lanJson.languages.length;o++){
-			language.newData({
-				defaultValues:[{
-					languageId:lanJson.languages[o].languageId,
-					languageName:lanJson.languages[o].languageName
-				}]
-			});
-		}
-		//为选中的语言加select
-		 var optionObj=$("#"+this.getIDByXID("language-select")).find("option");
-		optionObj.each(function(){	
-			 if( $(this).attr("value") == localStorage.getItem("languageId")){
-				 $(this).attr("selected","true");
-			 }
-		})
+			if(lanJson){
+				
+				console.log(lanJson.languages.length)
+				language.clear();
+				for(var o=0 ;o<lanJson.languages.length;o++){
+					language.newData({
+						defaultValues:[{
+							languageId:lanJson.languages[o].languageId,
+							languageName:lanJson.languages[o].languageName
+						}]
+					});
+				}
+				//为选中的语言加select
+				 var optionObj=$("#"+this.getIDByXID("language-select")).find("option");
+				optionObj.each(function(){	
+					 if( $(this).attr("value") == localStorage.getItem("languageId")){
+						 $(this).attr("selected","true");
+					 }
+				})
+			
+			}else{
+				location.href="languageSelect.w#!settings";
+				
+			}
+
 		 
 		}else{
 			location.href="languageSelect.w#!settings";
@@ -49,9 +57,10 @@ define(function(require){
 		//var row = event.bindingContext.$rawData;
 		//console.log(row);
 		var result = lan.getTranslation({'internalCode':'WELCOME'});
+		localStorage.setItem("back","1");
 		location.href='./index.w#!login';
 		console.log(result)
-		localStorage.setItem('isEnterLanguageUI',false);		//var as = lan.getTranslation({'internalCode':'xxx'});
+		//localStorage.setItem('isEnterLanguageUI',false);		//var as = lan.getTranslation({'internalCode':'xxx'});
 		//this.comp('titleBar1').title = as;
 	};
 
@@ -64,7 +73,13 @@ define(function(require){
 			
 			ip = 'http://'+$('#settingIp').val()+':'+$('#settingCOM').val()+'/OrderSystemWeX5/';
 			localStorage.setItem('ip',ip);
-			location.href= 'languageSelect.w#!content2'; 
+			if(localStorage.getItem("back") != "0"){
+				location.href= 'languageSelect.w#!content2'; 
+			}else{
+				location.href="index.w#!login";
+			}
+			
+			localStorage.setItem("back","1");
 			this.languageCustomRefresh(event);
 		}else{
 			alert("请输入ip和端口");
@@ -89,8 +104,10 @@ define(function(require){
 
 	Model.prototype.modelModelConstruct = function(event){
 				//判断是否要显示设置语言界面
-		if(localStorage.getItem('isEnterLanguageUI')=='false'){
-			//location.href= 'index.w'; 
+		if(localStorage.getItem('languageId') != null && localStorage.getItem("back") == "1"){
+			location.href= 'index.w'; 
+		}else{
+			
 		}
 		$('#settingIp').val(localStorage.getItem("pureip"));
 		$('#settingCOM').val(localStorage.getItem("com"));
@@ -100,11 +117,13 @@ define(function(require){
 
 	//返回登录界面
 	Model.prototype.button71Click = function(event){
+		localStorage.setItem("back","1");
 		location.href= 'index.w#!login'; 
 	};
 
 	//返回登录界面
 	Model.prototype.button2Click = function(event){
+		localStorage.setItem("back","1");
 		location.href= 'index.w#!login'; 
 	};
 

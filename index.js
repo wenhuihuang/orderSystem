@@ -1156,7 +1156,7 @@ var ip = 'http://'+localStorage.getItem('pureip')+':'+localStorage.getItem('com'
     	var row = event.bindingContext.$rawData;
     	var status = this.comp('statusData');
     	status.getFirstRow().val('typeCode',row.val('typeCode'));
-    	 //记录下当前长按的桌子信息
+ //记录下当前长按的桌子信息
         currentDeskData.newData({
 				index: 0,
 				defaultValues:[{
@@ -1169,8 +1169,7 @@ var ip = 'http://'+localStorage.getItem('pureip')+':'+localStorage.getItem('com'
 					 "shareNO":row.val('shareNO'),
 					 "custQty":row.val('custQty')
 				}]
-		});
-        timeOutEvent = setTimeout(function(){
+		});        timeOutEvent = setTimeout(function(){
             //执行长按要执行的内容，如弹出菜单         
             //找出台li里的attr=mydata    
 //          var liObj= $(event.target).is("li") ? $(event.target).attr("mydata") : $(event.target).parents("li").attr("mydata");
@@ -1189,7 +1188,7 @@ var ip = 'http://'+localStorage.getItem('pureip')+':'+localStorage.getItem('com'
 			 $(".main-ul").find("li").each(function(){
 				 action = $(this).attr('action','action');
 			 });
-        },500);//这里设置定时器，定义长按500毫秒触发长按事件，时间可以自己改，个人感觉500毫秒非常合适 
+        },600);//这里设置定时器，定义长按500毫秒触发长按事件，时间可以自己改，个人感觉500毫秒非常合适 
     };
     
     //移动
@@ -1204,7 +1203,7 @@ var ip = 'http://'+localStorage.getItem('pureip')+':'+localStorage.getItem('com'
     	var _this=$(event.target).parents("li");
     	var action=_this.attr("action");
     	event.preventDefault();
-        clearTimeout(timeOutEvent);//清除定时器  
+        clearTimeout(timeOutEvent);//清除定时器   
         if(timeOutEvent!=0){              
         //这里写要执行的内容（尤如onclick事件）  
        
@@ -1766,7 +1765,8 @@ var ip = 'http://'+localStorage.getItem('pureip')+':'+localStorage.getItem('com'
 
 	//登录页面设置
 	Model.prototype.button70Click = function(event){
-		this.comp("Settings").show();
+		location.href = 'languageSelect.w#!settings';
+		localStorage.setItem("back", "0");
 	};
 
 	
@@ -2025,8 +2025,8 @@ var ip = 'http://'+localStorage.getItem('pureip')+':'+localStorage.getItem('com'
 
 	
 	Model.prototype.languageBtnClick = function(event){
-		localStorage.setItem('isEnterLanguageUI',true);
-		location.href = 'languageSelect.w';
+		localStorage.setItem('back',"0");
+		location.href = 'languageSelect.w#!content2';
 	};
 	
 
@@ -2119,15 +2119,16 @@ var ip = 'http://'+localStorage.getItem('pureip')+':'+localStorage.getItem('com'
 
 	
 	
-
 	//菜单拼音搜索
 	Model.prototype.searchGoodsBtnClick = function(event){
 
 		var condition = $('#'+this.getIDByXID('searchGoodsInput')).val();
 		var data = order.getGoodsByCondition({'ip':ip,'condition':condition});
 		this.comp('searchGoodsData').loadData({'rows':data.goods});
+		$(this.getElementByXid('searchResult0')).text('');
 		if(data.goods.length==0){
-			this.comp('message').show({'title':'结果','message':'没有查找到内容'});
+//			this.comp('message').show({'title':'结果','message':'没有查找到内容'});
+			$(this.getElementByXid('searchResult0')).text('没有查找到内容')
 		}
 	};
 	
@@ -2196,6 +2197,7 @@ var ip = 'http://'+localStorage.getItem('pureip')+':'+localStorage.getItem('com'
 	//清空搜索结果
 	Model.prototype.m_searchClick = function(event){
 		this.comp('searchGoodsData').clear();
+		$(this.getElementByXid('searchGoodsInput')).focus();
 	};	
 	
 
