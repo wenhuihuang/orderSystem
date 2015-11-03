@@ -286,7 +286,6 @@ var ip = 'http://'+localStorage.getItem('pureip')+':'+localStorage.getItem('com'
 	        }
 		});
 	    
-	    
 	};
 
 
@@ -357,7 +356,8 @@ var ip = 'http://'+localStorage.getItem('pureip')+':'+localStorage.getItem('com'
 				$('#autoLogin').attr("checked","true");
 			}else{
 				
-			}	};
+			}
+		};
 
 	//mydata为deskData
 	function getDesk(mydata,row,type){
@@ -942,7 +942,7 @@ var ip = 'http://'+localStorage.getItem('pureip')+':'+localStorage.getItem('com'
 		if(flag == true){
 			return;
 		}
-//		$('#showCookWays').append("<span"+" id='"+row.val('cookWayId')+"'>"+row.val('cookWay')+'('+row.val('addMoney')+')'+"</span>");
+		//$('#showCookWays').append("<span"+" id='"+row.val('cookWayId')+"'>"+row.val('cookWay')+'('+row.val('addMoney')+')'+"</span>");
 		var money = currentGoodsData.val('addMoney')+row.val('addMoney');
 		debugger
 		currentGoodsData.getFirstRow().val('addMoney',money);
@@ -1085,6 +1085,9 @@ var ip = 'http://'+localStorage.getItem('pureip')+':'+localStorage.getItem('com'
 	};
 
 	Model.prototype.button19Click = function(event){
+		clearTimeout(timeOutEvent);//清除定时器  
+		 timeOutEvent = 0; 
+		 localStorage.setItem("long","1"); 
 		this.comp("contents1").to("index");
 //		$('.left-menu').find('li').eq(0).trigger('click');//刷新
 	};
@@ -1169,7 +1172,9 @@ var ip = 'http://'+localStorage.getItem('pureip')+':'+localStorage.getItem('com'
 					 "shareNO":row.val('shareNO'),
 					 "custQty":row.val('custQty')
 				}]
-		});        timeOutEvent = setTimeout(function(){
+		});     
+
+			   timeOutEvent = setTimeout(function(){
             //执行长按要执行的内容，如弹出菜单         
             //找出台li里的attr=mydata    
 //          var liObj= $(event.target).is("li") ? $(event.target).attr("mydata") : $(event.target).parents("li").attr("mydata");
@@ -1189,6 +1194,7 @@ var ip = 'http://'+localStorage.getItem('pureip')+':'+localStorage.getItem('com'
 				 action = $(this).attr('action','action');
 			 });
         },600);//这里设置定时器，定义长按500毫秒触发长按事件，时间可以自己改，个人感觉500毫秒非常合适 
+		
     };
     
     //移动
@@ -1259,8 +1265,7 @@ var ip = 'http://'+localStorage.getItem('pureip')+':'+localStorage.getItem('com'
 				});
 			});
 			//清空商品列表
-			goodsListData.clear();	
-			debugger		
+			goodsListData.clear();			
 			//记录当前台号
 			oneDeskData.newData( );//end
 			if(state=="在用"){
@@ -1401,7 +1406,6 @@ var ip = 'http://'+localStorage.getItem('pureip')+':'+localStorage.getItem('com'
 	Model.prototype.indexActive = function(event){
 		var deskData = this.comp('deskData');
 		var status = this.comp('statusData');
-		debugger
 		if(status.val('typeCode') != undefined){
 			getDesk(deskData,status.val('typeCode'),2);
 		}else{
@@ -2122,13 +2126,14 @@ var ip = 'http://'+localStorage.getItem('pureip')+':'+localStorage.getItem('com'
 
 	//菜单拼音搜索
 	Model.prototype.searchGoodsBtnClick = function(event){
-
+		var searchGoodsData=this.comp('searchGoodsData');
 		var condition = $('#'+this.getIDByXID('searchGoodsInput')).val();
 		var data = order.getGoodsByCondition({'ip':ip,'condition':condition});
-		this.comp('searchGoodsData').loadData({'rows':data.goods});
+		searchGoodsData.loadData({'rows':data.goods});
 		if(data.goods.length==0){
 			this.comp('message').show({'title':'结果','message':'没有查找到内容'});
 		}
+
 	};
 	
 

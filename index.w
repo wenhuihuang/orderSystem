@@ -295,11 +295,11 @@
   
   
   <div component="$UI/system/components/bootstrap/row/row" class="row" xid="row41">
-   <div class="col col-xs-6" xid="col115"><span xid="span94" class="bottom-copy">CopyRight©启旭科技有限公司</span></div>
-   <div class="col col-xs-3" xid="col116"><a component="$UI/system/components/justep/button/button" class="btn btn-success btn-style p30" label="设置" xid="button70" bind-click="button70Click">
+   <div class="col col-xs-7" xid="col115"><span xid="span94" class="bottom-copy">CopyRight©启旭科技有限公司</span></div>
+   <div class="col col-xs-2" xid="col116"><a component="$UI/system/components/justep/button/button" class="btn btn-success btn-style p30" label="设置" xid="button70" bind-click="button70Click">
    <i xid="i70"></i>
    <span xid="span40">设置</span></a></div>
-  <div class="col col-xs-3" xid="col117"><a component="$UI/system/components/justep/button/button" class="btn btn-success btn-style p30" label="语言" xid="languageBtn" onClick="languageBtnClick">
+  <div class="col col-xs-2" xid="col117"><a component="$UI/system/components/justep/button/button" class="btn btn-success btn-style p30" label="语言" xid="languageBtn" onClick="languageBtnClick">
    <i xid="i38"></i>
    <span xid="span95">语言</span></a></div></div></div></div></div>
     <div class="x-contents-content index" xid="index" onActive="indexActive">
@@ -407,7 +407,7 @@
  <li xid="li2" bind-click="li2Click"><div component="$UI/system/components/justep/output/output" class="x-output" xid="output5" bind-ref="ref('typeName')"></div>
   <div component="$UI/system/components/justep/output/output" class="x-output count" xid="output6" bind-ref="ref('qty')" bind-visible="val('qty')&gt;0"></div></li></ul> </div></div>          <div xid="right-main" class="right-main"> 
             <div component="$UI/system/components/justep/list/list" class="x-list" xid="list6" data="goodsListData">
-   <ul class="x-list-template" xid="listTemplateUl6">
+    <ul class="x-list-template" xid="listTemplateUl6">
     <li xid="li3"><ul xid="ul4"> 
               <li xid="li32" bind-text="val('goodsName')"> 
                 <h3 xid="h31" bind-text="val('goodsName')">菜名</h3> 
@@ -415,12 +415,12 @@
               <li class="clearfix"> 
                 <p class="price fl" xid="span177" bind-text="val('sprice')">0.00</p>  
                 <p class="number fr" xid="span178"> 
-                  <img class="subtract" xid="image1" bind-attr-src='$model.getImageUrl("./images/jiangreen.png")' bind-click="image1Click"/>  
+                  <img class="subtract" xid="image1" bind-attr-src='$model.getImageUrl("./images/jiangreen.png")' bind-click="image1Click" />  
                   
-                  <label xid="qty" class="num" bind-text="val('qty')">label</label><img class="add" xid="image2" bind-attr-src='$model.getImageUrl("./images/jiagreen.png")' bind-click="image2Click"/>
+                  <label xid="qty" class="num" bind-text="val('qty')">label</label><img class="add" xid="image2" bind-attr-src='$model.getImageUrl("./images/jiagreen.png")' bind-click="image2Click" />
                 </p> 
               </li> 
-            </ul></li></ul> </div>  
+            </ul></li></ul></div>  
               
             </div>
         </div>  
@@ -465,8 +465,8 @@
      <div component="$UI/system/components/bootstrap/row/row" class="row" xid="row36">
    <div component="$UI/system/components/justep/list/list" class="x-list" xid="list15" data="searchGoodsData">
    <ul class="x-list-template" xid="listTemplateUl16">
-    <div class="col col-xs-6" xid="col45" bind-click="col45Click">
-   <span xid="span37" bind-text="val('goodsName')"></span></div></ul> </div> </div></div>
+    <div class="col col-xs-6 count-radius-parent" xid="col45" bind-click="col45Click">
+   <span xid="span37" bind-text="val('goodsName')"></span><span xid="span2" class="count-radius" bind-text="ref('qty')" bind-visible="val('qty')&gt;0"></span></div></ul> </div> </div></div>
   </div>
    </div></div> 
    <div class="x-panel-bottom menu-bottom-wrap" xid="bottom3">
