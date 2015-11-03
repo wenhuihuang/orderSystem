@@ -1188,7 +1188,7 @@ var ip = 'http://'+localStorage.getItem('pureip')+':'+localStorage.getItem('com'
 			 $(".main-ul").find("li").each(function(){
 				 action = $(this).attr('action','action');
 			 });
-        },500);//这里设置定时器，定义长按500毫秒触发长按事件，时间可以自己改，个人感觉500毫秒非常合适 
+        },600);//这里设置定时器，定义长按500毫秒触发长按事件，时间可以自己改，个人感觉500毫秒非常合适 
     };
     
     //移动
@@ -1766,6 +1766,7 @@ var ip = 'http://'+localStorage.getItem('pureip')+':'+localStorage.getItem('com'
 	//登录页面设置
 	Model.prototype.button70Click = function(event){
 		location.href = 'languageSelect.w#!settings';
+		localStorage.setItem("back", "0");
 	};
 
 	
@@ -2024,7 +2025,7 @@ var ip = 'http://'+localStorage.getItem('pureip')+':'+localStorage.getItem('com'
 
 	
 	Model.prototype.languageBtnClick = function(event){
-		localStorage.setItem('isEnterLanguageUI',true);
+		localStorage.setItem('back',"0");
 		location.href = 'languageSelect.w#!content2';
 	};
 	

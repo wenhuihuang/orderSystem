@@ -897,6 +897,11 @@ ul.menu-item li{
 	background:#2BB8AA;
 	border:none;
 }
+.edit-add-bottom .x-orange{
+	color: #ffffff;
+    background-color: #df691a;
+    border-color: #df691a;
+}
 .require-title-wrap ul{
 	margin:8px 0;
 }
@@ -1086,14 +1091,25 @@ ul.menu-item li{
 .menu-title-wrap{
 	display:box;
 	display:-webkit-box;
+	background: rgb(43, 184, 170);
+    color: rgb(255, 255, 255);
 }
 .menu-title{
 	box-flex:1.0;
 	-webkit-box-flex:1.0;
+	text-align:center;
+	text-align:center;
+}
+.menu-title h5{
+	margin:0;
+	line-height:48px;
+	color:#fff;
 }
 .menu-all{
 	box-flex:2.0;
 	-webkit-box-flex:2.0;
+	text-align:center;
+	line-height:48px;
 }
 /*iphone4 iphone5 小于320px*/
 @media screen and (max-width:320px){
