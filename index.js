@@ -2188,7 +2188,6 @@ var ip = 'http://'+localStorage.getItem('pureip')+':'+localStorage.getItem('com'
 		var currentDeskData = this.comp('currentDeskData');
 		var roomId = currentDeskData.getFirstRow().val('roomId');
 		localStorage.setItem(roomId,JSON.stringify(cartData.toJson()));
-		this.comp('message').show({'message':'成功加入购物车','title':'结果'});
 	};	
 	
 
@@ -2206,6 +2205,7 @@ var ip = 'http://'+localStorage.getItem('pureip')+':'+localStorage.getItem('com'
 	Model.prototype.m_searchClick = function(event){
 		this.comp('searchGoodsData').clear();
 		$(this.getElementByXid('searchGoodsInput')).focus();
+		$(this.getElementByXid('searchGoodsInput')).val('');
 	};	
 	
 
