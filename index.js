@@ -286,6 +286,7 @@ var ip = 'http://'+localStorage.getItem('pureip')+':'+localStorage.getItem('com'
 	        }
 		});
 	    
+
 	};
 
 
@@ -2125,15 +2126,16 @@ var ip = 'http://'+localStorage.getItem('pureip')+':'+localStorage.getItem('com'
 
 	
 	
-
 	//菜单拼音搜索
 	Model.prototype.searchGoodsBtnClick = function(event){
 		var searchGoodsData=this.comp('searchGoodsData');
 		var condition = $('#'+this.getIDByXID('searchGoodsInput')).val();
 		var data = order.getGoodsByCondition({'ip':ip,'condition':condition});
 		searchGoodsData.loadData({'rows':data.goods});
+		$(this.getElementByXid('searchResult0')).text('');
 		if(data.goods.length==0){
-			this.comp('message').show({'title':'结果','message':'没有查找到内容'});
+//			this.comp('message').show({'title':'结果','message':'没有查找到内容'});
+			$(this.getElementByXid('searchResult0')).text('没有查找到内容')
 		}
 
 	};
@@ -2186,7 +2188,6 @@ var ip = 'http://'+localStorage.getItem('pureip')+':'+localStorage.getItem('com'
 		var currentDeskData = this.comp('currentDeskData');
 		var roomId = currentDeskData.getFirstRow().val('roomId');
 		localStorage.setItem(roomId,JSON.stringify(cartData.toJson()));
-		this.comp('message').show({'message':'成功加入购物车','title':'结果'});
 	};	
 	
 
@@ -2202,6 +2203,13 @@ var ip = 'http://'+localStorage.getItem('pureip')+':'+localStorage.getItem('com'
 	Model.prototype.button49Click = function(event){
 		this.comp("account").show();
 		this.comp("contents6").to("content53")
+	};	
+	
+	//清空搜索结果
+	Model.prototype.m_searchClick = function(event){
+		this.comp('searchGoodsData').clear();
+		$(this.getElementByXid('searchGoodsInput')).focus();
+		$(this.getElementByXid('searchGoodsInput')).val('');
 	};	
 	
 

@@ -2,7 +2,7 @@
 
 <div xmlns="http://www.w3.org/1999/xhtml" xid="window" class="window" component="$UI/system/components/justep/window/window"
   design="device:mobile">  
-  <div component="$UI/system/components/justep/model/model" xid="model" style="width:234px;height:auto;left:481px;top:98px;" onLoad="modelLoad"> <div component="$UI/system/components/justep/data/data" autoLoad="true" xid="language" idColumn="col0" confirmDelete="false" autoNew="true"><column name="col0" type="String" xid="xid65"></column>
+  <div component="$UI/system/components/justep/model/model" xid="model" style="width:234px;height:auto;left:700px;top:46px;" onLoad="modelLoad"> <div component="$UI/system/components/justep/data/data" autoLoad="true" xid="language" idColumn="col0" confirmDelete="false" autoNew="true"><column name="col0" type="String" xid="xid65"></column>
   <column label="在用" name="USING" type="String" xid="xid66"></column>
   <column label="用户名" name="USERNAME" type="String" xid="xid67"></column>
   <column label="密码" name="PASSWORD" type="String" xid="xid68"></column>
@@ -422,9 +422,8 @@
         </div>  
         <div class="x-panel-bottom menu-bottom-wrap" xid="bottom2">
           <div xid="div105" class="menu-bottom-left"> 
-            
-             
-          <a component="$UI/system/components/justep/button/button" class="btn btn-default" xid="m-search" label="按拼音点菜" target="menu-search">
+   <i xid="i5"></i>
+   <a component="$UI/system/components/justep/button/button" class="btn btn-default" xid="m-search" label="按拼音点菜" target="menu-search" onClick="m_searchClick">
    <i xid="i5"></i>
    <span xid="span92">按拼音点菜</span></a><a component="$UI/system/components/justep/button/button" class="btn btn-default" label="已点详情" xid="button9" bind-click="button9Click"> 
               <i xid="i9" />  
@@ -463,7 +462,7 @@
    <ul class="x-list-template" xid="listTemplateUl16">
     <div class="col col-xs-6 count-radius-parent" xid="col45" bind-click="col45Click">
    <span xid="span37" bind-text="val('goodsName')"></span><span xid="span2" class="count-radius" bind-text="ref('qty')" bind-visible="val('qty')&gt;0"></span></div></ul> </div> </div></div>
-  </div>
+  <p xid="searchResult0"></p></div>
    </div></div> 
    <div class="x-panel-bottom menu-bottom-wrap" xid="bottom3">
     <div xid="div53" class="menu-bottom-right">
@@ -862,7 +861,7 @@
                   </li> 
                 </ul> 
               </div>  
-              <div component="$UI/system/components/justep/list/list" class="x-list ed-con-con " xid="list9" data="currentCookWayData">
+              <div component="$UI/system/components/justep/list/list" class="x-list ed-con-con " xid="list9" data="sendCookWayData" filter="$row.val('goodsId')==$model.currentGoodsData.val(&quot;goodsId&quot;)">
    <ul class="x-list-template" xid="listTemplateUl9">
     <li xid="li6" bind-click="li6Click" class="clearfix"><div component="$UI/system/components/justep/labelEdit/labelEdit" class="x-label-edit x-label30" xid="labelOutput1" bind-text="val('cookWay')+'('+val('addMoney')+')'">
    <label class="x-label" xid="label4"></label>

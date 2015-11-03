@@ -365,6 +365,7 @@ img.subtract,img.add{
 	padding-left:10px;
 }
 .menu-bottom-wrap .menu-bottom-left span{
+	color:#000;
 	/*color:#000;*/
 }
 .menu-bottom-wrap .menu-bottom-left span b{
@@ -655,6 +656,7 @@ img.subtract,img.add{
 	width:100%;
 	margin:0;
 }
+.send-order-btn,.send-order-btn:hover,.menu-bottom-right .btn{
 .send-order-btn,.send-order-btn:hover,.menu-bottom-left .btn{
 	background:#2BB8AA;
 	border:none;
@@ -1090,6 +1092,8 @@ ul.menu-item li{
 .settings-btn .btn{
 	width:100%;
 }
+
+
 .back-btn{
 	padding:8px 18px;
 	color: #fff;
