@@ -519,6 +519,7 @@ img.subtract,img.add{
     bottom: 0;
     background-color: #E8E8E8;
     z-index:100;
+    border-radius:4px;
 }
 .pop-menuSub-btn{
 	width:100%;
@@ -527,6 +528,7 @@ img.subtract,img.add{
     background-color: #E8E8E8;
     display:none;
     z-index:111;
+    border-radius:4px;
 }
 .pop-menuSub-btn span{
 	padding: 8px 0;
@@ -1000,7 +1002,13 @@ ul.menu-item li{
 .login-bottom {
 	text-align:right;
 	line-height:48px;
-	padding:0 20px;
+	/*padding:0 20px;*/
+}
+.login-bottom .row .col{
+	padding:0;
+}
+.login-bottom .row .col-xs-7{
+	width:64%;
 }
 .bottom-copy{
 	display:inline-block;
@@ -1108,12 +1116,31 @@ ul.menu-item li{
 	margin:0;
 	line-height:48px;
 	color:#fff;
+	font-size:18px;
+	font-weight:bold;
 }
 .menu-all{
 	box-flex:2.0;
 	-webkit-box-flex:2.0;
 	text-align:center;
 	line-height:48px;
+}
+.count-radius-parent{
+	position:relative;
+}
+.menu-search .goodsList .row .col span.count-radius{
+	position: absolute;
+    width: 20px;
+    height: 20px;
+    line-height: 20px;
+    border-radius: 10px;
+    border: 1px dashed rgb(255, 255, 255);
+    padding: 0;
+    top: 5px;
+    right: 5px;
+    color: rgb(255, 0, 0);
+    background:#fff;
+	
 }
 /*iphone4 iphone5 小于320px*/
 @media screen and (max-width:320px){
