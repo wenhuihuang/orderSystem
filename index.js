@@ -2193,6 +2193,13 @@ var ip = 'http://'+localStorage.getItem('pureip')+':'+localStorage.getItem('com'
 	
 
 	
+	//清空搜索结果
+	Model.prototype.m_searchClick = function(event){
+		this.comp('searchGoodsData').clear();
+	};	
+	
+
+	
 
 
 	

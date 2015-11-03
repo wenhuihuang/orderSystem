@@ -1074,6 +1074,9 @@ ul.menu-item li{
 .settings-btn .btn{
 	width:100%;
 }
+.goodsList p{
+	display:none;
+}
 /*iphone4 iphone5 小于320px*/
 @media screen and (max-width:320px){
 	/*台变成3个一排*/

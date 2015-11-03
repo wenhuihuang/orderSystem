@@ -2,7 +2,7 @@
 
 <div xmlns="http://www.w3.org/1999/xhtml" xid="window" class="window" component="$UI/system/components/justep/window/window"
   design="device:mobile">  
-  <div component="$UI/system/components/justep/model/model" xid="model" style="width:234px;height:auto;left:481px;top:98px;" onLoad="modelLoad"> <div component="$UI/system/components/justep/data/data" autoLoad="true" xid="language" idColumn="col0" confirmDelete="false" autoNew="true"><column name="col0" type="String" xid="xid65"></column>
+  <div component="$UI/system/components/justep/model/model" xid="model" style="width:234px;height:auto;left:796px;top:120px;" onLoad="modelLoad"> <div component="$UI/system/components/justep/data/data" autoLoad="true" xid="language" idColumn="col0" confirmDelete="false" autoNew="true"><column name="col0" type="String" xid="xid65"></column>
   <column label="在用" name="USING" type="String" xid="xid66"></column>
   <column label="用户名" name="USERNAME" type="String" xid="xid67"></column>
   <column label="密码" name="PASSWORD" type="String" xid="xid68"></column>
@@ -438,7 +438,7 @@
             </span> 
           </div>  
           <div xid="div106" class="menu-bottom-right">
-            <a component="$UI/system/components/justep/button/button" class="btn btn-default" xid="m-search" label="按拼音点菜" target="menu-search">
+            <a component="$UI/system/components/justep/button/button" class="btn btn-default" xid="m-search" label="按拼音点菜" target="menu-search" onClick="m_searchClick">
    <i xid="i5"></i>
    <span xid="span92">按拼音点菜</span></a><a component="$UI/system/components/justep/button/button" class="btn btn-default"
               label="已点详情" xid="button9" bind-click="button9Click"> 
@@ -462,7 +462,7 @@
      
   <div component="$UI/system/components/justep/panel/panel" class="x-panel x-full" xid="panel11">
    <div class="x-panel-top" xid="top6"><div xid="div37"><div component="$UI/system/components/bootstrap/row/row" class="row w100" xid="row37">
-   <div class="col col-xs-9" xid="col105"><input component="$UI/system/components/justep/input/input" class="form-control" xid="searchGoodsInput" placeHolder="请输入拼音或编码"></input></div>
+   <div class="col col-xs-9" xid="col105"><input component="$UI/system/components/justep/input/input" class="form-control" xid="searchGoodsInput" placeHolder="请输入拼音或编码" bind-hasFocus="true"></input></div>
    <div class="col col-xs-3" xid="col106"><a component="$UI/system/components/justep/button/button" class="btn btn-style" label="搜索" xid="searchGoodsBtn" onClick="searchGoodsBtnClick">
    <i xid="i14"></i>
    <span xid="span139">搜索</span></a></div>
@@ -474,7 +474,7 @@
    <ul class="x-list-template" xid="listTemplateUl16">
     <div class="col col-xs-6" xid="col45" bind-click="col45Click">
    <span xid="span37" bind-text="val('goodsName')"></span></div></ul> </div> </div></div>
-  </div>
+  <p xid="p5"></p></div>
    </div></div> 
    <div class="x-panel-bottom menu-bottom-wrap" xid="bottom3">
     <div xid="div53" class="menu-bottom-right">
