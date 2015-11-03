@@ -380,15 +380,11 @@
           </div>
         </div>          <div class="x-panel-bottom bottom-wrap" xid="bottom1"> 
           <div component="$UI/system/components/bootstrap/row/row" class="row w100" xid="row40">
-   <div class="col col-xs-4" xid="col111"><a component="$UI/system/components/justep/button/button" class="btn btn-warning" label="注销" xid="button1" target="login">
+   <div class="col col-xs-4" xid="col111"></div>
+   <div class="col col-xs-4" xid="col112"></div>
+   <div class="col col-xs-4" xid="col113"><a component="$UI/system/components/justep/button/button" class="btn btn-warning" label="注销" xid="button1" target="login">
    <i xid="i1"></i>
-   <span xid="span1">注销</span></a></div>
-   <div class="col col-xs-4" xid="col112"><a component="$UI/system/components/justep/button/button" class="btn btn-default" label="Post Test" xid="button3">
-   <i xid="i3"></i>
-   <span xid="span3">Post Test</span></a></div>
-   <div class="col col-xs-4" xid="col113"><a component="$UI/system/components/justep/button/button" class="btn btn-default" label="呼叫服务" xid="button4">
-   <i xid="i4"></i>
-   <span xid="span4">呼叫服务</span></a></div></div></div> 
+   <span xid="span1">注销</span></a></div></div></div> 
       </div>
     </div>  
     <div class="x-contents-content" xid="menu" onActive="menuActive">
