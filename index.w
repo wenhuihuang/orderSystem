@@ -535,13 +535,13 @@
             <div component="$UI/system/components/justep/contents/contents"
               class="x-contents x-full" active="0" xid="contents3"> 
               <div class="x-contents-content" xid="content12">
-                <div xid="div16" class="pop-con"> 
+                <div component="$UI/system/components/justep/panel/panel" class="x-panel x-full" xid="panel27">
+   <div class="x-panel-content" xid="content52"><div xid="div16" class="pop-con"> 
                   <div class="con-con" xid="div18"> 
                     </div>  
                   
                   <div xid="pop-menuSub-btn" class="pop-menuSub-btn no-single">
-                    <div component="$UI/system/components/bootstrap/row/row"
-                      class="row" xid="row8"> 
+                    <div component="$UI/system/components/bootstrap/row/row" class="row" xid="row8"> 
                       <div class="col col-xs-4" xid="col30">
                         <span xid="span32" bind-click="span32Click" bind-touchstart="span32Touchstart" bind-text="language.ref('DISHNAME')"><![CDATA[菜名]]></span>
                       </div>  
@@ -552,8 +552,7 @@
                         <span xid="span34" bind-click="span34Click" bind-text="language.ref('QUANTITY')"><![CDATA[数量]]></span>
                       </div>
                     </div>  
-                    <div component="$UI/system/components/bootstrap/row/row"
-                      class="row" xid="row9"> 
+                    <div component="$UI/system/components/bootstrap/row/row" class="row" xid="row9"> 
                       <div class="col col-xs-4" xid="col33">
                         <span xid="span35" bind-click="span35Click" bind-text="language.ref('GIVE')"><![CDATA[赠送]]></span>
                       </div>  
@@ -571,8 +570,7 @@
    <span xid="span28" bind-click="button15Click">其它</span></div>
   <div class="col col-xs-4" xid="col17">
    <span xid="span131" bind-click="button6Click" bind-text="language.ref('BACK')" class="back">返回</span></div></div></div> 
-                </div> 
-              <div component="$UI/system/components/justep/panel/panel" class="x-panel x-full con-con" xid="panel28">
+                </div><div component="$UI/system/components/justep/panel/panel" class="x-panel x-full con-con" xid="panel28">
    <div class="x-panel-top" xid="top11" height="56"><p class="no-send order-info-title" xid="p10">
    <span xid="span91" bind-text="language.val('TOTALQ')+':'">总数量：</span>
    <span xid="span24" bind-text="$model.cartData.sum('qty')" class="color-price"></span>
@@ -603,7 +601,8 @@
       <div class="col col-xs-1dot7" xid="col20">
        <span xid="span65" bind-text="val('addMoney')">加收</span></div> 
       <div class="col col-xs-1dot7" xid="col23">
-       <span xid="span66" bind-text="val('sprice') * val('qty')+val('addMoney')" class="color-price">总价</span></div> </div> </li> </ul> </div></div>
+       <span xid="span66" bind-text="val('sprice') * val('qty')+val('addMoney')" class="color-price">总价</span></div> </div> </li> </ul> </div>
+  </div>
    <div class="x-panel-bottom" xid="bottom8" height="35"><div xid="div32" class="pop-menu-btn">
                     <div component="$UI/system/components/justep/button/buttonGroup" class="btn-group btn-group-justified" tabbed="true" xid="buttonGroup3">
                       <a component="$UI/system/components/justep/button/button" class="btn btn-link btn-only-icon" xid="button30" icon="icon-android-add" bind-click="a1Click"> 
@@ -623,7 +622,23 @@
                         <span xid="span70" class="color-style">更多</span>
                       </a>
                     </div>
-                  </div></div></div></div>  
+                  </div></div></div></div>
+   <div class="x-panel-bottom" xid="bottom22"><div xid="div20" class="bottom-wrap"> 
+              <div xid="div21" class="pop-bottom-left order-info-all-btn">
+                <span xid="span83" bind-text="language.val('TOTALPRICESYUN')+':'"><![CDATA[总价格(元):]]></span><div component="$UI/system/components/justep/output/output" class="x-output dib color-price" xid="output6" bind-text=" $model.statusData.val(&quot;orderTotal&quot;) + $model.statusData.val(&quot;cartTotal&quot;)" style="background-color:transparent;" />
+              </div>  
+              <div xid="div22" class="poop-bottom-right"> 
+                <a component="$UI/system/components/justep/button/button" class="btn btn-default send-order-btn" label="送单" xid="button26" onClick="button5Click"> 
+                  <i xid="i28" />  
+                  <span xid="span19" bind-text="language.ref('SENDSHEET')">送单</span>
+                </a><a component="$UI/system/components/justep/button/button" class="btn btn-default close-btn" label="关闭" xid="closeBtn" bind-click="closeBtnClick"> 
+                  <i xid="i27" />  
+                  <span xid="span18" bind-text="language.ref('CLOSE')">关闭</span>
+                </a>  
+                 
+              </div> 
+            </div></div></div> 
+              </div>  
               <div class="x-contents-content" xid="content13">
                 <div xid="div28" class="pop-con"> 
                   <div class="con-con" xid="div17"> 
@@ -793,26 +808,7 @@
   </div>
             </div>
           </div>  
-          <div class="x-panel-bottom" xid="bottom5"> 
-            <div xid="div20" class="bottom-wrap"> 
-              <div xid="div21" class="pop-bottom-left order-info-all-btn">
-                <span xid="span83" bind-text="language.val('TOTALPRICESYUN')+':'"><![CDATA[总价格(元):]]></span><div component="$UI/system/components/justep/output/output"
-                  class="x-output dib color-price" xid="output6" bind-text=" $model.statusData.val(&quot;orderTotal&quot;) + $model.statusData.val(&quot;cartTotal&quot;)"
-                  style="background-color:transparent;"/>
-              </div>  
-              <div xid="div22" class="poop-bottom-right"> 
-                <a component="$UI/system/components/justep/button/button" class="btn btn-default send-order-btn" label="送单" xid="button26" onClick="button5Click"> 
-                  <i xid="i28" />  
-                  <span xid="span19" bind-text="language.ref('SENDSHEET')">送单</span>
-                </a><a component="$UI/system/components/justep/button/button" class="btn btn-default close-btn" label="关闭" xid="closeBtn" bind-click="closeBtnClick"> 
-                  <i xid="i27" />  
-                  <span xid="span18" bind-text="language.ref('CLOSE')">关闭</span>
-                </a>  
-                 
-              </div> 
-            </div> 
           </div> 
-        </div> 
       </div> 
     </div> 
   </div>  

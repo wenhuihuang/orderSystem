@@ -1214,6 +1214,8 @@ var ip = 'http://'+localStorage.getItem('pureip')+':'+localStorage.getItem('com'
         //这里写要执行的内容（尤如onclick事件）  
        
 		if(action == undefined ||action == ''){
+		 clearTimeout(timeOutEvent);//清除定时器  
+        timeOutEvent = 0; 
         var oneDeskData = this.comp('currentDeskData');
 		var row = event.bindingContext.$rawData;
 		var deskData = this.comp('deskData');

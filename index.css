@@ -518,6 +518,7 @@ img.subtract,img.add{
     bottom: 0;
     background-color: #E8E8E8;
     z-index:100;
+    border-radius:4px;
 }
 .pop-menuSub-btn{
 	width:100%;
@@ -526,6 +527,7 @@ img.subtract,img.add{
     background-color: #E8E8E8;
     display:none;
     z-index:111;
+    border-radius:4px;
 }
 .pop-menuSub-btn span{
 	padding: 8px 0;
