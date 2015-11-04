@@ -1138,6 +1138,35 @@ ul.menu-item li{
     background:#fff;
 	
 }
+.have-wrap .have-con .top-border,.order-info-con .top-border{
+	border-top:1px solid #ccc;
+}
+.have-wrap .have-con  .row,.order-info-con .row{
+	border-bottom:1px solid #ccc;
+}
+.have-wrap .have-con  .row .col{
+	height:35px;
+	line-height:35px;
+}
+.have-wrap .have-con  .row .col:nth-child(1){
+	border-right:1px solid #ccc;
+}
+.have-wrap .have-con  .row .col-xs-4:nth-child(2){
+	border-right:1px solid #ccc;
+}
+.order-info-con .row .col{
+	padding:0;
+	height:35px;
+	line-height:35px;
+	text-align:center;
+}
+.order-info-con .row .col-xs-6{
+	border-right:1px solid #ccc;
+}
+.order-info-con .row .col-xs-3{
+	border-right:1px solid #ccc;
+}
+	
 /*iphone4 iphone5 小于320px*/
 @media screen and (max-width:320px){
 	/*台变成3个一排*/

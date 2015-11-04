@@ -4,7 +4,16 @@ define(function(require){
 	//var ip = "http://qixusoft.vicp.net";
 //	var ip="http://192.168.1.20:8080/OrderSystemWeX5/";
 //	var ip ="http://192.168.1.128:8080/OrderSystemWeX5/";
-var ip = 'http://'+localStorage.getItem('pureip')+':'+localStorage.getItem('com')+'/OrderSystemWeX5/';	
+	var ip ;
+	$(function(){
+		if(localStorage.getItem('pureip') != null || localStorage.getItem('pureip') != undefined){
+			 ip = 'http://'+localStorage.getItem('pureip')+':'+localStorage.getItem('com')+'/OrderSystemWeX5/';	
+		}else
+		{
+			location.href = 'languageSelect.w#!settings';
+		}
+	})
+
 //var url="UI2/orderSystem_a/index.w#!index";
 	var Baas = require("$UI/demo/baas/baas");
 	var Language = require('$UI/orderSystem/language');
@@ -295,7 +304,9 @@ var ip = 'http://'+localStorage.getItem('pureip')+':'+localStorage.getItem('com'
 	
 	//data加载完成，调整顶部宽度
 	Model.prototype.modelLoad = function(event){
-			//设置菜单宽度
+		
+			
+					 //设置菜单宽度
 			var liWidth=parseInt($(".menu-con").find('li').outerWidth(true));
 			var liMargin=$(".menu-con")
 			var liLength=$(".menu-con").find('li').length;
@@ -358,6 +369,9 @@ var ip = 'http://'+localStorage.getItem('pureip')+':'+localStorage.getItem('com'
 			}else{
 				
 			}
+		
+		
+			
 		};
 
 	//mydata为deskData
@@ -594,6 +608,7 @@ var ip = 'http://'+localStorage.getItem('pureip')+':'+localStorage.getItem('com'
 	    var success = function(param){
 	    	 getDesk(deskData,row,2);
 	    	//补上当前台的订单id
+	    	currentDeskData.clear();
 	    	currentDeskData.newData({
 	    		index:0,
 	    		defaultValues:[{
@@ -606,6 +621,7 @@ var ip = 'http://'+localStorage.getItem('pureip')+':'+localStorage.getItem('com'
 					 "shareNo":currentDeskData.val('shareNo')
 	    		}]
 	    	});
+	    	currentDeskData.first();
 	    	pop.hide();
 	    	contents1.to('menu');
 	    }				
@@ -978,7 +994,7 @@ var ip = 'http://'+localStorage.getItem('pureip')+':'+localStorage.getItem('com'
 		var sendCook = this.comp('sendCookWayData');
 		var cookways = '';
 		sendCook.eachAll(function(param){
-				cookways += param.row.val('goodsId')+'_'+param.row.val('cookWayId')+',';
+				cookways += param.row.val('goodsId')+'_'+param.row.val('cookWayId')+'_'+param.row.val('cookWay')+'_'+param.row.val('addMoney')+',';
 		});
 		cookways = cookways.substring(0,cookways.length-1);
 		var user = this.comp('userData');
@@ -1036,7 +1052,6 @@ var ip = 'http://'+localStorage.getItem('pureip')+':'+localStorage.getItem('com'
 									"success" : successOrder
 								});			
 			var testPrintSuccess = function(printData){
-			alert(printData);
 			//----------------------------------------------------start of print----------------------------------
 			
 //			alert(param.result[0].msg);
@@ -1161,6 +1176,7 @@ var ip = 'http://'+localStorage.getItem('pureip')+':'+localStorage.getItem('com'
     	var status = this.comp('statusData');
     	status.getFirstRow().val('typeCode',row.val('typeCode'));
  //记录下当前长按的桌子信息
+    	currentDeskData.clear();
         currentDeskData.newData({
 				index: 0,
 				defaultValues:[{
@@ -1173,7 +1189,8 @@ var ip = 'http://'+localStorage.getItem('pureip')+':'+localStorage.getItem('com'
 					 "shareNO":row.val('shareNO'),
 					 "custQty":row.val('custQty')
 				}]
-		});     
+		}); 
+		currentDeskData.first();    
 
 			   timeOutEvent = setTimeout(function(){
             //执行长按要执行的内容，如弹出菜单         
@@ -1866,13 +1883,15 @@ var ip = 'http://'+localStorage.getItem('pureip')+':'+localStorage.getItem('com'
 	//预览结帐单
 	Model.prototype.span92Click = function(event){
 		var showBillData = this.comp('showBillData');
-		var consumeRoomId = this.comp('currentDeskData').val('consumeRoomId');
+		var consumeRoomId = this.comp('currentDeskData').getFirstRow().val('consumeRoomId');
 		var data = order.showBill({'ip':ip,'consumeRoomId':consumeRoomId});
 		var a = {'@type':'table','rows':data};
 		showBillData.loadData(a);
+		showBillData.first();
 		this.comp('account').show();
 		this.comp('contents6').to('content38');
-		////debugger
+		$(this.getElementByXid('span119')).text(this.comp('currentDeskData').getFirstRow().val('tai_number'));//结帐单显示台号
+		debugger
 	};
 
 	//
@@ -2210,6 +2229,22 @@ var ip = 'http://'+localStorage.getItem('pureip')+':'+localStorage.getItem('com'
 		this.comp('searchGoodsData').clear();
 		$(this.getElementByXid('searchGoodsInput')).focus();
 		$(this.getElementByXid('searchGoodsInput')).val('');
+	};	
+	
+	//加载结帐单数据
+	Model.prototype.button29Click = function(event){
+		var currentDeskData = this.comp('currentDeskData');
+		var ConsumeBillData = this.comp('ConsumeBillData');
+		var data = order.getConsumeBill({'ip':ip,'consumeRoomId':currentDeskData.getFirstRow().val('consumeRoomId')})
+		var param = {"@type":"table",'rows':data};
+		ConsumeBillData.loadData(param);
+		ConsumeBillData.first();
+		debugger
+	};	
+	
+	//加载已分单orderDATA
+	Model.prototype.button28Click = function(event){
+		order.refreshOrder({'ip':ip,'currentDeskData':this.comp('currentDeskData'),'orderData':this.comp('orderData')});
 	};	
 	
 

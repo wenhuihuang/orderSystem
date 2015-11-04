@@ -355,6 +355,43 @@ define(function(require) {
 				"success" : success
 			});	
 			return obj;		
+		},
+		//获取结账单
+		getConsumeBill:function(data){
+			var obj;
+			var success = function(param){
+				var a = param;
+				obj = a;
+			};
+			Baas.sendRequest({
+				"url" : data.ip + 'ShopCartServlet.do?func=getConsumeBill&CONSUMEROOMID='+data.consumeRoomId,
+				"dataType": "json",
+				"success" : success
+			});	
+			return obj;	
+		},
+		refreshOrder:function(data){
+			//更新现在的订单列表
+			var successOrder = function(param){
+				data.orderData.clear()
+			for(var o in param.consumeDetails){
+				data.orderData.newData({
+					defaultValues:[{
+						goodsName:param.consumeDetails[o].goodsName,
+						price:param.consumeDetails[o].price,
+						addMoney:param.consumeDetails[o].addMoney,
+						qty:param.consumeDetails[o].qty,
+						unitName:param.consumeDetails[o].unitName
+					}]
+				});
+			}
+			};
+		//拿到订单详情
+		Baas.sendRequest({
+			"url" : data.ip + 'ShopCartServlet.do?func=showOrderedReturnJson&billMasterId='+data.currentDeskData.getFirstRow().val('billMasterId')+'&roomId='+data.currentDeskData.getFirstRow().val('roomId'),
+			"dataType": "json",
+			"success" : successOrder
+		});		
 		}
 	};
 
