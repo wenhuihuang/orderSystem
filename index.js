@@ -608,17 +608,25 @@ define(function(require){
 	    var success = function(param){
 	    	 getDesk(deskData,row,2);
 	    	//补上当前台的订单id
+	    	var roomId = currentDeskData.getFirstRow().val('roomId');
+	    	var state = currentDeskData.getFirstRow().val('state');
+	    	var typeCode = currentDeskData.getFirstRow().val('typeCode');
+	    	var custQty = currentDeskData.getFirstRow().val('custQty');
+	    	var shareNo = currentDeskData.getFirstRow().val('shareNo');
+	    	var tai_number = currentDeskData.getFirstRow().val('tai_number');
 	    	currentDeskData.clear();
+	    	debugger
 	    	currentDeskData.newData({
 	    		index:0,
 	    		defaultValues:[{
+	    			 "tai_number":tai_number,
 	    			 "billMasterId":param.result[0].billMasterId,
 	    			 "consumeRoomId":param.result[0].consumeRoomId,
-					 "roomId":currentDeskData.val('roomId'),
-					 "state":currentDeskData.val('state'),
-					 "typeCode":currentDeskData.val('typeCode'),
-					 "custQty":currentDeskData.val('custQty'),
-					 "shareNo":currentDeskData.val('shareNo')
+					 "roomId":roomId,
+					 "state":state,
+					 "typeCode":typeCode,
+					 "custQty":custQty,
+					 "shareNo":shareNo
 	    		}]
 	    	});
 	    	currentDeskData.first();

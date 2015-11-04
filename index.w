@@ -305,20 +305,18 @@
     </div>  
     <div component="$UI/system/components/justep/data/data" autoLoad="true"
       xid="cancelReasonData" idColumn="col0" onCustomRefresh="cancelReasonDataCustomRefresh"> 
-      <column name="col0" type="String" xid="column15"/>  
-      <column name="tfzReansonId" type="Integer" xid="column14"/>  
-      <column name="zReason" type="String" xid="column17"/>  
-      <column name="zReasonCode" type="String" xid="column16"/>  
-      <column name="zType" type="String" xid="column13"/>
-    </div>  
+      <column name="col0" type="String" xid="column15"></column>
+  <column name="tfzReasonId" type="Integer" xid="column14"></column>
+  <column name="zReason" type="String" xid="column17"></column>
+  <column name="zReasonCode" type="String" xid="column16"></column>
+  <column name="zType" type="String" xid="column13"></column></div>  
     <div component="$UI/system/components/justep/data/data" autoLoad="true"
       xid="currentCancelReasonData" idColumn="col0" onCustomRefresh="cancelReasonDataCustomRefresh"> 
-      <column name="col0" type="String" xid="column21"/>  
-      <column name="tfzReansonId" type="Integer" xid="column20"/>  
-      <column name="zReason" type="String" xid="column18"/>  
-      <column name="zReasonCode" type="String" xid="column22"/>  
-      <column name="zType" type="String" xid="column19"/>
-    </div>  
+      <column name="col0" type="String" xid="column21"></column>
+  <column name="tfzReasonId" type="Integer" xid="column20"></column>
+  <column name="zReason" type="String" xid="column18"></column>
+  <column name="zReasonCode" type="String" xid="column22"></column>
+  <column name="zType" type="String" xid="column19"></column></div>  
     <div component="$UI/system/components/justep/data/data" autoLoad="true"
       xid="showBillData" idColumn="col0" confirmRefresh="false">
       <column name="col0" type="String" xid="xid65"></column>
