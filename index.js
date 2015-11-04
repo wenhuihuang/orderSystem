@@ -1724,11 +1724,13 @@ define(function(require){
 			}
 			]
 		});
+		debugger
 	};
 
 	
 	//发送退菜原因
 	Model.prototype.cancelReasonTrueClick = function(event){
+		debugger
 		var userData = this.comp('userData');
 		var userId = userData.val('userId');
 		var currentCancelReasonData = this.comp('currentCancelReasonData');
@@ -2246,6 +2248,7 @@ define(function(require){
 	Model.prototype.button28Click = function(event){
 		order.refreshOrder({'ip':ip,'currentDeskData':this.comp('currentDeskData'),'orderData':this.comp('orderData')});
 	};	
+	
 	
 
 	return Model;

@@ -1984,7 +1984,7 @@
                       class="row" xid="row26"> 
                       <div class="col col-xs-6" xid="col72"> 
                         <a component="$UI/system/components/justep/button/button"
-                          class="btn btn-success" label="确认" xid="button55" onClick="button43Click"> 
+                          class="btn btn-success" label="确认" xid="button55" onClick="cancelReasonTrueClick"> 
                           <i xid="i58"/>  
                           <span xid="span98">确认</span>
                         </a> 
