@@ -1712,6 +1712,7 @@ define(function(require){
 	
 	//点击菜单获取当前退菜原因
 	Model.prototype.canelliClick = function(event){
+		$(event.target).addClass("active").siblings().removeClass("active");
 		var currentCancelReasonData = this.comp('currentCancelReasonData');
 		var row = event.bindingContext.$rawData;
 		currentCancelReasonData.newData({

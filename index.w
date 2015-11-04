@@ -1085,7 +1085,7 @@
                     <div component="$UI/system/components/justep/list/list"
                       class="x-list" xid="list4" data="currentDeskData"> 
                       <ul class="x-list-template" xid="listTemplateUl4"> 
-                        <li xid="li11" bind-text=" $object.val(&quot;tai_number&quot;)"/>
+                        <li xid="li11" bind-text=" $object.val(&quot;tai_number&quot;)" style="text-align:center;font-size:18px;font-weight:bold;"/>
                       </ul> 
                     </div>
                     <div component="$UI/system/components/bootstrap/row/row"
@@ -1958,7 +1958,7 @@
                       <div class="x-titlebar-right reverse" xid="div97"/>
                     </div> 
                   </div>  
-                  <div class="x-panel-content" xid="content34"> 
+                  <div class="x-panel-content " xid="content34"> 
                     <div xid="div98" class="pop-con"> 
                       <div class="con-con" xid="div99"> 
                         <div xid="div104"> 
@@ -1973,9 +1973,9 @@
                       </div> 
                     </div>  
                     <div component="$UI/system/components/justep/list/list"
-                      class="x-list" xid="list14" data="cancelReasonData"> 
-                      <ul class="x-list-template" xid="listTemplateUl15"> 
-                        <li xid="li4" bind-click="canelliClick" bind-text="val('zReason')"/>
+                      class="x-list cause" xid="list14" data="cancelReasonData"> 
+                      <ul class="x-list-template x-min-height" xid="listTemplateUl15" componentname="$UI/system/components/justep/list/list#listTemplateUl" id="undefined_listTemplateUl15"> 
+                        <li xid="li4" bind-click="canelliClick" bind-text="val('zReason')" class="x-min-height"/>
                       </ul> 
                     </div> 
                   </div>  
@@ -2220,7 +2220,7 @@
               <div class="x-contents-content" xid="content38"> 
                 <div component="$UI/system/components/justep/panel/panel" class="x-panel x-full"
                   xid="panel23"> 
-                  <div class="x-panel-top" xid="top21"> 
+                  <div class="x-panel-top  preview-top" xid="top21"> 
                     <h3 xid="h37" class="order-info-title">大酒店</h3>
                   </div>  
                         <div class="x-panel-content order-info-con" xid="content44"> 
@@ -2255,12 +2255,9 @@
                         </div> 
                       </div>  
                       <div xid="div154"> 
-                        <h3 xid="h38" bind-text="'总金额：'+ $model.statusData.val(&quot;orderTotal&quot;) "
-                          style="总金额"><![CDATA[]]></h3>  
-                        <p xid="p4"> 
-                          <span xid="span122">欢迎下次光临</span>
-                        </p> 
-                      </div> 
+                        <h3 xid="h38" class="all-price"><![CDATA[]]><span xid="span150"><![CDATA[总金额：]]></span>
+  <span xid="span151" bind-text=' $model.statusData.val("orderTotal") ' class="color-price"></span></h3>  
+                        </div> 
                     </div>  
                     <div component="$UI/system/components/bootstrap/row/row" class="row top-border" xid="row49">
    <div class="col col-xs-6" xid="col138"><h5 xid="h510"><![CDATA[项目]]></h5></div>
@@ -2274,7 +2271,9 @@
    <div class="col col-xs-3" xid="col142">
     <span xid="span147" bind-text="val('qty')"></span></div> 
    <div class="col col-xs-3" xid="col141">
-    <span xid="span148" bind-text="val('totalMoney')"></span></div> </div></li></ul> </div></div>    
+    <span xid="span148" bind-text="val('totalMoney')"></span></div> </div></li></ul> </div>
+  <p xid="p4" style="text-align:center;">
+   <span xid="span122" style="font-size:18px;">欢迎下次光临</span></p></div>    
                   <div class="x-panel-bottom order-info-button" xid="bottom20"> 
                     <a component="$UI/system/components/justep/button/button"
                       class="btn back-btn" label="返回" xid="button69" bind-click="closeAccount"> 

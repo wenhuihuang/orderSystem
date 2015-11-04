@@ -967,8 +967,8 @@ ul.menu-item li{
 .have-wrap table tr td:nth-child(1){
 	width:30%;
 }
-.order-info-title{
-	height-line:48px;
+.preview-top h3{
+	line-height:48px;
 }
 .order-info-title h3,.order-info-wrap h3{
 	text-align:center;
@@ -1165,6 +1165,29 @@ ul.menu-item li{
 }
 .order-info-con .row .col-xs-3{
 	border-right:1px solid #ccc;
+}
+.cause{
+	margin-top:20px;
+}
+.cause ul li{
+	height:35px;
+	line-height:35px;
+	text-align:center;
+	border-bottom:1px solid #ccc;
+}
+.cause ul li:nth-child(1){
+	border-top:1px solid #ccc;
+}
+.cause ul li.active{
+	color: rgb(255, 255, 255);
+    border-color: rgb(95, 178, 111);
+    background: rgb(105, 193, 122);
+}
+.all-price{
+	margin:10px 0;
+}
+.all-price span{
+	font-size:16px;
 }
 	
 /*iphone4 iphone5 小于320px*/
