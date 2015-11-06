@@ -190,7 +190,7 @@ define(function(require) {
 				obj = a;
 			};
 			Baas.sendRequest({
-				"url" : data.ip + 'RoomFunctionServlet.do?func=gift&billDetailId='+data.billDetailId+'&reasonId='+data.reasonId+'&cancelQty='+data.cancelQty+'&empcode='+data.userId,
+				"url" : data.ip + 'RoomFunctionServlet.do?func=gift&billDetailId='+data.billDetailId+'&reasonId='+data.reasonId+'&cancelQty='+data.qty+'&empcode='+data.userId,
 				"dataType": "json",
 				"success" : success
 			});	
@@ -247,7 +247,7 @@ define(function(require) {
 				obj = a;
 			};
 			Baas.sendRequest({
-				"url" : data.ip + 'RoomFunctionServlet.do?func=memberDiscount&cardno='+data.cardno+'&pwd='+data.pwd+'&billMasterId='+data.billMasterId,
+				"url" : data.ip + 'RoomFunctionServlet.do?func=memberDiscount&cardno='+data.cartno+'&pwd='+data.pwd+'&billMasterId='+data.billMasterId,
 				"dataType": "json",
 				"success" : success
 			});	
@@ -384,7 +384,8 @@ define(function(require) {
 						unitName:param.consumeDetails[o].unitName,
 						billDetailId:param.consumeDetails[o].billDetailId,
 						cancelQty:param.consumeDetails[o].cancelQty,
-						checkOutQty:param.consumeDetails[o].checkOutQty
+						checkOutQty:param.consumeDetails[o].checkOutQty,
+						presentQty:param.consumeDetails[o].presentQty
 					}]
 				});
 			}
