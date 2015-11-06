@@ -75,7 +75,7 @@ define(function(require) {
 				obj = a;
 			};
 			Baas.sendRequest({
-				"url" : data.ip + 'RoomFunctionServlet.do?func=cancelGoods&cancelQty='+data.qty+'&reasonId='+data.reasonId+'&empcode='+data.userId,
+				"url" : data.ip + 'RoomFunctionServlet.do?func=cancelGoods&cancelQty='+data.qty+'&reasonId='+data.reasonId+'&empcode='+data.userId+'&billDetailId='+data.billDetailId,
 				"dataType": "json",
 				"success" : success
 			});	
@@ -381,7 +381,10 @@ define(function(require) {
 						price:param.consumeDetails[o].price,
 						addMoney:param.consumeDetails[o].addMoney,
 						qty:param.consumeDetails[o].qty,
-						unitName:param.consumeDetails[o].unitName
+						unitName:param.consumeDetails[o].unitName,
+						billDetailId:param.consumeDetails[o].billDetailId,
+						cancelQty:param.consumeDetails[o].cancelQty,
+						checkOutQty:param.consumeDetails[o].checkOutQty
 					}]
 				});
 			}
@@ -392,6 +395,21 @@ define(function(require) {
 			"dataType": "json",
 			"success" : successOrder
 		});		
+		},
+		//获取版本号
+		//http://127.0.0.1:8080/OrderSystemWeX5/RoomFunctionServlet.do?func=checkAppVersion
+		checkAppVersion:function(data){
+			var obj;
+			var success = function(param){
+				var a = param;
+				obj = a;
+			};
+			Baas.sendRequest({
+				"url" : data.ip + 'RoomFunctionServlet.do?func=checkAppVersion',
+				"dataType": "json",
+				"success" : success
+			});	
+			return obj.result;	
 		}
 	};
 

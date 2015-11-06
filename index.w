@@ -2,7 +2,7 @@
 
 <div xmlns="http://www.w3.org/1999/xhtml" xid="window" class="window" component="$UI/system/components/justep/window/window"
   design="device:mobile">  
-  <div component="$UI/system/components/justep/model/model" xid="model" style="width:234px;height:auto;left:700px;top:262px;"
+  <div component="$UI/system/components/justep/model/model" xid="model" style="width:234px;height:auto;left:660px;top:79px;"
     onLoad="modelLoad"> 
     <div component="$UI/system/components/justep/data/data" autoLoad="true"
       xid="language" idColumn="col0" confirmDelete="false" autoNew="true">
@@ -129,7 +129,8 @@
   <column label="台" name="roomCode" type="String" xid="xid17"></column>
   <column name="typeCode" type="String" xid="xid50"></column>
   <column name="custQty" type="Integer" xid="xid52"></column>
-  <column label="消费房间id" name="consumeRoomId" type="String" xid="xid53"></column></div>  
+  <column label="消费房间id" name="consumeRoomId" type="String" xid="xid53"></column>
+  <column label="用于退菜" name="billDetailId" type="String" xid="xid139"></column></div>  
     <div component="$UI/system/components/justep/data/data" autoLoad="true"
       xid="cartData" idColumn="goodsId" confirmDelete="false"> 
       <column label="商品id" name="goodsId" type="String" xid="column3"/>  
@@ -151,40 +152,37 @@
     </div>  
     <div component="$UI/system/components/justep/data/data" autoLoad="true"
       xid="orderData" idColumn="col4">
-      <column name="col4" type="String" xid="xid20"/>  
-      <column name="goodsName" type="String" xid="xid21"/>  
-      <column name="price" type="Double" xid="xid22"/>  
-      <column name="addMoney" type="Double" xid="xid23"/>  
-      <column name="qty" type="Integer" xid="xid24"/>  
-      <column name="totalPrice" type="Double" xid="xid42"/>  
-      <rule xid="rule3"> 
-        <col name="totalPrice" xid="ruleCol4"> 
-          <calculate xid="calculate4"> 
-            <expr xid="default20">(val('price')+val('addMoney'))*val('qty')</expr>
-          </calculate> 
-        </col> 
-      </rule>  
-      <column name="billDetailId" type="String" xid="xid64"/>
-    </div>  
+      <column name="col4" type="String" xid="xid20"></column>
+  <column name="goodsName" type="String" xid="xid21"></column>
+  <column name="price" type="Double" xid="xid22"></column>
+  <column name="addMoney" type="Double" xid="xid23"></column>
+  <column name="qty" type="Integer" xid="xid24"></column>
+  <column name="totalPrice" type="Double" xid="xid42"></column>
+  <column name="billDetailId" type="String" xid="xid64"></column>
+  <column name="cancelQty" type="String" xid="xid140"></column>
+  <column name="checkOutQty" type="Integer" xid="xid142"></column>
+  <rule xid="rule3">
+   <col name="totalPrice" xid="ruleCol4">
+    <calculate xid="calculate4">
+     <expr xid="default20">(val('price')+val('addMoney'))*(val('qty')-val('cancelQty'))</expr></calculate> </col> </rule>
+  <column name="unitName" type="String" xid="xid147"></column></div>  
     <div component="$UI/system/components/justep/data/data" autoLoad="false"
       xid="statusData" idColumn="col2" autoNew="true">
-      <column name="col2" type="String" xid="xid27"/>  
-      <column label="订单总价" name="orderTotal" type="Double" xid="xid25"/>  
-      <column label="购物车总价" name="cartTotal" type="Double" xid="xid26"/>  
-      <rule xid="rule1"> 
-        <col name="orderTotal" xid="ruleCol1"> 
-          <calculate xid="calculate1"> 
-            <expr xid="default1">$model.orderData.sum('totalPrice')</expr>
-          </calculate> 
-        </col>  
-        <col name="cartTotal" xid="ruleCol2"> 
-          <calculate xid="calculate2"> 
-            <expr xid="default3">$model.cartData.sum('totalPrice')</expr>
-          </calculate> 
-        </col> 
-      </rule>  
-      <column label="房间层数类型" name="typeCode" type="String" xid="xid123"/>
-    </div>  
+      <column name="col2" type="String" xid="xid27"></column>
+  <column label="订单总价" name="orderTotal" type="Double" xid="xid25"></column>
+  <column label="购物车总价" name="cartTotal" type="Double" xid="xid26"></column>
+  <column label="房间层数类型" name="typeCode" type="String" xid="xid123"></column>
+  <column name="totalCheckOutMoney" type="Double" xid="xid141"></column>
+  <rule xid="rule1">
+   <col name="orderTotal" xid="ruleCol1">
+    <calculate xid="calculate1">
+     <expr xid="default1">$model.orderData.sum('totalPrice')</expr></calculate> </col> 
+   <col name="cartTotal" xid="ruleCol2">
+    <calculate xid="calculate2">
+     <expr xid="default3">$model.cartData.sum('totalPrice')</expr></calculate> </col> 
+   <col name="totalCheckOutMoney" xid="ruleCol9">
+    <calculate xid="calculate9">
+     <expr xid="default49">$model.showBillData.sum('checkOutMoney')</expr></calculate> </col> </rule></div>  
     <div component="$UI/system/components/justep/data/data" autoLoad="true"
       xid="currentGoodsData" idColumn="goodsId"> 
       <column label="商品id" name="goodsId" type="String" xid="default5"/>  
@@ -288,21 +286,21 @@
     </div>  
     <div component="$UI/system/components/justep/data/data" autoLoad="true"
       xid="currentOrderData" idColumn="col4"> 
-      <column name="col4" type="String" xid="default42"/>  
-      <column name="goodsName" type="String" xid="default41"/>  
-      <column name="price" type="Double" xid="default39"/>  
-      <column name="addMoney" type="Double" xid="default33"/>  
-      <column name="qty" type="Integer" xid="default32"/>  
-      <column name="totalPrice" type="Double" xid="default29"/>  
-      <rule xid="rule6"> 
-        <col name="totalPrice" xid="ruleCol7"> 
-          <calculate xid="calculate7"> 
-            <expr xid="default40">(val('price')+val('addMoney'))*val('qty')</expr>
-          </calculate> 
-        </col> 
-      </rule>  
-      <column name="billDetailId" type="String" xid="default43"/>
-    </div>  
+      <column name="col4" type="String" xid="default42"></column>
+  <column name="goodsName" type="String" xid="default41"></column>
+  <column name="price" type="Double" xid="default39"></column>
+  <column name="addMoney" type="Double" xid="default33"></column>
+  <column name="qty" type="Integer" xid="default32"></column>
+  <column name="totalPrice" type="Double" xid="default29"></column>
+  <rule xid="rule6">
+   <col name="totalPrice" xid="ruleCol7">
+    <calculate xid="calculate7">
+     <expr xid="default40">(val('price')+val('addMoney'))*val('qty')</expr></calculate> </col> </rule>
+  <column name="billDetailId" type="String" xid="default43"></column>
+  <column name="checkOutQty" type="Integer" xid="xid143"></column>
+  <column name="cancelQty" type="Integer" xid="xid144"></column>
+  <column name="unitName" type="String" xid="xid145"></column>
+  <column name="col10" type="String" xid="xid146"></column></div>  
     <div component="$UI/system/components/justep/data/data" autoLoad="true"
       xid="cancelReasonData" idColumn="col0" onCustomRefresh="cancelReasonDataCustomRefresh"> 
       <column name="col0" type="String" xid="column15"></column>
@@ -531,7 +529,9 @@
           <div component="$UI/system/components/bootstrap/row/row" class="row w100"
             xid="row40"> 
             <div class="col col-xs-4" xid="col111"/>  
-            <div class="col col-xs-4" xid="col112"/>  
+            <div class="col col-xs-4" xid="col112"><a component="$UI/system/components/justep/button/button" class="btn btn-warning cancel-active" label="取消" xid="button4" bind-click="button4Click">
+   <i xid="i4"></i>
+   <span xid="span83">取消</span></a></div>  
             <div class="col col-xs-4" xid="col113">
               <a component="$UI/system/components/justep/button/button" class="btn btn-warning"
                 label="注销" xid="button1" target="login"> 
@@ -922,11 +922,7 @@
                   <div class="x-panel-bottom" xid="bottom22">
                     <div xid="div20" class="bottom-wrap"> 
                       <div xid="div21" class="pop-bottom-left order-info-all-btn"> 
-                        <span xid="span83" bind-text="language.val('TOTALPRICESYUN')+':'"><![CDATA[总价格(元):]]></span>
-                        <div component="$UI/system/components/justep/output/output"
-                          class="x-output dib color-price" xid="output6" bind-text=" $model.statusData.val(&quot;orderTotal&quot;) + $model.statusData.val(&quot;cartTotal&quot;)"
-                          style="background-color:transparent;"/> 
-                      </div>  
+                        </div>  
                       <div xid="div22" class="poop-bottom-right"> 
                         <a component="$UI/system/components/justep/button/button"
                           class="btn send-order-btn btn-style" label="送单" xid="button26"
@@ -992,12 +988,11 @@
                   <div class="x-panel-top" xid="top23" height="56">
                     <p class="no-send order-info-title" xid="p1"> 
                       <span xid="span75" bind-text="language.val('TOTALQ')+':'">总数量：</span>  
-                      <span xid="span22" bind-text="$model.orderData.sum('qty')"
+                      <span xid="span22" bind-text="$model.orderData.sum('qty')-$model.orderData.sum('cancelQty')"
                         class="color-price"/>  
                       <span xid="span22" bind-text="language.val('TOTALPRICESYUN')+':'"
                         class="ml20"/>  
-                      <span xid="span25" bind-text="$model.statusData.val(&quot;orderTotal&quot;)"
-                        class="color-price"/>
+                      <span xid="span25" class="color-price" bind-text="statusData.ref('orderTotal')"/>
                     </p>  
                     <div xid="div15" class="pop-con-title"> 
                       <div component="$UI/system/components/bootstrap/row/row"
@@ -1029,7 +1024,7 @@
                             class="row" xid="row7"> 
                             <div class="col col-xs-5dot2" xid="col15"> 
                               <span xid="span27" bind-text="val('goodsName')">菜名</span>
-                            </div>  
+                            <span xid="span149" bind-text="'退('+val('cancelQty')+')份'" bind-visible="val('cancelQty')&gt;0?true:false"></span></div>  
                             <div class="col col-xs-1dot7" xid="col29"> 
                               <span xid="span26" bind-text="val('price')">单价</span>
                             </div>  
@@ -1964,8 +1959,7 @@
                             class="x-label-edit x-label30" xid="labelInput11"> 
                             <label class="x-label" xid="label11">数量</label>  
                             <input component="$UI/system/components/justep/input/input"
-                              class="form-control x-edit" xid="input13" placeHolder="请输入菜名"
-                              id="hOrderChangeName"/>
+                              class="form-control x-edit" xid="input13" id="hOrderChangeName" dataType="Integer"/>
                           </div> 
                         </div> 
                       </div> 
@@ -2254,7 +2248,7 @@
                       </div>  
                       <div xid="div154"> 
                         <h3 xid="h38" class="all-price"><![CDATA[]]><span xid="span150"><![CDATA[总金额：]]></span>
-  <span xid="span151" bind-text=' $model.statusData.val("orderTotal") ' class="color-price"></span></h3>  
+  <span xid="span151" class="color-price" bind-text="statusData.ref('totalCheckOutMoney')"></span></h3>  
                         </div> 
                     </div>  
                     <div component="$UI/system/components/bootstrap/row/row" class="row top-border" xid="row49">
@@ -2269,7 +2263,7 @@
    <div class="col col-xs-3" xid="col142">
     <span xid="span147" bind-text="val('qty')"></span></div> 
    <div class="col col-xs-3" xid="col141">
-    <span xid="span148" bind-text="val('totalMoney')"></span></div> </div></li></ul> </div>
+    <span xid="span148" bind-text="val('checkOutMoney')"></span></div> </div></li></ul> </div>
   <p xid="p4" style="text-align:center;">
    <span xid="span122" style="font-size:18px;">欢迎下次光临</span></p></div>    
                   <div class="x-panel-bottom order-info-button" xid="bottom20"> 

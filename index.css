@@ -1189,6 +1189,9 @@ ul.menu-item li{
 .all-price span{
 	font-size:16px;
 }
+.cancel-active{
+	display:none;
+}
 	
 /*iphone4 iphone5 小于320px*/
 @media screen and (max-width:320px){

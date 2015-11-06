@@ -1,6 +1,9 @@
 define(function(require){
 	var $ = require("jquery");
 	var justep = require("$UI/system/lib/justep");
+	require(['./appVersionChecker']);
+	var version = "1.0.1"
+	var cishu = 0;
 	//var ip = "http://qixusoft.vicp.net";
 //	var ip="http://192.168.1.20:8080/OrderSystemWeX5/";
 //	var ip ="http://192.168.1.128:8080/OrderSystemWeX5/";
@@ -13,7 +16,8 @@ define(function(require){
 			location.href = 'languageSelect.w#!settings';
 		}
 	})
-
+	//长按
+	var lang=false;
 //var url="UI2/orderSystem_a/index.w#!index";
 	var Baas = require("$UI/demo/baas/baas");
 	var Language = require('$UI/orderSystem/language');
@@ -304,9 +308,17 @@ define(function(require){
 	
 	//data加载完成，调整顶部宽度
 	Model.prototype.modelLoad = function(event){
-		
-			
-					 //设置菜单宽度
+			//检查版本更新
+			if(cishu == 0){
+			cishu ++;
+			var lastVersion = order.checkAppVersion({'ip':ip});
+			if(lastVersion != version){	
+				if(confirm('有更新，是否更新')){
+						window.location.href="http://pkg.fir.im/472aa57b774dc7b5225685e78020eddb02958a63.apk?attname=orderSystem.apk_1.0.0.apk&e=1446696787&token=LOvmia8oXF4xnLh0IdH05XMYpH6ENHNpARlmPc-T:UUSf9jkiRQgOx4ghp2LNRpCapcE=";
+				}
+			}
+			}
+			//设置菜单宽度
 			var liWidth=parseInt($(".menu-con").find('li').outerWidth(true));
 			var liMargin=$(".menu-con")
 			var liLength=$(".menu-con").find('li').length;
@@ -440,6 +452,22 @@ define(function(require){
 	//点击通过台类型加载桌子，通过状态字段来设置当前的颜色字段
 	Model.prototype.li10Click = function(event){
 		getDesk(this.comp('deskData'),event.bindingContext.$rawData,1);
+			if(lang === true){
+				 var currentDeskData = this.comp('currentDeskData');
+				//当前房间的roomId
+				var currentRoomId = currentDeskData.val('roomId');
+				$(".more-wrap").show();
+              $(".main-ul").css({"margin-bottom":"94px"});
+				$(".main-ul").find("li").each(function(){
+		    		if($(this).attr("roomId") == currentRoomId){
+		    			$(this).css({"background":"rgb(0, 204, 102)"});
+		    		}else{
+		    			$(this).css({"background":"#ccc"})
+		    		}
+				});
+			}
+
+		
 	};
 
 	//进入房台，记录下当前的订单号和roomId,然后再根据状态跳去不同的页面
@@ -614,6 +642,7 @@ define(function(require){
 	    	var custQty = currentDeskData.getFirstRow().val('custQty');
 	    	var shareNo = currentDeskData.getFirstRow().val('shareNo');
 	    	var tai_number = currentDeskData.getFirstRow().val('tai_number');
+	    	var billDetailId = currentDeskData.getFirstRow().val('billDetailId');
 	    	currentDeskData.clear();
 	    	debugger
 	    	currentDeskData.newData({
@@ -626,7 +655,8 @@ define(function(require){
 					 "state":state,
 					 "typeCode":typeCode,
 					 "custQty":custQty,
-					 "shareNo":shareNo
+					 "shareNo":shareNo,
+					 "billDetailId":billDetailId
 	    		}]
 	    	});
 	    	currentDeskData.first();
@@ -634,7 +664,7 @@ define(function(require){
 	    	contents1.to('menu');
 	    }				
 		Baas.sendRequest({
-			"url" : ip + 'OrderedNumServlet.do?func=newConsumeRoom&getJson=1&roomId='+currentDeskData.getFirstRow().val('roomId')+'&custQty='+num,
+			"url" : ip + 'OrderedNumServlet.do?func=newConsumeRoom&getJson=1&roomId='+currentDeskData.getFirstRow().val('roomId')+'&custQty='+num+'&empcode='+this.comp('userData').val('userId'),
 			"dataType": "json",
 			"success" : success
 		});
@@ -1119,6 +1149,8 @@ define(function(require){
 	Model.prototype.button18Click = function(event){
 		//加active
 		this.bgColor(event);
+		lang=false;
+		$(".cancel-active").hide();
 		//$('#more').css({'display':'none'});
 		this.comp("popOver-take").show();	
 	};
@@ -1182,25 +1214,29 @@ define(function(require){
     	var currentDeskData = this.comp('currentDeskData');
     	var row = event.bindingContext.$rawData;
     	var status = this.comp('statusData');
+    	var _this=$(event.target).parents("li");
     	status.getFirstRow().val('typeCode',row.val('typeCode'));
- //记录下当前长按的桌子信息
-    	currentDeskData.clear();
-        currentDeskData.newData({
-				index: 0,
-				defaultValues:[{
-					 "tai_number":row.val('tai_number'),
-					 "billMasterId":row.val('billMasterId'),
-					 "roomId":row.val('roomId'),
-					 "typeCode":row.val('typeCode'),
-					 "state":row.val('state'),
-					 "consumeRoomId":row.val('consumeRoomId'),
-					 "shareNO":row.val('shareNO'),
-					 "custQty":row.val('custQty')
-				}]
-		}); 
-		currentDeskData.first();    
-
-			   timeOutEvent = setTimeout(function(){
+    
+    				   timeOutEvent = setTimeout(function(){
+    				   lang=true;
+			    //记录下当前长按的桌子信息
+			    	currentDeskData.clear();
+			        currentDeskData.newData({
+							index: 0,
+							defaultValues:[{
+								 "tai_number":row.val('tai_number'),
+								 "billMasterId":row.val('billMasterId'),
+								 "roomId":row.val('roomId'),
+								 "typeCode":row.val('typeCode'),
+								 "state":row.val('state'),
+								 "consumeRoomId":row.val('consumeRoomId'),
+								 "shareNO":row.val('shareNO'),
+								 "custQty":row.val('custQty')
+							}]
+					}); 
+					currentDeskData.first();  
+					alert("S")
+			   
             //执行长按要执行的内容，如弹出菜单         
             //找出台li里的attr=mydata    
 //          var liObj= $(event.target).is("li") ? $(event.target).attr("mydata") : $(event.target).parents("li").attr("mydata");
@@ -1210,16 +1246,18 @@ define(function(require){
 //            //为选中的台加上active
             divObj.addClass("active").siblings().removeClass("active").addClass("ccc"); //? $(event.target).addClass("active").siblings().removeClass("active") : $(event.target).parents("li").addClass("active").siblings().removeClass("active");
               $(".more-wrap").show();
+              $(".cancel-active").show();
               $(".main-ul").css({"margin-bottom":"94px"});
 //            $(".more-wrap").find(".btn").each(function(){
 //            	$(this).attr({"roomId":liObj});
 //            });
-			debugger;
 			timeOutEvent = 0;
 			 $(".main-ul").find("li").each(function(){
 				 action = $(this).attr('action','action');
 			 });
         },600);//这里设置定时器，定义长按500毫秒触发长按事件，时间可以自己改，个人感觉500毫秒非常合适 
+    	
+	
 		
     };
     
@@ -1242,7 +1280,7 @@ define(function(require){
 		if(action == undefined ||action == ''){
 		 clearTimeout(timeOutEvent);//清除定时器  
         timeOutEvent = 0; 
-        var oneDeskData = this.comp('currentDeskData');
+        var currentDeskData = this.comp('currentDeskData');
 		var row = event.bindingContext.$rawData;
 		var deskData = this.comp('deskData');
 		var state=row.val("state");
@@ -1251,6 +1289,24 @@ define(function(require){
 		var cartData = this.comp('cartData');
 		var goodsListData = this.comp('goodsListData');
 		var menuTypeData = this.comp('menuTypeData');
+		   //记录下当前长按的桌子信息
+			    	currentDeskData.clear();
+			        currentDeskData.newData({
+							index: 0,
+							defaultValues:[{
+								 "tai_number":row.val('tai_number'),
+								 "billMasterId":row.val('billMasterId'),
+								 "roomId":row.val('roomId'),
+								 "typeCode":row.val('typeCode'),
+								 "state":row.val('state'),
+								 "consumeRoomId":row.val('consumeRoomId'),
+								 "shareNO":row.val('shareNO'),
+								 "custQty":row.val('custQty')
+							}]
+					}); 
+					currentDeskData.first();  
+					alert("S")
+		
 		//下面用于刷新当前房台状态
 		var deskData = this.comp('deskData');
 		var success = function(param){
@@ -1295,7 +1351,7 @@ define(function(require){
 			//清空商品列表
 			goodsListData.clear();			
 			//记录当前台号
-			oneDeskData.newData( );//end
+			currentDeskData.newData( );//end
 			if(state=="在用"){
 				contents1.to("menu"); 
 			}else if(state=="埋单"){
@@ -1368,9 +1424,11 @@ define(function(require){
 					        	if(msg.code == 1){
 					        		 $(".more-wrap").hide();
 					        		 $(".main-ul").css({"margin-bottom":"0"});
+					        		 lang=false;
 					        		alert(msg.result);
 									//刷新
-									getDesk(deskData,status.val('typeCode'),2);					        	
+									getDesk(deskData,status.val('typeCode'),2);		
+									$(".cancel-active").hide();			        	
 								}else{
 					        		alert("转台失败！");
 					        	}
@@ -1406,13 +1464,15 @@ define(function(require){
 					var shareRoomId = currentDeskData.val('roomId');
 					var shareBillMasterId = currentDeskData.val('billMasterId');
 					var shareConsumeRoomId = currentDeskData.val('consumeRoomId');
-								
+								debugger
 					_this.css({"background":"#18AEB6"});
 					var success = function(param){
 						if(param.code == '1'){
-//							location.reload();//刷新房台
+//							location.reload();//刷新房台	
+							lang=false;
 							//刷新台
 							getDesk(deskData,status.val('typeCode'),2);
+							$(".cancel-active").hide();
 							return;
 						}else{
 						}
@@ -1429,6 +1489,7 @@ define(function(require){
 	    }
       }  
     };
+
 
     //刷新房台
 	Model.prototype.indexActive = function(event){
@@ -1715,6 +1776,7 @@ define(function(require){
 		var a = order.cancelReason({'ip':ip});
 		////debugger
 		this.comp('cancelReasonData').loadData(a);
+		debugger
 	};
 
 	
@@ -1733,19 +1795,32 @@ define(function(require){
 			}
 			]
 		});
-		debugger
 	};
 
 	
 	//发送退菜原因
 	Model.prototype.cancelReasonTrueClick = function(event){
-		debugger
+		var currentCancelReasonData = this.comp('currentCancelReasonData');
 		var userData = this.comp('userData');
 		var userId = userData.val('userId');
 		var currentCancelReasonData = this.comp('currentCancelReasonData');
 		var reasonId = currentCancelReasonData.val('tfzReasonId');
+		var billDetailId = this.comp('currentOrderData').getFirstRow().val('billDetailId');
 		var qty = $('#hOrderChangeName').val();
-		var result = order.cancelGoods({'ip':ip,'userId':userId,'reasonId':reasonId,'qty':qty});
+		var cancelQty =  this.comp('currentOrderData').getFirstRow().val('cancelQty');
+		var orderQty = this.comp('currentOrderData').getFirstRow().val('qty');
+		debugger
+		if(qty > orderQty-cancelQty){
+			this.comp('message').show({'title':'error','message':'退菜数量超出订单数量'});
+			return;
+		}
+		if(currentCancelReasonData.getCount()<1){
+				this.comp('message').show({'title':'error','message':'请选择退菜原因'});
+		}
+		var result = order.cancelGoods({'ip':ip,'userId':userId,'reasonId':reasonId,'qty':qty,'billDetailId':billDetailId});
+		order.refreshOrder({'ip':ip,'currentDeskData':this.comp('currentDeskData'),'orderData':this.comp('orderData')});//刷新
+		this.comp('currentOrderData').clear();//清空退菜
+		currentCancelReasonData.clear();//清空退菜原因
 		this.comp('yet-sort').hide();
 	};
 
@@ -1765,6 +1840,7 @@ define(function(require){
 		var liObj= $(event.target).is("li") ? $(event.target).addClass("active").siblings().removeClass("active") : $(event.target).parents("li").addClass("active").siblings().removeClass("active");
 		var currentOrderData = this.comp('currentOrderData');
 		var row = event.bindingContext.$rawData;
+		debugger
 		currentOrderData.newData({
 			index:0,
 			defaultValues:[{
@@ -1773,7 +1849,8 @@ define(function(require){
 				addMoney:row.val('addMoney'),
 				qty:row.val('qty'),
 				billDetailId:row.val('billDetailId'),
-				unitName:row.val('unitName')
+				unitName:row.val('unitName'),
+				cancelQty:row.val('cancelQty')
 			}]
 		});
 	};
@@ -1781,6 +1858,10 @@ define(function(require){
 	
 	//已分单订单界面退菜跳转
 	Model.prototype.hspan40Click = function(event){
+		if(this.comp('currentOrderData').getCount()<=0){
+			this.comp('message').show({'title':'警告','message':'请先选择菜品'});
+			return;
+		}
 		this.comp('yet-sort').show();
 		this.comp('contents5').to('content33');
 	};
@@ -1821,11 +1902,11 @@ define(function(require){
 	//已分单界面数量
 	Model.prototype.hbutton53Click = function(event){
 		var currentOrderData = this.comp('currentOrderData');
+		var currentDeskData = this.comp('currentDeskData').getFirstRow();
 		var userData = this.comp('userData');
 		var qty = $('#hOrderChangeQty').val();
 		order.hEditCout({'ip':ip,'billDetailId':currentOrderData.val('billDetailId'),'userId':userData.val('userId'),'qty':qty,'unitName':currentOrderData.val('unitName')});
 		order.updateOrderData({'ip':ip,'orderData':this.comp('orderData'),'billMasterId':currentDeskData.val('billMasterId'),'roomId':currentDeskData.val('roomId')});
-		
 	};
 
 	
@@ -1872,7 +1953,8 @@ define(function(require){
 		var userData = this.comp('userData');
 		var currentOrderData = this.comp('currentOrderData');
 		var qty = $('#hOrderPresentsQty').val();
-		ordr.hGift({'ip':ip,'billDetailId':currentOrderData.val('billDetailId'),'reasonId':currentOrderData.val('reasonId'),'qty':qty,'userId':userData.val('userId')});		
+		order.hGift({'ip':ip,'billDetailId':currentOrderData.val('billDetailId'),'reasonId':currentOrderData.val('reasonId'),'qty':qty,'userId':userData.val('userId')});	
+		debugger	
 	};
 
 	
@@ -2257,6 +2339,22 @@ define(function(require){
 	Model.prototype.button28Click = function(event){
 		order.refreshOrder({'ip':ip,'currentDeskData':this.comp('currentDeskData'),'orderData':this.comp('orderData')});
 	};	
+	
+	
+	
+	
+	//取消长按
+	Model.prototype.button4Click = function(event){
+		//下面用于刷新当前房台状态
+		var status = this.comp('statusData');
+	    var deskData = this.comp('deskData');
+		lang=false;
+		//刷新
+		getDesk(deskData,status.val('typeCode'),2);	
+		$(".cancel-active").hide();
+	};	
+	
+	
 	
 	
 
