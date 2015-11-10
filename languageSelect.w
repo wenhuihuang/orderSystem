@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <div xmlns="http://www.w3.org/1999/xhtml" xid="window" class="window" component="$UI/system/components/justep/window/window" design="device:m;">  
-  <div component="$UI/system/components/justep/model/model" xid="model" style="height:auto;left:621px;top:235px;" onModelConstruct="modelModelConstruct"><div component="$UI/system/components/justep/data/data" autoLoad="true" xid="language" idColumn="col0" onCustomRefresh="languageCustomRefresh"><column name="col0" type="String" xid="xid1"></column>
+  <div component="$UI/system/components/justep/model/model" xid="model" style="height:auto;left:621px;top:235px;" onModelConstruct="modelModelConstruct" onLoad="modelLoad"><div component="$UI/system/components/justep/data/data" autoLoad="true" xid="language" idColumn="col0" onCustomRefresh="languageCustomRefresh"><column name="col0" type="String" xid="xid1"></column>
   <column label="id" name="languageId" type="String" xid="xid2"></column>
   <column label="name" name="languageName" type="String" xid="xid3"></column>
   <data xid="default5">[]</data></div>
@@ -9,7 +9,9 @@
    <column name="col0" type="String" xid="xid63"></column>
    <column label="模式" name="model" type="String" xid="xid64"></column>
    <data xid="default29">[{&quot;model&quot;:&quot;服务员手机&quot;},{&quot;model&quot;:&quot;服务员平板&quot;},{&quot;model&quot;:&quot;自助手机&quot;},{&quot;model&quot;:&quot;自助平板&quot;}]</data></div></div> 
-<div component="$UI/system/components/justep/panel/panel" class="x-panel x-full" xid="panel1">
+  <div xid="div67" class="loading">
+   <span xid="span153">加载中，请稍后</span></div>
+ <div component="$UI/system/components/justep/panel/panel" class="x-panel x-full" xid="panel1">
    
    <div class="x-panel-content" xid="content1">
   

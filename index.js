@@ -1,12 +1,15 @@
 define(function(require){
 	var $ = require("jquery");
 	var justep = require("$UI/system/lib/justep");
-	require(['./appVersionChecker']);
-	var version = "1.0.1"
+	var  loadingBar=require("$UI/system/components/justep/loadingBar/loadingBar");
+	require('cordova!org.apache.cordova.file-transfer');
+	require('cordova!ch.ti8m.documenthandler');
+	require('cordova!hu.dpal.phonegap.plugins.SpinnerDialog');
+	var version = "1.0.1";
 	var cishu = 0;
 	//var ip = "http://qixusoft.vicp.net";
-//	var ip="http://192.168.1.20:8080/OrderSystemWeX5/";
-//	var ip ="http://192.168.1.128:8080/OrderSystemWeX5/";
+	//var ip="http://192.168.1.20:8080/OrderSystemWeX5/";
+	//var ip ="http://192.168.1.128:8080/OrderSystemWeX5/";
 	var ip ;
 	$(function(){
 		if(localStorage.getItem('pureip') != null || localStorage.getItem('pureip') != undefined){
@@ -18,7 +21,10 @@ define(function(require){
 	})
 	//长按
 	var lang=false;
-//var url="UI2/orderSystem_a/index.w#!index";
+	//长按是否加载完成标记0表示加载中不能进行长按，1可以长按
+	var lang_flag=0;  
+	 
+	//var url="UI2/orderSystem_a/index.w#!index";
 	var Baas = require("$UI/demo/baas/baas");
 	var Language = require('$UI/orderSystem/language');
 	var myBaas = require('$UI/orderSystem/myBaas');
@@ -27,6 +33,41 @@ define(function(require){
 	var lan = require('$UI/orderSystem/language');
 	    //定时器 
     var timeOutEvent=0;
+     /*重写loadingBar的start和stop开始*/
+     //loadingBar的start
+      loadingBar.start= function(){
+			var self = this;
+			var oldNum = parseInt(self.$loadingBarNode.attr('loadingnum'));
+    		self.$loadingBarNode.attr('loadingnum',oldNum + 1);
+    		self.$loadingOverlayNode.addClass('x-default-overlay-open');
+    		//设置加载时不可以长按
+    		lang_flag=0;
+			self.$loadingBarNode.fadeIn(200,function(){
+				if(oldNum === 0){
+	    			self.$loadingBarNode.width((40 + Math.random() * 30) + "%");
+	    		}
+	        });
+	      
+		};
+	//loadingBar的stop
+	loadingBar.stop=function(){
+			var self = this;
+			self.$loadingOverlayNode.removeClass('x-default-overlay-open');
+			setTimeout(function(){
+				var oldNum = parseInt(self.$loadingBarNode.attr('loadingnum'));
+	    		self.$loadingBarNode.attr('loadingnum',oldNum - 1);
+	    		if(oldNum <= 1){
+		    		self.$loadingBarNode.width("101%").fadeOut(1000, function() {
+		    			//设置回载后可以长按
+		    			lang_flag=1;
+		    			self.$loadingBarNode.width("1%");
+			        });
+		    	}
+			},1000);
+			
+		};
+    /*重写loadingBar的start和stop结束*/
+    
 	var Model = function(){
 		this.callParent();
 	};
@@ -313,10 +354,91 @@ define(function(require){
 			if(cishu == 0){
 			cishu ++;
 			var lastVersion = order.checkAppVersion({'ip':ip});
-			if(lastVersion != version){	
+//			if(lastVersion != version){	
 				if(confirm('有更新，是否更新')){
-						window.location.href="http://pkg.fir.im/472aa57b774dc7b5225685e78020eddb02958a63.apk?attname=orderSystem.apk_1.0.0.apk&e=1446696787&token=LOvmia8oXF4xnLh0IdH05XMYpH6ENHNpARlmPc-T:UUSf9jkiRQgOx4ghp2LNRpCapcE=";
-				}
+//				var fullPath;
+//					if (justep.Browser.isX5App) {
+//						target="http://pkg.fir.im/472aa57b774dc7b5225685e78020eddb02958a63.apk?attname=orderSystem.apk_1.0.0.apk&e=1446696787&token=LOvmia8oXF4xnLh0IdH05XMYpH6ENHNpARlmPc-T:UUSf9jkiRQgOx4ghp2LNRpCapcE=";
+//						var sad= new window.FileTransfer();
+////						sad.download(encodeURI('pkg.fir.im'), target, function(){alert('success')}, function(data){debugger;alert(data)})
+//						//start
+//						   try {
+//						              /*
+//						            window.requestFileSystem = window.requestFileSystem || window.webkitRequestFileSystem;
+//						            window.resolveLocalFileSystemURL = window.resolveLocalFileSystemURL                || window.ebkitResolveLocalFileSystemURL; //根据URL取得文件的读取权限
+//						            */
+//						            
+//						            //查找是否有download这个文件夹，没有则创建，然后找到这个文件夹的绝对路径
+//						            window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, function (fileSystem) {                
+//						                fileSystem.root.getDirectory("download", {
+//						                    create: true,
+//						                    exclusive: false
+//						                }, function (entry) {
+//						                    //网上流传的资料中都是使用fullPath，在这里我获取到的是相对目录，在下载时使用会报错，所以换做了toURL()
+//						                    //这是一个全局全局变量，用以保存路径
+//						                    fullPath = entry.toURL();
+//						                    alert(fullPath.toString() + '创建文件夹成功');
+//						                    						           try {
+//					          // onDeviceReady();
+//					          var ft = new FileTransfer();
+//					          var uri = encodeURI(target);
+//					          var fileURL = entry.toURL()+'order.apk' ;					
+//					          ft.download(
+//					              uri,
+//					              fileURL,
+//					              function(entry) {
+//					                  OpenFile(entry.fullPath);
+//					                  console.log("download complete: " + entry.toURL());
+//					              },
+//					              function(error) {
+//					                  alert("download error source " + error.source);
+//					                  alert("download error target " + error.target);
+//					                  console.log("download error source " + error.source);
+//					                  console.log("download error target " + error.target);
+//					                  console.log("upload error code" + error.code);
+//					              },
+//					              false,
+//					              {
+//					                  headers: {
+//					                      "Authorization": "Basic dGVzdHVzZXJuYW1lOnRlc3RwYXNzd29yZA=="
+//					                  }
+//					              }
+//					          );
+//					        }
+//					        catch (e) {
+//					          alert(e.name + ":" + e.message);
+//					        }
+//					        //end	
+//						                }, function () {
+//						                    console.log('创建文件夹失败');
+//						                    alert('创建文件夹失败');
+//						                });
+//						            }, function () {
+//						                console.log('创建文件夹失败');
+//						                alert('创建文件夹失败');
+//						            });
+//						          }
+//						          catch (e) {
+//						            alert(e.name + ":" + e.message);
+//						          }			
+//						          //end
+//		
+//					}
+//				}
+					window.plugins.spinnerDialog.show("下载中","正在下载中", true);
+					target="http://pkg.fir.im/472aa57b774dc7b5225685e78020eddb02958a63.apk?attname=orderSystem.apk_1.0.0.apk&e=1446696787&token=LOvmia8oXF4xnLh0IdH05XMYpH6ENHNpARlmPc-T:UUSf9jkiRQgOx4ghp2LNRpCapcE=";
+					if (justep.Browser.isX5App) {
+					handleDocumentWithURL(
+					      function() {console.log('success');window.plugins.spinnerDialog.hide();},
+					      function(error) {
+					        console.log('failure');
+					        if(error == 53) {
+					          console.log('No app that handles this file type.');
+					        }
+					      }, 
+					      target
+					    );
+					 }
 			}
 			}
 			//设置菜单宽度
@@ -382,8 +504,7 @@ define(function(require){
 			}else{
 				
 			}
-		
-		
+			$(".loading").hide();
 			
 		};
 
@@ -1218,7 +1339,8 @@ define(function(require){
     	var status = this.comp('statusData');
     	var _this=$(event.target).parents("li");
     	status.getFirstRow().val('typeCode',row.val('typeCode'));
-    				   timeOutEvent = setTimeout(function(){
+    	if(lang_flag == 1){
+    	    		   timeOutEvent = setTimeout(function(){
     				   lang=true;
 			    //记录下当前长按的桌子信息
 			    	currentDeskData.clear();
@@ -1245,7 +1367,7 @@ define(function(require){
 //            //为选中的台加上active
             divObj.addClass("active").siblings().removeClass("active").addClass("ccc"); //? $(event.target).addClass("active").siblings().removeClass("active") : $(event.target).parents("li").addClass("active").siblings().removeClass("active");
               $(".more-wrap").show();
-              $(".cancel-active").show();
+              $(".cancel-active").css("display","block");
               $(".main-ul").css({"margin-bottom":"94px"});
 //            $(".more-wrap").find(".btn").each(function(){
 //            	$(this).attr({"roomId":liObj});
@@ -1255,6 +1377,12 @@ define(function(require){
 				 action = $(this).attr('action','action');
 			 });
         },600);//这里设置定时器，定义长按500毫秒触发长按事件，时间可以自己改，个人感觉500毫秒非常合适 
+    	
+    	}
+
+    	
+    	
+    			
     	
 	
 		
@@ -1404,7 +1532,7 @@ define(function(require){
 		//选择的房间的名称，如果有【xx】 需要截断字符串再上传  --去【xx】
 			currentRoomName = currentRoomName.replace(/【.*/g," ");
 			//当a节点点击的时候，当前节点变红其它节点变灰
-				if(_this.attr("state") == '空台'){
+				if(_this.attr("state") == '空台' && currentDeskData.val('state') == "在用"){
 					//记录下当前房台的信息
 					var changeRoomId = _this.attr('roomid');
 					

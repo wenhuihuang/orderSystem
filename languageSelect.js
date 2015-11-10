@@ -128,5 +128,10 @@ define(function(require){
 	};
 
 
+	Model.prototype.modelLoad = function(event){
+		$(".loading").hide();
+	};
+
+
 	return Model;
 });

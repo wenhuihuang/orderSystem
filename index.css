@@ -182,6 +182,7 @@ img.subtract,img.add{
 .menu-wrap{
 	background:#2BB8AA;
 	overflow:hidden;
+	z-index:1000;
 }
 .menu-con{
 	overflow:auto;
@@ -209,20 +210,6 @@ img.subtract,img.add{
 .menu-con ul li .x-output{
 	color:#fff;
 }
-/*
-.bottom-left,.bottom-right{
-	box-flex:1.0;
-	-webkit-box-flex:1.0;
-	-moz-box-flex:1.0;
-	padding:7px;
-}
-*/
-/*
-.bottom-left .btn{
-	background:#BDC3C2;
-	border:none;
-}
-*/
 .btn-style{
 	background:rgb(43, 184, 170);
 	color:#fff;
@@ -264,13 +251,6 @@ img.subtract,img.add{
 	width:30%;
 	text-align:center;
 }
-/*
-.table-con{
-	border:1px solid #ccc;
-	box-shadow:0px 0px 8px 2px #acacac;
-	margin:4%;
-}
-*/
 /*menu*/
 .home-wrap{
 	/*position:absolute;*/
@@ -393,56 +373,12 @@ img.subtract,img.add{
 	display:-moz-box;
 	border-bottom:1px solid #ccc;
 }
-/*
-.con-main dt{
-	box-flex:2.0;
-	-webkit-box-flex:2.0;
-	-moz-box-flex:2.0;
-}
-*/
-/*
-.con-main dl dt{
-	border-bottom:1px solid #acacac;
-}
-.con-main dd div:nth-child(1){
-	box-flex:2.0;
-	-webkit-box-flex:2.0;
-	-moz-box-flex:2.0;
-}
-.con-main dd div:nth-child(2){
-	box-flex:1.0;
-	-webkit-box-flex:1.0;
-	-moz-box-flex:1.0;
-	border-left:1px solid #acacac;
-}
-.con-top dl dt:nth-child(1){
-	box-flex:2.0;
-	-webkit-box-flex:2.0;
-	-moz-box-flex:2.0;
-}
-.con-top dl dt:nth-child(2){
-	box-flex:1.0;
-	-webkit-box-flex:1.0;
-	-moz-box-flex:1.0;
-	border-left:1px solid #acacac;
-}
-.con-top .top-left p:nth-child(1){
-	border-bottom:1px solid #acacac;
-}
-.con-top .top-left p:nth-child(2) span{
-	display:inline-block;
-	width:32%;
-	border-right:1px solid #acacac;
-}
-.con-top .top-left p:nth-child(2) span:nth-child(3){
-	border:0;
-}
-*/
 /*台号*/
 .main-con ul li{
 	display:block;
 	float:left;
 	width:21%;
+	height:80px;
 	/*margin:2%;*/
 }
 .main-con ul li .x-output{
@@ -514,18 +450,21 @@ img.subtract,img.add{
 	width:100%;
 	position: absolute;
     bottom: 0;
-    background-color: #E8E8E8;
     z-index:100;
-    border-radius:4px;
+    border-bottom-left-radius:4px;
+    border-bottom-rihgt-radius:4px;
+    border-top:1px solid #ccc;
 }
 .pop-menuSub-btn{
 	width:100%;
 	position: absolute;
     bottom: 0px;
-    background-color: #E8E8E8;
     display:none;
     z-index:111;
-    border-radius:4px;
+    border-bottom-left-radius:4px;
+    border-bottom-rihgt-radius:4px;
+    border-top:1px solid #ccc;
+    background:#fff;
 }
 .pop-menuSub-btn span{
 	padding: 8px 0;
@@ -563,44 +502,6 @@ img.subtract,img.add{
 .pop-menuSub-btn .row .col{
 	padding:0;
 }
-/*
-.con-con ul li div,.con-top ul li div{
-	display:inline-block;
-}
-
-.con-con ul li div:nth-child(1),.con-top ul li div:nth-child(1){
-	border-right:1px solid #ccc;
-	width:68%;
-}
-.con-con ul li div:nth-child(2),.con-top ul li div:nth-child(2){
-	width:29%;
-}
-.pop-con{
-	
-}
-
-.pop-con .no-send{
-	padding:8px 0;
-	color:red;
-	border-bottom:1px solid #acacac;
-}
-.pop-con .send{
-	padding:8px 0;
-	color:red;
-	border-bottom:1px solid #acacac;
-}
-.pop-con .no-send,.pop-con .send,.con-con ul li div:nth-child(1) p:nth-child(2){
-	display:box;
-	display:-webkit-box;
-	display:-moz-box;
-}
-.pop-con .no-send span,.pop-con .send span,.con-con ul li div:nth-child(1) p:nth-child(2) span{
-	box-flex:1.0;
-	-webkit-box-flex:1.0;
-	-moz-box-flex:1.0;
-	display:block;
-}
-*/
 .con-top-left p span{
 	display:inline-block;
 	width:32%;
@@ -1088,8 +989,6 @@ ul.menu-item li{
 .settings-btn .btn{
 	width:100%;
 }
-
-
 .back-btn{
 	padding:8px 18px;
 	color: #fff;
@@ -1120,6 +1019,12 @@ ul.menu-item li{
 	-webkit-box-flex:2.0;
 	text-align:center;
 	line-height:48px;
+}
+.menu-all span{
+	font-size:18px;
+}
+.menu-all span b{
+	margin:0 5px;
 }
 .count-radius-parent{
 	position:relative;
@@ -1192,6 +1097,21 @@ ul.menu-item li{
 .cancel-active{
 	display:none;
 }
+
+.loading{
+	position:absolute;
+	width:100%;
+	height:100%;
+	background:#fff url(images/loading.gif) no-repeat center center;
+	z-index:214748364;
+	text-align:center;
+}
+.loading span{
+	display:inline-block;
+	margin-top:50%;
+	text-align:center;
+}
+
 	
 /*iphone4 iphone5 小于320px*/
 @media screen and (max-width:320px){

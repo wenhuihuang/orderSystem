@@ -358,7 +358,9 @@
   <column name="lowMoney" type="String" xid="xid136"></column>
   <column name="checkOutMoney" type="String" xid="xid137"></column>
   <column name="col8" type="String" xid="xid138"></column></div></div>  
-  <div component="$UI/system/components/justep/contents/contents" class="x-contents x-full"
+   <div xid="div67" class="loading">
+   <span xid="span153">加载中，请稍后</span></div>
+   <div component="$UI/system/components/justep/contents/contents" class="x-contents x-full"
     active="0" xid="contents1" swipe="false"> 
     <div class="x-contents-content" xid="login"> 
       <div component="$UI/system/components/justep/panel/panel" class="x-panel x-full"
@@ -390,7 +392,7 @@
                     class="row" xid="row1"> 
                     <div class="col col-xs-6" xid="col2"> 
                       <a component="$UI/system/components/justep/button/button"
-                        class="btn btn-default btn-exit" label="退出" xid="exit"> 
+                        class="btn btn-default btn-exit" label="退出" xid="exit" onClick="exitClick"> 
                         <i xid="i17"/>  
                         <span xid="span86" bind-text="language.val('EXIT')">退出</span>
                       </a> 
@@ -2381,5 +2383,5 @@
   </div>
   <resource xid="resource2">
     <require xid="require1" url="$UI/demo/baas/baas"/>
-  </resource>
+  <require xid="require2" url="cordova!org.apache.cordova.file-transfer"></require></resource>
 </div>
