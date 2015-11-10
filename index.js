@@ -5,7 +5,7 @@ define(function(require){
 	require('cordova!org.apache.cordova.file-transfer');
 	require('cordova!ch.ti8m.documenthandler');
 	require('cordova!hu.dpal.phonegap.plugins.SpinnerDialog');
-	var version = "1.0.1";
+	var version = "1.0.0";
 	var cishu = 0;
 	//var ip = "http://qixusoft.vicp.net";
 	//var ip="http://192.168.1.20:8080/OrderSystemWeX5/";
@@ -165,8 +165,13 @@ define(function(require){
 		$(".select-con").html(html);
 	};
 
-	//口味
+	//未分单口味
 	Model.prototype.button13Click = function(event){
+		var currentGoodsData = this.comp('currentGoodsData');
+		var message = this.comp('message');
+		if(check.nCheckSelect({'currentGoodsData':currentGoodsData,'message':message})==false){
+			return false;
+		}
 		this.comp("popOver2").show();
 		this.comp("contents2").to("content8");
 		//var html="<div class='select-con-wrap'></div>";
@@ -175,6 +180,11 @@ define(function(require){
 
 	//没分单其它
 	Model.prototype.button15Click = function(event){
+		var currentGoodsData = this.comp('currentGoodsData');
+		var message = this.comp('message');
+		if(check.nCheckSelect({'currentGoodsData':currentGoodsData,'message':message})==false){
+			return false;
+		}
 		this.comp("popOver2").show();
 		this.comp("contents2").to("content10")
 		var html="<textarea class='select-con-wrap' placeholder='请输入要求'></textarea>";
@@ -354,7 +364,7 @@ define(function(require){
 			if(cishu == 0){
 			cishu ++;
 			var lastVersion = order.checkAppVersion({'ip':ip});
-//			if(lastVersion != version){	
+			if(lastVersion != version){	
 				if(confirm('有更新，是否更新')){
 //				var fullPath;
 //					if (justep.Browser.isX5App) {
@@ -439,7 +449,7 @@ define(function(require){
 					      target
 					    );
 					 }
-			}
+			}}
 			}
 			//设置菜单宽度
 			var liWidth=parseInt($(".menu-con").find('li').outerWidth(true));
@@ -748,7 +758,8 @@ define(function(require){
 	    var contents1 = this.comp('contents1');
 	    var currentDeskData =  this.comp('currentDeskData');
 	    var pop = this.comp('popOver_renshu');
-	    var num = $('#custNum').val();
+	    var input = this.comp('input1');
+	    var num = this.comp('input1').val();
 	    if(num == ''||num == undefined){
 	    	alert('输入错误');
 	    	return;
@@ -783,6 +794,7 @@ define(function(require){
 	    	});
 	    	currentDeskData.first();
 	    	pop.hide();
+	    	input.clear();
 	    	contents1.to('menu');
 	    }				
 		Baas.sendRequest({
@@ -1043,8 +1055,13 @@ define(function(require){
 
 
 
-	//要求分类
+	//未分单要求分类
 	Model.prototype.button14Click = function(event){
+		var currentGoodsData = this.comp('currentGoodsData');
+		var message = this.comp('message');
+		if(check.nCheckSelect({'currentGoodsData':currentGoodsData,'message':message})==false){
+			return false;
+		}
 		this.comp("popOver2").show();
 		this.comp("contents2").to("content1");
 		var cookTypeData = this.comp('cookTypeData');
@@ -1671,6 +1688,11 @@ define(function(require){
 	
 	//未分单弹出修改菜名框
 	Model.prototype.span32Click = function(event){
+		var currentGoodsData = this.comp('currentGoodsData');
+		var message = this.comp('message');
+		if(check.nCheckSelect({'currentGoodsData':currentGoodsData,'message':message})==false){
+			return false;
+		}
 		this.comp("give").show();
 		this.comp("contents4").to("content17");
 	};
@@ -1682,8 +1704,13 @@ define(function(require){
 	};
 
 	
-	
+	//未分单修改价格
 	Model.prototype.span33Click = function(event){
+		var currentGoodsData = this.comp('currentGoodsData');
+		var message = this.comp('message');
+		if(check.nCheckSelect({'currentGoodsData':currentGoodsData,'message':message})==false){
+			return false;
+		}
 		this.comp("give").show();
 		this.comp("contents4").to("content15");
 	};
@@ -1691,6 +1718,11 @@ define(function(require){
 	
 	//未分单弹出修改数量框
 	Model.prototype.span34Click = function(event){
+		var currentGoodsData = this.comp('currentGoodsData');
+		var message = this.comp('message');
+		if(check.nCheckSelect({'currentGoodsData':currentGoodsData,'message':message})==false){
+			return false;
+		}
 		this.comp("give").show();
 		this.comp("contents4").to("content23");
 	};
@@ -1698,6 +1730,11 @@ define(function(require){
 	
 	//未分单弹出赠送框
 	Model.prototype.span35Click = function(event){
+		var currentGoodsData = this.comp('currentGoodsData');
+		var message = this.comp('message');
+		if(check.nCheckSelect({'currentGoodsData':currentGoodsData,'message':message})==false){
+			return false;
+		}
 		this.comp("give").show();
 		this.comp("contents4").to("content16");
 	};
@@ -1839,26 +1876,47 @@ define(function(require){
 	
 	//未分单修改菜名
 	Model.prototype.button43Click = function(event){
-		var goodsName = $('#noOrderChangeName').val();
+		var currentGoodsData = this.comp('currentGoodsData');
+		var message = this.comp('message');
+		if(check.nCheckSelect({'currentGoodsData':currentGoodsData,'message':message})==false){
+			return false;
+		}
+		var goodsName = this.comp('ninput2').val();
 		var goodsId = this.comp('currentGoodsData').val('goodsId');		
 		var cartData = this.comp('cartData');
 		order.changeGoodsName({'goodsName':goodsName,'goodsId':goodsId,'cartData':cartData});
+		this.comp('ninput2').clear();
+		currentGoodsData.clear();
 		this.comp('give').hide();
 	};
 
 	
 	//未分单修改价格
 	Model.prototype.button34Click = function(event){
-		var sprice = $('#noOrderChangePrice').val();
-		order.changeGoodsPrice({'sprice':sprice,'goodsId':this.comp('currentGoodsData').val('goodsId'),'cartData':this.comp('cartData')})
+		var currentGoodsData = this.comp('currentGoodsData');
+		var message = this.comp('message');
+		if(check.nCheckSelect({'currentGoodsData':currentGoodsData,'message':message})==false){
+			return false;
+		}
+		var sprice =this.comp('ninput5').val();
+		order.changeGoodsPrice({'sprice':sprice,'goodsId':this.comp('currentGoodsData').val('goodsId'),'cartData':this.comp('cartData')});
+		currentGoodsData.clear();
+		this.comp('ninput5').clear();
 		this.comp('give').hide();
 	};
 
 	
 	//未分单修改数量
 	Model.prototype.button38Click = function(event){
-		var qty = $('#noOrderChangeQty').val();
+		var currentGoodsData = this.comp('currentGoodsData');
+		var message = this.comp('message');
+		if(check.nCheckSelect({'currentGoodsData':currentGoodsData,'message':message})==false){
+			return false;
+		}
+		var qty = this.comp('ninput7').val();
 		order.changeGoodsQty({'qty':qty,'goodsId':this.comp('currentGoodsData').val('goodsId'),'cartData':this.comp('cartData')})
+		currentGoodsData.clear();
+		this.comp('ninput7').clear();
 		this.comp('give').hide();
 	};
 
@@ -1966,6 +2024,7 @@ define(function(require){
 		if(check.hCheckSelect({'currentOrderData':this.comp('currentOrderData'),'message':this.comp('message')})== false){
 			return;
 		}
+//		this.comp('hinput10').clear();
 		this.comp("yet-sort").show();
 		this.comp("contents5").to("content29");
 	};
@@ -1988,7 +2047,8 @@ define(function(require){
 				qty:row.val('qty'),
 				billDetailId:row.val('billDetailId'),
 				unitName:row.val('unitName'),
-				cancelQty:row.val('cancelQty')
+				cancelQty:row.val('cancelQty'),
+				presentQty:row.val('presentQty')
 			}]
 		});
 	};
@@ -2011,20 +2071,22 @@ define(function(require){
 	//已分单修改价格
 	Model.prototype.hbutton57Click = function(event){
 		var currentOrderData = this.comp('currentOrderData');
+		var currentGoodsData = this.comp('currentGoodsData');
 		var userData = this.comp('userData');
-		var price = $('#hOrderChangePrice').val();
+		var price = this.comp('hinput10').val();
 		var currentDeskData = this.comp('currentDeskData').getFirstRow();
 		var result = order.hEditPrice({'ip':ip,'billDetailId':currentOrderData.val('billDetailId'),'price':price,'userId':userData.val('userId')});
 		if(result.code == '-1'){
 			this.comp('message').show({'title':'message','message':result.result});
+			return;
 		}
 		//刷新orderData
 		////
 		order.refreshOrder({'ip':ip,'currentDeskData':this.comp('currentDeskData'),'orderData':this.comp('orderData')});
+		currentOrderData.clear();
 		debugger
-//		$(this.getElementByXid('input12')).val('');
-//		this.comp('currentDeskData').clear();
 		//隐藏dialog
+		this.comp('hinput10').clear();
 		this.comp('yet-sort').hide();
 	};
 
@@ -2057,9 +2119,15 @@ define(function(require){
 		var currentOrderData = this.comp('currentOrderData');
 		var currentDeskData = this.comp('currentDeskData').getFirstRow();
 		var userData = this.comp('userData');
-		var qty = $('#hOrderChangeQty').val();
-		order.hEditCout({'ip':ip,'billDetailId':currentOrderData.val('billDetailId'),'userId':userData.val('userId'),'qty':qty,'unitName':currentOrderData.val('unitName')});
-		order.updateOrderData({'ip':ip,'orderData':this.comp('orderData'),'billMasterId':currentDeskData.val('billMasterId'),'roomId':currentDeskData.val('roomId')});
+		var qty = this.comp('hinput11').val();
+		var result = order.hEditCout({'ip':ip,'billDetailId':currentOrderData.val('billDetailId'),'userId':userData.val('userId'),'qty':qty,'unitName':currentOrderData.val('unitName')});
+		if(result.code=='1'){
+				order.refreshOrder({'ip':ip,'orderData':this.comp('orderData'),'currentDeskData':this.comp('currentDeskData')});
+				this.comp('yet-sort').hide();
+				this.comp('hinput11').clear();
+				currentOrderData.clear();
+		}
+		
 	};
 
 	
@@ -2074,6 +2142,7 @@ define(function(require){
 		var a = order.reminder({'ip':ip,'billDetailId':currentOrderData.val('billDetailId')});
 		if(a.code=='1'){
 			this.comp('message').show({'title':'success','message':a.result});
+			currentOrderData.clear();
 		}else{
 			this.comp('message').show({'title':'error','message':a.result});
 		}
@@ -2098,6 +2167,7 @@ define(function(require){
 		var a = order.respite({'ip':ip,'billDetailId':currentOrderData.val('billDetailId')});
 		if(a.code=='1'){
 			this.comp('message').show({'title':'success','message':a.result});
+			currentOrderData.clear();
 		}else{
 			this.comp('message').show({'title':'error','message':a.result});
 		}
@@ -2122,10 +2192,21 @@ define(function(require){
 		var userData = this.comp('userData');
 		var currentOrderData = this.comp('currentOrderData');
 		var currentPresentsReasonData = this.comp('currentPresentsReasonData');
-		var qty = $('#hOrderPresentsQty').val();
+		var qty = this.comp('hinput9').val();
+		if(qty > (currentOrderData.val('qty')-currentOrderData.val('presentQty')-currentOrderData.val('cancelQty'))){
+			this.comp('message').show({'title':'error','message':'赠送数量不能大于已点数量'});
+			return false;
+		}
+		//赠送数量不能大于点单数量
 		var result = order.hGift({'ip':ip,'billDetailId':currentOrderData.val('billDetailId'),'reasonId':currentPresentsReasonData.getFirstRow().val('tfzReasonId'),'qty':qty,'userId':userData.val('userId')});	
-		currentPresentsReasonData.clear();
-		this.comp('message').show({'title':'message','message':'result'.result})
+		if(result.code=='1'){
+			this.comp('hinput9').clear();
+			currentPresentsReasonData.clear();
+			currentOrderData.clear();
+			this.comp('yet-sort').hide();
+			order.refreshOrder({'orderData':this.comp('orderData'),'currentDeskData':this.comp('currentDeskData')});
+		}
+		this.comp('message').show({'title':'message','message':result.result})
 	};
 
 	
@@ -2197,12 +2278,13 @@ define(function(require){
 	//结帐单修改人数
 	Model.prototype.button63Click = function(event){
 		//"url" : data.ip + 'RoomFunctionServlet.do?func=editCustQty&billMasterId='+data.billMasterId+'&consumeRoomId='+data.consumeRoomId+'&custQty='+data.qty,
-		var qty = $('#jOrderChangeQty').val();
-		var consumeRoomId = this.comp('currentDeskData').val('consumeRoomId');
-		var billMasterId =  this.comp('currentDeskData').val('billMasterId');
-		
-		var result = order.editCustQty({'ip':ip,'qty':qty,'billMasterId':billMasterId});
-		
+		var qty = this.comp('input16').val();
+		var consumeRoomId = this.comp('currentDeskData').getFirstRow().val('consumeRoomId');
+		var billMasterId =  this.comp('currentDeskData').getFirstRow().val('billMasterId');
+		var roomId = this.comp('currentDeskData').getFirstRow().val('roomId');
+		var result = order.editCustQty({'ip':ip,'qty':qty,'billMasterId':billMasterId,'consumeRoomId':consumeRoomId,'roomId':roomId});
+		order.refreshOrder({'ip':ip,'currentDeskData':this.comp('currentDeskData'),'orderData':this.comp('orderData')});
+		this.comp('input16').clear();
 		this.comp('account').hide();
 	};
 	
@@ -2260,11 +2342,16 @@ define(function(require){
 		var userData = this.comp('userData');
 		var a = this.comp('currentDisCountTypesData');
 		var currentDisCountTypesData = this.comp('currentDisCountTypesData');
-		var result = order.allDiscout({'ip':ip,'billMasterId':currentDeskData.val('billMasterId'),'userId':userData.val('userId'),'discount':a.val('discount'),'discountTypeId':a.val('discountTypeId')});
+		if(currentDisCountTypesData.getCount()<1){
+			this.comp('message').show({'title':'message','message':'请用选择打折类型'});
+			return false;
+		}
+		var result = order.allDiscout({'ip':ip,'billMasterId':currentDeskData.getFirstRow().val('billMasterId'),'userId':userData.val('userId'),'discount':a.val('discount'),'discountTypeId':a.val('discountTypeId')});
 		if(result.code == '-1'){
 			this.comp('message').show({'title':'error','message':result.result});
 		}else{
 			$(event.target).css({'background':'yellow'});
+			currentDisCountTypesData.clear();
 			this.comp('account').hide();
 		}
 	};

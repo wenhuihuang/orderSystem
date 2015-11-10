@@ -2,7 +2,7 @@
 
 <div xmlns="http://www.w3.org/1999/xhtml" xid="window" class="window" component="$UI/system/components/justep/window/window"
   design="device:mobile">  
-  <div component="$UI/system/components/justep/model/model" xid="model" style="width:234px;height:auto;left:686px;top:130px;"
+  <div component="$UI/system/components/justep/model/model" xid="model" style="width:234px;height:auto;left:613px;top:132px;"
     onLoad="modelLoad"> 
     <div component="$UI/system/components/justep/data/data" autoLoad="true"
       xid="language" idColumn="col0" confirmDelete="false" autoNew="true">
@@ -299,7 +299,8 @@
   <column name="checkOutQty" type="Integer" xid="xid143"></column>
   <column name="cancelQty" type="Integer" xid="xid144"></column>
   <column name="unitName" type="String" xid="xid145"></column>
-  <column name="col10" type="String" xid="xid146"></column></div>  
+  <column name="presentQty" type="Integer" xid="xid146"></column>
+  <column name="col11" type="String" xid="xid150"></column></div>  
     <div component="$UI/system/components/justep/data/data" autoLoad="true"
       xid="cancelReasonData" idColumn="col0" onCustomRefresh="cancelReasonDataCustomRefresh"> 
       <column name="col0" type="String" xid="column15"></column>
@@ -357,7 +358,8 @@
   <column name="discountMoney" type="String" xid="xid135"></column>
   <column name="lowMoney" type="String" xid="xid136"></column>
   <column name="checkOutMoney" type="String" xid="xid137"></column>
-  <column name="col8" type="String" xid="xid138"></column></div></div>  
+  <column name="discount" type="String" xid="xid138"></column>
+  <column name="col9" type="String" xid="xid151"></column></div></div>  
    <div xid="div67" class="loading">
    <span xid="span153">加载中，请稍后</span></div>
    <div component="$UI/system/components/justep/contents/contents" class="x-contents x-full"
@@ -379,13 +381,13 @@
                   class="x-label-edit x-label30" xid="labelInput1"> 
                   <label class="x-label" xid="label1" bind-text="language.val('USERNAME')">用户名:</label>  
                   <input component="$UI/system/components/justep/input/input"
-                    class="form-control x-edit" xid="userName" bind-attr-placeHolder="language.val('USERNAME')"/>
+                    class="form-control x-edit" xid="userName" />
                 </div>  
                 <div component="$UI/system/components/justep/labelEdit/labelEdit"
                   class="x-label-edit x-label30" xid="labelPassword1"> 
                   <label class="x-label" xid="label2" bind-text="language.val('PASSWORD')">密码:</label>  
                   <input component="$UI/system/components/justep/input/password"
-                    class="form-control x-edit" xid="userPwd" bind-attr-placeHolder="language.val('PASSWORD')"/>
+                    class="form-control x-edit" xid="userPwd" />
                 </div>  
                 <p xid="p79" class="login-wrap"> 
                   <div component="$UI/system/components/bootstrap/row/row"
@@ -695,7 +697,7 @@
       <div xid="div7" class="con-con">
         <h2 xid="h22" bind-text="language.val('INPUTNUM')"><![CDATA[请输入就餐人数]]></h2>
         <input component="$UI/system/components/justep/input/input" class="form-control"
-          xid="input1" id="custNum" dataType="Integer" autoFocus="true" placeHolder="输入人数"/>
+          xid="input1" dataType="Integer" autoFocus="true" placeHolder="输入人数"/>
         <div xid="div8" class="btn-wrap">
           <a component="$UI/system/components/justep/button/button" class="btn btn-default undo-btn"
             label="取消" xid="button17" onClick="button17Click"> 
@@ -1117,7 +1119,7 @@
                         <h5 xid="h55"><![CDATA[消费合计]]></h5>
                       </div>  
                       <div class="col col-xs-4" xid="col124"/>  
-                      <div class="col col-xs-4" xid="col123"><span xid="span133" bind-text="ConsumeBillData.ref('conMoney')"></span></div>
+                      <div class="col col-xs-4" xid="col123"><span xid="span133" bind-text="statusData.ref('orderTotal')"></span></div>
                     </div>  
                     <div component="$UI/system/components/bootstrap/row/row"
                       class="row" xid="row45"> 
@@ -1137,7 +1139,7 @@
                         <h5 xid="h57"><![CDATA[折扣费]]></h5>
                       </div>  
                       <div class="col col-xs-4" xid="col130">
-                        <span xid="span140"/>
+                        <span xid="span140" bind-text="ConsumeBillData.ref('discount')"/>
                       </div>  
                       <div class="col col-xs-4" xid="col129">
                         <span xid="span141" bind-text="ConsumeBillData.ref('discountMoney')"/>
@@ -1463,8 +1465,8 @@
                             class="x-label-edit x-label30" xid="labelInput4"> 
                             <label class="x-label" xid="label6"><![CDATA[菜名]]></label>  
                             <input component="$UI/system/components/justep/input/input"
-                              class="form-control x-edit" xid="input2" placeHolder="请输入菜名"
-                              id="noOrderChangeName"/> 
+                              class="form-control x-edit"
+                              xid="ninput2"/> 
                           </div> 
                         </div> 
                       </div> 
@@ -1510,8 +1512,7 @@
                             class="x-label-edit x-label30" xid="labelInput5"> 
                             <label class="x-label" xid="label7"><![CDATA[价格]]></label>  
                             <input component="$UI/system/components/justep/input/input"
-                              class="form-control x-edit" xid="input5" placeHolder="请输入价格"
-                              id="noOrderChangePrice"/> 
+                              class="form-control x-edit" xid="ninput5" dataType="Float"/> 
                           </div> 
                         </div> 
                       </div> 
@@ -1557,8 +1558,7 @@
                             class="x-label-edit x-label30" xid="labelInput7"> 
                             <label class="x-label" xid="label9">数量</label>  
                             <input component="$UI/system/components/justep/input/input"
-                              class="form-control x-edit" xid="input7" placeHolder="请输入数量"
-                              id="noOrderChangeQty"/> 
+                              class="form-control x-edit" xid="ninput7" dataType="Integer"/> 
                           </div> 
                         </div> 
                       </div> 
@@ -1692,8 +1692,8 @@
                             class="x-label-edit x-label30" xid="labelInput13"> 
                             <label class="x-label" xid="label13">数量</label>  
                             <input component="$UI/system/components/justep/input/input"
-                              class="form-control x-edit" xid="input9" placeHolder="请输入数量"
-                              id="hOrderPresentsQty"/>
+                              class="form-control x-edit" xid="hinput9" placeHolder="请输入数量"
+                              />
                           </div> 
                         </div>  
                         <div xid="div122"> 
@@ -1796,8 +1796,7 @@
                             class="x-label-edit x-label30" xid="labelInput12"> 
                             <label class="x-label" xid="label12">价格</label>  
                             <input component="$UI/system/components/justep/input/input"
-                              class="form-control x-edit" xid="hinput10"
-                              id="hOrderChangePrice" dataType="Integer"/>
+                              class="form-control x-edit" xid="hinput10" dataType="Integer"/>
                           </div> 
                         </div> 
                       </div> 
@@ -1844,7 +1843,7 @@
                             <label class="x-label" xid="label14">数量</label>  
                             <input component="$UI/system/components/justep/input/input"
                               class="form-control x-edit" xid="hinput11" placeHolder="请输入数量"
-                              id="hOrderChangeQty"/>
+                              />
                           </div> 
                         </div> 
                       </div> 
@@ -2173,8 +2172,7 @@
                             class="x-label-edit x-label30" xid="labelInput15"> 
                             <label class="x-label" xid="label19">数量</label>  
                             <input component="$UI/system/components/justep/input/input"
-                              class="form-control x-edit" xid="input16" placeHolder="请输入数量"
-                              id="jOrderChangeQty"/>
+                              class="form-control x-edit" xid="input16" />
                           </div> 
                         </div> 
                       </div> 

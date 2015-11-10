@@ -261,7 +261,7 @@ define(function(require) {
 				obj = a;
 			};
 			Baas.sendRequest({
-				"url" : data.ip + 'RoomFunctionServlet.do?func=editCustQty&billMasterId='+data.billMasterId+'&consumeRoomId='+data.consumeRoomId+'&custQty='+data.qty,
+				"url" : data.ip + 'RoomFunctionServlet.do?func=editCustQty&billMasterId='+data.billMasterId+'&consumeRoomId='+data.consumeRoomId+'&custQty='+data.qty+'&roomId='+data.roomId,
 				"dataType": "json",
 				"success" : success
 			});	
