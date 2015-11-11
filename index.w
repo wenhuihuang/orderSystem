@@ -2,7 +2,7 @@
 
 <div xmlns="http://www.w3.org/1999/xhtml" xid="window" class="window" component="$UI/system/components/justep/window/window"
   design="device:mobile">  
-  <div component="$UI/system/components/justep/model/model" xid="model" style="width:234px;height:auto;left:613px;top:132px;"
+  <div component="$UI/system/components/justep/model/model" xid="model" style="width:234px;height:auto;top:192px;left:727px;"
     onLoad="modelLoad"> 
     <div component="$UI/system/components/justep/data/data" autoLoad="true"
       xid="language" idColumn="col0" confirmDelete="false" autoNew="true">
@@ -2338,15 +2338,13 @@
                             class="x-label-edit x-label30" xid="labelInput6"> 
                             <label class="x-label" xid="label8"><![CDATA[卡号]]></label>  
                             <input component="$UI/system/components/justep/input/input"
-                              class="form-control x-edit" xid="cartno" placeHolder="请输入会员卡号"
-                              id="cartNo"/>
+                              class="form-control x-edit" xid="cartno" />
                           </div>  
                           <div component="$UI/system/components/justep/labelEdit/labelEdit"
                             class="x-label-edit x-label30" xid="labelInput8"> 
                             <label class="x-label" xid="label10"><![CDATA[密码]]></label>  
                             <input component="$UI/system/components/justep/input/input"
-                              class="form-control x-edit" xid="input8" placeHolder="请输入密码"
-                              id="cartPwd"/>
+                              class="form-control x-edit" xid="cartpwd"/>
                           </div>
                         </div> 
                       </div> 

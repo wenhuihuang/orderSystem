@@ -118,6 +118,7 @@ define(function(require){
 				 });
 			 });
 		 }
+		this.comp("contents3").to('content12');
 		this.comp("order").show();
 	};
 
@@ -2256,8 +2257,8 @@ define(function(require){
 
 	//会员打折
 	Model.prototype.jbutton65Click = function(event){
-		var cartno = $('#cartNo').val();
-		var cartpwd = $('#cartPwd').val();
+		var cartno = this.comp('cartno').val();
+		var cartpwd = this.comp('cartpwd').val();
 		
 		var currentDeskData = this.comp('currentDeskData');
 		var billMasterId = currentDeskData.getFirstRow().val('billMasterId');
@@ -2265,9 +2266,16 @@ define(function(require){
 		if(result.code == '-1'){
 			this.comp('message').show({'title':'error','message':result.result});
 		}else{
-			$('#cartNo').val('');
-			$('#cartPwd').val('');
+			this.comp('cartno').val('');
+			this.comp('cartpwd').val('');
 			justep.Util.hint('输入会员卡成功')
+			//刷新结帐单
+			var currentDeskData = this.comp('currentDeskData');
+			var ConsumeBillData = this.comp('ConsumeBillData');
+			var data = order.getConsumeBill({'ip':ip,'consumeRoomId':currentDeskData.getFirstRow().val('consumeRoomId')})
+			var param = {"@type":"table",'rows':data};
+			ConsumeBillData.loadData(param);
+			ConsumeBillData.first();			
 			this.comp('account').hide();
 		}
 	};
@@ -2285,6 +2293,13 @@ define(function(require){
 		var result = order.editCustQty({'ip':ip,'qty':qty,'billMasterId':billMasterId,'consumeRoomId':consumeRoomId,'roomId':roomId});
 		order.refreshOrder({'ip':ip,'currentDeskData':this.comp('currentDeskData'),'orderData':this.comp('orderData')});
 		this.comp('input16').clear();
+		//刷新结帐单
+		var currentDeskData = this.comp('currentDeskData');
+		var ConsumeBillData = this.comp('ConsumeBillData');
+		var data = order.getConsumeBill({'ip':ip,'consumeRoomId':currentDeskData.getFirstRow().val('consumeRoomId')})
+		var param = {"@type":"table",'rows':data};
+		ConsumeBillData.loadData(param);
+		ConsumeBillData.first();
 		this.comp('account').hide();
 	};
 	
@@ -2352,6 +2367,13 @@ define(function(require){
 		}else{
 			$(event.target).css({'background':'yellow'});
 			currentDisCountTypesData.clear();
+			//刷新结帐单
+			var currentDeskData = this.comp('currentDeskData');
+			var ConsumeBillData = this.comp('ConsumeBillData');
+			var data = order.getConsumeBill({'ip':ip,'consumeRoomId':currentDeskData.getFirstRow().val('consumeRoomId')})
+			var param = {"@type":"table",'rows':data};
+			ConsumeBillData.loadData(param);
+			ConsumeBillData.first();
 			this.comp('account').hide();
 		}
 	};
