@@ -1691,7 +1691,7 @@
                             class="x-label-edit x-label30" xid="labelInput13"> 
                             <label class="x-label" xid="label13">数量</label>  
                             <input component="$UI/system/components/justep/input/input"
-                              class="form-control x-edit" xid="hinput9" placeHolder="请输入数量"
+                              class="form-control x-edit" xid="hinput9" 
                               />
                           </div> 
                         </div>  
