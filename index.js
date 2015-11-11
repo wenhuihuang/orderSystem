@@ -911,13 +911,13 @@ define(function(require){
 	Model.prototype.menuActive = function(event){
 		$('.left-menu').find('li').eq(0).trigger('click');
 	};
-
+	/*
 	//隐藏订单 
 	Model.prototype.button6Click = function(event){
 		//this.comp("order").hide();
 		$(".no-single").hide();
 	};
-
+*/
 
 	//删除购物车一行
 	Model.prototype.p120Click = function(event){
@@ -2234,9 +2234,9 @@ define(function(require){
 		var a = {'@type':'table','rows':data};
 		showBillData.loadData(a);
 		showBillData.first();
-		this.comp('account').show();
-		this.comp('contents6').to('content38');
-		$(this.getElementByXid('span119')).text(this.comp('currentDeskData').getFirstRow().val('tai_number'));//结帐单显示台号
+		this.comp('allInfo').show();
+		//this.comp('contents6').to('content38');
+		$(this.getElementByXid('span186')).text(this.comp('currentDeskData').getFirstRow().val('tai_number'));//结帐单显示台号
 	};
 
 	//
@@ -2449,7 +2449,7 @@ define(function(require){
 	};
 	
 
-
+/*
 
 	//没分单更多菜单
 	Model.prototype.button33Click = function(event){
@@ -2460,29 +2460,30 @@ define(function(require){
 		 
 	};
 	
+*/
 
-
-
+/*
 	//已分单更多菜单
 	Model.prototype.button41Click = function(event){
 		$(".has-single").show();
 	};
 	
+*/
 
-
-
+/*
 	//已分单返回隐藏更多菜单
 	Model.prototype.hiedClick = function(event){
 		//$(".has-single").hide();
 		$(event.target).parents(".pop-menuSub-btn").hide();
 	};
 	
-
+*/
 
 
 	//结账单更多
 	Model.prototype.button47Click = function(event){
-		$(".statement-btn").show();
+		//$(".statement-btn").show();
+		$(".pop-menuSub-wrap").show();
 	};
 	
 
@@ -2656,11 +2657,35 @@ define(function(require){
 	
 	
 
+	//点击隐藏定单信息
+	Model.prototype.allInfoHide = function(event){
+		this.comp("allInfo").hide();
+	};	
 	
 	
 
 	
 	
+	//点击更多
+	Model.prototype.menuSubShow = function(event){
+		//检查是否选择
+		//var currentGoodsData = this.comp('currentGoodsData');
+		//var message = this.comp('message');
+		//if(check.nCheckSelect({'currentGoodsData':currentGoodsData,'message':message})==false){
+		//	return false;
+		//}
+		$(".pop-menuSub-wrap").show();
+	};	
+	
+	
+	//点击隐藏更多菜单
+	Model.prototype.menuSubHide = function(event){
+		$(".pop-menuSub-wrap").hide();
+	};	
+	
+	
+
+
 	
 	
 

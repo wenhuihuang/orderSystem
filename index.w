@@ -416,13 +416,15 @@
             <div component="$UI/system/components/bootstrap/row/row" class="row"
               xid="row34"> 
               <div class="col col-xs-6" xid="col100">
+                <span class="x-checkbox" xid="checkbox2">
                 <input type="checkbox" id="rememberPwd" checked="true"/>
                 <label for="rememberPwd">记住密码</label>
+                </span>
               </div>  
               <div class="col col-xs-6" xid="col101">
-                <input type="checkbox" id="autoLogin"/>
-                <label for="autoLogin">自动登录</label>
-              </div> 
+       
+              <span class="x-checkbox" xid="checkbox1"> <input type="checkbox" id="autoLogin"/>
+                <label for="autoLogin">自动登录</label></span></div> 
             </div>
           </div> 
         </div>  
@@ -785,8 +787,8 @@
                 <div component="$UI/system/components/justep/panel/panel" class="x-panel x-full"
                   xid="panel27"> 
                   <div class="x-panel-content" xid="content52">
-                    <div xid="div16" class="pop-con"> 
-                      <div class="con-con" xid="div18"></div>  
+                    <div xid="div16" class="pop-con pop-menuSub-wrap"> 
+                      <div class="menuSub-hide" xid="div18" bind-click="menuSubHide"></div>  
                       <div xid="pop-menuSub-btn" class="pop-menuSub-btn no-single"> 
                         <div component="$UI/system/components/bootstrap/row/row"
                           class="row" xid="row8"> 
@@ -821,7 +823,7 @@
                             <span xid="span28" bind-click="button15Click">其它</span>
                           </div>  
                           <div class="col col-xs-4" xid="col17"> 
-                            <span xid="span131" bind-click="button6Click" bind-text="language.ref('BACK')"
+                            <span xid="span131" bind-click="menuSubHide" bind-text="language.ref('BACK')"
                               class="back">返回</span>
                           </div>
                         </div>
@@ -912,7 +914,7 @@
                               <span xid="span69"/> 
                             </a>  
                             <a component="$UI/system/components/justep/button/button"
-                              class="btn btn-link" xid="button33" bind-click="button33Click"
+                              class="btn btn-link" xid="button33" bind-click="menuSubShow"
                               label="更多"> 
                               <i xid="i35"/>  
                               <span xid="span70" class="color-style">更多</span> 
@@ -945,8 +947,8 @@
                 </div> 
               </div>  
               <div class="x-contents-content" xid="content13"> 
-                <div xid="div28" class="pop-con"> 
-                  <div class="con-con" xid="div17"></div>  
+                <div xid="div28" class="pop-con pop-menuSub-wrap"> 
+                  <div class="menuSub-hide" xid="div17" bind-click="menuSubHide"></div>  
                   <div class="pop-menuSub-btn has-single"> 
                     <div component="$UI/system/components/bootstrap/row/row"
                       class="row" xid="row8"> 
@@ -981,7 +983,7 @@
                         <span xid="hspan95" bind-click="hspan95Click">全单叫起</span>
                       </div>  
                       <div class="col col-xs-4" xid="col14"> 
-                        <span xid="span16" bind-click="hiedClick" class="back">返回</span>
+                        <span xid="span16" bind-click="menuSubHide" class="back">返回</span>
                       </div>
                     </div>
                   </div> 
@@ -1067,7 +1069,7 @@
                           <span xid="span49" class="color-style">退菜</span> 
                         </a>  
                         <a component="$UI/system/components/justep/button/button"
-                          class="btn btn-link" xid="button41" label="更多" bind-click="button41Click"> 
+                          class="btn btn-link" xid="button41" label="更多" bind-click="menuSubShow"> 
                           <i xid="i44"/>  
                           <span xid="span48" class="color-style">更多</span> 
                         </a> 
@@ -1185,15 +1187,15 @@
                           <span xid="span52" class="color-style">输入会员卡号</span>
                         </a>  
                         <a component="$UI/system/components/justep/button/button"
-                          class="btn btn-link" xid="button47" label="更多" bind-click="button47Click"> 
+                          class="btn btn-link" xid="button47" label="更多" bind-click="menuSubShow"> 
                           <i xid="i49"/>  
                           <span xid="span58" class="color-style">更多</span>
                         </a> 
                       </div> 
                     </div>
-                    <div xid="div83" class="pop-menuSub-btn  statement-btn"> 
-                      <div component="$UI/system/components/bootstrap/row/row"
-                        class="row" xid="row13"> 
+                    
+                  <div xid="div109" class="pop-menuSub-wrap"><div xid="div110" class="menuSub-hide" bind-click="menuSubHide"></div><div xid="div83" class="pop-menuSub-btn  statement-btn"> 
+                      <div component="$UI/system/components/bootstrap/row/row" class="row" xid="row13"> 
                         <div class="col col-xs-4" xid="col48"> 
                           <span xid="span73"><![CDATA[修改原始单号]]></span>
                         </div>  
@@ -1204,8 +1206,7 @@
                           <span xid="jspan75" bind-click="jspan75Click"><![CDATA[修改人数]]></span>
                         </div> 
                       </div>  
-                      <div component="$UI/system/components/bootstrap/row/row"
-                        class="row" xid="row14"> 
+                      <div component="$UI/system/components/bootstrap/row/row" class="row" xid="row14"> 
                         <div class="col col-xs-4" xid="col46"> 
                           <span xid="span76">修改最低消费</span>
                         </div>  
@@ -1216,8 +1217,7 @@
                           <span xid="span71" bind-click="span71Click">会员打折</span>
                         </div> 
                       </div>  
-                      <div component="$UI/system/components/bootstrap/row/row"
-                        class="row" xid="row19"> 
+                      <div component="$UI/system/components/bootstrap/row/row" class="row" xid="row19"> 
                         <div class="col col-xs-4" xid="col51"> 
                           <span xid="span72" bind-click="span72Click">重打总单</span>
                         </div>  
@@ -1225,11 +1225,10 @@
                           <span xid="span77" bind-click="span77Click"><![CDATA[]]></span>
                         </div>  
                         <div class="col col-xs-4" xid="col16"> 
-                          <span xid="span17" bind-click="hiedClick" class="back">返回</span>
+                          <span xid="span17" bind-click="menuSubHide" class="back">返回</span>
                         </div>
                       </div>
-                    </div>
-                  </div>
+                    </div></div></div>
                 </div> 
               </div>
             </div> 
@@ -1380,7 +1379,7 @@
   <div component="$UI/system/components/justep/popOver/popOver" class="x-popOver box-style"
     xid="give" opacity="1"> 
     <div class="x-popOver-overlay" xid="div26"/>  
-    <div class="x-popOver-content pop-container" xid="div27" style="width:95%;height:96%;"> 
+    <div class="x-popOver-content pop-container" xid="div27"> 
       <div xid="div38" class="pop-wrap" style="height:94%;"> 
         <div component="$UI/system/components/justep/panel/panel" class="x-panel x-full"
           xid="panel8"> 
@@ -2199,72 +2198,6 @@
                   </div> 
                 </div> 
               </div>  
-              <div class="x-contents-content" xid="content38"> 
-                <div component="$UI/system/components/justep/panel/panel" class="x-panel x-full"
-                  xid="panel23"> 
-                  <div class="x-panel-top  preview-top" xid="top21"> 
-                    <h3 xid="h37" class="order-info-title">大酒店</h3>
-                  </div>  
-                        <div class="x-panel-content order-info-con" xid="content44"> 
-                    <div xid="div155" class="order-info-wrap"> 
-                      <div xid="div153"> 
-                        <div component="$UI/system/components/bootstrap/row/row"
-                          class="row" xid="row29"> 
-                          <div class="col col-xs-4" xid="col97"> 
-                            <span xid="span128">管理员：</span>
-                          </div>  
-                          <div class="col col-xs-8" xid="col86"> 
-                            <span xid="span127" bind-text="userData.ref('userName')"/>
-                          </div> 
-                        </div>  
-                        <div component="$UI/system/components/bootstrap/row/row"
-                          class="row" xid="row31"> 
-                          <div class="col col-xs-4" xid="col85"> 
-                            <span xid="span120">台号：</span>
-                          </div>  
-                          <div class="col col-xs-8" xid="col88"> 
-                            <span xid="span119"/>
-                          </div> 
-                        </div>  
-                        <div component="$UI/system/components/bootstrap/row/row"
-                          class="row" xid="row32"> 
-                          <div class="col col-xs-4" xid="col93"> 
-                            <span xid="span121">单号：</span>
-                          </div>  
-                          <div class="col col-xs-8" xid="col94"> 
-                            <span xid="span126" bind-text="ConsumeBillData.ref('billNO')"/>
-                          </div> 
-                        </div> 
-                      </div>  
-                      <div xid="div154"> 
-                        <h3 xid="h38" class="all-price"><![CDATA[]]><span xid="span150"><![CDATA[总金额：]]></span>
-  <span xid="span151" class="color-price" bind-text="statusData.ref('totalCheckOutMoney')"></span></h3>  
-                        </div> 
-                    </div>  
-                    <div component="$UI/system/components/bootstrap/row/row" class="row top-border" xid="row49">
-   <div class="col col-xs-6" xid="col138"><h5 xid="h510"><![CDATA[项目]]></h5></div>
-   <div class="col col-xs-3" xid="col139"><h5 xid="h511"><![CDATA[数量]]></h5></div>
-   <div class="col col-xs-3" xid="col140"><h5 xid="h512"><![CDATA[金额]]></h5></div></div>
-  <div component="$UI/system/components/justep/list/list" class="x-list" xid="list5" data="showBillData">
-   <ul class="x-list-template" xid="listTemplateUl5">
-    <li xid="li12"><div component="$UI/system/components/bootstrap/row/row" class="row" xid="row50">
-   <div class="col col-xs-6" xid="col143">
-    <span xid="span146" bind-text="val('goodsName')"></span></div> 
-   <div class="col col-xs-3" xid="col142">
-    <span xid="span147" bind-text="val('qty')"></span></div> 
-   <div class="col col-xs-3" xid="col141">
-    <span xid="span148" bind-text="val('checkOutMoney')"></span></div> </div></li></ul> </div>
-  <p xid="p4" style="text-align:center;">
-   <span xid="span122" style="font-size:18px;">欢迎下次光临</span></p></div>    
-                  <div class="x-panel-bottom order-info-button" xid="bottom20"> 
-                    <a component="$UI/system/components/justep/button/button"
-                      class="btn back-btn" label="返回" xid="button69" bind-click="closeAccount"> 
-                      <i xid="i69"/>  
-                      <span xid="span115">返回</span>
-                    </a> 
-                  </div> 
-                </div> 
-              </div>  
               <div class="x-contents-content" xid="content45"> 
                 <div component="$UI/system/components/justep/panel/panel" class="x-panel x-full"
                   xid="panel24"> 
@@ -2377,7 +2310,56 @@
       </div>
     </div>
   </div>
-  <resource xid="resource2">
+  <div component="$UI/system/components/justep/popOver/popOver" class="x-popOver" xid="allInfo">
+   <div class="x-popOver-overlay" xid="div71"></div>
+   <div class="x-popOver-content pop-container allInfo" xid="div74"><div component="$UI/system/components/justep/panel/panel" class="x-panel x-full" xid="panel32">
+   <div class="x-panel-top  preview-top" xid="top26">
+    <h3 xid="h310" class="order-info-title">大酒店</h3></div> 
+   <div class="x-panel-content order-info-con" xid="content58">
+    <div xid="div82" class="order-info-wrap">
+     <div xid="div108">
+      <div component="$UI/system/components/bootstrap/row/row" class="row" xid="row57">
+       <div class="col col-xs-4" xid="col161">
+        <span xid="span182">管理员：</span></div> 
+       <div class="col col-xs-8" xid="col155">
+        <span xid="span179" bind-text="userData.ref('userName')"></span></div> </div> 
+      <div component="$UI/system/components/bootstrap/row/row" class="row" xid="row60">
+       <div class="col col-xs-4" xid="col154">
+        <span xid="span173">台号：</span></div> 
+       <div class="col col-xs-8" xid="col156">
+        <span xid="span186"></span></div> </div> 
+      <div component="$UI/system/components/bootstrap/row/row" class="row" xid="row59">
+       <div class="col col-xs-4" xid="col162">
+        <span xid="span174">单号：</span></div> 
+       <div class="col col-xs-8" xid="col163">
+        <span xid="span176" bind-text="ConsumeBillData.ref('billNO')"></span></div> </div> </div> 
+     <div xid="div107">
+      <h3 xid="h311" class="all-price">
+       <span xid="span188">总金额：</span>
+       <span xid="span187" class="color-price" bind-text="statusData.ref('totalCheckOutMoney')"></span></h3> </div> </div> 
+    <div component="$UI/system/components/bootstrap/row/row" class="row top-border" xid="row56">
+     <div class="col col-xs-6" xid="col153">
+      <h5 xid="h517">项目</h5></div> 
+     <div class="col col-xs-3" xid="col152">
+      <h5 xid="h516">数量</h5></div> 
+     <div class="col col-xs-3" xid="col158">
+      <h5 xid="h518">金额</h5></div> </div> 
+    <div component="$UI/system/components/justep/list/list" class="x-list" xid="list17" data="showBillData">
+     <ul class="x-list-template" xid="listTemplateUl18">
+      <li xid="li14">
+       <div component="$UI/system/components/bootstrap/row/row" class="row" xid="row58">
+        <div class="col col-xs-6" xid="col157">
+         <span xid="span180" bind-text="val('goodsName')"></span></div> 
+        <div class="col col-xs-3" xid="col160">
+         <span xid="span183" bind-text="val('qty')"></span></div> 
+        <div class="col col-xs-3" xid="col159">
+         <span xid="span184" bind-text="val('checkOutMoney')"></span></div> </div> </li> </ul> </div> 
+    <p xid="p6" style="text-align:center;">
+     <span xid="span175" style="font-size:18px;">欢迎下次光临</span></p> </div> 
+   <div class="x-panel-bottom order-info-button" xid="bottom25">
+    <a component="$UI/system/components/justep/button/button" class="btn back-btn" label="返回" xid="button6" bind-click="allInfoHide">
+     <i xid="i13"></i>
+     <span xid="span185">返回</span></a> </div> </div></div></div><resource xid="resource2">
     <require xid="require1" url="$UI/demo/baas/baas"/>
   <require xid="require2" url="cordova!org.apache.cordova.file-transfer"></require></resource>
 </div>
