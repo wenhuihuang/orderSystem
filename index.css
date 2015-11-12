@@ -135,6 +135,9 @@ width: 46.5%;
 .w100 .col{
 	padding:0 10px;
 }
+.p-top20{
+	padding-top:20px;
+}
 h3{
 	padding:0;
 	margin:0;
@@ -324,10 +327,18 @@ img.subtract,img.add{
 	margin:0;
 	display:inline-block;
 }
+.menu-bottom{
+	line-height:48px;
+}
+.menu-bottom .row .col{
+	padding:0;
+	text-align:center;
+}
+.menu-bottom .row .col .btn{
+	/*width:90%;*/
+}
 .menu-bottom-wrap{
-	display:box;
-	display:-webkit-box;
-	display:-moz-box;
+	display:block;
 	background:#e6e6e6;
 }
 .menu-bottom-wrap .menu-bottom-left,.menu-bottom-wrap .menu-bottom-right{
@@ -555,7 +566,6 @@ img.subtract,img.add{
 	margin:0;
 }
 .send-order-btn,.send-order-btn:hover,.menu-bottom-right .btn{
-.send-order-btn,.send-order-btn:hover,.menu-bottom-left .btn{
 	background:#2BB8AA;
 	border:none;
 	color:#fff;
@@ -1187,6 +1197,21 @@ ul.menu-item li{
 .othe-wrap .x-popOver-content {
 	z-index:1002;
 }
+.handOrder-btn-wrap .col{
+	text-align:center;
+}
+.handOrder-btn-wrap .col .btn{
+	width:100%;
+}
+.handOrder img{
+	display:inline-block;
+	width:38px;
+	height:38px;
+}
+.handInput input{
+	text-align:center;
+}
+	
 	
 /*iphone4 iphone5 小于320px*/
 @media screen and (max-width:320px){
