@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <div xmlns="http://www.w3.org/1999/xhtml" xid="window" class="window" component="$UI/system/components/justep/window/window"
-  design="device:mobile">  
+  design="device:mobile"> 
+    <div component="$UI/system/components/justep/model/model" xid="model" style="width:234px;height:auto;left:613px;top:132px;" onLoad="modelLoad">  
     <div component="$UI/system/components/justep/data/data" autoLoad="true"
       xid="language" idColumn="col0" confirmDelete="false" autoNew="true">
       <column name="col0" type="String" xid="xid65"/>  
@@ -1917,7 +1918,7 @@
       </div>
     </div>
   </div>
-  <div component="$UI/system/components/justep/popOver/popOver" class="x-popOver" xid="allInfo">
+  <div component="$UI/system/components/justep/popOver/popOver" class="x-popOver" xid="allInfo" opacity="1">
    <div class="x-popOver-overlay" xid="div71"></div>
    <div class="x-popOver-content pop-container allInfo" xid="div74"><div component="$UI/system/components/justep/panel/panel" class="x-panel x-full" xid="panel32">
    <div class="x-panel-top  preview-top" xid="top26">
@@ -1966,7 +1967,7 @@
    <div class="x-panel-bottom order-info-button" xid="bottom25">
     <a component="$UI/system/components/justep/button/button" class="btn back-btn" label="返回" xid="button6" bind-click="allInfoHide">
      <i xid="i13"></i>
-     <span xid="span185">返回</span></a> </div> </div></div></div><div component="$UI/system/components/justep/popOver/popOver" class="x-popOver" xid="othe">
+     <span xid="span185">返回</span></a> </div> </div></div></div><div component="$UI/system/components/justep/popOver/popOver" class="x-popOver othe-wrap" xid="othe" opacity="1">
    <div class="x-popOver-overlay" xid="div157"></div>
    <div class="x-popOver-content pop-container othe" xid="div158"><div component="$UI/system/components/justep/contents/contents" class="x-contents x-full" active="0" xid="contents8">
    <div class="x-contents-content" xid="content56"><div component="$UI/system/components/justep/panel/panel" class="x-panel x-full" xid="panel33">

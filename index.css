@@ -1154,9 +1154,13 @@ ul.menu-item li{
 .x-label-edit{
 	padding:0.5em;
 }
-.allInfo,.othe{
+.allInfo{
 	width:95%;
 	height:96%;
+}
+.othe{
+	width:95%;
+	height:70%;
 }
 .pop-menuSub-wrap{
 	display:none;
@@ -1177,7 +1181,12 @@ ul.menu-item li{
 	background:#fff;
 	color:#000;
 }
-
+.othe-wrap .x-popOver-overlay{
+	z-index:1001;
+}
+.othe-wrap .x-popOver-content {
+	z-index:1002;
+}
 	
 /*iphone4 iphone5 小于320px*/
 @media screen and (max-width:320px){
