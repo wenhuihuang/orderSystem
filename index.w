@@ -2,7 +2,7 @@
 
 <div xmlns="http://www.w3.org/1999/xhtml" xid="window" class="window" component="$UI/system/components/justep/window/window"
   design="device:mobile"> 
-    <div component="$UI/system/components/justep/model/model" xid="model" style="width:234px;height:auto;left:613px;top:132px;" onLoad="modelLoad">      
+    <div component="$UI/system/components/justep/model/model" xid="model" style="width:234px;height:auto;left:733px;top:-3px;" onLoad="modelLoad">      
        <div component="$UI/system/components/justep/data/data" autoLoad="true" xid="language" idColumn="col0" confirmDelete="false" autoNew="true">
       <column name="col0" type="String" xid="xid65"/>  
       <column label="在用" name="USING" type="String" xid="xid66"/>  

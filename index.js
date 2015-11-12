@@ -770,7 +770,7 @@ define(function(require){
 	    var deskData = this.comp('deskData');
 	    var row = currentDeskData.val('typeCode');
 	    var success = function(param){
-	    	 getDesk(deskData,row,2);
+	    	getDesk(deskData,row,2);
 	    	//补上当前台的订单id
 	    	var roomId = currentDeskData.getFirstRow().val('roomId');
 	    	var state = currentDeskData.getFirstRow().val('state');
@@ -796,6 +796,7 @@ define(function(require){
 	    		}]
 	    	});
 	    	currentDeskData.first();
+	    	localStorage.setItem(currentDeskData.getFirstRow().val('roomId'),'');//清空购物车
 	    	pop.hide();
 	    	input.clear();
 	    	contents1.to('menu');
@@ -1490,18 +1491,7 @@ define(function(require){
 			});
 			//---------end of ajax-------------
 			
-			//从localStorage中获取购物车数据
-			if(localStorage.getItem(param.rooms[0].roomId)!=null&&localStorage.getItem(param.rooms[0].roomId)!=""){
-				cartData.loadData(JSON.parse(localStorage.getItem(param.rooms[0].roomId)));
-			}
-			//通过购物车计算，各商品类型中的数量和商品的数据
-			menuTypeData.eachAll(function(data){
-				cartData.eachAll(function(data1){
-					if(data.row.val('typeCode')==data1.row.val('typeCode')){
-						data.row.val('qty',data.row.val('qty')+data1.row.val('qty'));
-					}
-				});
-			});
+
 			//清空商品列表
 			goodsListData.clear();			
 			//记录当前台号
@@ -1513,8 +1503,21 @@ define(function(require){
 			}else if(state="空台"){
 				clearTimeout(timeOutEvent);//清除定时器  
 				popOver_renshu.show();
-				localStorage.setItem(currentDeskData.getFirstRow().val('roomId'),'');//清空购物车
 				$(newNum).focus();//让文本框架获得焦点
+			}
+			if(currentDeskData.getFirstRow().val('state')!='空台'){
+				//从localStorage中获取购物车数据
+				if(localStorage.getItem(param.rooms[0].roomId)!=null&&localStorage.getItem(param.rooms[0].roomId)!=""){
+					cartData.loadData(JSON.parse(localStorage.getItem(param.rooms[0].roomId)));
+				}
+				//通过购物车计算，各商品类型中的数量和商品的数据
+				menuTypeData.eachAll(function(data){
+					cartData.eachAll(function(data1){
+						if(data.row.val('typeCode')==data1.row.val('typeCode')){
+							data.row.val('qty',data.row.val('qty')+data1.row.val('qty'));
+						}
+					});
+				});
 			}	
 		}
 		
@@ -1741,9 +1744,10 @@ define(function(require){
 		if(check.nCheckSelect({'currentGoodsData':currentGoodsData,'message':message})==false){
 			return false;
 		}
-		this.comp("othe").show();
 		this.comp("contents8").to("content56");
+		this.comp("othe").show();
 
+		$(this.getElementByXid('inputGive')).focus();	
 	};
 
 	//转台
@@ -1827,6 +1831,7 @@ define(function(require){
 			var success = function(param){
 				//$('.left-menu').find('li').eq(0).trigger('click');//刷新房台
 				getDesk(deskData,status.val('typeCode'),2);	
+				localStorage.setItem(currentDeskData.getFirstRow().val('roomId'),'');//清空购物车
 			}
 			Baas.sendRequest({
 				//RoomFunctionServlet.do?func=cleanRoom&currentBillMasterId=xxx&checkEmpCodeId=xxx&bankTerminalID=xxx
@@ -1940,8 +1945,17 @@ define(function(require){
 	//赠送确定---保存到本地
 	Model.prototype.buttonGitClick = function(event){
 		var currentGoodsData = this.comp('currentGoodsData');
-		var qty = this.copm("inputGive").val();		var currentPresentsReasonData = this.comp('currentPresentsReasonData');
+		var qty = this.comp("inputGive").val();		
+		var currentPresentsReasonData = this.comp('currentPresentsReasonData');
 		var sendPresentsReasonData = this.comp('sendPresentsReasonData');
+		if(qty==null||qty==''||qty==undefined){
+			this.comp('message').show({'title':'message','message':'数量不能为空'});
+			return;
+		}
+		if(currentPresentsReasonData.getCount()<1){
+			this.comp('message').show({'title':'message','message':'理由没选'});
+			return;			
+		}
 		sendPresentsReasonData.newData({
 			defaultValues:[{
 				'goodsId':currentGoodsData.val('goodsId'),
@@ -1949,6 +1963,7 @@ define(function(require){
 				'tfzReansonId':currentPresentsReasonData.val('tfzReansonId')
 			}]		
 		});
+		this.comp('othe').hide();
 	};
 
 	
