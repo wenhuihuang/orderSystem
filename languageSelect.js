@@ -133,8 +133,8 @@ define(function(require){
 
 
 	Model.prototype.settingsActive = function(event){
-		debugger
-		$(this.getElementByXid('settingIp')).focus();
+//		debugger
+//		$(this.getElementByXid('settingIp')).focus();
 	};
 
 
