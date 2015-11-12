@@ -2,7 +2,7 @@
 
 <div xmlns="http://www.w3.org/1999/xhtml" xid="window" class="window" component="$UI/system/components/justep/window/window"
   design="device:mobile">  
-  <div component="$UI/system/components/justep/model/model" xid="model" style="width:234px;height:auto;top:192px;left:727px;"
+  <div component="$UI/system/components/justep/model/model" xid="model" style="width:234px;height:auto;left:638px;top:202px;"
     onLoad="modelLoad"> 
     <div component="$UI/system/components/justep/data/data" autoLoad="true"
       xid="language" idColumn="col0" confirmDelete="false" autoNew="true">
@@ -608,7 +608,7 @@
         <div class="x-panel-bottom menu-bottom-wrap" xid="bottom2"> 
           <div xid="div105" class="menu-bottom-left"> 
             <a component="$UI/system/components/justep/button/button" class="btn btn-style"
-              xid="m-search" label="按拼音点菜" target="menu-search"> 
+              xid="m-search" label="按拼音点菜" target="menu-search" onClick="m_searchClick"> 
               <i xid="i5"/>  
               <span xid="span92">按拼音点菜</span>
             </a>
@@ -617,7 +617,9 @@
               <i xid="i9"/>  
               <span xid="span181">已点详情</span> 
             </a>
-          </div>  
+          <a component="$UI/system/components/justep/button/button" class="btn btn-style" label="手写单" xid="handOrderBtn" target="handOrder">
+   <i xid="i12"></i>
+   <span xid="span115">手写单</span></a></div>  
           <div xid="div106" class="menu-bottom-right"> 
             <a component="$UI/system/components/justep/button/button" class="btn back-btn"
               xid="button19" bind-click="button19Click" label="返回"> 
@@ -691,7 +693,31 @@
         </div> 
       </div>
     </div> 
-  </div>  
+  <div class="x-contents-content" xid="handOrder" onActive="handOrderActive"><div component="$UI/system/components/justep/panel/panel" class="x-panel x-full" xid="panel23">
+   <div class="x-panel-top" xid="top21"><div component="$UI/system/components/justep/titleBar/titleBar" class="x-titlebar" xid="titleBar14" title="手写单">
+   <div class="x-titlebar-left" xid="div63"></div>
+   <div class="x-titlebar-title" xid="div69">手写单</div>
+   <div class="x-titlebar-right reverse" xid="div70"></div></div></div>
+   <div class="x-panel-content" xid="content44"><div component="$UI/system/components/justep/labelEdit/labelEdit" class="x-label-edit x-label30" xid="labelInput9">
+   <label class="x-label" xid="label15"><![CDATA[菜名]]></label>
+   <input component="$UI/system/components/justep/input/input" class="form-control x-edit" xid="handGoodsName"></input></div>
+  <div component="$UI/system/components/justep/labelEdit/labelEdit" class="x-label-edit x-label30" xid="labelInput19">
+   <label class="x-label" xid="label21"><![CDATA[价钱]]></label>
+   <input component="$UI/system/components/justep/input/input" class="form-control x-edit" xid="handGoodsPrice" dataType="Float"></input></div>
+  <a component="$UI/system/components/justep/button/button" class="btn btn-default" label="-" xid="button14OrderHand" onClick="button14OrderHandClick">
+   <i xid="i39"></i>
+   <span xid="span120">-</span></a>
+  <input component="$UI/system/components/justep/input/input" class="form-control" xid="handGoodsQty" dataType="Integer"></input><a component="$UI/system/components/justep/button/button" class="btn btn-default" label="+" xid="button15orderHand" onClick="button15orderHandClick">
+   <i xid="i69"></i>
+   <span xid="span121">+</span></a></div>
+   <div class="x-panel-bottom" xid="bottom5"><div xid="div153" class="menu-bottom-right">
+   <a component="$UI/system/components/justep/button/button" class="btn back-btn" label="返回菜单" xid="buttonHandBack" target="menu">
+    <i xid="i15"></i>
+    <span xid="span119">返回菜单</span></a> 
+  <a component="$UI/system/components/justep/button/button" class="btn btn-default" label="确定" xid="button36" onClick="button36Click">
+   <i xid="i71"></i>
+   <span xid="span122">确定</span></a>
+  </div></div></div></div></div>  
   <div component="$UI/system/components/justep/popOver/popOver" class="x-popOver renShu"
     xid="popOver_renshu" opacity="1"> 
     <div class="x-popOver-overlay" xid="div1"/>  
@@ -1406,8 +1432,7 @@
                             class="x-label-edit x-label30" xid="labelInput4"> 
                             <label class="x-label" xid="label6"><![CDATA[数量]]></label>  
                             <input component="$UI/system/components/justep/input/input"
-                              class="form-control x-edit" xid="input2" placeHolder="请输入数量"
-                              id="noOrderPresentsQty"/> 
+                              class="form-control x-edit" xid="noOrderPresentsQty" dataType="Integer"/> 
                           </div> 
                         </div>  
                         <div xid="div60"> 
@@ -1692,7 +1717,7 @@
                             <label class="x-label" xid="label13">数量</label>  
                             <input component="$UI/system/components/justep/input/input"
                               class="form-control x-edit" xid="hinput9" 
-                              />
+                              dataType="Integer"/>
                           </div> 
                         </div>  
                         <div xid="div122"> 
@@ -2171,7 +2196,7 @@
                             class="x-label-edit x-label30" xid="labelInput15"> 
                             <label class="x-label" xid="label19">数量</label>  
                             <input component="$UI/system/components/justep/input/input"
-                              class="form-control x-edit" xid="input16" />
+                              class="form-control x-edit" xid="input16" dataType="Integer"/>
                           </div> 
                         </div> 
                       </div> 
