@@ -228,6 +228,7 @@ define(function(require){
 		});
 		sendCookWayData.deleteData(rows);
 		currentGoodsData.getFirstRow().val('addMoney',0);
+		$(".require-con ul li").removeClass("active");
 	};
 
 
@@ -487,6 +488,8 @@ define(function(require){
 			var obj = eval('(' + str + ')');
 			console.log("str="+str)
 			console.log(obj)
+			//将语言写入本地
+			//localStorage.setItem("language", str)
 			//加载语言数据
 			languageData.newData({
 				index: 0,
@@ -1119,6 +1122,7 @@ define(function(require){
 			"dataType": "json",
 			"success" : success
 		});
+		$(event.target).addClass("active").parents(".col").siblings().children("span").removeClass("active");
 	};
 
 	//加收一项
@@ -1149,7 +1153,7 @@ define(function(require){
 				'detail':$('#showCookWays').text()
 			}]
 		});	
-		
+		$(event.target).addClass("active");
 	};
 
 
@@ -1290,7 +1294,6 @@ define(function(require){
 		//加active
 		this.bgColor(event);
 		lang=false;
-		$(".cancel-active").hide();
 		//$('#more').css({'display':'none'});
 		this.comp("popOver-take").show();	
 	};
@@ -1343,6 +1346,7 @@ define(function(require){
 			"dataType": "json",
 			"success" : success
 		});
+		$(".cancel-active").hide();
 		this.comp("popOver-take").hide();
 		getDesk(deskData,status.val('typeCode'),2);		
 	};
@@ -1735,8 +1739,8 @@ define(function(require){
 		if(check.nCheckSelect({'currentGoodsData':currentGoodsData,'message':message})==false){
 			return false;
 		}
-		this.comp("give").show();
-		this.comp("contents4").to("content16");
+		this.comp("othe").show();
+		this.comp("contents8").to("content56");
 	};
 
 	//转台
@@ -1849,6 +1853,7 @@ define(function(require){
 	Model.prototype.button44Click = function(event){
 		this.comp('give').hide();
 	};
+	
 
 	
 //	//未分单长按来解决
@@ -1932,7 +1937,7 @@ define(function(require){
 	//赠送确定---保存到本地
 	Model.prototype.buttonGitClick = function(event){
 		var currentGoodsData = this.val('currentGoodsData');
-		var qty = $('noOrderPresentsQty').val();
+		var qty = this.copm("inputGive").val();
 		var currentPresentsReasonData = this.comp('currentPresentsReasonData');
 		var sendPresentsReasonData = this.comp('sendPresentsReasonData');
 		sendPresentsReasonData.newData({
@@ -1959,8 +1964,8 @@ define(function(require){
 			}
 			]
 		});
-		$(event.target).css({'background':'blue'});
-		$(event.target).siblings().css({'background':'yellow'});
+		$(event.target).addClass("active");
+		$(event.target).siblings().removeClass("active");
 	};
 
 	
@@ -1998,7 +2003,7 @@ define(function(require){
 		var currentCancelReasonData = this.comp('currentCancelReasonData');
 		var reasonId = currentCancelReasonData.val('tfzReasonId');
 		var billDetailId = this.comp('currentOrderData').getFirstRow().val('billDetailId');
-		var qty = $('#hOrderChangeName').val();
+		var qty = this.comp("inputQuit").val();
 		var cancelQty =  this.comp('currentOrderData').getFirstRow().val('cancelQty');
 		var orderQty = this.comp('currentOrderData').getFirstRow().val('qty');
 		
@@ -2013,7 +2018,7 @@ define(function(require){
 		order.refreshOrder({'ip':ip,'currentDeskData':this.comp('currentDeskData'),'orderData':this.comp('orderData')});//刷新
 		this.comp('currentOrderData').clear();//清空退菜
 		currentCancelReasonData.clear();//清空退菜原因
-		this.comp('yet-sort').hide();
+		this.comp('othe').hide();
 	};
 
 	
@@ -2063,8 +2068,8 @@ define(function(require){
 		if(check.hCheckSelect({'currentOrderData':this.comp('currentOrderData'),'message':this.comp('message')})== false){
 			return;
 		}
-		this.comp('yet-sort').show();
-		this.comp('contents5').to('content33');
+		this.comp('othe').show();
+		this.comp('contents8').to('content57');
 	};
 
 	
@@ -2180,8 +2185,8 @@ define(function(require){
 		if(check.hCheckSelect({'currentOrderData':this.comp('currentOrderData'),'message':this.comp('message')})== false){
 			return;
 		}	
-		this.comp('yet-sort').show();
-		this.comp('contents5').to('content27');
+		this.comp('othe').show();
+		this.comp('contents8').to('content60');
 		this.comp('presentsReasonData').refreshData();
 	};
 
@@ -2192,7 +2197,7 @@ define(function(require){
 		var userData = this.comp('userData');
 		var currentOrderData = this.comp('currentOrderData');
 		var currentPresentsReasonData = this.comp('currentPresentsReasonData');
-		var qty = this.comp('hinput9').val();
+		var qty = this.comp('inputGive2').val();
 		if(qty > (currentOrderData.val('qty')-currentOrderData.val('presentQty')-currentOrderData.val('cancelQty'))){
 			this.comp('message').show({'title':'error','message':'赠送数量不能大于已点数量'});
 			return false;
@@ -2200,10 +2205,10 @@ define(function(require){
 		//赠送数量不能大于点单数量
 		var result = order.hGift({'ip':ip,'billDetailId':currentOrderData.val('billDetailId'),'reasonId':currentPresentsReasonData.getFirstRow().val('tfzReasonId'),'qty':qty,'userId':userData.val('userId')});	
 		if(result.code=='1'){
-			this.comp('hinput9').clear();
+			this.comp('inputGive2').clear();
 			currentPresentsReasonData.clear();
 			currentOrderData.clear();
-			this.comp('yet-sort').hide();
+			this.comp('othe').hide();
 			order.refreshOrder({'orderData':this.comp('orderData'),'currentDeskData':this.comp('currentDeskData')});
 		}
 		this.comp('message').show({'title':'message','message':result.result})
@@ -2294,8 +2299,8 @@ define(function(require){
 	//打拆跳转
 	Model.prototype.span60Click = function(event){
 		////
-		this.comp('account').show();
-		this.comp('contents6').to('content39');
+		this.comp('othe').show();
+		this.comp('contents8').to('content62');
 	};
 	
 
@@ -2321,8 +2326,8 @@ define(function(require){
 	Model.prototype.li9Click = function(event){
 		var currentDisCountTypesData = this.comp('currentDisCountTypesData');
 		var row = event.bindingContext.$rawData;
-		$(event.target).css({'background':'blue'});
-		$(event.target).siblings().css({'background':'yellow'});
+		$(event.target).addClass("active");
+		$(event.target).siblings().removeClass("active");
 		currentDisCountTypesData.newData({
 			index:0,
 			defaultValues:[{
@@ -2352,7 +2357,7 @@ define(function(require){
 		}else{
 			$(event.target).css({'background':'yellow'});
 			currentDisCountTypesData.clear();
-			this.comp('account').hide();
+			this.comp('othe').hide();
 		}
 	};
 	
@@ -2659,6 +2664,16 @@ define(function(require){
 	//点击隐藏更多菜单
 	Model.prototype.menuSubHide = function(event){
 		$(".pop-menuSub-wrap").hide();
+	};	
+	
+	
+
+
+	
+	
+	//高尺寸的更多弹出框关闭
+	Model.prototype.otheClose = function(event){
+		this.comp("othe").hide();
 	};	
 	
 	

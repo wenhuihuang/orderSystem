@@ -427,7 +427,7 @@ img.subtract,img.add{
 	padding:8px 5px;
 	border-bottom:1px solid #acacac;
 }
-.con-con ul li.active{
+.con-con ul li.active,.select-con-wrap .require-con ul li.active,.select-con-wrap .give-item ul li.active,.cause ul li.active{
 	color: rgb(255, 255, 255);
     border-color: rgb(95, 178, 111);
     background: rgb(105, 193, 122);
@@ -655,17 +655,17 @@ img.subtract,img.add{
 	vertical-align: middle;
 	margin:0 5px;
 }
-.select-con-wrap .require-con ul li{
-	width:43%;
-	float:left;
+.select-con-wrap .require-con ul li,.select-con-wrap .give-item ul li,.cause ul li{
+	width:47%;
 	border-radius:3px;
-	background:#CAD42D;
+	background:#2BB8AA;
 	margin-left:8px;
 	margin-top:8px;
 	margin-bottom:8px;
-	color: #000;
+	color: #fff;
     padding: 8px 0;
     text-align: center;
+    display:inline-block;
 	
 }
 .ed-con-con .active{
@@ -742,26 +742,24 @@ ul.menu-item li{
 	width:75%;
 }
 /*输入人数框*/
-.renShu .con-wrap,.take .con-wrap{
+.con-wrap{
 	background:#fff;
-	padding:20px 0;
+	padding-top:20px;
 	box-shadow:0 0px 2px 2px #B9B9B9;
 	border-radius:5px;
+	min-width:230px;
+	width:65%;
 }
-.take .con-wrap{
-	width:186px;
-	
-}
-.renShu .con-wrap .btn-wrap,.take .con-wrap .btn-wrap{
+.con-wrap .btn-wrap{
 	border-top:1px solid #ccc;
-	padding-top:10px;
+	padding:0;
 }
-.renShu .con-wrap .con-con h2,.take .con-wrap .con-con h2{
+.con-wrap .con-con h2,.take .con-wrap .con-con h2{
 	font-size:16px;
 	color:#000;
 	text-align:center;
 }
-.renShu .con-wrap .con-con input,.take .con-wrap .con-con .x-label-edit{
+.con-wrap .con-con input,.take .con-wrap .con-con .x-label-edit{
 	margin:5px auto;
 	width:95%;
 }
@@ -770,10 +768,22 @@ ul.menu-item li{
 }
 .renShu .con-wrap .con-con .btn-wrap, .take .con-wrap .con-con .btn-wrap{
 	text-align:center;
+	margin-top:20px;
+	height:46px;
+	line-height:46px;
+}
+.btn-wrap .row,.btn-wrap .row .col,.btn-wrap .row .col .btn{
+	
+}
+.btn-wrap .row .col:nth-child(2){
+	border-left:1px solid #ccc;
+}
+.btn-wrap .row .col .btn{
+
 }
 .renShu .con-wrap .con-con .btn, .take .con-wrap .con-con .btn{
 	border:none;
-	width:45%;
+	width:90%;
 }
 .do-btn{
 	color:#fff;
@@ -825,6 +835,9 @@ ul.menu-item li{
 	padding:5px 2px;
 	display:block;
 	margin:0 auto;
+}
+.require-title ul div span.active{
+	background:#69C17A;
 }
 .showCookWays span{
 	background:#2BB8AA;
@@ -898,7 +911,26 @@ ul.menu-item li{
 	z-index:1002;
 }
 .box-style .x-popOver-content{
-	width:95%;height:260px;
+	height:200px;
+	min-width:230px;
+	width:65%;
+}
+.box-style .x-popOver-content-170{
+	height:170px;
+}
+.box-style .x-panel-bottom{
+	height:46px;
+	line-height:46px;
+	border-top:1px solid #ccc;
+}
+.box-style .x-panel-bottom .row .col{
+	padding:0;
+}
+.box-style .x-panel-bottom .row .col:nth-child(2){
+	border-left:1px solid #ccc;
+}
+.box-style .x-panel-bottom .row .col .btn{
+	width:90%;
 }
 .box-style .x-popOver-content .pop-wrap{
 	height:94%;
@@ -1077,6 +1109,7 @@ ul.menu-item li{
 .order-info-con .row .col-xs-3{
 	border-right:1px solid #ccc;
 }
+/*
 .cause{
 	margin-top:20px;
 }
@@ -1094,6 +1127,7 @@ ul.menu-item li{
     border-color: rgb(95, 178, 111);
     background: rgb(105, 193, 122);
 }
+*/
 .all-price{
 	margin:10px 0;
 }
@@ -1120,7 +1154,7 @@ ul.menu-item li{
 .x-label-edit{
 	padding:0.5em;
 }
-.allInfo{
+.allInfo,.othe{
 	width:95%;
 	height:96%;
 }
@@ -1139,6 +1173,11 @@ ul.menu-item li{
 .x-radio input[type="radio"]:checked + label:before, .x-checkbox input[type="checkbox"]:checked + label:before {
     background-color: #2BB8AA;
 }
+.bg-white{
+	background:#fff;
+	color:#000;
+}
+
 	
 /*iphone4 iphone5 小于320px*/
 @media screen and (max-width:320px){
@@ -1159,5 +1198,18 @@ ul.menu-item li{
 	.login-bottom .p30{
 		padding-left:10px;
 		padding-right:10px;
+	}
+	.select-con-wrap.cyUb2Ir .require-con.cyUb2Ir ul.cyUb2Ir li.cyUb2Ir, .select-con-wrap.cyUb2Ir .give-item.cyUb2Ir ul.cyUb2Ir li.cyUb2Ir, .cause.cyUb2Ir ul.cyUb2Ir li.cyUb2Ir{
+		width:46%;
+		border-radius:3px;
+		background:#2BB8AA;
+		margin-left:8px;
+		margin-top:8px;
+		margin-bottom:8px;
+		color: #fff;
+	    padding: 8px 0;
+	    text-align: center;
+	    display:inline-block;
+		
 	}
 }
