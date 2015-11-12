@@ -118,6 +118,7 @@ define(function(require){
 				 });
 			 });
 		 }
+		this.comp("contents3").to('content12');
 		this.comp("order").show();
 	};
 
@@ -2198,6 +2199,10 @@ define(function(require){
 		var currentOrderData = this.comp('currentOrderData');
 		var currentPresentsReasonData = this.comp('currentPresentsReasonData');
 		var qty = this.comp('inputGive2').val();
+		if(currentPresentsReasonData.getCount()<1){
+			this.comp('message').show('请选择赠送理由');
+			return;
+		}
 		if(qty > (currentOrderData.val('qty')-currentOrderData.val('presentQty')-currentOrderData.val('cancelQty'))){
 			this.comp('message').show({'title':'error','message':'赠送数量不能大于已点数量'});
 			return false;
@@ -2209,7 +2214,7 @@ define(function(require){
 			currentPresentsReasonData.clear();
 			currentOrderData.clear();
 			this.comp('othe').hide();
-			order.refreshOrder({'orderData':this.comp('orderData'),'currentDeskData':this.comp('currentDeskData')});
+			order.refreshOrder({'ip':ip,'orderData':this.comp('orderData'),'currentDeskData':this.comp('currentDeskData')});
 		}
 		this.comp('message').show({'title':'message','message':result.result})
 	};
@@ -2261,8 +2266,8 @@ define(function(require){
 
 	//会员打折
 	Model.prototype.jbutton65Click = function(event){
-		var cartno = $('#cartNo').val();
-		var cartpwd = $('#cartPwd').val();
+		var cartno = this.comp('cartno').val();
+		var cartpwd = this.comp('cartpwd').val();
 		
 		var currentDeskData = this.comp('currentDeskData');
 		var billMasterId = currentDeskData.getFirstRow().val('billMasterId');
@@ -2270,9 +2275,16 @@ define(function(require){
 		if(result.code == '-1'){
 			this.comp('message').show({'title':'error','message':result.result});
 		}else{
-			$('#cartNo').val('');
-			$('#cartPwd').val('');
+			this.comp('cartno').val('');
+			this.comp('cartpwd').val('');
 			justep.Util.hint('输入会员卡成功')
+			//刷新结帐单
+			var currentDeskData = this.comp('currentDeskData');
+			var ConsumeBillData = this.comp('ConsumeBillData');
+			var data = order.getConsumeBill({'ip':ip,'consumeRoomId':currentDeskData.getFirstRow().val('consumeRoomId')})
+			var param = {"@type":"table",'rows':data};
+			ConsumeBillData.loadData(param);
+			ConsumeBillData.first();			
 			this.comp('account').hide();
 		}
 	};
@@ -2290,6 +2302,13 @@ define(function(require){
 		var result = order.editCustQty({'ip':ip,'qty':qty,'billMasterId':billMasterId,'consumeRoomId':consumeRoomId,'roomId':roomId});
 		order.refreshOrder({'ip':ip,'currentDeskData':this.comp('currentDeskData'),'orderData':this.comp('orderData')});
 		this.comp('input16').clear();
+		//刷新结帐单
+		var currentDeskData = this.comp('currentDeskData');
+		var ConsumeBillData = this.comp('ConsumeBillData');
+		var data = order.getConsumeBill({'ip':ip,'consumeRoomId':currentDeskData.getFirstRow().val('consumeRoomId')})
+		var param = {"@type":"table",'rows':data};
+		ConsumeBillData.loadData(param);
+		ConsumeBillData.first();
 		this.comp('account').hide();
 	};
 	
@@ -2335,7 +2354,7 @@ define(function(require){
 				discountTypeId:row.val('discountTypeId'),
 				discountTypeName:row.val('discountTypeName')
 			}]
-		})
+		});
 	};
 	
 
@@ -2358,7 +2377,14 @@ define(function(require){
 			$(event.target).css({'background':'yellow'});
 			currentDisCountTypesData.clear();
 			this.comp('othe').hide();
-		}
+			//刷新结帐单
+			var currentDeskData = this.comp('currentDeskData');
+			var ConsumeBillData = this.comp('ConsumeBillData');
+			var data = order.getConsumeBill({'ip':ip,'consumeRoomId':currentDeskData.getFirstRow().val('consumeRoomId')})
+			var param = {"@type":"table",'rows':data};
+			ConsumeBillData.loadData(param);
+			ConsumeBillData.first();
+			this.comp('account').hide();		}
 	};
 	
 
@@ -2385,6 +2411,13 @@ define(function(require){
 				this.comp('message').show({'title':'埋单成功','message':a.result});
 //				currentDeskData.val('state','取消埋单');
 				$(this.getElementByXid('span77')).text('取消埋单');
+				//刷新结帐单
+				var currentDeskData = this.comp('currentDeskData');
+				var ConsumeBillData = this.comp('ConsumeBillData');
+				var data = order.getConsumeBill({'ip':ip,'consumeRoomId':currentDeskData.getFirstRow().val('consumeRoomId')})
+				var param = {"@type":"table",'rows':data};
+				ConsumeBillData.loadData(param);
+				ConsumeBillData.first();	
 			}else{
 				this.comp('message').show({'title':'error','message':a.result});
 			}
@@ -2394,6 +2427,13 @@ define(function(require){
 				this.comp('message').show({'title':'取消埋单成功','message':a.result});
 //				currentDeskData.val('state','埋单');
 				$(this.getElementByXid('span77')).text('埋单');
+				//刷新结帐单
+				var currentDeskData = this.comp('currentDeskData');
+				var ConsumeBillData = this.comp('ConsumeBillData');
+				var data = order.getConsumeBill({'ip':ip,'consumeRoomId':currentDeskData.getFirstRow().val('consumeRoomId')})
+				var param = {"@type":"table",'rows':data};
+				ConsumeBillData.loadData(param);
+				ConsumeBillData.first();	
 			}else{
 				this.comp('message').show({'title':'error','message':a.result});
 			}
