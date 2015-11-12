@@ -604,28 +604,27 @@
           </div> 
         </div>  
         <div class="x-panel-bottom menu-bottom-wrap" xid="bottom2"> 
-          <div xid="div105" class="menu-bottom-left"> 
-            <a component="$UI/system/components/justep/button/button" class="btn btn-style"
-              xid="m-search" label="按拼音点菜" target="menu-search" onClick="m_searchClick"> 
-              <i xid="i5"/>  
+          <div xid="div105" class="menu-bottom"> 
+            
+            
+          
+  <div component="$UI/system/components/bootstrap/row/row" class="row" xid="row18">
+   <div class="col col-xs-3" xid="col57"><a component="$UI/system/components/justep/button/button" class="btn btn-style" xid="m-search" label="按拼音点菜" target="menu-search" onClick="m_searchClick"> 
+              <i xid="i5" />  
               <span xid="span92">按拼音点菜</span>
-            </a>
-            <a component="$UI/system/components/justep/button/button" class="btn btn-style"
-              label="已点详情" xid="button9" bind-click="button9Click"> 
-              <i xid="i9"/>  
-              <span xid="span181">已点详情</span> 
-            </a>
-          <a component="$UI/system/components/justep/button/button" class="btn btn-style" label="手写单" xid="handOrderBtn" target="handOrder" onClick="handOrderBtnClick">
+            </a></div>
+   <div class="col col-xs-3" xid="col59"><a component="$UI/system/components/justep/button/button" class="btn btn-style" label="手写单" xid="handOrderBtn" target="handOrder" onClick="handOrderBtnClick">
    <i xid="i12"></i>
-   <span xid="span115">手写单</span></a></div>  
-          <div xid="div106" class="menu-bottom-right"> 
-            <a component="$UI/system/components/justep/button/button" class="btn back-btn"
-              xid="button19" bind-click="button19Click" label="返回"> 
-              <i xid="i21"/>  
+   <span xid="span115">手写单</span></a></div>
+   <div class="col col-xs-3" xid="col60"><a component="$UI/system/components/justep/button/button" class="btn btn-style" label="已点详情" xid="button9" bind-click="button9Click"> 
+              <i xid="i9" />  
+              <span xid="span181">已点详情</span> 
+            </a></div>
+  <div class="col col-xs-3" xid="col61"><a component="$UI/system/components/justep/button/button" class="btn back-btn" xid="button19" bind-click="button19Click" label="返回"> 
+              <i xid="i21" />  
               <span xid="span41">返回</span>
-            </a>
+            </a></div></div></div>  
           </div> 
-        </div> 
       </div> 
     </div>  
     <div class="x-contents-content menu-search" xid="menu-search">
@@ -691,7 +690,7 @@
         </div> 
       </div>
     </div> 
-  <div class="x-contents-content" xid="handOrder" onActive="handOrderActive"><div component="$UI/system/components/justep/panel/panel" class="x-panel x-full" xid="panel23">
+  <div class="x-contents-content handOrder" xid="handOrder" onActive="handOrderActive"><div component="$UI/system/components/justep/panel/panel" class="x-panel x-full" xid="panel23">
    <div class="x-panel-top" xid="top21"><div component="$UI/system/components/justep/titleBar/titleBar" class="x-titlebar" xid="titleBar14" title="手写单">
    <div class="x-titlebar-left" xid="div63"></div>
    <div class="x-titlebar-title" xid="div69">手写单</div>
@@ -702,20 +701,21 @@
   <div component="$UI/system/components/justep/labelEdit/labelEdit" class="x-label-edit x-label30" xid="labelInput19">
    <label class="x-label" xid="label21"><![CDATA[价钱]]></label>
    <input component="$UI/system/components/justep/input/input" class="form-control x-edit" xid="handGoodsPrice" dataType="Float"></input></div>
-  <a component="$UI/system/components/justep/button/button" class="btn btn-default" label="-" xid="button14OrderHand" onClick="button14OrderHandClick">
-   <i xid="i39"></i>
-   <span xid="span120">-</span></a>
-  <input component="$UI/system/components/justep/input/input" class="form-control" xid="handGoodsQty" dataType="Integer"></input><a component="$UI/system/components/justep/button/button" class="btn btn-default" label="+" xid="button15orderHand" onClick="button15orderHandClick">
-   <i xid="i69"></i>
-   <span xid="span121">+</span></a></div>
-   <div class="x-panel-bottom" xid="bottom5"><div xid="div153" class="menu-bottom-right">
-   <a component="$UI/system/components/justep/button/button" class="btn back-btn" label="返回菜单" xid="buttonHandBack" target="menu">
+  
+  
+  <div component="$UI/system/components/bootstrap/row/row" class="row handOrder-btn-wrap  p-top20" xid="row15">
+   <div class="col col-xs-4" xid="col38"><img src="$UI/orderSystem/images/jiangreen.png" alt="" xid="image3" bind-click="button14OrderHandClick"></img></div>
+   <div class="col col-xs-4 handInput" xid="col39"><input component="$UI/system/components/justep/input/input" class="form-control" xid="handGoodsQty" dataType="Integer"></input></div>
+   <div class="col col-xs-4" xid="col44"><img src="$UI/orderSystem/images/jiagreen.png" alt="" xid="image4" bind-click="button15orderHandClick"></img></div></div></div>
+   <div class="x-panel-bottom" xid="bottom5"><div component="$UI/system/components/justep/button/buttonGroup" class="btn-group btn-group-justified" tabbed="true" xid="buttonGroup1">
+  <div component="$UI/system/components/bootstrap/row/row" class="row handOrder-btn-wrap" xid="row17">
+   <div class="col col-xs-6" xid="col54"><a component="$UI/system/components/justep/button/button" class="btn back-btn" label="返回菜单" xid="buttonHandBack" target="menu">
     <i xid="i15"></i>
-    <span xid="span119">返回菜单</span></a> 
-  <a component="$UI/system/components/justep/button/button" class="btn btn-default" label="确定" xid="button36" onClick="button36Click">
+    <span xid="span119">返回菜单</span></a></div>
+   <div class="col col-xs-6" xid="col55"><a component="$UI/system/components/justep/button/button" class="btn btn-default btn-style " label="确定" xid="button36" onClick="button36Click">
    <i xid="i71"></i>
-   <span xid="span122">确定</span></a>
-  </div></div></div></div></div>  
+   <span xid="span122">确定</span></a></div>
+   </div></div></div></div></div></div>  
   <div component="$UI/system/components/justep/popOver/popOver" class="x-popOver renShu"
     xid="popOver_renshu" opacity="1"> 
     <div class="x-popOver-overlay" xid="div1"/>  
@@ -1991,7 +1991,7 @@
      <i xid="i13"></i>
      <span xid="span185">返回</span></a> </div> </div></div></div><div component="$UI/system/components/justep/popOver/popOver" class="x-popOver othe-wrap" xid="othe" opacity="1">
    <div class="x-popOver-overlay" xid="div157"></div>
-   <div class="x-popOver-content pop-container othe" xid="div158"><div component="$UI/system/components/justep/contents/contents" class="x-contents x-full" active="0" xid="contents8">
+   <div class="x-popOver-content pop-container othe" xid="div158"><div component="$UI/system/components/justep/contents/contents" class="x-contents x-full" active="0" xid="contents8" wrap="false" swipe="false" slidable="false">
    <div class="x-contents-content" xid="content56"><div component="$UI/system/components/justep/panel/panel" class="x-panel x-full" xid="panel33">
    <div class="x-panel-top" xid="top27">
     <div component="$UI/system/components/justep/titleBar/titleBar" class="x-titlebar" xid="titleBar14" title="赠送">
