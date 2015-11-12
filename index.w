@@ -617,7 +617,7 @@
               <i xid="i9"/>  
               <span xid="span181">已点详情</span> 
             </a>
-          <a component="$UI/system/components/justep/button/button" class="btn btn-style" label="手写单" xid="handOrderBtn" target="handOrder">
+          <a component="$UI/system/components/justep/button/button" class="btn btn-style" label="手写单" xid="handOrderBtn" target="handOrder" onClick="handOrderBtnClick">
    <i xid="i12"></i>
    <span xid="span115">手写单</span></a></div>  
           <div xid="div106" class="menu-bottom-right"> 

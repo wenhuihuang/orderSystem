@@ -2720,17 +2720,17 @@ define(function(require){
 		var qty = this.comp('handGoodsQty').val();
 		var goodsName = this.comp('handGoodsName').val();
 		var sprice = this.comp('handGoodsPrice').val();
-		if(qty==''&&qty == undefined||qty==0){
-			this.comp('message').show({'title':'message','message':'数量不能为0'});
-			return;
-		}
-		if(goodsName==''&&goodsName == undefined){
+		if(goodsName==''||goodsName == undefined){
 			this.comp('message').show({'title':'message','message':'菜单名不能为空'});
 			return false;
 		}
-		if(sprice==''&&sprice == undefined){
+		if(sprice==''||sprice == undefined){
 			this.comp('message').show({'title':'message','message':'价格不能为空'});
 			return false;
+		}
+		if(qty==''||qty == undefined||qty==0){
+			this.comp('message').show({'title':'message','message':'数量不能为0'});
+			return;
 		}
 		debugger
 		var cartData = this.comp('cartData');
@@ -2784,6 +2784,16 @@ define(function(require){
 
 	Model.prototype.button15orderHandClick = function(event){
 				this.comp('handGoodsQty').val(this.comp('handGoodsQty').val()+1);
+	};	
+	
+	
+
+
+	
+	
+
+	Model.prototype.handOrderBtnClick = function(event){
+				$(this.getElementByXid('handGoodsName')).focus();
 	};	
 	
 	
