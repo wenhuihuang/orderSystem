@@ -10,7 +10,8 @@
    <column label="模式" name="model" type="String" xid="xid64"></column>
    <data xid="default29">[{&quot;model&quot;:&quot;服务员手机&quot;},{&quot;model&quot;:&quot;服务员平板&quot;},{&quot;model&quot;:&quot;自助手机&quot;},{&quot;model&quot;:&quot;自助平板&quot;}]</data></div></div> 
   <div xid="div67" class="loading">
-   <span xid="span153">加载中，请稍后</span></div>
+   <span xid="span153">加载中，请稍后</span>
+  </div>
  <div component="$UI/system/components/justep/panel/panel" class="x-panel x-full" xid="panel1">
    
    <div class="x-panel-content" xid="content1">
@@ -18,7 +19,7 @@
   
   <div component="$UI/system/components/justep/contents/contents" class="x-contents x-full" active="0" xid="contents1" swipe="false" wrap="false" slidable="false">
    
-  <div class="x-contents-content" xid="settings"><div component="$UI/system/components/justep/panel/panel" class="x-panel x-full" xid="panel3">
+  <div class="x-contents-content" xid="settings" onActive="settingsActive"><div component="$UI/system/components/justep/panel/panel" class="x-panel x-full" xid="panel3">
    <div class="x-panel-top" xid="top1">
     <div component="$UI/system/components/justep/titleBar/titleBar" class="x-titlebar" xid="titleBar2" title="参数设置">
      <div class="x-titlebar-left" xid="div5"></div>
@@ -31,10 +32,10 @@
        <h5 xid="h51">1、服务器连接参数设置:</h5>
        <div component="$UI/system/components/justep/labelEdit/labelEdit" class="x-label-edit x-label30" xid="labelInput2">
         <label class="x-label" xid="label2">服务器地址:</label>
-        <input component="$UI/system/components/justep/input/input" class="form-control x-edit" xid="input1" placeHolder="请输入服务器地址" id="settingIp"></input></div> 
+        <input component="$UI/system/components/justep/input/input" class="form-control x-edit" xid="settingIp" /></div> 
        <div component="$UI/system/components/justep/labelEdit/labelEdit" class="x-label-edit x-label30" xid="labelInput1">
         <label class="x-label" xid="label3">端口号:</label>
-        <input component="$UI/system/components/justep/input/input" class="form-control x-edit" xid="input2" placeHolder="请输入端口号" id="settingCOM"></input></div> 
+        <input component="$UI/system/components/justep/input/input" class="form-control x-edit" xid="settingCOM"></input></div> 
        <h5 xid="h57">2、其它参数设置</h5>
        <div component="$UI/system/components/justep/labelEdit/labelEdit" class="x-label-edit x-label30" xid="labelSelect2">
         <label class="x-label" xid="label31">运行模式:</label>

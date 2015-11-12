@@ -66,12 +66,11 @@ define(function(require){
 
 	//设置iP和端口
 	Model.prototype.button73Click = function(event){
-	
-		if($('#settingIp').val() != "" && $('#settingCOM').val() !=''){
-			localStorage.setItem('pureip',$('#settingIp').val());
-			localStorage.setItem('com',$('#settingCOM').val());
+		if(this.comp('settingIp').val() != "" && this.comp('settingCOM').val()){
+			localStorage.setItem('pureip',this.comp('settingIp').val());
+			localStorage.setItem('com',this.comp('settingCOM').val());
 			
-			ip = 'http://'+$('#settingIp').val()+':'+$('#settingCOM').val()+'/OrderSystemWeX5/';
+			ip = 'http://'+this.comp('settingIp').val()+':'+this.comp('settingCOM').val()+'/OrderSystemWeX5/';
 			localStorage.setItem('ip',ip);
 			if(localStorage.getItem("back") != "0"){
 				location.href= 'languageSelect.w#!content2'; 
@@ -97,8 +96,8 @@ define(function(require){
 	 */
 	//显示设置好的ip
 	Model.prototype.content3Active = function(event){
-		$('#settingIp').val(localStorage.getItem('pureip'));
-		$('#settingCOM').val(localStorage.getItem('com'));
+		this.comp('settingIp').val(localStorage.getItem('pureip'));
+		this.comp('settingCOM').val(localStorage.getItem('com'));
 	};
 
 
@@ -109,8 +108,8 @@ define(function(require){
 		}else{
 			
 		}
-		$('#settingIp').val(localStorage.getItem("pureip"));
-		$('#settingCOM').val(localStorage.getItem("com"));
+		this.comp('settingIp').val(localStorage.getItem("pureip"));
+		this.comp('settingCOM').val(localStorage.getItem("com"));
 	
 	
 	};
@@ -130,6 +129,12 @@ define(function(require){
 
 	Model.prototype.modelLoad = function(event){
 		$(".loading").hide();
+	};
+
+
+	Model.prototype.settingsActive = function(event){
+//		debugger
+//		$(this.getElementByXid('settingIp')).focus();
 	};
 
 

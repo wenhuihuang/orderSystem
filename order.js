@@ -411,6 +411,21 @@ define(function(require) {
 				"success" : success
 			});	
 			return obj.result;	
+		},
+		//得到手写单基本信息
+		//OrderSystemWeX5/RoomFunctionServlet.do?func=getWriterBillID
+		getWriterBillID:function(data){
+			var obj;
+			var success = function(param){
+				var a = param;
+				obj = a;
+			};
+			Baas.sendRequest({
+				"url" : data.ip + 'RoomFunctionServlet.do?func=getWriterBillID',
+				"dataType": "json",
+				"success" : success
+			});	
+			return obj;				
 		}
 	};
 

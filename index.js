@@ -175,8 +175,7 @@ define(function(require){
 		}
 		this.comp("popOver2").show();
 		this.comp("contents2").to("content8");
-		//var html="<div class='select-con-wrap'></div>";
-		//$(".select-con").html(html);
+		
 	};
 
 	//没分单其它
@@ -1138,7 +1137,7 @@ define(function(require){
 				flag = true;
 			}
 		});
-		if(flag == true){
+		if(flag === true){
 			return;
 		}
 		//$('#showCookWays').append("<span"+" id='"+row.val('cookWayId')+"'>"+row.val('cookWay')+'('+row.val('addMoney')+')'+"</span>");
@@ -1227,7 +1226,7 @@ define(function(require){
 										});
 									}
 									$('.left-menu').find('li').eq(0).trigger('click');//触发菜单界面的点击事件，以便让菜单数量清0
-								}
+								};
 								//拿到订单详情
 								Baas.sendRequest({
 									"url" : ip + 'ShopCartServlet.do?func=showOrderedReturnJson&billMasterId='+currentDeskData.val('billMasterId')+'&roomId='+currentDeskData.val('roomId'),
@@ -1421,6 +1420,7 @@ define(function(require){
     Model.prototype.li1Touchend = function(event){
     	var _this=$(event.target).parents("li");
     	var action=_this.attr("action");
+    	var newNum = this.getElementByXid('input1');//新开台输入人数框
     	event.preventDefault();
         clearTimeout(timeOutEvent);//清除定时器   
         if(timeOutEvent!=0){              
@@ -1513,10 +1513,8 @@ define(function(require){
 			}else if(state="空台"){
 				clearTimeout(timeOutEvent);//清除定时器  
 				popOver_renshu.show();
-				//让文本框架
-
-				$('#custNum').focus();
-				$('#custNum').val('');
+				localStorage.setItem(currentDeskData.getFirstRow().val('roomId'),'');//清空购物车
+				$(newNum).focus();//让文本框架获得焦点
 			}	
 		}
 		
@@ -1700,6 +1698,7 @@ define(function(require){
 		}
 		this.comp("give").show();
 		this.comp("contents4").to("content17");
+		$(this.getElementByXid('ninput2')).focus();
 	};
 
 	
@@ -1718,6 +1717,7 @@ define(function(require){
 		}
 		this.comp("give").show();
 		this.comp("contents4").to("content15");
+		$(this.getElementByXid('ninput5')).focus();
 	};
 
 	
@@ -1730,6 +1730,7 @@ define(function(require){
 		}
 		this.comp("give").show();
 		this.comp("contents4").to("content23");
+		$(this.getElementByXid('ninput7')).focus();
 	};
 
 	
@@ -1742,6 +1743,7 @@ define(function(require){
 		}
 		this.comp("othe").show();
 		this.comp("contents8").to("content56");
+
 	};
 
 	//转台
@@ -1937,9 +1939,8 @@ define(function(require){
 	
 	//赠送确定---保存到本地
 	Model.prototype.buttonGitClick = function(event){
-		var currentGoodsData = this.val('currentGoodsData');
-		var qty = this.copm("inputGive").val();
-		var currentPresentsReasonData = this.comp('currentPresentsReasonData');
+		var currentGoodsData = this.comp('currentGoodsData');
+		var qty = this.copm("inputGive").val();		var currentPresentsReasonData = this.comp('currentPresentsReasonData');
 		var sendPresentsReasonData = this.comp('sendPresentsReasonData');
 		sendPresentsReasonData.newData({
 			defaultValues:[{
@@ -2033,6 +2034,7 @@ define(function(require){
 //		this.comp('hinput10').clear();
 		this.comp("yet-sort").show();
 		this.comp("contents5").to("content29");
+		$(this.getElementByXid('hinput10')).focus();
 	};
 
 
@@ -2116,6 +2118,7 @@ define(function(require){
 		}
 		this.comp('yet-sort').show();
 		this.comp('contents5').to('content35');
+		$(this.getElementByXid('hinput11')).focus();
 	};
 
 	
@@ -2189,6 +2192,7 @@ define(function(require){
 		this.comp('othe').show();
 		this.comp('contents8').to('content60');
 		this.comp('presentsReasonData').refreshData();
+		$(this.getElementByXid('hinput9')).focus();
 	};
 
 	
@@ -2254,6 +2258,7 @@ define(function(require){
 	Model.prototype.span71Click = function(event){
 		this.comp('account').show();
 		this.comp('contents6').to('content53');
+		$(this.getElementByXid('cartno')).focus();
 	};
 	
 
@@ -2328,7 +2333,9 @@ define(function(require){
 	//结帐单修改人数跳转
 	Model.prototype.jspan75Click = function(event){
 		this.comp('account').show();
-		this.comp('contents6').to('content47');
+		this.comp('contents6').to('content47');		
+		$(this.getElementByXid('input16')).focus();
+		
 	};
 	
 
@@ -2639,13 +2646,14 @@ define(function(require){
 	Model.prototype.button49Click = function(event){
 		this.comp("account").show();
 		this.comp("contents6").to("content53")
+		$(this.getElementByXid('cartno')).focus();
 	};	
 	
 	//清空搜索结果
 	Model.prototype.m_searchClick = function(event){
 		this.comp('searchGoodsData').clear();
+		this.comp('searchGoodsInput').clear();
 		$(this.getElementByXid('searchGoodsInput')).focus();
-		$(this.getElementByXid('searchGoodsInput')).val('');
 	};	
 	
 	//加载结帐单数据
@@ -2710,11 +2718,97 @@ define(function(require){
 
 
 	
+	//手写单
+	Model.prototype.button36Click = function(event){
+		var result = order.getWriterBillID({'ip':ip});
+		var qty = this.comp('handGoodsQty').val();
+		var goodsName = this.comp('handGoodsName').val();
+		var sprice = this.comp('handGoodsPrice').val();
+		if(goodsName==''||goodsName == undefined){
+			this.comp('message').show({'title':'message','message':'菜单名不能为空'});
+			return false;
+		}
+		if(sprice==''||sprice == undefined){
+			this.comp('message').show({'title':'message','message':'价格不能为空'});
+			return false;
+		}
+		if(qty==''||qty == undefined||qty==0){
+			this.comp('message').show({'title':'message','message':'数量不能为0'});
+			return;
+		}
+		debugger
+		var cartData = this.comp('cartData');
+			cartData.newData({
+				defaultValues:[{
+					'goodsId':result.goodsId,
+					'qty':qty,
+					'goodsName':goodsName,
+					'sprice':sprice,
+					'addMoney':0,
+					'typeCode':result.typeCode,
+					'unitId':result.unitId
+				}]
+			});
+		
+		//将购物车数据写入到localStorage
+		var currentDeskData = this.comp('currentDeskData');
+		var roomId = currentDeskData.getFirstRow().val('roomId');
+		
+		localStorage.setItem(roomId,JSON.stringify(cartData.toJson()));
+		this.comp('contents1').to('menu');
+	};	
 	
 	//高尺寸的更多弹出框关闭
 	Model.prototype.otheClose = function(event){
 		this.comp("othe").hide();
 	};	
+	
+
+
+
+	
+	
+	//初始化手写单界面事件
+	Model.prototype.handOrderActive = function(event){
+		this.comp('handGoodsQty').val(0);
+	};	
+	
+	
+
+
+	
+	
+
+	Model.prototype.button14OrderHandClick = function(event){
+			if(	this.comp('handGoodsQty').val()>1){
+			this.comp('handGoodsQty').val(this.comp('handGoodsQty').val()-1);
+			}
+	};	
+	
+	
+
+
+	
+	
+
+	Model.prototype.button15orderHandClick = function(event){
+				this.comp('handGoodsQty').val(this.comp('handGoodsQty').val()+1);
+	};	
+	
+	
+
+
+	
+	
+
+	Model.prototype.handOrderBtnClick = function(event){
+				$(this.getElementByXid('handGoodsName')).focus();
+	};	
+	
+	
+
+
+	
 	
 
 	return Model;
