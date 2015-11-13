@@ -613,7 +613,7 @@
               <i xid="i5" />  
               <span xid="span92">按拼音点菜</span>
             </a></div>
-   <div class="col col-xs-3" xid="col59"><a component="$UI/system/components/justep/button/button" class="btn btn-style" label="手写单" xid="handOrderBtn" target="handOrder" onClick="handOrderBtnClick">
+   <div class="col col-xs-3" xid="col59"><a component="$UI/system/components/justep/button/button" class="btn btn-style" label="手写单" xid="handOrderBtn" onClick="handOrderBtnClick">
    <i xid="i12"></i>
    <span xid="span115">手写单</span></a></div>
    <div class="col col-xs-3" xid="col60"><a component="$UI/system/components/justep/button/button" class="btn btn-style" label="已点详情" xid="button9" bind-click="button9Click"> 
