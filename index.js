@@ -2821,6 +2821,12 @@ define(function(require){
 	
 
 	Model.prototype.handOrderBtnClick = function(event){
+				//检验是否设置手写单
+				var result = order.getWriterBillID({'ip':ip});
+					if(result == null){
+						this.comp('message').show({'title':'message','message':'未设置手写单'});
+						return;
+				}
 				$(this.getElementByXid('handGoodsName')).focus();
 	};	
 	
