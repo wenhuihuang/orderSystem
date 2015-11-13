@@ -1389,7 +1389,7 @@ define(function(require){
 //            //为选中的台加上active
             divObj.addClass("active").siblings().removeClass("active").addClass("ccc"); //? $(event.target).addClass("active").siblings().removeClass("active") : $(event.target).parents("li").addClass("active").siblings().removeClass("active");
               $(".more-wrap").show();
-              $(".cancel-active").css("display","block");
+              $(".cancel-active").css("display","inline-block");
               $(".main-ul").css({"margin-bottom":"94px"});
 //            $(".more-wrap").find(".btn").each(function(){
 //            	$(this).attr({"roomId":liObj});
