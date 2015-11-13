@@ -623,7 +623,6 @@ define(function(require){
 		var menuTypeData = this.comp('menuTypeData');
 		//下面用于刷新当前房台状态
 		var deskData = this.comp('deskData');
-		;
 		var success = function(param){
 			
 			//重新加载房台
@@ -1851,16 +1850,34 @@ define(function(require){
 
 	
 	//埋单
-	Model.prototype.button23Click = function(event){
-		var button = this.comp('button23');//埋单	
+	Model.prototype.button23Click = function(event){	
 		var currentDeskData = this.comp('currentDeskData').getFirstRow();
-		
-		if(currentDeskData.val('state')!='埋单'){
-		var userData = this.comp('userData');
-			var a = myBaas.cleanRoom({'currentBillMasterId':currentDeskData.val('billMasterId'),'userId':userId.val('userId'),'currentConsumeRoomId':currentDeskData.val('consumeRoomId')});
-		}else{//取消埋单
-			var a = myBaas.uncheckBill({'currentBillMasterId':currentDeskData.val('billMasterId'),'userId':userId.val('userId')});
-			
+		var userId = this.comp('userData').val('userId');
+		var status = this.comp('statusData');
+		var deskData = this.comp('deskData');
+		////
+		debugger
+		var button = this.comp('button23');
+		if(button.label == '埋单'){
+			var a= order.checkBill({'ip':ip,'userId':userId,'billMasterId':currentDeskData.val('billMasterId'),'consumeRoomId':currentDeskData.val('consumeRoomId')});
+			if(a.code == '1'){
+				this.comp('message').show({'title':'埋单成功','message':a.result});
+//				currentDeskData.val('state','取消埋单');
+				button.set({'label':'取消埋单'});
+				getDesk(deskData,status.val('typeCode'),2);	
+			}else{
+				this.comp('message').show({'title':'error','message':a.result});
+			}
+		}else{
+			var a = order.unCheckBill({'ip':ip,'billMasterId':currentDeskData.val('billMasterId'),'userId':userId});
+			if(a.code == '1'){
+				this.comp('message').show({'title':'取消埋单成功','message':a.result});
+//				currentDeskData.val('state','埋单');
+				button.set({'label':'埋单'});
+				getDesk(deskData,status.val('typeCode'),2);
+			}else{
+				this.comp('message').show({'title':'error','message':a.result});
+			}
 		}
 	};
 
