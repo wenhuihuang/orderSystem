@@ -1362,6 +1362,7 @@ define(function(require){
     	var status = this.comp('statusData');
     	var _this=$(event.target).parents("li");
     	status.getFirstRow().val('typeCode',row.val('typeCode'));
+    	var self = this;
     	if(lang_flag == 1){
     	    		   timeOutEvent = setTimeout(function(){
     				   lang=true;
@@ -1381,6 +1382,12 @@ define(function(require){
 							}]
 					}); 
 				currentDeskData.first(); 
+				//更新埋单状态状态
+					if(row.val('state')=='埋单'){
+						self.comp('button23').set({'label':'取消埋单'});
+					}else{
+						self.comp('button23').set({'label':'埋单'});
+					}
             //执行长按要执行的内容，如弹出菜单         
             //找出台li里的attr=mydata    
 //          var liObj= $(event.target).is("li") ? $(event.target).attr("mydata") : $(event.target).parents("li").attr("mydata");
@@ -1464,6 +1471,7 @@ define(function(require){
 					if(row.val('state')=='埋单'){
 						$(this.getElementByXid('span77')).text('取消埋单'); 
 						this.comp('button23').set({'label':'取消埋单'});
+						debugger
 					}else{
 						$(this.getElementByXid('span77')).text('埋单'); 
 						this.comp('button23').set({'label':'埋单'});
