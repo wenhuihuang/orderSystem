@@ -1463,8 +1463,10 @@ define(function(require){
 					
 					if(row.val('state')=='埋单'){
 						$(this.getElementByXid('span77')).text('取消埋单'); 
+						this.comp('button23').set({'label':'取消埋单'});
 					}else{
 						$(this.getElementByXid('span77')).text('埋单'); 
+						this.comp('button23').set({'label':'埋单'});
 					}
 		//下面用于刷新当前房台状态
 		var deskData = this.comp('deskData');
