@@ -1868,6 +1868,8 @@ define(function(require){
 		////
 		debugger
 		var button = this.comp('button23');
+		lang=false;
+		$(".cancel-active").hide();
 		if(button.label == '埋单'){
 			var a= order.checkBill({'ip':ip,'userId':userId,'billMasterId':currentDeskData.val('billMasterId'),'consumeRoomId':currentDeskData.val('consumeRoomId')});
 			if(a.code == '1'){
