@@ -1424,10 +1424,13 @@ define(function(require){
     	var newNum = this.getElementByXid('input1');//新开台输入人数框
     	event.preventDefault();
         clearTimeout(timeOutEvent);//清除定时器   
-        if(timeOutEvent!=0 && lang==false){              
+        if(timeOutEvent!=0){              
         //这里写要执行的内容（尤如onclick事件）  
        
 		if(action == undefined ||action == ''){
+		if(lang==false){
+			
+		
 		 clearTimeout(timeOutEvent);//清除定时器  
         timeOutEvent = 0; 
         var currentDeskData = this.comp('currentDeskData');
@@ -1535,6 +1538,7 @@ define(function(require){
 			"success" : success
 		});
 	    //-------------end of click-----------------
+	    }
 	    }else if(action == "turntable"){//转台-----------
 	    	var status = this.comp('statusData');
 	    	var deskData = this.comp('deskData');
