@@ -912,6 +912,8 @@ define(function(require){
 
 	//当打开菜单页面的时候，默认点击第一列
 	Model.prototype.menuActive = function(event){
+		lang=false;
+		$(".cancel-active").hide();
 		$('.left-menu').find('li').eq(0).trigger('click');
 	};
 	/*
@@ -1833,6 +1835,8 @@ define(function(require){
     		var status = this.comp('statusData');
     		var deskData = this.comp('deskData');
 			var success = function(param){
+			lang=false;
+			$(".cancel-active").hide();
 				//$('.left-menu').find('li').eq(0).trigger('click');//刷新房台
 				getDesk(deskData,status.val('typeCode'),2);	
 				localStorage.setItem(currentDeskData.getFirstRow().val('roomId'),'');//清空购物车
