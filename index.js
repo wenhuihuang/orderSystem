@@ -2736,6 +2736,10 @@ define(function(require){
 	//手写单
 	Model.prototype.button36Click = function(event){
 		var result = order.getWriterBillID({'ip':ip});
+		if(result == null){
+			this.comp('message').show({'title':'message','message':'未设置手写单'});
+			return;
+		}
 		var qty = this.comp('handGoodsQty').val();
 		var goodsName = this.comp('handGoodsName').val();
 		var sprice = this.comp('handGoodsPrice').val();
