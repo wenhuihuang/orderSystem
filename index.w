@@ -131,23 +131,20 @@
   <column label="用于退菜" name="billDetailId" type="String" xid="xid139"></column></div>  
     <div component="$UI/system/components/justep/data/data" autoLoad="true"
       xid="cartData" idColumn="goodsId" confirmDelete="false"> 
-      <column label="商品id" name="goodsId" type="String" xid="column3"/>  
-      <column label="商品名称" name="goodsName" type="String" xid="column4"/>  
-      <column name="sprice" type="Double" xid="column1"/>  
-      <column label="商品数量" name="qty" type="Integer" xid="column2"/>  
-      <column name="addMoney" type="Double" xid="xid28"/>  
-      <column name="cookWay" type="String" xid="xid38"/>  
-      <column name="totalPrice" type="Double" xid="xid41"/>  
-      <column name="typeCode" type="String" xid="xid48"/>  
-      <rule xid="rule2"> 
-        <col name="totalPrice" xid="ruleCol3"> 
-          <calculate xid="calculate3"> 
-            <expr xid="default19">(val('sprice')+val('addMoney'))*val('qty')</expr>
-          </calculate> 
-        </col> 
-      </rule>  
-      <column name="unitId" type="String" xid="xid63"/>
-    </div>  
+      <column label="商品id" name="goodsId" type="String" xid="column3"></column>
+  <column label="商品名称" name="goodsName" type="String" xid="column4"></column>
+  <column name="sprice" type="Double" xid="column1"></column>
+  <column label="商品数量" name="qty" type="Integer" xid="column2"></column>
+  <column name="addMoney" type="Double" xid="xid28"></column>
+  <column name="cookWay" type="String" xid="xid38"></column>
+  <column name="totalPrice" type="Double" xid="xid41"></column>
+  <column name="typeCode" type="String" xid="xid48"></column>
+  <rule xid="rule2">
+   <col name="totalPrice" xid="ruleCol3">
+    <calculate xid="calculate3">
+     <expr xid="default19">(val('sprice')+val('addMoney'))*val('qty')</expr></calculate> </col> </rule>
+  <column name="unitId" type="String" xid="xid63"></column>
+  <column label="显示礼物数量" name="gift" type="String" xid="xid152"></column></div>  
     <div component="$UI/system/components/justep/data/data" autoLoad="true"
       xid="orderData" idColumn="col4">
       <column name="col4" type="String" xid="xid20"></column>
@@ -185,20 +182,17 @@
   <column label="埋单按钮名字" name="checkBtn" type="String" xid="xid149"></column></div>  
     <div component="$UI/system/components/justep/data/data" autoLoad="true"
       xid="currentGoodsData" idColumn="goodsId"> 
-      <column label="商品id" name="goodsId" type="String" xid="default5"/>  
-      <column label="商品名称" name="goodsName" type="String" xid="default7"/>  
-      <column name="sprice" type="Double" xid="default4"/>  
-      <column label="商品数量" name="qty" type="Integer" xid="default6"/>  
-      <column name="addMoney" type="Double" xid="xid29"/>  
-      <rule xid="rule4"> 
-        <col name="addMoney" xid="ruleCol5"> 
-          <calculate xid="calculate5"> 
-            <expr xid="default21">$model.currentCookWayData.sum("addMoney")</expr>
-          </calculate> 
-        </col> 
-      </rule>  
-      <column name="typeCode" type="String" xid="xid124"/>
-    </div>  
+      <column label="商品id" name="goodsId" type="String" xid="default5"></column>
+  <column label="商品名称" name="goodsName" type="String" xid="default7"></column>
+  <column name="sprice" type="Double" xid="default4"></column>
+  <column label="商品数量" name="qty" type="Integer" xid="default6"></column>
+  <column name="addMoney" type="Double" xid="xid29"></column>
+  <rule xid="rule4">
+   <col name="addMoney" xid="ruleCol5">
+    <calculate xid="calculate5">
+     <expr xid="default21">$model.currentCookWayData.sum(&quot;addMoney&quot;)</expr></calculate> </col> </rule>
+  <column name="typeCode" type="String" xid="xid124"></column>
+  <column name="gift" type="String" xid="xid153"></column></div>  
     <div component="$UI/system/components/justep/data/data" autoLoad="true"
       xid="cookTypeData" idColumn="typeCode">
       <column name="typeCode" type="String" xid="xid30"/>  
@@ -895,7 +889,7 @@
                                 class="row" xid="row6"> 
                                 <div class="col col-xs-5dot2" xid="col19"> 
                                   <span xid="span62" bind-text="val('goodsName')">菜名</span>
-                                </div>  
+                                <span xid="span16gift" bind-text="val('gift')"><![CDATA[]]></span></div>  
                                 <div class="col col-xs-1dot7" xid="col22"> 
                                   <span xid="span63" bind-text="val('sprice')">单价</span>
                                 </div>  

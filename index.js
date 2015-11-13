@@ -1817,7 +1817,8 @@ define(function(require){
 				"qty":row.val('qty'),
 				"goodsId":row.val('goodsId'),
 				"addMoney":row.val('addMoney'),
-				'typeCode':row.val('typeCode')
+				'typeCode':row.val('typeCode'),
+				'gift':row.val('gift')
 			}]
 		});
 		var sendCookWayData = this.comp('sendCookWayData');
@@ -1980,7 +1981,9 @@ define(function(require){
 	//赠送确定---保存到本地
 	Model.prototype.buttonGitClick = function(event){
 		var currentGoodsData = this.comp('currentGoodsData');
+		var bqty = currentGoodsData.val('qty');
 		var qty = this.comp("inputGive").val();		
+		var hqty;
 		var currentPresentsReasonData = this.comp('currentPresentsReasonData');
 		var sendPresentsReasonData = this.comp('sendPresentsReasonData');
 		if(qty==null||qty==''||qty==undefined){
@@ -1991,12 +1994,27 @@ define(function(require){
 			this.comp('message').show({'title':'message','message':'理由没选'});
 			return;			
 		}
+		sendPresentsReasonData.each(function(data){
+			if(data.row.val('goodsId')==currentGoodsData.val('goodsId')){
+				bqty = bqty - data.row.val('qty');
+				hqty = data.row.val('qty');
+			}
+		});
+		if(bqty<qty){
+			this.comp('message').show({'title':'message','message':'赠送数量不能大于购买数量'});
+			return false;
+		}
 		sendPresentsReasonData.newData({
 			defaultValues:[{
 				'goodsId':currentGoodsData.val('goodsId'),
 				'qty':qty,
 				'tfzReansonId':currentPresentsReasonData.val('tfzReansonId')
 			}]		
+		});
+		this.comp('cartData').each(function(data){
+			if(currentGoodsData.val('goodsId')==data.row.val('goodsId')){
+				data.row.val('gift',hqty);
+			}
 		});
 		this.comp('othe').hide();
 	};
