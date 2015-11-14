@@ -1412,7 +1412,9 @@ define(function(require){
 			 });
     	}else{
     		//alert("此台是空台")
+    		timeOutEvent = 0;
     		self.comp('message').show({'title':'信息','message':'此台是空台'});
+    		return false;
     	}
         },600);//这里设置定时器，定义长按500毫秒触发长按事件，时间可以自己改，个人感觉500毫秒非常合适 
     	
