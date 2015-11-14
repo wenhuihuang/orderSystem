@@ -1143,6 +1143,7 @@ define(function(require){
 		if(flag === true){
 			return;
 		}
+		debugger
 		//$('#showCookWays').append("<span"+" id='"+row.val('cookWayId')+"'>"+row.val('cookWay')+'('+row.val('addMoney')+')'+"</span>");
 		var money = currentGoodsData.val('addMoney')+row.val('addMoney');
 		
