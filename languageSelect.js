@@ -82,6 +82,7 @@ define(function(require){
 			this.languageCustomRefresh(event);
 		}else{
 			alert("请输入ip和端口");
+			
 		}
 		
 	};
