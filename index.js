@@ -1983,9 +1983,9 @@ define(function(require){
 	//赠送确定---保存到本地
 	Model.prototype.buttonGitClick = function(event){
 		var currentGoodsData = this.comp('currentGoodsData');
-		var bqty = currentGoodsData.val('qty');
-		var qty = this.comp("inputGive").val();		
-		var hqty;
+		var bqty = currentGoodsData.val('qty');//剩余可赠送数量
+		var qty = this.comp("inputGive").val();//赠送数量		
+		var hqty=currentGoodsData.val('gift');//赠送
 		var currentPresentsReasonData = this.comp('currentPresentsReasonData');
 		var sendPresentsReasonData = this.comp('sendPresentsReasonData');
 		if(qty==null||qty==''||qty==undefined){
@@ -1998,10 +1998,19 @@ define(function(require){
 		}
 		sendPresentsReasonData.each(function(data){
 			if(data.row.val('goodsId')==currentGoodsData.val('goodsId')){
-				bqty = bqty - data.row.val('qty');
-				hqty = data.row.val('qty');
+				debugger
+				if(data.row.val('qty')!=undefined){
+					bqty = bqty - data.row.val('qty');
+					hqty = parseInt(qty) + parseInt(data.row.val('qty'));
+				}else{
+					hqty += parseInt(qty);
+				}
 			}
 		});
+		debugger
+		if(hqty==0){
+			hqty += parseInt(qty);
+		}
 		if(bqty<qty){
 			this.comp('message').show({'title':'message','message':'赠送数量不能大于购买数量'});
 			return false;
@@ -2018,6 +2027,7 @@ define(function(require){
 				data.row.val('gift',hqty);
 			}
 		});
+		this.comp("inputGive").clear();
 		this.comp('othe').hide();
 	};
 
