@@ -207,13 +207,17 @@
     </div>  
     <div component="$UI/system/components/justep/data/data" autoLoad="true"
       xid="currentCookWayData" idColumn="col3"> 
-      <column name="col3" type="String" xid="default14"/>  
-      <column name="cookWayId" type="String" xid="default10"/>  
-      <column name="addMoney" type="Double" xid="default9"/>  
-      <column name="cookWay" type="String" xid="default8"/>  
-      <column name="goodsId" type="String" xid="xid36"/>  
-      <column name="detail" type="String" xid="xid39"/>
-    </div>  
+      <column name="col3" type="String" xid="default14"></column>
+  <column name="cookWayId" type="String" xid="default10"></column>
+  <column name="addMoney" type="Double" xid="default9"></column>
+  <column name="cookWay" type="String" xid="default8"></column>
+  <column name="goodsId" type="String" xid="xid36"></column>
+  <column name="detail" type="String" xid="xid39"></column>
+  <column name="total" type="Double" xid="xid154"></column>
+  <rule xid="rule8">
+   <col name="total" xid="ruleCol10">
+    <calculate xid="calculate10">
+     <expr xid="default50">$model.currentCookWayData.sum(&quot;addMoney&quot;)</expr></calculate> </col> </rule></div>  
     <div component="$UI/system/components/justep/data/data" autoLoad="true"
       xid="sendCookWayData" idColumn="col3" confirmDelete="false"> 
       <column name="col3" type="String" xid="default18"/>  
@@ -896,7 +900,7 @@
                                 class="row" xid="row6"> 
                                 <div class="col col-xs-5dot2" xid="col19"> 
                                   <span xid="span62" bind-text="val('goodsName')">菜名</span>
-                                <span xid="span16gift" bind-text="val('gift')"><![CDATA[]]></span></div>  
+                                <span xid="span16gift" bind-visible="val('gift')!=undefined" bind-text="'赠'+val('gift')"><![CDATA[]]></span></div>  
                                 <div class="col col-xs-1dot7" xid="col22"> 
                                   <span xid="span63" bind-text="val('sprice')">单价</span>
                                 </div>  
@@ -2005,7 +2009,7 @@
       <div xid="div167">
        <div component="$UI/system/components/justep/labelEdit/labelEdit" class="x-label-edit x-label30" xid="labelInput9">
         <label class="x-label" xid="label15">数量</label>
-        <input component="$UI/system/components/justep/input/input" class="form-control x-edit" xid="inputGive" placeHolder="请输入数量"></input></div> </div> 
+        <input component="$UI/system/components/justep/input/input" class="form-control x-edit" xid="inputGive" placeHolder="请输入数量" dataType="Integer"></input></div> </div> 
       <div xid="div164">
        <div class="select-con-wrap" xid="div163">
         <div component="$UI/system/components/justep/list/list" class="x-list require-con" xid="list5" data="presentsReasonData">

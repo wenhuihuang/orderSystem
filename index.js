@@ -1064,6 +1064,7 @@ define(function(require){
 	Model.prototype.button14Click = function(event){
 		var currentGoodsData = this.comp('currentGoodsData');
 		var message = this.comp('message');
+		//检查是否已选中物品
 		if(check.nCheckSelect({'currentGoodsData':currentGoodsData,'message':message})==false){
 			return false;
 		}
@@ -1142,6 +1143,7 @@ define(function(require){
 		if(flag === true){
 			return;
 		}
+		debugger
 		//$('#showCookWays').append("<span"+" id='"+row.val('cookWayId')+"'>"+row.val('cookWay')+'('+row.val('addMoney')+')'+"</span>");
 		var money = currentGoodsData.val('addMoney')+row.val('addMoney');
 		
@@ -1188,9 +1190,10 @@ define(function(require){
 		var sendPresentsReasonData = this.comp('sendPresentsReasonData');
 		var presents = '';
 		sendPresentsReasonData.eachAll(function(param){
+			debugger
 			presents += param.row.val('goodsId')+'_'+param.row.val('qty')+'_'+param.row.val('tfzReasonId')+',';
 		});
-		presents = presents.substring(0,cookways.length-1);
+		presents = presents.substring(0,presents.length-1);
 		
 		var url = 'ShopCartServlet.do?func=orderByReturnJson&billMasterId='+billMasterId+'&roomId='+roomId+'&goods='+goods+'&cookways='+cookways+'&orderempcode='+user.val('userId')+'&presents='+presents;	
 		var menuTypeData = this.comp('menuTypeData');//用于清0数据
@@ -1959,7 +1962,7 @@ define(function(require){
 		var cartData = this.comp('cartData');
 		order.changeGoodsName({'goodsName':goodsName,'goodsId':goodsId,'cartData':cartData});
 		this.comp('ninput2').clear();
-		currentGoodsData.clear();
+//		currentGoodsData.clear();
 		this.comp('give').hide();
 	};
 
@@ -1973,7 +1976,7 @@ define(function(require){
 		}
 		var sprice =this.comp('ninput5').val();
 		order.changeGoodsPrice({'sprice':sprice,'goodsId':this.comp('currentGoodsData').val('goodsId'),'cartData':this.comp('cartData')});
-		currentGoodsData.clear();
+//		currentGoodsData.clear();
 		this.comp('ninput5').clear();
 		this.comp('give').hide();
 	};
@@ -1988,7 +1991,7 @@ define(function(require){
 		}
 		var qty = this.comp('ninput7').val();
 		order.changeGoodsQty({'qty':qty,'goodsId':this.comp('currentGoodsData').val('goodsId'),'cartData':this.comp('cartData')})
-		currentGoodsData.clear();
+//		currentGoodsData.clear();
 		this.comp('ninput7').clear();
 		this.comp('give').hide();
 	};
@@ -2007,7 +2010,7 @@ define(function(require){
 		var currentGoodsData = this.comp('currentGoodsData');
 		var bqty = currentGoodsData.val('qty');//剩余可赠送数量
 		var qty = this.comp("inputGive").val();//赠送数量		
-		var hqty=currentGoodsData.val('gift');//赠送
+		var hqty=0;//赠送
 		var currentPresentsReasonData = this.comp('currentPresentsReasonData');
 		var sendPresentsReasonData = this.comp('sendPresentsReasonData');
 		if(qty==null||qty==''||qty==undefined){
@@ -2022,13 +2025,12 @@ define(function(require){
 			if(data.row.val('goodsId')==currentGoodsData.val('goodsId')){
 				debugger
 				if(data.row.val('qty')!=undefined){
-					bqty = bqty - data.row.val('qty');
-					hqty = parseInt(qty) + parseInt(data.row.val('qty'));
-				}else{
-					hqty += parseInt(qty);
+					bqty = bqty - parseInt(data.row.val('qty'));
+					hqty += parseInt(data.row.val('qty'));
 				}
 			}
 		});
+		hqty += parseInt(qty);
 		debugger
 		if(hqty==0){
 			hqty += parseInt(qty);
@@ -2041,7 +2043,7 @@ define(function(require){
 			defaultValues:[{
 				'goodsId':currentGoodsData.val('goodsId'),
 				'qty':qty,
-				'tfzReansonId':currentPresentsReasonData.val('tfzReansonId')
+				'tfzReasonId':currentPresentsReasonData.val('tfzReasonId')
 			}]		
 		});
 		this.comp('cartData').each(function(data){
@@ -2253,7 +2255,7 @@ define(function(require){
 		var a = order.reminder({'ip':ip,'billDetailId':currentOrderData.val('billDetailId')});
 		if(a.code=='1'){
 			this.comp('message').show({'title':'success','message':a.result});
-			currentOrderData.clear();
+//			currentOrderData.clear();
 		}else{
 			this.comp('message').show({'title':'error','message':a.result});
 		}
@@ -2278,7 +2280,7 @@ define(function(require){
 		var a = order.respite({'ip':ip,'billDetailId':currentOrderData.val('billDetailId')});
 		if(a.code=='1'){
 			this.comp('message').show({'title':'success','message':a.result});
-			currentOrderData.clear();
+//			currentOrderData.clear();
 		}else{
 			this.comp('message').show({'title':'error','message':a.result});
 		}
@@ -2318,7 +2320,7 @@ define(function(require){
 		if(result.code=='1'){
 			this.comp('inputGive2').clear();
 			currentPresentsReasonData.clear();
-			currentOrderData.clear();
+//			currentOrderData.clear();
 			this.comp('othe').hide();
 			order.refreshOrder({'ip':ip,'orderData':this.comp('orderData'),'currentDeskData':this.comp('currentDeskData')});
 		}
