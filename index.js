@@ -763,7 +763,7 @@ define(function(require){
 	    var input = this.comp('input1');
 	    var num = this.comp('input1').val();
 	    if(num == ''||num == undefined){
-	    	alert('输入错误');
+	    	this.comp('message').show({'title':'信息','message':"请输入人数！"});
 	    	return;
 	    }
 	    var deskData = this.comp('deskData');
@@ -1164,6 +1164,7 @@ define(function(require){
 
 	//送单
 	Model.prototype.button5Click = function(event){
+		var self=this;
 		var currentDeskData = this.comp('currentDeskData').getFirstRow();
 		var billMasterId = currentDeskData.val('billMasterId');
 		var roomId = currentDeskData.val('roomId');
@@ -1196,7 +1197,8 @@ define(function(require){
 		//送单成功
 		var success = function(param){	
 
-			alert(param.result[0].msg);
+		
+			self.comp('message').show({'title':'信息','message':param.result[0].msg});
 			localStorage.setItem(roomId,'');//清空购物车缓存
 			localStorage.setItem('sendCookWayData'+roomId, '');//清空sendCookWayData
 			cartData.clear();//发送订单成功，清空cartData
@@ -1365,6 +1367,8 @@ define(function(require){
     	var self = this;
     	if(lang_flag == 1){
     	    		   timeOutEvent = setTimeout(function(){
+    	    		   if(_this.attr("state") != "空台"){
+    	    		   
     				   lang=true;
 			    //记录下当前长按的桌子信息
 			    	currentDeskData.clear();
@@ -1406,6 +1410,10 @@ define(function(require){
 			 $(".main-ul").find("li").each(function(){
 				 action = $(this).attr('action','action');
 			 });
+    	}else{
+    		//alert("此台是空台")
+    		self.comp('message').show({'title':'信息','message':'此台是空台'});
+    	}
         },600);//这里设置定时器，定义长按500毫秒触发长按事件，时间可以自己改，个人感觉500毫秒非常合适 
     	
     	}
@@ -1427,6 +1435,7 @@ define(function(require){
     var action;//记录当前的操作方法
     //结束
     Model.prototype.li1Touchend = function(event){
+    	var self=this
     	var _this=$(event.target).parents("li");
     	var action=_this.attr("action");
     	var newNum = this.getElementByXid('input1');//新开台输入人数框
@@ -1595,12 +1604,13 @@ define(function(require){
 					        		 $(".more-wrap").hide();
 					        		 $(".main-ul").css({"margin-bottom":"0"});
 					        		 lang=false;
-					        		alert(msg.result);
+					        		
+					        		self.comp('message').show({'title':'信息','message':msg.result});
 									//刷新
 									getDesk(deskData,status.val('typeCode'),2);		
 									$(".cancel-active").hide();			        	
 								}else{
-					        		alert("转台失败！");
+					        		self.comp('message').show({'title':'信息','message':"转台失败！"});
 					        	}
 					        	
 					        },
@@ -1611,7 +1621,7 @@ define(function(require){
 			
 				
 			}else{
-				alert("此台已有人，不能转");
+				self.comp('message').show({'title':'信息','message':"此台有人，不能转！"});
 			}
 			
 	
@@ -1653,7 +1663,7 @@ define(function(require){
 						"success" : success
 					});
 				}else{//如果当前房间不为在用状态，不允许并单
-					this.comp('message').show({'title':'当前桌子不允许并台','message':'error'});
+					this.comp('message').show({'title':'信息','message':'此台不能合并！'});
 				}
 	    	
 	    }
