@@ -352,8 +352,15 @@
   <column name="checkOutMoney" type="String" xid="xid137"></column>
   <column name="discount" type="String" xid="xid138"></column>
   <column name="col9" type="String" xid="xid151"></column></div></div>  
-   <div xid="div545645646" class="loading">
-   <span xid="span153">加载中，请稍后</span></div>
+   <div xid="popOverLoaing" class="popOverLoaing">
+   <div xid="div86" class="popOverLoaing-content">
+    <div xid="div97">
+     <p xid="p4">
+      <span xid="span79" class="title"><![CDATA[信息]]></span></p> 
+     <p xid="p5">
+      <span xid="span80" class="popOverLoading-content"><![CDATA[]]></span></p> </div> </div> </div><div xid="div545645646" class="loading">
+   <span xid="span153">加载中，请稍后</span>
+  </div>
    <div component="$UI/system/components/justep/contents/contents" class="x-contents x-full"
     active="0" xid="contents1" swipe="false"> 
     <div class="x-contents-content" xid="login"> 
