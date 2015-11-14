@@ -463,8 +463,9 @@ img.subtract,img.add{
     bottom: 0;
     z-index:100;
     border-bottom-left-radius:4px;
-    border-bottom-rihgt-radius:4px;
+    border-bottom-right-radius:4px;
     border-top:1px solid #ccc;
+    background:#fff;
 }
 .pop-menuSub-btn{
 	width:100%;
