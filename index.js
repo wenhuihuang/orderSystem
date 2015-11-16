@@ -1167,6 +1167,8 @@ define(function(require){
 	//送单
 	Model.prototype.button5Click = function(event){
 		var self=this;
+		$(".popOverLoading-content").text("正在送单，请稍等");
+		$(".popOverLoaing").show();
 		var currentDeskData = this.comp('currentDeskData').getFirstRow();
 		var billMasterId = currentDeskData.val('billMasterId');
 		var roomId = currentDeskData.val('roomId');
@@ -1201,12 +1203,10 @@ define(function(require){
 		var menuTypeData = this.comp('menuTypeData');//用于清0数据
 		var goodsListData = this.comp('goodsListData');
 		//
-		window.plugins.spinnerDialog.show("信息","送单中", true);
+//		window.plugins.spinnerDialog.show("信息","送单中", true);
 		//送单成功
 		var success = function(param){	
-			
-			window.plugins.spinnerDialog.hide();			
-			self.comp('message').show({'title':'信息','message':param.result[0].msg});
+        $(".popOverLoaing").hide();			self.comp('message').show({'title':'信息','message':param.result[0].msg});
 			localStorage.setItem(roomId,'');//清空购物车缓存
 			localStorage.setItem('sendCookWayData'+roomId, '');//清空sendCookWayData
 			cartData.clear();//发送订单成功，清空cartData
@@ -1453,7 +1453,6 @@ define(function(require){
         clearTimeout(timeOutEvent);//清除定时器   
         if(timeOutEvent!=0){              
         //这里写要执行的内容（尤如onclick事件）  
-       
 		if(action == undefined ||action == ''){
 		if(lang==false){
 			
@@ -1572,7 +1571,6 @@ define(function(require){
 	    }else if(action == "turntable"){//转台-----------
 	    	var status = this.comp('statusData');
 	    	var deskData = this.comp('deskData');
-	    	
 	    var currentDeskData = this.comp('currentDeskData');
 		//当前房间的roomId
 		var currentRoomId = currentDeskData.val('roomId');
@@ -1601,15 +1599,17 @@ define(function(require){
 					_this.css({"background":"#18AEB6"});
 					var url=ip + 'RoomFunctionServlet.do';
 					var data='func=changeRoom&changeRoomId='+changeRoomId+'&changeRoomName='+changeRoomName+'&currentRoomId='+currentRoomId+'&current='+currentBillMasterId+'&currentConsumeRoomId='+currentConsumeRoomId+'&currentShareNo='+currentShareNo+'&currentRoomName='+currentRoomName;
-					console.log(data)
+					$(".popOverLoading-content").text("正在转台，请稍等");
+					$(".popOverLoaing").show();
 						$.ajax({
-					        type: "GET",
+					        type: "POST",
 					        url: url,
 					        data:data,
 					        dataType: 'json',
-					        async: false,//使用同步方式，目前data组件有同步依赖
+					        async: true,//使用同步方式，目前data组件有同步依赖
 					        cache: false,
 					        success: function(msg){
+					        	$(".popOverLoaing").hide();
 					        	if(msg.code == 1){
 					        		 $(".more-wrap").hide();
 					        		 $(".main-ul").css({"margin-bottom":"0"});
@@ -1618,13 +1618,14 @@ define(function(require){
 					        		self.comp('message').show({'title':'信息','message':msg.result});
 									//刷新
 									getDesk(deskData,status.val('typeCode'),2);		
-									$(".cancel-active").hide();			        	
+									$(".cancel-active").hide();
 								}else{
 					        		self.comp('message').show({'title':'信息','message':"转台失败！"});
 					        	}
 					        	
 					        },
 					        error: function(){
+					        $(".popOverLoaing").hide();
 					          throw justep.Error.create("加载数据失败");
 					        }
 						});
@@ -1643,7 +1644,8 @@ define(function(require){
 	    		var status = this.comp('statusData');
 	    		var deskData = this.comp('deskData');
 	    		if(_this.attr("state") == '在用'){
-			
+	    			$(".popOverLoading-content").text("正在并台，请稍等");
+					$(".popOverLoaing").show();
 					//记录下当前房台的信息
 					var currentRoomId = _this.attr('roomid');
 					var currentBillMasterId = _this.attr('billmasterid');	
@@ -1657,6 +1659,7 @@ define(function(require){
 								
 					_this.css({"background":"#18AEB6"});
 					var success = function(param){
+						$(".popOverLoaing").hide();
 						if(param.code == '1'){
 //							location.reload();//刷新房台	
 							lang=false;
@@ -1670,7 +1673,8 @@ define(function(require){
 					Baas.sendRequest({
 						"url" : ip + 'RoomFunctionServlet.do?func=mergeRoom&shareRoomId='+shareRoomId+'&shareConsumeRoomId='+shareConsumeRoomId+'&shareBillMasterId='+shareBillMasterId+'&currentRoomId='+currentRoomId+'&currentBillMasterId='+currentBillMasterId+'&currentConsumeRoomId='+currentConsumeRoomId+'&currentCustQty='+currentCustQty,
 						"dataType": "json",
-						"success" : success
+						"success" : success,
+						"async": true
 					});
 				}else{//如果当前房间不为在用状态，不允许并单
 					this.comp('message').show({'title':'信息','message':'此台不能合并！'});
@@ -1864,7 +1868,10 @@ define(function(require){
 			//---用于刷新
     		var status = this.comp('statusData');
     		var deskData = this.comp('deskData');
+    		$(".popOverLoading-content").text("正在清台，请稍等");
+			$(".popOverLoaing").show();
 			var success = function(param){
+				$(".popOverLoaing").hide();
 			lang=false;
 			$(".cancel-active").hide();
 				//$('.left-menu').find('li').eq(0).trigger('click');//刷新房台
@@ -1875,7 +1882,8 @@ define(function(require){
 				//RoomFunctionServlet.do?func=cleanRoom&currentBillMasterId=xxx&checkEmpCodeId=xxx&bankTerminalID=xxx
 				"url" :ip+ 'RoomFunctionServlet.do?func=cleanRoom&currentBillMasterId='+currentDeskData.val('billMasterId')+'&checkEmpCodeId='+userData.val('userId')+'&bankTerminalID=0001000000000106',
 				"dataType": "json",
-				"success" : success
+				"success" : success,
+				"async":true
 			});
 	};
 
@@ -2917,8 +2925,6 @@ define(function(require){
 	
 	
 
-
-	
 	
 
 	return Model;

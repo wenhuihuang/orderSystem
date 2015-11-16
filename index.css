@@ -120,6 +120,9 @@ width: 46.5%;
 .fr{
 	float:right;
 }
+a:hover{
+	text-decoration:none
+}
 .ml20{
 	margin-left:20px;
 }
@@ -1164,6 +1167,58 @@ ul.menu-item li{
 	display:inline-block;
 	margin-top:50%;
 	text-align:center;
+}
+.popOverLoaing{
+	z-index:100000;
+	display:none;
+	position:absolute;
+	width:100%;
+	height:100%;
+	background:rgba(10, 10, 10, 0.46);
+}
+.popOverLoaing .popOverLoaing-content{
+    border: 1px solid #999999;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    border-radius: 6px;
+    -webkit-box-shadow: 0 3px 9px rgba(0, 0, 0, 0.5);
+    box-shadow: 0 3px 9px rgba(0, 0, 0, 0.5);
+    background-clip: padding-box;
+    width: 220px;
+    position: fixed;
+    z-index: 1000001;
+    left: 50%;
+    margin-left: -110px;
+    margin-top: 0;
+    top: 50%;
+    text-align: center;
+    opacity: 1;
+    -webkit-transform: translate3d(0, 0, 0) scale(1.185);
+    -ms-transform: translate3d(0, 0, 0) scale(1.185);
+    transform: translate3d(0, 0, 0) scale(1.185);
+    -webkit-transition-property: -webkit-transform, opacity;
+    -moz-transition-property: -moz-transform, opacity;
+    -ms-transition-property: -ms-transform, opacity;
+    -o-transition-property: -o-transform, opacity;
+    transition-property: transform, opacity;
+    display: block;
+}
+.popOverLoaing .popOverLoaing-content div{
+	padding: 15px;
+    border-radius: 6px;
+    background-color: rgba(241, 241, 241, 0.79);
+}
+.popOverLoaing .popOverLoaing-content div p .title{
+	word-break: break-all;
+    word-wrap: break-word;
+    font-weight: 700;
+    font-size: 16px;
+    text-align: center;
+}
+.popOverLoaing .popOverLoaing-content div p .popOverLoading-content{
+	margin-top: 5px;
+    word-break: break-all;
+    word-wrap: break-word;
+    text-align: center;
 }
 .x-label-edit{
 	padding:0.5em;
