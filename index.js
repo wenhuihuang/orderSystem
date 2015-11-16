@@ -1176,6 +1176,10 @@ define(function(require){
 		cartData.eachAll(function(param){
 			goods += param.row.val('goodsId')+'_'+param.row.val('qty')+'_'+param.row.val('sprice')+'_'+param.row.val('goodsName')+'_'+param.row.val('unitId')+',';
 		});
+		if(cartData.getCount()<1){
+			this.comp('message').show({'title':'信息','message':'请先选择菜品'});
+			return;
+		}
 		goods = goods.substring(0,goods.length-1);
 		var sendCook = this.comp('sendCookWayData');
 		var cookways = '';
@@ -1197,10 +1201,11 @@ define(function(require){
 		var menuTypeData = this.comp('menuTypeData');//用于清0数据
 		var goodsListData = this.comp('goodsListData');
 		//
+		window.plugins.spinnerDialog.show("信息","送单中", true);
 		//送单成功
 		var success = function(param){	
-
-		
+			
+			window.plugins.spinnerDialog.hide();			
 			self.comp('message').show({'title':'信息','message':param.result[0].msg});
 			localStorage.setItem(roomId,'');//清空购物车缓存
 			localStorage.setItem('sendCookWayData'+roomId, '');//清空sendCookWayData
