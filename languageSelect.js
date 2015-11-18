@@ -29,7 +29,7 @@ define(function(require){
 				}
 				//为选中的语言加select
 				 var optionObj=$("#"+this.getIDByXID("language-select")).find("option");
-				optionObj.each(function(){	
+				 optionObj.each(function(){	
 					 if( $(this).attr("value") == localStorage.getItem("languageId")){
 						 $(this).attr("selected","true");
 					 }
@@ -37,7 +37,6 @@ define(function(require){
 			
 			}else{
 				location.href="languageSelect.w#!settings";
-				
 			}
 
 		 
