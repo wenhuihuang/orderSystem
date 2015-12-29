@@ -2,7 +2,7 @@
 
 <div xmlns="http://www.w3.org/1999/xhtml" xid="window" class="window" component="$UI/system/components/justep/window/window"
   design="device:mobile"> 
-    <div component="$UI/system/components/justep/model/model" xid="model" style="width:234px;height:auto;left:682px;top:88px;" onLoad="modelLoad">      
+    <div component="$UI/system/components/justep/model/model" xid="model" style="width:234px;height:auto;left:822px;top:283px;" onLoad="modelLoad">      
        <div component="$UI/system/components/justep/data/data" autoLoad="true" xid="language" idColumn="col0" confirmDelete="false" autoNew="true">
       <column name="col0" type="String" xid="xid65"></column>
   <column label="在用" name="USING" type="String" xid="xid66"></column>
@@ -106,7 +106,25 @@
   <column label="有更新，是否更新" name="IFUPDATE" type="String" xid="xid191"></column>
   <column label="正在更新中" name="DOWNLOADING" type="String" xid="xid192"></column>
   <column label="请输入人数" name="INPUTPERSONNUM" type="String" xid="xid193"></column>
-  <column label="确认删除" name="CONFIRMDELETE" type="String" xid="xid194"></column></div>  
+  <column label="确认删除" name="CONFIRMDELETE" type="String" xid="xid194"></column>
+  <column label="此台有人，不能转台" name="PEOPLECANNOTTURN" type="String" xid="xid195"></column>
+  <column label="正在转台，请稍等" name="AREAND" type="String" xid="xid196"></column>
+  <column label="不能并台" name="CANTMERGE" type="String" xid="xid197"></column>
+  <column label="正在清台，请稍等" name="ISCLEAR" type="String" xid="xid198"></column>
+  <column label="数量不能为空" name="NUMBEREMPTY" type="String" xid="xid199"></column>
+  <column label="理由没选" name="REASONNOTTOCHOOSE" type="String" xid="xid200"></column>
+  <column label="赠送数量不能大于购买数量 " name="GIVENOTGREATER" type="String" xid="xid201"></column>
+  <column label="未设置手写单" name="HANDWRITTENLIST" type="String" xid="xid202"></column>
+  <column label="菜名不能为空" name="NAMENOTEMPTY" type="String" xid="xid203"></column>
+  <column label="体格不能为空" name="PRICENOTEMPTY" type="String" xid="xid204"></column>
+  <column label="没有查找到内容" name="NOSEARCHCONTENT" type="String" xid="xid205"></column>
+  <column label="请选择折扣类型" name="SELECTDISCOUNT" type="String" xid="xid206"></column>
+  <column label="退菜数量大于订单数量" name="FOODGREATERORDER" type="String" xid="xid207"></column>
+  <column label="请选择退菜原因" name="RETURNFOOD" type="String" xid="xid208"></column>
+  <column label="大酒店" name="RESTAURANT" type="String" xid="xid209"></column>
+  <column label="单号" name="ORDERNUM" type="String" xid="xid210"></column>
+  <column label="项目" name="PROJECT" type="String" xid="xid211"></column>
+  <column label="欢迎下次光临" name="WELCOMENEXT" type="String" xid="xid212"></column></div>  
     <div component="$UI/system/components/justep/data/data" autoLoad="true"
       xid="runModel" idColumn="col0">
       <column name="col0" type="String" xid="xid63"/>  
@@ -401,7 +419,7 @@
      <p xid="p4">
       <span xid="span79" class="title"><![CDATA[message]]></span></p> 
      <p xid="p5">
-      <span xid="span80" class="popOverLoading-content"><![CDATA[]]></span></p> </div> </div> </div><div xid="div545645646" class="loading" style="height:5px;width:326px;">
+      <span xid="span80" class="popOverLoading-content"><![CDATA[]]></span></p> </div> </div> </div><div xid="div545645646" class="loading">
    <span xid="span153">加载中，请稍后</span>
   </div>
    <div component="$UI/system/components/justep/contents/contents" class="x-contents x-full"
@@ -1991,36 +2009,36 @@
    <div class="x-popOver-overlay" xid="div71"></div>
    <div class="x-popOver-content pop-container allInfo" xid="div74"><div component="$UI/system/components/justep/panel/panel" class="x-panel x-full" xid="panel32">
    <div class="x-panel-top  preview-top" xid="top26">
-    <h3 xid="h310" class="order-info-title">大酒店</h3></div> 
+    <h3 xid="h310" class="order-info-title" bind-text="language.ref('RESTAURANT')">大酒店</h3></div> 
    <div class="x-panel-content order-info-con" xid="content58">
     <div xid="div82" class="order-info-wrap">
      <div xid="div108">
       <div component="$UI/system/components/bootstrap/row/row" class="row" xid="row57">
        <div class="col col-xs-4" xid="col161">
-        <span xid="span182">管理员：</span></div> 
+        <span xid="span182" bind-text="language.val('ADMIN')">管理员：</span></div> 
        <div class="col col-xs-8" xid="col155">
         <span xid="span179" bind-text="userData.ref('userName')"></span></div> </div> 
       <div component="$UI/system/components/bootstrap/row/row" class="row" xid="row60">
        <div class="col col-xs-4" xid="col154">
-        <span xid="span173">台号：</span></div> 
+        <span xid="span173" bind-text="language.val('AHO')">台号：</span></div> 
        <div class="col col-xs-8" xid="col156">
         <span xid="span186"></span></div> </div> 
       <div component="$UI/system/components/bootstrap/row/row" class="row" xid="row59">
        <div class="col col-xs-4" xid="col162">
-        <span xid="span174">单号：</span></div> 
+        <span xid="span174" bind-text="language.val('ORDERNUM')">单号：</span></div> 
        <div class="col col-xs-8" xid="col163">
         <span xid="span176" bind-text="ConsumeBillData.ref('billNO')"></span></div> </div> </div> 
      <div xid="div107">
       <h3 xid="h311" class="all-price">
-       <span xid="span188">总金额：</span>
+       <span xid="span188" bind-text="language.val('TOTALPRICES')">总金额：</span>
        <span xid="span187" class="color-price" bind-text="statusData.ref('totalCheckOutMoney')"></span></h3> </div> </div> 
     <div component="$UI/system/components/bootstrap/row/row" class="row top-border" xid="row56">
      <div class="col col-xs-6" xid="col153">
-      <h5 xid="h517">项目</h5></div> 
+      <h5 xid="h517" bind-text="language.val('PROJECT')">项目</h5></div> 
      <div class="col col-xs-3" xid="col152">
-      <h5 xid="h516">数量</h5></div> 
+      <h5 xid="h516" bind-text="language.ref('QUANTITY')">数量</h5></div> 
      <div class="col col-xs-3" xid="col158">
-      <h5 xid="h518">金额</h5></div> </div> 
+      <h5 xid="h518" bind-text="language.val('PRICE')">金额</h5></div> </div> 
     <div component="$UI/system/components/justep/list/list" class="x-list" xid="list17" data="showBillData">
      <ul class="x-list-template" xid="listTemplateUl18">
       <li xid="li14">
@@ -2032,7 +2050,7 @@
         <div class="col col-xs-3" xid="col159">
          <span xid="span184" bind-text="val('checkOutMoney')"></span></div> </div> </li> </ul> </div> 
     <p xid="p6" style="text-align:center;">
-     <span xid="span175" style="font-size:18px;">欢迎下次光临</span></p> </div> 
+     <span xid="span175" style="font-size:18px;" bind-text="language.val('WELCOMENEXT')">欢迎下次光临</span></p> </div> 
    <div class="x-panel-bottom order-info-button" xid="bottom25">
     <a component="$UI/system/components/justep/button/button" class="btn back-btn" label="返回" xid="button6" bind-click="allInfoHide">
      <i xid="i13"></i>

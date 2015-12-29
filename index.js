@@ -5,7 +5,7 @@ define(function(require){
 	require('cordova!org.apache.cordova.file-transfer');
 	require('cordova!ch.ti8m.documenthandler');
 	require('cordova!hu.dpal.phonegap.plugins.SpinnerDialog');
-	var version = "1.0.0";
+	var version = "1.1.0";
 	var cishu = 0;
 	//var ip = "http://qixusoft.vicp.net";
 	//var ip="http://192.168.1.20:8080/OrderSystemWeX5/";
@@ -486,12 +486,14 @@ define(function(require){
 				}
 				
 			}
-			var obj = eval('(' + str + ')');
+			debugger
+			var obj = eval('('+str+')');
 			console.log("str="+str)
 			console.log(obj)
 			//将语言写入本地
 			//localStorage.setItem("language", str)
 			//加载语言数据
+//			languageData.loadData(obj);
 			languageData.newData({
 				index: 0,
 				defaultValues:[
@@ -1210,7 +1212,7 @@ define(function(require){
 //		window.plugins.spinnerDialog.show("信息","送单中", true);
 		//送单成功
 		var success = function(param){	
-        $(".popOverLoaing").hide();			self.comp('message').show({'title':'信息','message':param.result[0].msg});
+        $(".popOverLoaing").hide();			self.comp('message').show({'title':'message','message':param.result[0].msg});
 			localStorage.setItem(roomId,'');//清空购物车缓存
 			localStorage.setItem('sendCookWayData'+roomId, '');//清空sendCookWayData
 			cartData.clear();//发送订单成功，清空cartData
@@ -1428,7 +1430,7 @@ define(function(require){
     	}else{
     		//alert("此台是空台")
     		timeOutEvent = 0;
-    		self.comp('message').show({'title':'信息','message':language.val('THISDESKFREE')});
+    		self.comp('message').show({'title':'message','message':language.val('THISDESKFREE')});
     		return false;
     	}
         },600);//这里设置定时器，定义长按500毫秒触发长按事件，时间可以自己改，个人感觉500毫秒非常合适 
@@ -1640,19 +1642,18 @@ define(function(require){
 			
 				
 			}else{
-				self.comp('message').show({'title':'message','message':"此台有人，不能转！"});
+				self.comp('message').show({'title':'message','message':language.val('PEOPLECANNOTTURN')});
 			}
 			
 	
 	    }else if(action=="shareRoom"){//并台------
-	    		
 	    		var currentDeskData = this.comp('currentDeskData');
 	    		var mergeRoomData = this.comp('mergeRoomData');
 	    		//---用于刷新
 	    		var status = this.comp('statusData');
 	    		var deskData = this.comp('deskData');
 	    		if(_this.attr("state") == '在用'){
-	    			$(".popOverLoading-content").text("正在并台，请稍等");
+	    			$(".popOverLoading-content").text(language.val('AREAND'));
 					$(".popOverLoaing").show();
 					//记录下当前房台的信息
 					var currentRoomId = _this.attr('roomid');
@@ -1685,7 +1686,7 @@ define(function(require){
 						"async": true
 					});
 				}else{//如果当前房间不为在用状态，不允许并单
-					this.comp('message').show({'title':'信息','message':'此台不能合并！'});
+					this.comp('message').show({'title':'message','message':language.val('CANTMERGE')});
 				}
 	    	
 	    }
@@ -1869,6 +1870,7 @@ define(function(require){
 	
 	//零结帐
 	Model.prototype.button22Click = function(event){
+			var language = this.comp('language');
 			//加active
 			this.bgColor(event);
 			var currentDeskData = this.comp('currentDeskData');
@@ -1876,7 +1878,7 @@ define(function(require){
 			//---用于刷新
     		var status = this.comp('statusData');
     		var deskData = this.comp('deskData');
-    		$(".popOverLoading-content").text("正在清台，请稍等");
+    		$(".popOverLoading-content").text(language.val('ISCLEAR'));
 			$(".popOverLoaing").show();
 			var success = function(param){
 				$(".popOverLoaing").hide();
@@ -2019,6 +2021,7 @@ define(function(require){
 	
 	//赠送确定---保存到本地
 	Model.prototype.buttonGitClick = function(event){
+		var language = this.comp('language'); 
 		var currentGoodsData = this.comp('currentGoodsData');
 		var bqty = currentGoodsData.val('qty');//剩余可赠送数量
 		var qty = this.comp("inputGive").val();//赠送数量		
@@ -2026,11 +2029,11 @@ define(function(require){
 		var currentPresentsReasonData = this.comp('currentPresentsReasonData');
 		var sendPresentsReasonData = this.comp('sendPresentsReasonData');
 		if(qty==null||qty==''||qty==undefined){
-			this.comp('message').show({'title':'message','message':'数量不能为空'});
+			this.comp('message').show({'title':'message','message':language.val('NUMBEREMPTY')});
 			return;
 		}
 		if(currentPresentsReasonData.getCount()<1){
-			this.comp('message').show({'title':'message','message':'理由没选'});
+			this.comp('message').show({'title':'message','message':language.val('REASONNOTTOCHOOSE')});
 			return;			
 		}
 		sendPresentsReasonData.each(function(data){
@@ -2048,7 +2051,7 @@ define(function(require){
 			hqty += parseInt(qty);
 		}
 		if(bqty<qty){
-			this.comp('message').show({'title':'message','message':'赠送数量不能大于购买数量'});
+			this.comp('message').show({'title':'message','message':language.val('GIVENOTGREATER')});
 			return false;
 		}
 		sendPresentsReasonData.newData({
@@ -2115,6 +2118,7 @@ define(function(require){
 	
 	//发送退菜原因
 	Model.prototype.cancelReasonTrueClick = function(event){
+		var language = this.comp('language');
 		var currentCancelReasonData = this.comp('currentCancelReasonData');
 		var userData = this.comp('userData');
 		var userId = userData.val('userId');
@@ -2126,11 +2130,11 @@ define(function(require){
 		var orderQty = this.comp('currentOrderData').getFirstRow().val('qty');
 		
 		if(qty > orderQty-cancelQty){
-			this.comp('message').show({'title':'error','message':'退菜数量超出订单数量'});
+			this.comp('message').show({'title':'error','message':language.val('FOODGREATERORDER')});
 			return;
 		}
 		if(currentCancelReasonData.getCount()<1){
-				this.comp('message').show({'title':'error','message':'请选择退菜原因'});
+				this.comp('message').show({'title':'error','message':language.val('RETURNFOOD')});
 		}
 		var result = order.cancelGoods({'ip':ip,'userId':userId,'reasonId':reasonId,'qty':qty,'billDetailId':billDetailId});
 		order.refreshOrder({'ip':ip,'currentDeskData':this.comp('currentDeskData'),'orderData':this.comp('orderData')});//刷新
@@ -2315,16 +2319,17 @@ define(function(require){
 	//已分单赠送实际操作
 	Model.prototype.hbutton58Click = function(event){
 		//data.ip + 'RoomFunctionServlet.do?func=gift&billDetailId='+data.billDetailId+'&reasonId='+data.reasonId+'&cancelQty='+data.cancelQty+'&empcode='+data.userId		var currentOrderData = this.comp('currentOrderData');
+		var language = this.comp('language');
 		var userData = this.comp('userData');
 		var currentOrderData = this.comp('currentOrderData');
 		var currentPresentsReasonData = this.comp('currentPresentsReasonData');
 		var qty = this.comp('inputGive2').val();
 		if(currentPresentsReasonData.getCount()<1){
-			this.comp('message').show('请选择赠送理由');
+			this.comp('message').show(language.val('REASONNOTTOCHOOSE'));
 			return;
 		}
 		if(qty > (currentOrderData.val('qty')-currentOrderData.val('presentQty')-currentOrderData.val('cancelQty'))){
-			this.comp('message').show({'title':'error','message':'赠送数量不能大于已点数量'});
+			this.comp('message').show({'title':'error','message':language.val('GIVENOTGREATER')});
 			return false;
 		}
 		//赠送数量不能大于点单数量
@@ -2398,7 +2403,7 @@ define(function(require){
 		}else{
 			this.comp('cartno').val('');
 			this.comp('cartpwd').val('');
-			justep.Util.hint('输入会员卡成功')
+			justep.Util.hint(result.result);
 			//刷新结帐单
 			var currentDeskData = this.comp('currentDeskData');
 			var ConsumeBillData = this.comp('ConsumeBillData');
@@ -2485,12 +2490,13 @@ define(function(require){
 	//确认打折
 	Model.prototype.button68Click = function(event){
 		//				"url" : data.ip + 'RoomFunctionServlet.do?func=allDiscout&billMasterId='+data.billMasterId+'&empCode='+data.userId+'&discountTypeId='+data.discountTypeId+'&discount='+data.discount,
+		var language = this.comp('language');
 		var currentDeskData = this.comp('currentDeskData');
 		var userData = this.comp('userData');
 		var a = this.comp('currentDisCountTypesData');
 		var currentDisCountTypesData = this.comp('currentDisCountTypesData');
 		if(currentDisCountTypesData.getCount()<1){
-			this.comp('message').show({'title':'message','message':'请用选择打折类型'});
+			this.comp('message').show({'title':'message','message':language.val('SELECTDISCOUNT')});
 			return false;
 		}
 		var result = order.allDiscout({'ip':ip,'billMasterId':currentDeskData.getFirstRow().val('billMasterId'),'userId':userData.val('userId'),'discount':a.val('discount'),'discountTypeId':a.val('discountTypeId')});
@@ -2648,7 +2654,7 @@ define(function(require){
 
 		
 		var cartData = this.comp('cartData');
-		if(confirm('确定删除<'+row.val('goodsName')+'>')){
+		if(confirm('delete?<'+row.val('goodsName')+'>')){
 			cartData.deleteData(cartData.getRowByID(row.val('goodsId')));
 			//用于进入房台时加载购物车数据
 			localStorage.setItem(roomId,JSON.stringify(cartData.toJson()));
@@ -2688,6 +2694,7 @@ define(function(require){
 	
 	//菜单拼音搜索
 	Model.prototype.searchGoodsBtnClick = function(event){
+		var language = this.comp('language');
 		var searchGoodsData=this.comp('searchGoodsData');
 		var condition = $('#'+this.getIDByXID('searchGoodsInput')).val();
 		var data = order.getGoodsByCondition({'ip':ip,'condition':condition});
@@ -2695,7 +2702,7 @@ define(function(require){
 		$(this.getElementByXid('searchResult0')).text('');
 		if(data.goods.length==0){
 //			this.comp('message').show({'title':'结果','message':'没有查找到内容'});
-			$(this.getElementByXid('searchResult0')).text('没有查找到内容')
+			$(this.getElementByXid('searchResult0')).text(language.val('NOSEARCHCONTENT'))
 		}
 
 	};
@@ -2837,24 +2844,21 @@ define(function(require){
 	
 	//手写单
 	Model.prototype.button36Click = function(event){
+		var language = this.comp('language');
 		var result = order.getWriterBillID({'ip':ip});
-		if(result == null){
-			this.comp('message').show({'title':'message','message':'未设置手写单'});
-			return;
-		}
 		var qty = this.comp('handGoodsQty').val();
 		var goodsName = this.comp('handGoodsName').val();
 		var sprice = this.comp('handGoodsPrice').val();
 		if(goodsName==''||goodsName == undefined){
-			this.comp('message').show({'title':'message','message':'菜单名不能为空'});
+			this.comp('message').show({'title':'message','message':language.val('NAMENOTEMPTY')});
 			return false;
 		}
 		if(sprice==''||sprice == undefined){
-			this.comp('message').show({'title':'message','message':'价格不能为空'});
+			this.comp('message').show({'title':'message','message':language.val('PRICENOTEMPTY')});
 			return false;
 		}
 		if(qty==''||qty == undefined||qty==0){
-			this.comp('message').show({'title':'message','message':'数量不能为0'});
+			this.comp('message').show({'title':'message','message':language.val('NUMNOTEMPTY')});
 			return;
 		}
 		debugger
@@ -2923,10 +2927,11 @@ define(function(require){
 	
 
 	Model.prototype.handOrderBtnClick = function(event){
+				var language = this.comp('language');
 				//检验是否设置手写单
 				var result = order.getWriterBillID({'ip':ip});
 				if(result == null){
-						this.comp('message').show({'title':'message','message':'未设置手写单'});
+						this.comp('message').show({'title':'message','message':language.val('HANDWRITTENLIST')});
 						return false;
 				}
 				$(this.getElementByXid('handGoodsName')).focus();
