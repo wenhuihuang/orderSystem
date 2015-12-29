@@ -524,7 +524,7 @@
               <ul class="x-list-template clearfix main-ul" xid="listTemplateUl2"> 
                 <li xid="li1" bind-attr-roomId="val('roomId')" bind-attr-state="val('state')"
                   bind-attr-tai_number="val('tai_number')" bind-attr-consumeRoomId="val('consumeRoomId')"
-                  bind-attr-custQty="val('custQty')" bind-touchstart="li1Touchstart"
+                  bind-attr-custQty="val('custQty')" bind-attr-billMasterId="val('billMasterId')" bind-touchstart="li1Touchstart" 
                   bind-touchend="li1Touchend" bind-touchmove="li1Touchmove" bind-css="{'blue':val('color')=='blue','gray':val('color')=='gray','yellow':val('color')=='yellow','red':val('color')=='red','green':val('color')=='green'}"> 
                   <div xid="div5" class="table-con use"> 
                     <p xid="p87"> 

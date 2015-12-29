@@ -1653,11 +1653,14 @@ define(function(require){
 	    		var status = this.comp('statusData');
 	    		var deskData = this.comp('deskData');
 	    		if(_this.attr("state") == '在用'){
+	    			console.log('开始打印');
+	    			console.log(_this)
 	    			$(".popOverLoading-content").text(language.val('AREAND'));
 					$(".popOverLoaing").show();
 					//记录下当前房台的信息
 					var currentRoomId = _this.attr('roomid');
 					var currentBillMasterId = _this.attr('billmasterid');	
+					console.log('currentBillMasterId'+currentBillMasterId);
 					var currentConsumeRoomId = _this.attr('consumeRoomId');
 					var currentCustQty = _this.attr('custQty');
 					var custQty = _this.attr('custQty');
@@ -1680,6 +1683,7 @@ define(function(require){
 						}
 					};
 					Baas.sendRequest({
+					//RoomFunctionServlet.do?func=mergeRoom&shareRoomId=xxxx&shareConsumeRoomId=xxx&shareBillMasterId=xxx&currentRoomId=xxx&currentBillMasterId=xxx&currentConsumeRoomId=xxx&currentCustQty=xxx
 						"url" : ip + 'RoomFunctionServlet.do?func=mergeRoom&shareRoomId='+shareRoomId+'&shareConsumeRoomId='+shareConsumeRoomId+'&shareBillMasterId='+shareBillMasterId+'&currentRoomId='+currentRoomId+'&currentBillMasterId='+currentBillMasterId+'&currentConsumeRoomId='+currentConsumeRoomId+'&currentCustQty='+currentCustQty,
 						"dataType": "json",
 						"success" : success,
