@@ -419,7 +419,7 @@
      <p xid="p4">
       <span xid="span79" class="title"><![CDATA[message]]></span></p> 
      <p xid="p5">
-      <span xid="span80" class="popOverLoading-content"><![CDATA[]]></span></p> </div> </div> </div><div xid="div545645646" class="loading">
+      <span xid="span80" class="popOverLoading-content"><![CDATA[]]></span></p> </div> </div> </div><div xid="div545645646" class="loading" style="display:none;">
    <span xid="span153">加载中，请稍后</span>
   </div>
    <div component="$UI/system/components/justep/contents/contents" class="x-contents x-full"
