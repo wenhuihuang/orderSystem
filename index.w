@@ -236,7 +236,8 @@
    <col name="totalCheckOutMoney" xid="ruleCol9">
     <calculate xid="calculate9">
      <expr xid="default49">$model.showBillData.sum('checkOutMoney')</expr></calculate> </col> </rule>
-  <column label="埋单按钮名字" name="checkBtn" type="String" xid="xid149"></column></div>  
+  <column label="埋单按钮名字" name="checkBtn" type="String" xid="xid149"></column>
+  <column label="是否允许开台" name="mergetable" type="String" xid="xid213"></column></div>  
     <div component="$UI/system/components/justep/data/data" autoLoad="true"
       xid="currentGoodsData" idColumn="goodsId"> 
       <column label="商品id" name="goodsId" type="String" xid="default5"></column>

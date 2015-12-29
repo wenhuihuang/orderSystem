@@ -1712,8 +1712,16 @@ define(function(require){
 	
 	//并台	
 	Model.prototype.button20Click = function(event){
+		debugger
+		var currentDeskData = this.comp('currentDeskData').getFirstRow();
+		var state = currentDeskData.val('state');
+		if(state == '埋单'){
+			this.comp('message').show({'title':'faile','message':'已埋单，不可并台'});
+			return;
+		}
 		//加active
 		this.bgColor(event);
+		
 		var currentDeskData = this.comp('currentDeskData');
 		//当前房间的roomId
 		var roomId = currentDeskData.val('roomId');
