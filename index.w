@@ -2,7 +2,7 @@
 
 <div xmlns="http://www.w3.org/1999/xhtml" xid="window" class="window" component="$UI/system/components/justep/window/window"
   design="device:mobile"> 
-    <div component="$UI/system/components/justep/model/model" xid="model" style="width:234px;height:auto;left:822px;top:283px;" onLoad="modelLoad">      
+    <div component="$UI/system/components/justep/model/model" xid="model" style="width:234px;height:auto;left:597px;top:218px;" onLoad="modelLoad">      
        <div component="$UI/system/components/justep/data/data" autoLoad="true" xid="language" idColumn="col0" confirmDelete="false" autoNew="true">
       <column name="col0" type="String" xid="xid65"></column>
   <column label="在用" name="USING" type="String" xid="xid66"></column>
@@ -548,21 +548,21 @@
               xid="row3"> 
               <div class="col col-xs-4" xid="col4"> 
                 <a component="$UI/system/components/justep/button/button"
-                  class="btn btn-default" label=" 搭台 " xid="button18" bind-click="button18Click"> 
+                  class="btn btn-default stage_btn" label=" 搭台 " xid="button18" bind-click="button18Click"> 
                   <i xid="i20"/>  
                   <span xid="span8" bind-text="language.ref('STAGE')">搭台</span> 
                 </a> 
               </div>  
               <div class="col col-xs-4" xid="col5"> 
                 <a component="$UI/system/components/justep/button/button"
-                  class="btn btn-default" label="并台 " xid="button20" bind-click="button20Click"> 
+                  class="btn btn-default combine_table" label="并台 " xid="button20" bind-click="button20Click"> 
                   <i xid="i22"/>  
                   <span xid="span9" bind-text="language.ref('COMBINE')">并台</span> 
                 </a> 
               </div>  
               <div class="col col-xs-4" xid="col6"> 
                 <a component="$UI/system/components/justep/button/button"
-                  class="btn btn-default" label="转台" xid="button21" bind-click="button21Click"> 
+                  class="btn btn-default turntable" label="转台" xid="button21" bind-click="button21Click"> 
                   <i xid="i23"/>  
                   <span xid="span10" bind-text="language.ref('TURNTABLE')">转台</span> 
                 </a> 
@@ -583,7 +583,7 @@
               </div>  
               <div class="col col-xs-4" xid="col9"> 
                 <a component="$UI/system/components/justep/button/button"
-                  class="btn btn-default" label=" 点菜" xid="button24" target="menu"> 
+                  class="btn btn-default order_btn" label=" 点菜" xid="button24" target="menu"> 
                   <i xid="i26"/>  
                   <span xid="span13" bind-text="language.ref('ORDER')">点菜</span> 
                 </a> 

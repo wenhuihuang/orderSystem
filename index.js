@@ -1387,6 +1387,10 @@ define(function(require){
     	    		   if(_this.attr("state") != "空台"){
     	    		   
     				   lang=true;
+    				   	$(".combine_table").removeAttr("disabled");
+						$(".stage_btn").removeAttr("disabled");
+						$(".turntable").removeAttr("disabled");
+						$(".order_btn").removeAttr("disabled");
 			    //记录下当前长按的桌子信息
 			    	currentDeskData.clear();
 			        currentDeskData.newData({
@@ -1405,6 +1409,10 @@ define(function(require){
 				currentDeskData.first(); 
 				//更新埋单状态状态
 					if(row.val('state')=='埋单'){
+						$(".combine_table").attr("disabled","true");
+						$(".stage_btn").attr("disabled","true");
+						$(".turntable").attr("disabled","true");
+						$(".order_btn").attr("disabled","true");
 						self.comp('button23').set({'label':language.val('CANCELPAY')});
 					}else{
 						self.comp('button23').set({'label':language.val('PAY')});
@@ -1595,7 +1603,8 @@ define(function(require){
 		//当前房间的名称
 		var currentRoomName	= currentDeskData.val("tai_number");
 		//选择的房间的名称，如果有【xx】 需要截断字符串再上传  --去【xx】
-			currentRoomName = currentRoomName.replace(/【.*/g," ");
+		console.log(currentRoomName)
+			currentRoomName = currentRoomName.replace(/【.*/g,"");
 			//当a节点点击的时候，当前节点变红其它节点变灰
 				if(_this.attr("state") == '空台' && currentDeskData.val('state') == "在用"){
 					//记录下当前房台的信息
@@ -1604,7 +1613,7 @@ define(function(require){
 					//要改变的台名
 					var changeRoomName = _this.attr('tai_number');
 					//选择的房间的名称，如果有【xx】 需要截断字符串再上传  --去【xx】
-					changeRoomName = changeRoomName.replace(/【.*/g," ");
+					changeRoomName = changeRoomName.replace(/【.*/g,"");
 					//alert(changeRoomName);
 					_this.css({"background":"#18AEB6"});
 					var url=ip + 'RoomFunctionServlet.do';
@@ -1921,7 +1930,6 @@ define(function(require){
 		debugger
 		var button = this.comp('button23');
 		lang=false;
-		$(".cancel-active").hide();
 		if(button.label == language.val('PAY')){
 			var a= order.checkBill({'ip':ip,'userId':userId,'billMasterId':currentDeskData.val('billMasterId'),'consumeRoomId':currentDeskData.val('consumeRoomId')});
 			if(a.code == '1'){
@@ -1929,6 +1937,7 @@ define(function(require){
 //				currentDeskData.val('state','取消埋单');
 				button.set({'label':language.val('CANCELPAY')});
 				getDesk(deskData,status.val('typeCode'),2);	
+				$(".cancel-active").hide();
 			}else{
 				this.comp('message').show({'title':'error','message':a.result});
 			}
@@ -1939,6 +1948,7 @@ define(function(require){
 //				currentDeskData.val('state','埋单');
 				button.set({'label':language.val('PAY')});
 				getDesk(deskData,status.val('typeCode'),2);
+				$(".cancel-active").hide();
 			}else{
 				this.comp('message').show({'title':'error','message':a.result});
 			}
