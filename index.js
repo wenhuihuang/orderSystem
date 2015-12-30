@@ -1612,7 +1612,7 @@ define(function(require){
 					$(".popOverLoading-content").text(language.val('CHANGETHETABLE'));
 					$(".popOverLoaing").show();
 						$.ajax({
-					        type: "POST",
+					        type: "GET",
 					        url: url,
 					        data:data,
 					        dataType: 'json',
