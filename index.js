@@ -2659,7 +2659,7 @@ define(function(require){
 		var row = this.comp('currentGoodsData');
 		var goodsId = row.val('goodsId');
 		var goodsList = this.comp('goodsListData');
-		var currentDeskData = this.comp('currentDeskData');
+		var currentDeskData = this.comp('currentDeskData').getFirstRow();
 		var roomId = currentDeskData.val('roomId');
 		var typeCode = row.getFirstRow().val('typeCode');
 		var menuTypeData = this.comp('menuTypeData');
@@ -2669,6 +2669,8 @@ define(function(require){
 		if(confirm('delete?<'+row.val('goodsName')+'>')){
 			cartData.deleteData(cartData.getRowByID(row.val('goodsId')));
 			//用于进入房台时加载购物车数据
+			console.log('删除商品');
+			console.log(roomId);
 			localStorage.setItem(roomId,JSON.stringify(cartData.toJson()));
 			goodsList.eachAll(function(data){//菜单数量置0
 				if(data.row.val('goodsId') == goodsId){
