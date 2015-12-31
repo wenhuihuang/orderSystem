@@ -1194,13 +1194,13 @@ define(function(require){
 		sendCook.eachAll(function(param){
 				cookways += param.row.val('goodsId')+'_'+param.row.val('cookWayId')+'_'+param.row.val('cookWay')+'_'+param.row.val('addMoney')+',';
 		});
+		debugger
 		cookways = cookways.substring(0,cookways.length-1);
 		var user = this.comp('userData');
 		//整理presents的东西
 		var sendPresentsReasonData = this.comp('sendPresentsReasonData');
 		var presents = '';
 		sendPresentsReasonData.eachAll(function(param){
-			debugger
 			presents += param.row.val('goodsId')+'_'+param.row.val('qty')+'_'+param.row.val('tfzReasonId')+',';
 		});
 		presents = presents.substring(0,presents.length-1);
@@ -2544,7 +2544,7 @@ define(function(require){
 	
 	//重打总单
 	Model.prototype.span72Click = function(event){
-		var result = order.reprintAll({'ip':ip,'consumeRoomId':this.comp('currentDeskData').val('consumeRoomId')});
+		var result = order.reprintAll({'ip':ip,'consumeRoomId':this.comp('currentDeskData').getFirstRow().val('consumeRoomId')});
 		this.comp('message').show({'title':'message','message':result.result});
 	};
 	
