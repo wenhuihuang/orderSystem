@@ -2,7 +2,7 @@
 
 <div xmlns="http://www.w3.org/1999/xhtml" xid="window" class="window" component="$UI/system/components/justep/window/window"
   design="device:mobile"> 
-    <div component="$UI/system/components/justep/model/model" xid="model" style="width:234px;height:auto;left:300px;top:125px;" onLoad="modelLoad">      
+    <div component="$UI/system/components/justep/model/model" xid="model" style="width:234px;height:auto;left:640px;top:250px;" onLoad="modelLoad">      
        <div component="$UI/system/components/justep/data/data" autoLoad="true" xid="language" idColumn="col0" confirmDelete="false" autoNew="true">
       <column name="col0" type="String" xid="xid65"></column>
   <column label="在用" name="USING" type="String" xid="xid66"></column>
@@ -958,7 +958,7 @@
                                 class="row" xid="row6"> 
                                 <div class="col col-xs-5dot2" xid="col19"> 
                                   <span xid="span62" bind-text="val('goodsName')">菜名</span>
-                                <span xid="span16" bind-visible="val('cookWay') !=undefined &amp;&amp;val('cookWay') !=''" bind-text="val('cookWay')"></span><span xid="span16gift" bind-visible="val('gift')!=undefined" bind-text="'赠'+val('gift')"><![CDATA[]]></span>
+                                <span xid="span16" bind-visible="val('cookWay') !=undefined" bind-text="val('cookWay')"></span><span xid="span16gift" bind-visible="val('gift')!=undefined" bind-text="'赠'+val('gift')"><![CDATA[]]></span>
   </div>  
                                 <div class="col col-xs-1dot7" xid="col22"> 
                                   <span xid="span63" bind-text="val('sprice')">单价</span>
