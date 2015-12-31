@@ -2667,20 +2667,25 @@ define(function(require){
 	//删除商品
 	Model.prototype.button32Click = function(event){
 		var row = this.comp('currentGoodsData');
+		if(row.getCount()<1){
+			justep.Util.hint("请先选择商品");
+			return;
+		}
 		var goodsId = row.val('goodsId');
 		var goodsList = this.comp('goodsListData');
 		var currentDeskData = this.comp('currentDeskData').getFirstRow();
 		var roomId = currentDeskData.val('roomId');
 		var typeCode = row.getFirstRow().val('typeCode');
-		var menuTypeData = this.comp('menuTypeData');
-
-		
+		var menuTypeData = this.comp('menuTypeData');		
 		var cartData = this.comp('cartData');
 		if(confirm('delete?<'+row.val('goodsName')+'>')){
 			cartData.deleteData(cartData.getRowByID(row.val('goodsId')));
+			//删除当前商品
+			row.clear();
 			//用于进入房台时加载购物车数据
 			console.log('删除商品');
 			console.log(roomId);
+			row.clear();
 			localStorage.setItem(roomId,JSON.stringify(cartData.toJson()));
 			goodsList.eachAll(function(data){//菜单数量置0
 				if(data.row.val('goodsId') == goodsId){
