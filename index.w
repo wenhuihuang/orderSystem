@@ -958,7 +958,8 @@
                                 class="row" xid="row6"> 
                                 <div class="col col-xs-5dot2" xid="col19"> 
                                   <span xid="span62" bind-text="val('goodsName')">菜名</span>
-                                <span xid="span16gift" bind-visible="val('gift')!=undefined" bind-text="'赠'+val('gift')"><![CDATA[]]></span></div>  
+                                <span xid="span16" bind-visible="val('cookWay') !=undefined &amp;&amp;val('cookWay') !=''" bind-text="val('cookWay')"></span><span xid="span16gift" bind-visible="val('gift')!=undefined" bind-text="'赠'+val('gift')"><![CDATA[]]></span>
+  </div>  
                                 <div class="col col-xs-1dot7" xid="col22"> 
                                   <span xid="span63" bind-text="val('sprice')">单价</span>
                                 </div>  
