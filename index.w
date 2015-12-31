@@ -695,9 +695,9 @@
         xid="panel3"> 
         <div class="x-panel-top" xid="top3"> 
           <div component="$UI/system/components/justep/titleBar/titleBar" class="x-titlebar"
-            xid="titleBar4" title="按拼音或编码查找" bind-text=' $model.language.val("ORDERBYALPHABET")'> 
+            xid="titleBar4" title="按拼音或编码查找"> 
             <div class="x-titlebar-left" xid="div45"></div>  
-            <div class="x-titlebar-title" xid="div47">按拼音或编码查找</div>  
+            <div class="x-titlebar-title" xid="div47" bind-text=' $model.language.val("ORDERBYALPHABET")'>按拼音或编码查找</div>  
             <div class="x-titlebar-right reverse" xid="div46"/>
           </div> 
         </div>  
@@ -754,9 +754,9 @@
       </div>
     </div> 
   <div class="x-contents-content handOrder" xid="handOrder" onActive="handOrderActive"><div component="$UI/system/components/justep/panel/panel" class="x-panel x-full" xid="panel23">
-   <div class="x-panel-top" xid="top21"><div component="$UI/system/components/justep/titleBar/titleBar" class="x-titlebar" xid="titleBar14" title="手写单" bind-text=' $model.language.val("HANDWRITINGORDER")'>
+   <div class="x-panel-top" xid="top21"><div component="$UI/system/components/justep/titleBar/titleBar" class="x-titlebar" xid="titleBar14" title="手写单">
    <div class="x-titlebar-left" xid="div63"></div>
-   <div class="x-titlebar-title" xid="div69">手写单</div>
+   <div class="x-titlebar-title" xid="div69" bind-text=' $model.language.val("HANDWRITINGORDER")'>手写单</div>
    <div class="x-titlebar-right reverse" xid="div70"></div></div></div>
    <div class="x-panel-content" xid="content44"><div component="$UI/system/components/justep/labelEdit/labelEdit" class="x-label-edit x-label30" xid="labelInput9">
    <label class="x-label" xid="label15" bind-text="language.ref('DISHNAME')"><![CDATA[菜名]]></label>
