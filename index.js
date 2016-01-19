@@ -6,6 +6,7 @@ define(function(require){
 	require('cordova!ch.ti8m.documenthandler');
 	require('cordova!hu.dpal.phonegap.plugins.SpinnerDialog');
 	var version = "1.1.0";
+	var typeCode = '';//楼层代码
 	var cishu = 0;
 	//var ip = "http://qixusoft.vicp.net";
 	//var ip="http://192.168.1.20:8080/OrderSystemWeX5/";
@@ -57,9 +58,10 @@ define(function(require){
 				var oldNum = parseInt(self.$loadingBarNode.attr('loadingnum'));
 	    		self.$loadingBarNode.attr('loadingnum',oldNum - 1);
 	    		if(oldNum <= 1){
+	    		//lang_flag=1;
 		    		self.$loadingBarNode.width("101%").fadeOut(1000, function() {
 		    			//设置回载后可以长按
-		    			lang_flag=1;
+		    			//lang_flag=1;
 		    			self.$loadingBarNode.width("1%");
 			        });
 		    	}
@@ -532,6 +534,7 @@ define(function(require){
 		}else{
 			typeCode = row;
 		}
+		$(".popOverLoaing").show();
 		var url= ip+"RoomServlet.do";
 		var data="func=getRoom&typeCode="+typeCode+"&getJson=1";
 		$.ajax({
@@ -539,7 +542,7 @@ define(function(require){
 	        url: url,
 	        data: data,
 	        dataType: 'json',
-	        async: false,//使用同步方式，目前data组件有同步依赖
+	        async: true,//使用同步方式，目前data组件有同步依赖
 	        cache: false,
 	        success: function(msg){	          
 	            var rowss=[];
@@ -579,9 +582,11 @@ define(function(require){
 		 	$(".main-ul").find("li").each(function(){
 	    		$(this).attr('action','');
 			});
+		 		$(".popOverLoaing").hide();
 	        },
 	        error: function(){
 	          throw justep.Error.create("加载数据失败");
+	            $(".popOverLoaing").hide();
 	        }
 		});
 	}
@@ -589,8 +594,11 @@ define(function(require){
 
 	//点击通过台类型加载桌子，通过状态字段来设置当前的颜色字段
 	Model.prototype.li10Click = function(event){
+		this.comp('popOver1').show();
+		debugger
+		typeCode = event.bindingContext.$rawData.val('typeCode');		
 		getDesk(this.comp('deskData'),event.bindingContext.$rawData,1);
-			if(lang === true){
+			//if(lang === true){
 				 var currentDeskData = this.comp('currentDeskData');
 				//当前房间的roomId
 				var currentRoomId = currentDeskData.val('roomId');
@@ -603,9 +611,8 @@ define(function(require){
 		    			$(this).css({"background":"#ccc"})
 		    		}
 				});
-			}
-
-		
+			//}	
+		this.comp('popOver1').hide();	
 	};
 
 	//进入房台，记录下当前的订单号和roomId,然后再根据状态跳去不同的页面
@@ -1135,13 +1142,14 @@ define(function(require){
 
 	//加收一项
 	Model.prototype.li5Click = function(event){
+		var self = this;
 		var row = event.bindingContext.$rawData;
 		var currentCookWayData = this.comp('sendCookWayData');
 		var currentGoodsData = this.comp('currentGoodsData');
 		var flag = false;//判断是否已经添加
 		currentCookWayData.eachAll(function(param){
 			if(param.row.val('cookWayId') == row.val('cookWayId')&&param.row.val('goodsId')==currentGoodsData.val('goodsId')){
-				justep.Util.hint(this.comp('language').val('HAVEADD'));
+				justep.Util.hint(self.comp('language').val('HAVEADD'));
 				flag = true;
 			}
 		});
@@ -1175,6 +1183,11 @@ define(function(require){
 		var self=this;
 		var currentDeskData = this.comp('currentDeskData').getFirstRow();
 		var billMasterId = currentDeskData.val('billMasterId');
+		
+		if(currentDeskData.val('state') == '埋单'){
+			this.comp('message').show({title:'message',message:'埋单后，不能下单'})
+			return;
+		}
 		var roomId = currentDeskData.val('roomId');
 		var orderData = this.comp('orderData');
 		var goods = '';
@@ -1212,7 +1225,10 @@ define(function(require){
 //		window.plugins.spinnerDialog.show("信息","送单中", true);
 		//送单成功
 		var success = function(param){	
-        $(".popOverLoaing").hide();			self.comp('message').show({'title':'message','message':param.result[0].msg});
+        $(".popOverLoaing").hide();			
+        //self.comp('message').show({'title':'message','message':param.result[0].msg});
+        //不能让用户看代码，用户体验至上
+        	self.comp('message').show({'title':'message','message':'送单成功'});
 			localStorage.setItem(roomId,'');//清空购物车缓存
 			localStorage.setItem('sendCookWayData'+roomId, '');//清空sendCookWayData
 			cartData.clear();//发送订单成功，清空cartData
@@ -1441,7 +1457,7 @@ define(function(require){
     		self.comp('message').show({'title':'message','message':language.val('THISDESKFREE')});
     		return false;
     	}
-        },600);//这里设置定时器，定义长按500毫秒触发长按事件，时间可以自己改，个人感觉500毫秒非常合适 
+        },100);//这里设置定时器，定义长按500毫秒触发长按事件，时间可以自己改，个人感觉500毫秒非常合适 
     	
     	}
 
@@ -1469,13 +1485,13 @@ define(function(require){
     	var newNum = this.getElementByXid('input1');//新开台输入人数框
     	event.preventDefault();
         clearTimeout(timeOutEvent);//清除定时器   
-        if(timeOutEvent!=0){              
+        if(1){              //timeOutEvent!=0
         //这里写要执行的内容（尤如onclick事件）  
 		if(action == undefined ||action == ''){
 		if(lang==false){
 			
 		
-		 clearTimeout(timeOutEvent);//清除定时器  
+		clearTimeout(timeOutEvent);//清除定时器  
         timeOutEvent = 0; 
         var currentDeskData = this.comp('currentDeskData');
 		var row = event.bindingContext.$rawData;
@@ -1532,8 +1548,7 @@ define(function(require){
 					 rowss[i]={'typeName':{'value':data.typeCodes[i].typeName},'typeCode':{'value':data.typeCodes[i].typeCode},'qty':{'value':0}};
 				 	}
 				 	var ffdata={"@type":"table","rows":rowss};
-				 	menuTypeData.loadData(ffdata);//将返回的数据加载到data组件
-			 	
+				 	menuTypeData.loadData(ffdata);//将返回的数据加载到data组件			 	
 		        },
 		        error: function(){
 		          throw justep.Error.create("error");
@@ -1550,6 +1565,7 @@ define(function(require){
 				contents1.to("menu"); 
 			}else if(state=="埋单"){
 				contents1.to("menu");
+//				self.comp('message').show({'title':'message','message':'已埋单不能点菜'});			
 			}else if(state="空台"){
 				clearTimeout(timeOutEvent);//清除定时器  
 				popOver_renshu.show();
@@ -1617,7 +1633,7 @@ define(function(require){
 					//alert(changeRoomName);
 					_this.css({"background":"#18AEB6"});
 					var url=ip + 'RoomFunctionServlet.do';
-					var data='func=changeRoom&changeRoomId='+changeRoomId+'&changeRoomName='+changeRoomName+'&currentRoomId='+currentRoomId+'&current='+currentBillMasterId+'&currentConsumeRoomId='+currentConsumeRoomId+'&currentShareNo='+currentShareNo+'&currentRoomName='+currentRoomName;
+					var data='func=changeRoom&changeRoomId='+changeRoomId+'&changeRoomName='+changeRoomName+'&currentRoomId='+currentRoomId+'&currentBillMasterId='+currentBillMasterId+'&currentConsumeRoomId='+currentConsumeRoomId+'&currentShareNo='+currentShareNo+'&currentRoomName='+currentRoomName;
 					$(".popOverLoading-content").text(language.val('CHANGETHETABLE'));
 					$(".popOverLoaing").show();
 						$.ajax({
@@ -2290,12 +2306,17 @@ define(function(require){
 			return;
 		}
 		var currentOrderData = this.comp('currentOrderData');
+		var language = this.comp('language');
+		$(".popOverLoading-content").text(language.val('SENDINGORDER'));
+		$(".popOverLoaing").show();
+		console.log('this is hurrying the food');
 		var a = order.reminder({'ip':ip,'billDetailId':currentOrderData.val('billDetailId')});
+		$(".popOverLoaing").hide();
 		if(a.code=='1'){
-			this.comp('message').show({'title':'success','message':a.result});
+			this.comp('message').show({'title':'success','message':a.result});			
 //			currentOrderData.clear();
 		}else{
-			this.comp('message').show({'title':'error','message':a.result});
+			this.comp('message').show({'title':'error','message':a.result});			
 		}
 	};
 
@@ -2313,9 +2334,13 @@ define(function(require){
 		//检查是否选中行
 		if(check.hCheckSelect({'currentOrderData':this.comp('currentOrderData'),'message':this.comp('message')})== false){
 			return;
-		}		
+		}	
+		var language = this.comp('language');
+		$(".popOverLoading-content").text(language.val('SENDINGORDER'));
+		$(".popOverLoaing").show();	
 		var currentOrderData = this.comp('currentOrderData');
 		var a = order.respite({'ip':ip,'billDetailId':currentOrderData.val('billDetailId')});
+		$(".popOverLoaing").hide();
 		if(a.code=='1'){
 			this.comp('message').show({'title':'success','message':a.result});
 //			currentOrderData.clear();
@@ -2354,8 +2379,11 @@ define(function(require){
 			this.comp('message').show({'title':'error','message':language.val('GIVENOTGREATER')});
 			return false;
 		}
+		$(".popOverLoading-content").text(language.val('SENDINGORDER'));
+		$(".popOverLoaing").show();	
 		//赠送数量不能大于点单数量
 		var result = order.hGift({'ip':ip,'billDetailId':currentOrderData.val('billDetailId'),'reasonId':currentPresentsReasonData.getFirstRow().val('tfzReasonId'),'qty':qty,'userId':userData.val('userId')});	
+		$(".popOverLoaing").hide();	
 		if(result.code=='1'){
 			this.comp('inputGive2').clear();
 			currentPresentsReasonData.clear();
@@ -2369,24 +2397,36 @@ define(function(require){
 	
 	//全单催菜
 	Model.prototype.hspan37Click = function(event){
+		var language = this.comp('language');
 		var  currentDeskData = this.comp('currentDeskData').getFirstRow();
+		$(".popOverLoading-content").text(language.val('SENDINGORDER'));
+		$(".popOverLoaing").show();	
 		var result = order.hurryAll({'ip':ip,'billMasterId':currentDeskData.val('billMasterId'),'consumeRoomId':currentDeskData.val('consumeRoomId')});
+		$(".popOverLoaing").hide();
 		this.comp('message').show({'title':'message','message':result.result})
 	};
 
 	//全单叫起
 	Model.prototype.hspan95Click = function(event){
+		var language = this.comp('language');
 		var  currentDeskData = this.comp('currentDeskData').getFirstRow();
+		$(".popOverLoading-content").text(language.val('SENDINGORDER'));
+		$(".popOverLoaing").show();	
 		var result = order.respiteAllL({'ip':ip,'billMasterId':currentDeskData.val('billMasterId'),'consumeRoomId':currentDeskData.val('consumeRoomId')});
+		$(".popOverLoaing").hide();	
 		this.comp('message').show({'title':'message','message':result.result})
 	};
 
 	
 	//预览结帐单
 	Model.prototype.span92Click = function(event){
+		var language = this.comp('language');
 		var showBillData = this.comp('showBillData');
 		var consumeRoomId = this.comp('currentDeskData').getFirstRow().val('consumeRoomId');
+		$(".popOverLoading-content").text(language.val('SENDINGORDER'));
+		$(".popOverLoaing").show();	
 		var data = order.showBill({'ip':ip,'consumeRoomId':consumeRoomId});
+		$(".popOverLoaing").hide();	
 		var a = {'@type':'table','rows':data};
 		showBillData.loadData(a);
 		showBillData.first();
@@ -2544,7 +2584,11 @@ define(function(require){
 	
 	//重打总单
 	Model.prototype.span72Click = function(event){
+		var language = this.comp('language');
+		$(".popOverLoading-content").text(language.val('SENDINGORDER'));
+		$(".popOverLoaing").show();	
 		var result = order.reprintAll({'ip':ip,'consumeRoomId':this.comp('currentDeskData').getFirstRow().val('consumeRoomId')});
+		$(".popOverLoaing").hide();	
 		this.comp('message').show({'title':'message','message':result.result});
 	};
 	
@@ -2552,6 +2596,7 @@ define(function(require){
 
 	//埋单
 	Model.prototype.span77Click = function(event){
+		var language = this.comp('language');
 		
 		var currentDeskData = this.comp('currentDeskData').getFirstRow();
 		var userId = this.comp('userData').val('userId');
@@ -2966,6 +3011,20 @@ define(function(require){
 				$(this.getElementByXid('handGoodsName')).focus();
 				this.comp('contents1').to('handOrder');
 	};	
+	
+	
+
+	
+	//刷新当前楼层房台
+	Model.prototype.refreshTableBtnClick = function(event){
+		var deskData = this.comp('deskData');
+		getDesk(deskData,typeCode,2);
+	};	
+	
+	
+
+	
+
 	
 	
 

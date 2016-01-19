@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<div xmlns="http://www.w3.org/1999/xhtml" xid="window" class="window" component="$UI/system/components/justep/window/window"
+<div xmlns="http://www.w3.org/1999/xhtml" xid="window" class="window x-full-screen" component="$UI/system/components/justep/window/window"
   design="device:mobile"> 
-    <div component="$UI/system/components/justep/model/model" xid="model" style="width:234px;height:auto;left:640px;top:250px;" onLoad="modelLoad">      
+    <div component="$UI/system/components/justep/model/model" xid="model" style="width:234px;height:auto;left:-89px;top:452px;" onLoad="modelLoad">      
        <div component="$UI/system/components/justep/data/data" autoLoad="true" xid="language" idColumn="col0" confirmDelete="false" autoNew="true">
       <column name="col0" type="String" xid="xid65"></column>
   <column label="在用" name="USING" type="String" xid="xid66"></column>
@@ -423,8 +423,15 @@
       <span xid="span80" class="popOverLoading-content"><![CDATA[]]></span></p> </div> </div> </div><div xid="div545645646" class="loading" style="display:none;">
    <span xid="span153">加载中，请稍后</span>
   </div>
-   <div component="$UI/system/components/justep/contents/contents" class="x-contents x-full"
-    active="0" xid="contents1" swipe="false"> 
+  <div component="$UI/system/components/justep/popOver/popOver"
+    class="x-popOver" xid="popOver1"
+    opacity="0.9">
+    <div class="x-popOver-overlay" xid="div4"/>
+    <div class="x-popOver-content text-center" xid="div5">  
+      <div xid="div3" bind-text="&quot;正在加载中，请稍候...&quot;"/>
+    </div>
+</div><div component="$UI/system/components/justep/contents/contents" class="x-contents x-full"
+    active="0" xid="contents1" swipe="false" slidable="false"> 
     <div class="x-contents-content" xid="login"> 
       <div component="$UI/system/components/justep/panel/panel" class="x-panel x-full"
         xid="panel26"> 
@@ -489,17 +496,16 @@
             </div>
           </div> 
         </div>  
-        <div class="x-panel-bottom login-bottom" xid="bottom21"> 
-          <span xid="span94" class="bottom-copy">CopyRight©启旭科技有限公司</span>  
+        <div class="x-panel-bottom login-bottom" xid="bottom21" style="float:right;"> 
           <a component="$UI/system/components/justep/button/button" class="btn btn-success btn-style p30"
-            label="设置" xid="button70" bind-click="button70Click"> 
-            <i xid="i70"/>  
-            <span xid="span40" bind-text="language.ref('SETTING')">设置</span>
-          </a>
-          <a component="$UI/system/components/justep/button/button" class="btn btn-success btn-style p30"
-            label="语言" xid="languageBtn" onClick="languageBtnClick"> 
+            label="语言" xid="languageBtn" onClick="languageBtnClick" style="float:right;margin-right:20px;"> 
             <i xid="i38"/>  
             <span xid="span95" bind-text="language.ref('LANGUAGE')">语言</span>
+          </a>
+          <a component="$UI/system/components/justep/button/button" class="btn btn-success btn-style p30"
+            label="设置" xid="button70" bind-click="button70Click" style="float:right;margin-right:10px"> 
+            <i xid="i70"/>  
+            <span xid="span40" bind-text="language.ref('SETTING')">设置</span>
           </a>
         </div>
       </div>
@@ -507,13 +513,13 @@
     <div class="x-contents-content index" xid="index" onActive="indexActive"> 
       <div component="$UI/system/components/justep/panel/panel" class="x-panel x-full"
         xid="panel1"> 
-        <div class="x-panel-top menu-wrap" xid="top1" height="40"> 
+        <div class="x-panel-top menu-wrap" xid="top1" height="60"> 
           <div component="$UI/system/components/justep/list/list" class="x-list menu-con"
-            xid="list1" data="roomData"> 
-            <ul class="x-list-template clearfix" xid="listTemplateUl1"> 
-              <li xid="li10" class="top-menu-li" bind-click="li10Click"> 
+            xid="list1" data="roomData" style="height:100%;"> 
+            <ul class="x-list-template clearfix" xid="listTemplateUl1" style="height:100%;"> 
+              <li xid="li10" class="top-menu-li" bind-click="li10Click" style="height:100%;"> 
                 <div component="$UI/system/components/justep/output/output"
-                  class="x-output" xid="output2" bind-ref="ref('typeName')"/> 
+                  class="x-output" xid="output2" bind-ref="ref('typeName')" style="height:100%;"/> 
               </li> 
             </ul> 
           </div>
@@ -594,17 +600,20 @@
         <div class="x-panel-bottom bottom-wrap" xid="bottom1"> 
           <div component="$UI/system/components/bootstrap/row/row" class="row w100"
             xid="row40"> 
-            <div class="col col-xs-4" xid="col111"/>  
             <div class="col col-xs-4" xid="col112"><a component="$UI/system/components/justep/button/button" class="btn btn-warning cancel-active" label="取消" xid="button4" bind-click="button4Click">
    <i xid="i4"></i>
    <span xid="span83" bind-text="language.ref('CANCEL')">取消</span></a></div>  
-            <div class="col col-xs-4" xid="col113">
-              <a component="$UI/system/components/justep/button/button" class="btn btn-warning"
-                label="注销" xid="button1" target="login"> 
-                <i xid="i1"/>  
-                <span xid="span1" bind-text="language.ref('CANCELLATION')">注销</span>
-              </a>
-            </div>
+            <div class="col col-xs-8" xid="col113">
+            <div component="$UI/system/components/bootstrap/row/row" class="row" xid="row24">
+   <div class="col col-xs-6" xid="col66"><a component="$UI/system/components/justep/button/button" class="btn btn-warning" label="刷新" xid="refreshTableBtn" onClick="refreshTableBtnClick"> 
+	                <i xid="i1" />  
+	                <span xid="span1">刷新</span>
+	              </a></div>
+   <div class="col col-xs-6" xid="col67"><a component="$UI/system/components/justep/button/button" class="btn btn-warning" label="注销" xid="button1" target="login"> 
+	                <i xid="i1" />  
+	                <span xid="span1" bind-text="language.ref('CANCELLATION')">注销</span>
+	              </a></div>
+   </div></div>
           </div>
         </div> 
       </div> 
@@ -869,7 +878,7 @@
           </div>  
           <div class="x-panel-content" xid="content11"> 
             <div component="$UI/system/components/justep/contents/contents"
-              class="x-contents x-full" active="0" xid="contents3"> 
+              class="x-contents x-full" active="0" xid="contents3" swipe="false" slidable="false"> 
               <div class="x-contents-content" xid="content12"> 
                 <div component="$UI/system/components/justep/panel/panel" class="x-panel x-full"
                   xid="panel27"> 
