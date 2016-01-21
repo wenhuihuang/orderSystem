@@ -145,7 +145,9 @@ define(function(require) {
 			var success = function(param){
 				var a = param;
 				obj = a;
+				return obj;
 			};
+			
 			Baas.sendRequest({
 				"url" : data.ip + 'RoomFunctionServlet.do?func=editCout&billDetailId='+data.billDetailId+'&qty='+data.qty+'&empcode='+data.userId+'&unitName='+data.unitName,
 				"dataType": "json",

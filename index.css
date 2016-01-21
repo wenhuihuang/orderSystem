@@ -206,7 +206,8 @@ img.subtract,img.add{
 	line-height:30px;
 	color:#fff;	
 	margin-right:10px;
-	border-radius:3px;
+	border-top-left-radius:3px;
+	border-top-right-radius:3px;
 	border:none;
 	text-align:center;
 }
@@ -275,6 +276,9 @@ img.subtract,img.add{
 	background:rgba(231, 255, 248, 0.58) !important;
 	overflow:auto;
 }
+.home .left-menu .x-output{
+	padding-top:0;
+}
 .home .left-menu li div.count{
 	position:absolute;
 	width:20px;
@@ -291,7 +295,7 @@ img.subtract,img.add{
 	border-radius:3px;
 	background:#2BB8AA;
 	color:#fff;
-	padding:8px 0px;
+	padding:12px 0px;
 	display:block;
 	min-width:100px;
 	width:95%;
@@ -489,6 +493,18 @@ img.subtract,img.add{
     border-radius: 3px;
     margin: 5px;
     display: block;
+}
+.green-btn{
+	padding:8px 18px;
+    text-align: center;
+    background: #32C152;
+    color: #fff;
+    border-radius: 3px;
+    /* margin: 5px; */
+    display: inline-block;
+    width:95%;
+    font-size:16px;
+    font-weight:500;
 }
 .p30{
 	padding-left:20px;
@@ -863,30 +879,32 @@ ul.menu-item li{
 	color:#fff;
 }
 /*更多菜单*/
-.more-wrap{
+.more-btn-wrap{
 	position:fixed;
-	bottom:48px;
+	top:48px;
+	left:0;
 	background:#fff;
 	width:100%;
-	display:none;
+	/* display:none; */
+	z-index:10000;
 }
-.more-wrap .row {
+.more-btn-wrap .row {
 	margin:0;
 }
-.more-wrap .row .col{
+.more-btn-wrap .row .col{
 	text-align:center;
 	padding-top:5px;
 	padding-bottom:5px;
 	padding-left:10px;
 	padding-right:10px;
 }
-.more-wrap .row .col .btn{
+.more-btn-wrap .row .col .btn{
 	background:#2BB8AA;
 	color:#fff;
 	border:none;
 	width:100%;
 }
-.more-wrap .row div.active a.btn{
+.more-btn-wrap .row div.active a.btn{
 	background:#00CC66;
 }
 .have-wrap h3{
@@ -1054,16 +1072,18 @@ ul.menu-item li{
     color: rgb(255, 255, 255);
 }
 .menu-title{
-	box-flex:1.0;
-	-webkit-box-flex:1.0;
+	/* box-flex:1.0;
+	-webkit-box-flex:1.0; */
 	text-align:center;
-	text-align:center;
+	width:30%;
+	min-width:100px;
 }
 .menu-title h5{
 	margin:0;
-	line-height:48px;
+	margin-top:5px;
+	/* line-height:48px; */
 	color:#fff;
-	font-size:18px;
+	font-size:16px;
 	font-weight:bold;
 }
 .menu-all{
@@ -1231,12 +1251,12 @@ ul.menu-item li{
 	width:95%;
 	height:70%;
 }
-.pop-menuSub-wrap{
+.pop-menuSub-wrap,.more-popOver{
 	display:none;
 }
-.menuSub-hide{
+.menuSub-hide,.more-popOver-hide{
 	position:fixed;
-	background:rgba(0, 0, 0, 0.25);
+	background:rgba(0, 0, 0, 0.35);
 	z-index:100;
 	width:100%;
 	height:100%;
