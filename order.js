@@ -161,11 +161,21 @@ define(function(require) {
 			var success = function(param){
 				var a = param;
 				obj = a;
+				
+				if(a.code=='1'){
+					data.comp.show({'title':'success','message':a.result});			
+//					currentOrderData.clear();
+				}else{
+					data.comp.show({'title':'error','message':a.result});			
+				}
+				$(".popOverLoaing").hide();
+				
 			};
 			Baas.sendRequest({
 				"url" : data.ip + 'RoomFunctionServlet.do?func=reminder&billDetailId='+data.billDetailId,
 				"dataType": "json",
-				"success" : success
+				"success" : success,
+				"async" : true
 			});	
 			return obj;
 		},
@@ -175,11 +185,20 @@ define(function(require) {
 			var success = function(param){
 				var a = param;
 				obj = a;
+				
+				$(".popOverLoaing").hide();
+				if(a.code=='1'){
+					data.comp.show({'title':'success','message':a.result});
+//					currentOrderData.clear();
+				}else{
+					data.comp.show({'title':'error','message':a.result});
+				}
 			};
 			Baas.sendRequest({
 				"url" : data.ip + 'RoomFunctionServlet.do?func=respite&billDetailId='+data.billDetailId,
 				"dataType": "json",
-				"success" : success
+				"success" : success,
+				"async" : true
 			});	
 			return obj;
 		}
@@ -204,11 +223,14 @@ define(function(require) {
 			var success = function(param){
 				var a = param;
 				obj = a;
+				$(".popOverLoaing").hide();
+				data.comp.show({'title':'message','message':param.result})
 			};
 			Baas.sendRequest({
 				"url" : data.ip + 'RoomFunctionServlet.do?func=hurryAll&billMasterId='+data.billMasterId+'&consumeRoomId='+data.consumeRoomId,
 				"dataType": "json",
-				"success" : success
+				"success" : success,
+				"async" : true
 			});	
 			return obj;			
 		},
@@ -218,11 +240,14 @@ define(function(require) {
 			var success = function(param){
 				var a = param;
 				obj = a;
+				$(".popOverLoaing").hide();	
+				data.comp.show({'title':'message','message':param.result})
 			};
 			Baas.sendRequest({
 				"url" : data.ip + 'RoomFunctionServlet.do?func=respiteAll&billMasterId='+data.billMasterId+'&consumeRoomId='+data.consumeRoomId,
 				"dataType": "json",
-				"success" : success
+				"success" : success,
+				"async" : true
 			});	
 			return obj;					
 		},
@@ -391,12 +416,14 @@ define(function(require) {
 					}]
 				});
 			}
+			$(".popOverLoaing").hide();
 			};
 		//拿到订单详情
 		Baas.sendRequest({
 			"url" : data.ip + 'ShopCartServlet.do?func=showOrderedReturnJson&billMasterId='+data.currentDeskData.getFirstRow().val('billMasterId')+'&roomId='+data.currentDeskData.getFirstRow().val('roomId'),
 			"dataType": "json",
-			"success" : successOrder
+			"success" : successOrder,
+			"async" : true
 		});		
 		},
 		//获取版本号
@@ -421,6 +448,7 @@ define(function(require) {
 			var success = function(param){
 				var a = param;
 				obj = a;
+				$(".popOverLoaing").hide();
 			};
 			Baas.sendRequest({
 				"url" : data.ip + 'RoomFunctionServlet.do?func=getWriterBillID',

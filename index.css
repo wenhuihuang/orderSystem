@@ -793,10 +793,13 @@ ul.menu-item li{
 	margin:5px auto;
 	width:95%;
 }
-.renShu .con-wrap .con-con, .take .con-wrap .con-con{
+.writeOver .x-popOver-overlay{
+	z-index:1000;
+} 
+.renShu .con-wrap .con-con, .take .con-wrap .con-con,.writeOver .con-wrap .con-con{
 	text-align:center;
 }
-.renShu .con-wrap .con-con .btn-wrap, .take .con-wrap .con-con .btn-wrap{
+.renShu .con-wrap .con-con .btn-wrap, .take .con-wrap .con-con .btn-wrap,.writeOver .con-wrap .con-con .btn-wrap{
 	text-align:center;
 	margin-top:20px;
 	height:46px;
@@ -811,7 +814,7 @@ ul.menu-item li{
 .btn-wrap .row .col .btn{
 
 }
-.renShu .con-wrap .con-con .btn, .take .con-wrap .con-con .btn{
+.renShu .con-wrap .con-con .btn, .take .con-wrap .con-con .btn ,.writeOver .con-wrap .con-con .btn {
 	border:none;
 	width:90%;
 }

@@ -74,4 +74,5 @@
        <a component="$UI/system/components/justep/button/button" class="btn btn-style" label="确认" xid="button1" bind-click="button1Click">
         <i xid="i1"></i>
         <span xid="span1">确认</span></a> </div> </div> </div> </div> </div></div></div>
-   </div></div>
+   </div>
+  <resource xid="resource2"><require xid="require1" url="cordova!com.brodysoft.sqlitePlugin"></require></resource></div>
