@@ -2,7 +2,7 @@
 
 <div xmlns="http://www.w3.org/1999/xhtml" xid="window" class="window x-full-screen" component="$UI/system/components/justep/window/window"
   design="device:mobile"> 
-    <div component="$UI/system/components/justep/model/model" xid="model" style="width:234px;height:auto;left:58px;top:179px;" onLoad="modelLoad">      
+    <div component="$UI/system/components/justep/model/model" xid="model" style="width:234px;height:auto;left:283px;top:351px;" onLoad="modelLoad">      
        <div component="$UI/system/components/justep/data/data" autoLoad="true" xid="language" idColumn="col0" confirmDelete="false" autoNew="true">
       <column name="col0" type="String" xid="xid65"></column>
   <column label="在用" name="USING" type="String" xid="xid66"></column>
@@ -230,18 +230,18 @@
   <column label="购物车总价" name="cartTotal" type="Double" xid="xid26"></column>
   <column label="房间层数类型" name="typeCode" type="String" xid="xid123"></column>
   <column name="totalCheckOutMoney" type="Double" xid="xid141"></column>
+  <column label="埋单按钮名字" name="checkBtn" type="String" xid="xid149"></column>
+  <column label="是否允许开台" name="mergetable" type="String" xid="xid213"></column>
   <rule xid="rule1">
    <col name="orderTotal" xid="ruleCol1">
     <calculate xid="calculate1">
      <expr xid="default1">$model.orderData.sum('totalPrice')</expr></calculate> </col> 
    <col name="cartTotal" xid="ruleCol2">
     <calculate xid="calculate2">
-     <expr xid="default3">$model.cartData.sum('totalPrice')</expr></calculate> </col> 
+     <expr xid="default3">$model.cartData.sum('totalPrice').toFixed(2)</expr></calculate> </col> 
    <col name="totalCheckOutMoney" xid="ruleCol9">
     <calculate xid="calculate9">
-     <expr xid="default49">$model.showBillData.sum('checkOutMoney')</expr></calculate> </col> </rule>
-  <column label="埋单按钮名字" name="checkBtn" type="String" xid="xid149"></column>
-  <column label="是否允许开台" name="mergetable" type="String" xid="xid213"></column></div>  
+     <expr xid="default49">$model.showBillData.sum('checkOutMoney')</expr></calculate> </col> </rule></div>  
     <div component="$UI/system/components/justep/data/data" autoLoad="true"
       xid="currentGoodsData" idColumn="goodsId"> 
       <column label="商品id" name="goodsId" type="String" xid="default5"></column>
@@ -623,8 +623,7 @@
                       <p class="number fr" xid="span178"> 
                         <img class="subtract" xid="image1" bind-attr-src="$model.getImageUrl(&quot;./images/jiangreen.png&quot;)"
                           bind-click="image1Click"/>  
-                        <label xid="qty" class="num" bind-text="val('qty')">label</label>
-                        <img class="add" xid="image2" bind-attr-src="$model.getImageUrl(&quot;./images/jiagreen.png&quot;)"
+                        <input  xid="foodqtyinput" bind-ref="ref('qty')" style="line-height:10px;width:25px;" bind-value="ref('qty')" bind-change="input2Change"></input><img class="add" xid="image2" bind-attr-src="$model.getImageUrl(&quot;./images/jiagreen.png&quot;)"
                           bind-click="image2Click"/> 
                       </p> 
                     </li> 
@@ -962,7 +961,7 @@
                                   <span xid="span65" bind-text="val('addMoney')">加收</span>
                                 </div>  
                                 <div class="col col-xs-1dot7" xid="col23"> 
-                                  <span xid="span66" bind-text="val('sprice') * val('qty')+val('addMoney')"
+                                  <span xid="span66" bind-text="(val('sprice') * val('qty')+val('addMoney')).toFixed(2)"
                                     class="color-price">总价</span>
                                 </div> 
                               </div> 

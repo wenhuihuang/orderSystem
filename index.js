@@ -7,16 +7,18 @@ define(function(require){
 	require('cordova!hu.dpal.phonegap.plugins.SpinnerDialog');
 	var version = "1.2.0";
 	var typeCode = '';//楼层代码
-	var cishu = 0;
+	var cishu = 1;
 	//var ip = "http://qixusoft.vicp.net";
 	//var ip="http://192.168.1.20:8080/OrderSystemWeX5/";
 	//var ip ="http://192.168.1.128:8080/OrderSystemWeX5/";
-	localStorage.setItem('pureip','192.168.1.128');
-	localStorage.setItem('com','8222');
-	var ip ;
+	localStorage.setItem('pureip','192.168.75.130');
+	localStorage.setItem('com','8080');
+	//localStorage.setItem('pureip','localhost');
+	//localStorage.setItem('com','8081');
+	var ip;
 	$(function(){
-		if(localStorage.getItem('pureip') != null || localStorage.getItem('pureip') != undefined){
-			 ip = 'http://'+localStorage.getItem('pureip')+':'+localStorage.getItem('com')+'/OrderSystemWeX5/';	
+		if(localStorage.getItem('pureip') != null && localStorage.getItem('pureip') != undefined){
+			 ip = "http://"+localStorage.getItem('pureip')+':'+localStorage.getItem('com')+'/OrderSystemWeX5/';	
 		}else
 		{
 			location.href = 'languageSelect.w#!settings';
@@ -32,7 +34,7 @@ define(function(require){
 	//var lang_flag=0;  
 	 
 	//var url="UI2/orderSystem_a/index.w#!index";
-	var Baas = require("$UI/demo/baas/baas");
+	var Baas = require("$UI/orderSystem/baas");
 	var Language = require('$UI/orderSystem/language');
 	var myBaas = require('$UI/orderSystem/myBaas');
 	var order = require('$UI/orderSystem/order');
@@ -283,6 +285,7 @@ define(function(require){
 		////
 		var mydata = this.comp('user_inof');
 		var success = function(data){
+			contents1.to('index');
 			     if(data.admin[0].userId != "")   {
 			    	 userData.newData({
 			    		 defaultValues:[{
@@ -292,13 +295,13 @@ define(function(require){
 			    	 });
 			    	 contents1.to('index');
 			     }else{
-			    	 if(username == '' || pwd == ''){
+			    	/* if(username == '' || pwd == ''){
 			    		 $(".login-error-info").hide();
 			    		 $(".login-error-info-a").show();
 			    	 }else{
 			    		 $(".login-error-info").hide();
 			    		 $(".login-error-info-b").show();
-			    	 }
+			    	 }*/
 			    	 //justep.Util.hint("登陆失败");
 			     }                                            
 		}
@@ -876,7 +879,7 @@ define(function(require){
 	    var row = currentDeskData.val('typeCode');
 	    var self=this;
 	    var success = function(param){
-	    debugger
+	   
 	    	getDesk(deskData,row,2);
 	    	currentDeskData =  self.comp('currentDeskData');
 	    	//补上当前台的订单id
@@ -2340,7 +2343,7 @@ define(function(require){
 		var bqty = currentGoodsData.val('qty');//剩余可赠送数量
 		var qty = this.comp("inputGive").val();//赠送数量		
 		var hqty=0;//赠送
-		debugger;
+		
 		var currentPresentsReasonData = this.comp('currentPresentsReasonData');
 		var sendPresentsReasonData = this.comp('sendPresentsReasonData');
 		if(qty==null||qty==''||qty==undefined){
@@ -2569,7 +2572,7 @@ define(function(require){
 	
 	//已分单界面数量
 	Model.prototype.hbutton53Click = function(event){
-		debugger
+		
 		var currentOrderData = this.comp('currentOrderData');
 		var currentDeskData = this.comp('currentDeskData').getFirstRow();
 		var userData = this.comp('userData');
@@ -2828,7 +2831,7 @@ define(function(require){
 	Model.prototype.button68Click = function(event){
 		//				"url" : data.ip + 'RoomFunctionServlet.do?func=allDiscout&billMasterId='+data.billMasterId+'&empCode='+data.userId+'&discountTypeId='+data.discountTypeId+'&discount='+data.discount,
 		var self = this;
-		debugger
+		
 //		var language = this.comp('language');
 		var currentDeskData = this.comp('currentDeskData');
 		var userData = this.comp('userData');
@@ -3425,6 +3428,66 @@ define(function(require){
 
 	Model.prototype.content60Active = function(event){
 		$(this.getElementByXid('inputGive2')).focus();
+	};	
+	
+	
+
+	
+
+	
+	
+
+	
+
+	Model.prototype.input2Change = function(event){
+	
+	var qty = event.currentTarget.value;
+	if(qty == undefined || qty == ''){
+		alert('请先输入数字');
+		return;
+	}
+	qty = parseFloat(qty);
+		var cartData = this.comp('cartData');
+		var row = event.bindingContext.$rawData;
+		// ;
+		var flag = false;//该菜单是否存在
+		cartData.eachAll(function(param){
+		// ;
+			if(param.row.val('goodsId') == row.val('goodsId')){//已经存在
+				param.row.val('qty',param.row.val('qty')+qty);
+				flag = true;
+			}
+		});
+		if(flag === false){
+			cartData.newData({
+				defaultValues:[{
+					'goodsId':row.val('goodsId'),
+					'qty':qty,
+					'goodsName':row.val('goodsName'),
+					'sprice':row.val('sprice'),
+					'addMoney':0,
+					'typeCode':row.val('typeCode'),
+					'unitId':row.val('unitId')
+				}]
+			});
+		}
+		//购物车显示数量显示在goodsList
+		row.val('qty',qty);
+		//向菜单类型右侧添加数量
+		//---1.抽出与当前相同菜单类型的菜单类型
+		var menuType = this.comp('menuTypeData');
+		menuType.eachAll(function(data){
+			if(data.row.val('typeCode') == row.val('typeCode')){
+				data.row.val('qty',qty);
+			}
+		});
+		//---end of 加数量
+		
+		//将购物车数据写入到localStorage
+		var currentDeskData = this.comp('currentDeskData');
+		var roomId = currentDeskData.getFirstRow().val('roomId');
+		
+		localStorage.setItem(roomId,JSON.stringify(cartData.toJson()));
 	};	
 	
 	
